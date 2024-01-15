@@ -1,0 +1,17 @@
+{
+    "name": "sgreen/mateable",
+    "autoload": {
+        "psr-4": {
+            "mateable\\": "."
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephon Green",
+            "email": "sgreen@mateable.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "5.*"
+    }
+}
