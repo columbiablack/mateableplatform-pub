@@ -28,8 +28,8 @@ class AuthMiddleware extends BaseMiddleware
         {
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
-                Platform::$app->response->setStatusCode(403);
-                throw new ForbiddenException();
+                Platform::$app->response->statusCode(403);
+                Platform::$app->view->renderview('_error',['exception' => 'You\'re forbidden to see this part of the site!', 'exceptiontitle' => 'Forbidden']);
             }
         }
     }

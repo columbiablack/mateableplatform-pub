@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024 Mateable LLC
  */
 
 namespace mateable\core\routes;
@@ -91,80 +91,39 @@ class Router
 
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function resolve()
     {
         $method = $this->request->getMethod();
         $url = $this->request->getUrl();
         $callback = $this->routeMap[$method][$url] ?? false;
 
-        //var_dump($callback);
-        //echo '<pre>';
-        //var_dump($this->routemap);
-        //echo '</pre>';
-        //exit();
-
         if($callback === false) {
             $callback = $this->getCallback();
-           return $this->renderview('_error',['exception' => 'I don\'t know why but something went terribly wrong.<br> Please try again!', 'exceptiontitle' => 'Error']);
+           return Platform::$app->view->renderview('_error',['exception' => 'I don\'t know why but something went terribly wrong.<br> Please try again!', 'exceptiontitle' => 'Error']);
         }
 
         if (is_string($callback)) {
-            return $this->renderView($callback);
+            return Platform::$app->view->renderView($callback);
         }
         if (is_array($callback)) {
             /**
-             * @var $controller Controller
+             * @var Controller $controller
              */
-            $controller = new $callback[0];
+            /*$controller = new $callback[0];
             $controller->action = $callback[1];
             Platform::$app->controller = $controller;
-            $middlewares = $controller->getMiddlewares();
-            foreach ($middlewares as $middleware) {
+            $middlewares = $controller->getMiddlewares();*/
+
+            $controller = new $callback[0]();
+            Platform::$app->controller = $controller;
+            $controller->action = $callback[1];
+            $callback[0] = $controller;
+
+            foreach ($controller->getMiddlewares() as $middleware) {
                 $middleware->execute();
             }
-            $callback[0] = $controller;
         }
         return call_user_func($callback, $this->request, $this->response);
     }
 
-    public function renderView($view, $params = []): array|string
-    {
-        $layoutcontent = $this->layoutContent();
-        $viewcontent = $this->renderViewOnly($view,$params);
-
-        $layoutcontent = str_replace('{{app_name}}','Mateable', $layoutcontent);
-        $layoutcontent = str_replace('{{content}}',$viewcontent, $layoutcontent);
-        $finalcontent = $layoutcontent;
-
-        return $finalcontent;
-    }
-
-    protected function layoutContent(): string
-    {
-        $layout = Platform::$app->layout;
-
-        if(Platform::$app->controller)
-        {
-            $layout = Platform::$app->controller->layout;
-        }
-
-        ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout.php";
-        return ob_get_clean();
-    }
-
-    protected function renderViewOnly($view, $params = []): string
-    {
-        foreach($params as $key => $value)
-        {
-            $$key = $value;
-        }
-
-        ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/$view.php";
-        return ob_get_clean();
-    }
 }

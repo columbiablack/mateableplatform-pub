@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024 Mateable LLC
  */
 
 namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
+use mateable\core\Platform;
 
 /**
  * @author SGreen <sgreen@mateable.com>
@@ -37,7 +38,7 @@ class SiteController extends Controller
 
     public function home(): string
     {
-        return $this->render('home');
+        return Platform::$app->view->renderView('home');
     }
 
     public function aboutUs(): string

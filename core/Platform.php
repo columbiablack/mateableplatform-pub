@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024 Mateable LLC
  */
 
 namespace mateable\core;
@@ -12,6 +12,7 @@ use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
+use mateable\core\views\View;
 
 /**
  * @author SGreen <sgreen@mateable.com>
@@ -30,6 +31,7 @@ class Platform
     public string $layout = 'main';
     public ?Controller $controller = null;
     public Session $session;
+    public View $view;
 
     public function __construct(string $root)
     {
@@ -51,9 +53,9 @@ class Platform
     {
         try{
             echo self::$app->router->resolve();
-        }catch(NotFoundException $exception){
+        }catch(\Exception $exception){
             self::$app->response->statusCode($exception->getCode());
-            echo self::$app->router->renderView('_error', ['exception' => $exception]);
+            echo self::$app->view->renderView('_error', ['exception' => $exception]);
         }
     }
 }

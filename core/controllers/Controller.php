@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024 Mateable LLC
  */
 
 namespace mateable\core\controllers;
@@ -18,6 +18,7 @@ class Controller
 {
 
     public string $action = '';
+    public string $layout = 'main';
 
     /**
      * @var BaseMiddleware[]
@@ -31,7 +32,7 @@ class Controller
 
     public function render($view, $params = []): string
     {
-        return Platform::$app->router->renderView($view, $params);
+        return Platform::$app->view->renderView($view, $params);
     }
 
     public function registerMiddleware(BaseMiddleware $middleware): void
