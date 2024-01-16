@@ -25,11 +25,6 @@ class Controller
      */
     protected array $middlewares = [];
 
-    public function setLayout($layout): void
-    {
-        $this->layout = $layout;
-    }
-
     public function render($view, $params = []): string
     {
         return Platform::$app->view->renderView($view, $params);

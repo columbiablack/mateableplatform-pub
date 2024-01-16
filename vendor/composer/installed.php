@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'sgreen/mateable',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => '1.0.x-dev',
+        'version' => '1.0.9999999.9999999-dev',
+        'reference' => '5fa063d1dc4ef607d980d61d8b2a7b0e1e24ac4a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'sgreen/mateable' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => '1.0.x-dev',
+            'version' => '1.0.9999999.9999999-dev',
+            'reference' => '5fa063d1dc4ef607d980d61d8b2a7b0e1e24ac4a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

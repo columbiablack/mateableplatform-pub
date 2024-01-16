@@ -20,7 +20,7 @@ class View
         $layoutcontent = $this->layoutContent();
         $viewcontent = $this->renderViewOnly($view,$params);
 
-        $layoutcontent = str_replace('{{app_name}}','Mateable', $layoutcontent);
+        $layoutcontent = str_replace('{{app_name}}', $_ENV['NAME'], $layoutcontent);
         $layoutcontent = str_replace('{{content}}',$viewcontent, $layoutcontent);
         $finalcontent = $layoutcontent;
 
@@ -37,7 +37,7 @@ class View
         }
 
         ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout.php";
+        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout.mtb.php";
         return ob_get_clean();
     }
 
@@ -49,7 +49,7 @@ class View
         }
 
         ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/$view.php";
+        include_once Platform::$ROOT_DIR."/core/views/$view.mtb.php";
         return ob_get_clean();
     }
 }

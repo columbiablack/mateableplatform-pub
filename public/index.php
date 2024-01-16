@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 namespace mateable;
 
 use Dotenv\Dotenv;

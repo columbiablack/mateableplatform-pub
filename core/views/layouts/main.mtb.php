@@ -74,7 +74,7 @@ use mateable\core\Platform;
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" aria-expanded="true">
-                        <i class="icon-wallet"></i> 0.00 MTBC
+                        <i class="icon-wallet"></i> 0.00 MTBC{{MTBC_Price}}
                     </a>
                 </li>
                 <?php endif; ?>
@@ -86,7 +86,7 @@ use mateable\core\Platform;
     <?php if(Platform::isGuest()): ?>
     <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/mateable_logo.png&quot;);background-position-y: -200pt;background-attachment: fixed;color: rgba(30, 75, 180, 0.85);"> <!--//rgba(9, 162, 255, 0.85);">-->
         <div class="text">
-            <h2>Mateable</h2>
+            <h2>{{app_name}}</h2>
             <p>We're back, become a member and see what's new!</p>
             <a class="btn btn-outline-light btn-lg" href="./signup#signup" type="button">Sign Up</a>
         </div>
@@ -98,7 +98,7 @@ use mateable\core\Platform;
         </div>
     <?php endif; ?>
     {{content}}
-<?php if(Platform::$app->request->getUrl() === '/' || Platform::$app->request->getUrl() === '/Mateable/html/'): ?>
+<?php if(Platform::$app->request->getUrl() === '/'): ?>
     <section class="clean-block slider dark">
         <div class="container">
             <div class="block-heading">

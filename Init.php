@@ -23,9 +23,18 @@ class Init
             // TODO Switch to maintenance mode
             echo "<h2>Site Down for maintenance</h2>";
         }elseif($maintenance === "false"){
-            $mateable = new Platform(__DIR__);
-            $mateable::$app->router->get('/', [SiteController::class, 'home']);
-            $mateable::$app->router->get('/aboutus', [SiteController::class, 'aboutUs']);
+            $config = [
+                'db' => [
+                    'dbname' => $_ENV['DB_NAME'],
+                    'dsn' => $_ENV['DB_DSN'],
+                    'port' => $_ENV['DB_PORT'],
+                    'host' => $_ENV['DB_HOST'],
+                    'user' => $_ENV['DB_USER'],
+                    'test' => $_ENV['DB_TEST']
+                ]
+            ];
+
+            $mateable = new Platform(__DIR__, $config);
             $mateable->run();
         }
     }

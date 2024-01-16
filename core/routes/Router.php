@@ -7,7 +7,6 @@
 namespace mateable\core\routes;
 
 use mateable\core\controllers\Controller;
-use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\Platform;
@@ -27,14 +26,15 @@ class Router
     {
         $this->response = $response;
         $this->request = $request;
+        $this->routemap = Routes::getAllowedRoutes();
     }
 
-    public function get(string $url, $callback): void
+    public function get($url, $callback): void
     {
         $this->routemap['get'][$url] = $callback;
     }
 
-    public function post(string $url, $callback): void
+    public function post($url, $callback): void
     {
         $this->routemap['post'][$url] = $callback;
     }
@@ -93,27 +93,21 @@ class Router
 
     public function resolve()
     {
-        $method = $this->request->getMethod();
         $url = $this->request->getUrl();
+        $method = $this->request->getMethod();
         $callback = $this->routeMap[$method][$url] ?? false;
 
+        //$callback = $this->getCallback();
+
         if($callback === false) {
-            $callback = $this->getCallback();
-           return Platform::$app->view->renderview('_error',['exception' => 'I don\'t know why but something went terribly wrong.<br> Please try again!', 'exceptiontitle' => 'Error']);
+            return Platform::$app->view->renderView('_error',['exception' => 'I\'m not sure what happened, but something went terribly wrong.<br> Please try again!', 'exceptiontitle' => 'Error']);
         }
 
         if (is_string($callback)) {
             return Platform::$app->view->renderView($callback);
         }
-        if (is_array($callback)) {
-            /**
-             * @var Controller $controller
-             */
-            /*$controller = new $callback[0];
-            $controller->action = $callback[1];
-            Platform::$app->controller = $controller;
-            $middlewares = $controller->getMiddlewares();*/
 
+        if (is_array($callback)) {
             $controller = new $callback[0]();
             Platform::$app->controller = $controller;
             $controller->action = $callback[1];

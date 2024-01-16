@@ -7,9 +7,11 @@
 namespace mateable\core;
 
 use mateable\core\controllers\Controller;
+use mateable\core\db\Database;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
+use mateable\core\models\DB;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
 use mateable\core\views\View;
@@ -30,10 +32,11 @@ class Platform
 
     public string $layout = 'main';
     public ?Controller $controller = null;
+    public Database $db;
     public Session $session;
     public View $view;
 
-    public function __construct(string $root)
+    public function __construct(string $root, array $config)
     {
         self::$ROOT_DIR = $root;
         self::$app = $this;
@@ -41,7 +44,15 @@ class Platform
         $this->request = new Request();
         $this->response = new Response();
         $this->session = new Session();
-        $this->router = new Router($this->request, $this->response);
+        $this->db = new Database($config['db']);
+        $this->view = new View();
+        $this->router = new Router($this->request, $this->response, $this->controller);
+
+    }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
     }
 
     public static function isGuest(): bool
