@@ -1,15 +1,14 @@
 <?php
 
-namespace app\system\middlewares;
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
 
-use app\system\core\Application;
-use app\system\exception\ForbiddenException;
+namespace mateable\core\middlewares;
+
+use mateable\core\exceptions\ForbiddenException;
 use mateable\core\Platform;
 
-/**
- * @author SGreen <sgreen@mateable.com>
- * @package mateable
- */
 class AuthMiddleware extends BaseMiddleware
 {
     public array $actions = [];
@@ -28,8 +27,7 @@ class AuthMiddleware extends BaseMiddleware
         {
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
-                Platform::$app->response->statusCode(403);
-                Platform::$app->view->renderview('_error',['exception' => 'You\'re forbidden to see this part of the site!', 'exceptiontitle' => 'Forbidden']);
+                throw new ForbiddenException();
             }
         }
     }

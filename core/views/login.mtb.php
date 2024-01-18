@@ -1,10 +1,15 @@
 <?php
+
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 /**
 * user: Mateable
-* @var $model \app\models\User
+* @var $model mateable\core\models\User
 */
 
-use app\system\libs\form\Form;
+use mateable\core\form\Form;
 ?>
     <section class="clean-block clean-form dark">
         <div id='login' class="container">

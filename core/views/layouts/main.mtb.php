@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 /**
  * @author SGreen <sgreen@mateable.com>
  * @package mateable
@@ -20,6 +25,7 @@ use mateable\core\Platform;
     <link rel="stylesheet" href="./assets/css/main.min.css">
 </head>
 <body>
+
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
         <a class="navbar-brand logo" href="./">{{app_name}}</a>
@@ -29,9 +35,9 @@ use mateable\core\Platform;
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
-                <?php if(mateable\core\Platform::isGuest()): ?>
+                <?php if(Platform::isGuest() >= false): ?>
                 <li class="nav-item"><a class="nav-link" href="./login">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="./signup">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="./register">Register</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         Projects
@@ -83,12 +89,12 @@ use mateable\core\Platform;
     </div>
 </nav>
 <main class="page landing-page">
-    <?php if(Platform::isGuest()): ?>
+    <?php if(Platform::isGuest() >= false): ?>
     <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/mateable_logo.png&quot;);background-position-y: -200pt;background-attachment: fixed;color: rgba(30, 75, 180, 0.85);"> <!--//rgba(9, 162, 255, 0.85);">-->
         <div class="text">
             <h2>{{app_name}}</h2>
-            <p>We're back, become a member and see what's new!</p>
-            <a class="btn btn-outline-light btn-lg" href="./signup#signup" type="button">Sign Up</a>
+            <p>We're back, register and see what's new!</p>
+            <a class="btn btn-outline-light btn-lg" href="./register#register" type="button">Register</a>
         </div>
     </section>
     <?php endif; ?>
@@ -145,13 +151,13 @@ use mateable\core\Platform;
 </main>
 <footer class="page-footer dark">
     <div class="container">
-        <?php if(Platform::isGuest()): ?>
+        <?php if(Platform::isGuest()>=false): ?>
         <div class="row">
             <div class="col-sm-3">
                 <h5>Get started</h5>
                 <ul>
                     <li><a href="./">Home</a></li>
-                    <li><a href="./signup">Sign up</a></li>
+                    <li><a href="./register">Register</a></li>
                     <li><a href="./download">Downloads</a></li>
                 </ul>
             </div>

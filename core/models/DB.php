@@ -6,11 +6,12 @@
 
 namespace mateable\core\models;
 
+    use mateable\core\exceptions\PDOException;
     use mateable\core\Platform;
 
     abstract class DB extends Model
 {
-    abstract public function tableName(): string;
+    abstract public static function tableName(): string;
     abstract public function attributes(): array;
     abstract public function primaryKey(): string;
 
@@ -31,15 +32,16 @@ namespace mateable\core\models;
             $result = true;
         }catch(\PDOException $exception){
             $result = false;
-            Platform::$app->view->renderView('_error', ['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
+            //Platform::$app->view->renderView('_error', ['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
+            throw new PDOException();
         }
         return $result;
     }
 
-    public function update(): bool
+   /* html function update(): bool
     {
         try{
-            $tablename = $this->tableName();
+            $tablename = DB::tableName();
             $attributes = $this->attributes();
             $params = array_map(fn($attr)=>":$attr", $attributes);
             // UPDATE `mtb_users` SET `username` = 'JAEL' WHERE `mtb_users`.`id` = 343;
@@ -58,9 +60,9 @@ namespace mateable\core\models;
             //$this->log($exception->getMessage().' - '.$exception->getLine());
         }
         return $result;
-    }
+    }*/
 
-    public function findOne(array $where)
+    public static function findOne(array $where)
     {
         $tableName = static::tableName();
         $attributes = array_keys($where);
@@ -74,9 +76,9 @@ namespace mateable\core\models;
         return $statement->fetchObject(static::class);
     }
 
-    public static function prepare($sql)
+    public static function prepare($sql): bool|\PDOStatement
     {
-        return Platform::$app->db->pdo->prepare($sql);
+        return Platform::$app->db->prepare($sql);
     }
 
 }

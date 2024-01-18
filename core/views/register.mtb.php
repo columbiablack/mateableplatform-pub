@@ -1,19 +1,24 @@
 <?php
+
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 /**
 *  user: Mateable
-*  @var $model \app\models\User
+*  @var $model \mateable\core\models\User
 */
 
-use app\system\libs\form\Form;
+use mateable\core\form\Form;
 
 ?>
 
         <section class="clean-block clean-form dark">
-            <div id="signup" class="container">
+            <div id="register" class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Sign Up</h2>
+                    <h2 class="text-info">Register</h2>
                     <p>When you become a member you get a Mateable Coin wallet with 100MTBC free!</p><br/><br/>
-                    <p>By signing up you acknowledge that you are legally 18 years of age or older, and have agreed to our <a href="#">Terms of Policy</a>.</p>
+                    <p>By signing up you do acknowledge that you are legally 18 years of age or older, and have agreed to our <a href="#">Terms of Policy</a>.</p>
                 </div>
                 <?php
                     $form = Form::begin('','post');

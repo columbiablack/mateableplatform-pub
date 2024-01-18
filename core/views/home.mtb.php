@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 /***
  *  user: Mateable
  */

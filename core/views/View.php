@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024 Mateable LLC
+ * Copyright (c) 2024. Mateable LLC
  */
 
 namespace mateable\core\views;
@@ -22,6 +22,7 @@ class View
 
         $layoutcontent = str_replace('{{app_name}}', $_ENV['NAME'], $layoutcontent);
         $layoutcontent = str_replace('{{content}}',$viewcontent, $layoutcontent);
+        $layoutcontent = str_replace('{{logo}}','<img src="assets/img/mateable_logo.png">', $layoutcontent);
         $finalcontent = $layoutcontent;
 
         return $finalcontent;
@@ -29,7 +30,7 @@ class View
 
     protected function layoutContent(): string
     {
-        $layout = Platform::$app->layout;
+        $layout = Platform::$app->controller->layout;
 
         if(Platform::$app->controller)
         {

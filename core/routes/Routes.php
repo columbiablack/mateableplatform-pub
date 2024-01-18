@@ -6,18 +6,31 @@
 
 namespace mateable\core\routes;
 
+use mateable\core\controllers\AuthController;
 use mateable\core\controllers\SiteController;
 
 class Routes
 {
     public static function getAllowedRoutes(): array
     {
-        return[
+        $routesGET['get'] = [
             '/' => [SiteController::class, 'home'],
-            '/login' => [SiteController::class, 'home'],
-            '/register' => [SiteController::class, 'home'],
+            '/login' => [AuthController::class, 'login'],
+            '/register' => [AuthController::class, 'register'],
             '/aboutus' => [SiteController::class, 'aboutUs'],
-            '/contact' => [SiteController::class, 'contact']
+            '/contact' => [SiteController::class, 'contact'],
         ];
+        return $routesGET;
     }
+
+    public static function postAllowedRoutes(): array
+    {
+        $routesPOST['post'] = [
+            '/login' => [AuthController::class, 'login'],
+            '/register' => [AuthController::class, 'register'],
+            '/contact' => [SiteController::class, 'contact'],
+        ];
+        return $routesPOST;
+    }
+
 }

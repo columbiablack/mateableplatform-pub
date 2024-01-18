@@ -6,9 +6,9 @@
 
 namespace mateable\core\users;
 
-use app\system\db\DBModel;
+use mateable\core\models\DB;
 
-abstract class User extends DBModel
+abstract class User extends DB
 {
     abstract public function displayName();
     abstract public function displayFirstName();

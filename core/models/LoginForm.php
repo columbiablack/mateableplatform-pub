@@ -9,7 +9,8 @@ namespace mateable\core\models;
 use mateable\core\Platform;
 use mateable\core\models\Users;
 
-class LoginForm extends Users
+
+class LoginForm extends Model
 {
     public string $email = '';
     public string $password = '';

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 (function() {
   "use strict"; // Start of use strict
 

@@ -1,15 +1,20 @@
 <?php
+
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 /**
 * user: Mateable
 */
 
-use app\system\core\Application;
+use mateable\core\Platform;
 
 ?>
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="border-1 block-heading">
-                    <h4 class="text-info card-title"><?php echo Application::$app->user->displayFirstName().'\'s' ?? '' ?> Dashboard</h4>
+                    <h4 class="text-info card-title"><?php echo Platform::$app->user->displayFirstName().'\'s' ?? '' ?> Dashboard</h4>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">

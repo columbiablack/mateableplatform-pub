@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2024 Mateable LLC
+ * Copyright (c) 2024. Mateable LLC
  */
 
 namespace mateable\core\routes;
 
 use mateable\core\controllers\Controller;
+use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\Platform;
@@ -26,7 +27,7 @@ class Router
     {
         $this->response = $response;
         $this->request = $request;
-        $this->routemap = Routes::getAllowedRoutes();
+        $this->routemap = Routes::getAllowedRoutes() + Routes::postAllowedRoutes();
     }
 
     public function get($url, $callback): void
@@ -83,6 +84,7 @@ class Router
                 $routeParams = array_combine($routeNames, $values);
 
                 $this->request->setRouteParams($routeParams);
+
                 return $callback;
             }
         }
@@ -91,16 +93,18 @@ class Router
 
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function resolve()
     {
-        $url = $this->request->getUrl();
         $method = $this->request->getMethod();
-        $callback = $this->routeMap[$method][$url] ?? false;
+        $url = $this->request->getUrl();
+        $callback = $this->routemap[$method][$url] ?? false;
 
-        //$callback = $this->getCallback();
-
-        if($callback === false) {
-            return Platform::$app->view->renderView('_error',['exception' => 'I\'m not sure what happened, but something went terribly wrong.<br> Please try again!', 'exceptiontitle' => 'Error']);
+        if(false >= $callback) {
+            //return Platform::$app->view->renderView('_error',['exception' => 'The page was not found.<br> Please try again!', 'exceptiontitle' => '404']);
+            throw new \mateable\core\exceptions\NotFoundException();
         }
 
         if (is_string($callback)) {

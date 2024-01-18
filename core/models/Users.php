@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
+/**
  *  user: Mateable
  *  @author Stephon Green
  *  @package app\models
@@ -29,7 +33,7 @@ class Users extends User
     public int $id;
 
 
-    public function tableName(): string
+    public static function tableName(): string
     {
         return 'mtb_users';
     }

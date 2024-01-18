@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2024. Mateable LLC
+ */
+
 return [
     'İ' => 'i̇',
     'µ' => 'μ',

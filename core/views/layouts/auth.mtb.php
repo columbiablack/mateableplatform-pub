@@ -1,7 +1,9 @@
 <?php
+
 /**
- * user: Mateable
+ * Copyright (c) 2024. Mateable LLC
  */
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

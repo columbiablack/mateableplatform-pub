@@ -28,19 +28,16 @@ class Database
 
         if($test === 'true')
         {
-            //$this->log("Running test..");
             $this->dbFullTest($config);
         }
         else
         {
             try
             {
-                $this->pdo = new PDO($dsn, $user, $password);
-                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }
-            catch(PDOException $ex)
-            {
-              //Controller::renderView('_error', ['exception' => $ex->getMessage(), 'exceptiontitle' => $ex->getCode()]);
+                //$this->pdo = new PDO($dsn, $user, $password);
+                //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }catch (\Exception $exception){
+                // TODO Add error handler here.
             }
         }
     }
@@ -65,18 +62,12 @@ class Database
             echo 'The Classname is '.$classname.PHP_EOL;
             $instance = new $classname();
 
-            //$this->log('applying migrations'.PHP_EOL);
             $instance->up();
-            //$this->log('applied migrations'.PHP_EOL);
             $newMigrations[] = $migration;
 
             if(!empty($newMigrations))
             {
                 $this->savedMigrations($newMigrations);
-            }
-            else
-            {
-                //$this->log('All migrations have finished');
             }
         }
     }
@@ -90,7 +81,7 @@ class Database
         ) ENGINE=INNODB;");
     }
 
-    public function getAppliedMigrations()
+    public function getAppliedMigrations(): bool|array
     {
         $statement = $this->pdo->prepare("SELECT migration FROM mtb_migrations");
         $statement->execute();
@@ -107,9 +98,9 @@ class Database
         $statement->execute();
     }
 
-    public function prepare($sql)
+    public function prepare($sql): bool|\PDOStatement
     {
-        return $this->pdo->prepare($sql);
+        return Platform::$app->db->pdo->prepare($sql);
     }
 
     public function dbFullTest($config): void
@@ -118,7 +109,7 @@ class Database
         $this->pdoDBConnectionTest($config);
     }
 
-    public function sqlDBConnectionTest(array $config): void
+    public function sqlDBConnectionTest(array $config): string|array
     {
         $db = $config['dbname'] ?? '';
         $port = $config['port'] ?? '';
@@ -131,21 +122,22 @@ class Database
             $mysqldb = new \mysqli($host, $usr, $pwd, $db, $port);
             if($mysqldb)
             {
-                //$this->log("SQL DB Test(Successful): It seems to have connected with no problems");
+                //TODO Create a response confirmation
             }
             else
             {
-                //$this->log("SQL DB Test(Failed): ");
+                //TODO Create a response error confirmation
             }
         }
         catch(\mysqli_sql_exception $exception)
         {
-            //Platform::$app->view->renderView('_error',['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
+            return Platform::$app->view->renderView('_error',['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
         }
 
+        return true;
     }
 
-    public function pdoDBConnectionTest(array $config): void
+    public function pdoDBConnectionTest(array $config): string|array
     {
         $dsn = $config['dsn'] ?? '';
         $user = $config['user'] ?? '';
@@ -158,8 +150,9 @@ class Database
         }
         catch(PDOException $ex)
         {
-            //Platform::$app->view->renderView('_error', ['exception' => $ex->getMessage(), 'exceptiontitle' => $ex->getCode()]);
-            //die('<pre>'.json_encode(array('PDO DB Test' => 'failed', 'connection' => false, 'message' => $ex->getMessage())).'</pre>');
+           // return Platform::$app->view->renderView('_error', ['exception' => $ex->getMessage(), 'exceptiontitle' => $ex->getCode()]);
+            throw new \mateable\core\exceptions\PDOException();
         }
+        return true;
     }
 }
