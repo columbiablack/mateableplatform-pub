@@ -38,6 +38,8 @@ use mateable\core\Platform;
                 <?php if(Platform::isGuest() >= false): ?>
                 <li class="nav-item"><a class="nav-link" href="./login">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="./register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="./marketplace">Marketplace</a></li>
+                <li class="nav-item"><a class="nav-link" href="./downloads">Downloads</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         Projects
@@ -49,7 +51,7 @@ use mateable\core\Platform;
                         <li><a class="dropdown-item" href="./orchid">Orchid App</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="./aboutus">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="./about-us">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="./contact">Contact Us</a></li>
                 <?php else: ?>
                 <li class="nav-item dropdown">
@@ -158,13 +160,13 @@ use mateable\core\Platform;
                 <ul>
                     <li><a href="./">Home</a></li>
                     <li><a href="./register">Register</a></li>
-                    <li><a href="./download">Downloads</a></li>
+                    <li><a href="./downloads">Downloads</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">
                 <h5>About us</h5>
                 <ul>
-                    <li><a href="./aboutus">Mateable LLC</a></li>
+                    <li><a href="./about-us">Mateable LLC</a></li>
                     <li><a href="./contact">Contact us</a></li>
                 </ul>
             </div>
@@ -178,9 +180,8 @@ use mateable\core\Platform;
             <div class="col-sm-3">
                 <h5>Legal</h5>
                 <ul>
-                    <li><a href="./tos">Terms of Service</a></li>
-                    <li><a href="./tou">Terms of Use</a></li>
-                    <li><a href="./privacypolicy">Privacy Policy</a></li>
+                    <li><a href="./legal?type=serviceterms">Terms of Service</a></li>
+                    <li><a href="./legal?type=privacypolicy">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>

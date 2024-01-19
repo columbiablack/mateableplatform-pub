@@ -3,7 +3,7 @@
         'name' => 'sgreen/mateable',
         'pretty_version' => '1.0.x-dev',
         'version' => '1.0.9999999.9999999-dev',
-        'reference' => '5fa063d1dc4ef607d980d61d8b2a7b0e1e24ac4a',
+        'reference' => '2835b3126c2bcecf3001d07c9d6bb1177a5b6ab0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'sgreen/mateable' => array(
             'pretty_version' => '1.0.x-dev',
             'version' => '1.0.9999999.9999999-dev',
-            'reference' => '5fa063d1dc4ef607d980d61d8b2a7b0e1e24ac4a',
+            'reference' => '2835b3126c2bcecf3001d07c9d6bb1177a5b6ab0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -75,9 +75,3 @@
         ),
     ),
 );
-
-/**
- * Copyright (c) 2024. Mateable LLC
- */
-
-

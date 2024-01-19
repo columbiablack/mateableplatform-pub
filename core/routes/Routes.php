@@ -11,14 +11,26 @@ use mateable\core\controllers\SiteController;
 
 class Routes
 {
+    public static function authAllowedRoutes(): array
+    {
+        return [
+            'profile',
+            'dashboard'
+        ];
+    }
+
     public static function getAllowedRoutes(): array
     {
         $routesGET['get'] = [
             '/' => [SiteController::class, 'home'],
             '/login' => [AuthController::class, 'login'],
             '/register' => [AuthController::class, 'register'],
-            '/aboutus' => [SiteController::class, 'aboutUs'],
+            '/about-us' => [SiteController::class, 'aboutUs'],
             '/contact' => [SiteController::class, 'contact'],
+            '/downloads' => [SiteController::class, 'downloads'],
+            '/marketplace' => [SiteController::class, 'marketplace'],
+            '/legal' => [SiteController::class, 'legal'],
+            '/profile' => [AuthController::class, 'profile']
         ];
         return $routesGET;
     }
@@ -32,5 +44,4 @@ class Routes
         ];
         return $routesPOST;
     }
-
 }

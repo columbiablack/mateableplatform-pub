@@ -6,14 +6,12 @@
 
 namespace mateable\core\exceptions;
 
-use Exception;
-
 /**
  * @author SGreen <sgreen@mateable.com>
  * @package mateable
  */
 class ForbiddenException extends Exception
 {
-    protected $message = 'The page was not found.';
-    protected $code = 404;
+    protected $message = 'Forbidden Access - You\'re not authorized to view this sector.';
+    protected $code = 403;
 }

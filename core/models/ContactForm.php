@@ -32,7 +32,7 @@ class ContactForm extends Model
         ];
     }
 
-    public function contactUs()
+    public function contactUs(): bool
     {
 
         return true;

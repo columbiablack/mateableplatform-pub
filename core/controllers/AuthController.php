@@ -8,17 +8,16 @@ namespace mateable\core\controllers;
 
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\http\Request;
-use mateable\core\http\Response;
 use mateable\core\models\LoginForm;
 use mateable\core\models\Users;
 use mateable\core\Platform;
-use mateable\core\session\Session;
+use mateable\core\routes\Routes;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->registerMiddleware(new AuthMiddleware(['profile']));
+        $this->registerMiddleware(new AuthMiddleware(Routes::authAllowedRoutes()));
     }
 
     public function login(Request $request): string
@@ -29,13 +28,13 @@ class AuthController extends Controller
             $loginForm->loadData($request->getBody());
 
             if($loginForm->validate() && $loginForm->doLogin()){
-                $this->render('profile');
+                $this->profile();
             }
         }
         return $this->render('login', ['model' => $loginForm]);
     }
 
-    public function register(Response $response, Request $request): string
+    public function register(Request $request): string
     {
         $registerForm = new Users();
         if($request->isPost())
@@ -43,9 +42,7 @@ class AuthController extends Controller
             $registerForm->loadData($request->getBody());
 
             if($registerForm->validate() && $registerForm->save()){
-                Platform::$app->session->setFlash('success','You have registered successfully!!!');
-                $response->redirect('./');
-                //$this->render('./profile');
+                $this->newMember();
             }
         }
         return $this->render('register', ['model' => $registerForm]);
@@ -54,5 +51,11 @@ class AuthController extends Controller
     public function profile(): string
     {
         return $this->render('profile');
+    }
+
+    public function newMember(): void
+    {
+        Platform::$app->session->setFlash('success','You have registered successfully!!!');
+        Platform::$app->response->redirect('login');
     }
 }

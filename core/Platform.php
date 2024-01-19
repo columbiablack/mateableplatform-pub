@@ -8,14 +8,12 @@ namespace mateable\core;
 
 use mateable\core\controllers\Controller;
 use mateable\core\db\Database;
-use mateable\core\exceptions\ForbiddenException;
-use mateable\core\exceptions\NotFoundException;
+use mateable\core\exceptions\Exception;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\models\Users;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
-use mateable\core\users\User;
 use mateable\core\views\View;
 
 /**
@@ -27,6 +25,9 @@ class Platform
 {
     public static Platform $app;
     public static string $ROOT_DIR;
+    /** The default template for
+     the layout is always 'main' */
+    public string $layout = 'main';
     public Request $request;
     public Response $response;
     public Router $router;
@@ -56,14 +57,18 @@ class Platform
         return !Platform::$app->user;
     }
 
+    /**
+     * @throws Exception
+     */
     public function run(): void
     {
         try{
             echo self::$app->router->resolve();
-        }catch(NotFoundException $exception){
-            throw new NotFoundException();
-        }catch(ForbiddenException $forbiddenException){
-            throw new ForbiddenException();
+        }catch(exceptions\Exception|exceptions\NotFoundException $e) {
+            echo $this->view->renderview('_error',[
+                'exception' => $e->getMessage(),
+                'exceptiontitle' => $e->getCode()
+            ]);
         }
     }
 }

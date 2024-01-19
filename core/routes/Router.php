@@ -102,9 +102,11 @@ class Router
         $url = $this->request->getUrl();
         $callback = $this->routemap[$method][$url] ?? false;
 
-        if(false >= $callback) {
-            //return Platform::$app->view->renderView('_error',['exception' => 'The page was not found.<br> Please try again!', 'exceptiontitle' => '404']);
-            throw new \mateable\core\exceptions\NotFoundException();
+        if(!$callback) {
+            $callback = $this->getCallback();
+            if (false >= $callback) {
+                throw new NotFoundException();
+            }
         }
 
         if (is_string($callback)) {

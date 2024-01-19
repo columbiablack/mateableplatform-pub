@@ -30,6 +30,11 @@ class Controller
         return Platform::$app->view->renderView($view, $params);
     }
 
+    public function renderLegal($view, $params = []): string
+    {
+        return Platform::$app->view->renderLegalView($view, $params);
+    }
+
     public function registerMiddleware(BaseMiddleware $middleware): void
     {
         $this->middlewares[] = $middleware;

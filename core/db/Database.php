@@ -131,7 +131,8 @@ class Database
         }
         catch(\mysqli_sql_exception $exception)
         {
-            return Platform::$app->view->renderView('_error',['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
+            //return Platform::$app->view->renderView('_error',['exception' => $exception->getMessage(), 'exceptiontitle' => $exception->getCode()]);
+            die();
         }
 
         return true;
