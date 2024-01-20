@@ -25,9 +25,7 @@ class Platform
 {
     public static Platform $app;
     public static string $ROOT_DIR;
-    /** The default template for
-     the layout is always 'main' */
-    public string $layout = 'main';
+    public static string $layout = 'main';
     public Request $request;
     public Response $response;
     public Router $router;
@@ -49,7 +47,7 @@ class Platform
         $this->request = new Request();
         $this->response = new Response();
         $this->controller = new Controller();
-        $this->router = new Router($this->request, $this->response, $this->controller);
+        $this->router = new Router($this->request, $this->response);
     }
 
     public static function isGuest(): bool

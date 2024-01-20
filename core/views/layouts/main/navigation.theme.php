@@ -4,6 +4,8 @@
  * Copyright (c) 2024. Mateable LLC
  */
 
+use mateable\core\Platform;
+
 ?>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">

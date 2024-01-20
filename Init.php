@@ -21,7 +21,8 @@ class Init
         $maintenance = $_ENV['MAINTENANCE'];
         if($maintenance === "true"){
             // TODO Switch to maintenance mode
-            echo "<h2>Site Down for maintenance</h2>";
+            //echo "<h2>Site Down for maintenance</h2>";
+            include_once(__DIR__.'/core/views/maintenance.php');
         }elseif($maintenance === "false"){
             $config = [
                 'db' => [

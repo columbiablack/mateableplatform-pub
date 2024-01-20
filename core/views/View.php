@@ -12,28 +12,29 @@ use mateable\core\Platform;
  * @author SGreen <sgreen@mateable.com>
  * @package mateable
  */
-
 class View
 {
     protected array $dirList =[];
+
     public function renderView($view, $params = []): array|string
-    {
+    {   $viewmgr = new ViewManager();
         $layout_content = $this->layoutContent();
         $viewcontent = $this->renderViewOnly($view,$params);
 
-        $layout_content = str_replace('{{app_name}}', $_ENV['NAME'], $layout_content);
         $layout_content = str_replace('{{content}}',$viewcontent, $layout_content);
-        return str_replace('{{logo}}','<img src="assets/img/mateable_logo.png">', $layout_content);
+
+        return $viewmgr->convert($layout_content);
     }
 
     public function renderLegalView($view, $params = []): array|string
     {
+        $viewmgr = new ViewManager();
         $legal_layout_content = $this->layoutLegalContent();
         $viewcontent = $this->renderLegalViewOnly($view,$params);
 
-        $legal_layout_content = str_replace('{{app_name}}', $_ENV['NAME'], $legal_layout_content);
         $legal_layout_content = str_replace('{{content}}',$viewcontent, $legal_layout_content);
-        return str_replace('{{logo}}','<img src="assets/img/mateable_logo.png">', $legal_layout_content);
+
+        return $viewmgr->convert($legal_layout_content);
     }
 
     public function renderViewOnly($view, $params = []): string
@@ -68,7 +69,7 @@ class View
         }
 
         ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout.mtb.php";
+        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout/main.mtb.php";
         return ob_get_clean();
     }
 
@@ -82,7 +83,7 @@ class View
         }
 
         ob_start();
-        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout.mtb.php";
+        include_once Platform::$ROOT_DIR."/core/views/layouts/$layout/main.mtb.php";
         return ob_get_clean();
     }
 

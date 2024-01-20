@@ -14,10 +14,6 @@ use mateable\core\Platform;
                 </div>
                 <div class="block-content">
                     <p class="text-info">
-                        <?php
-                            var_dump(Platform::$app->view->getLayouts());
-                            //var_dump(scandir(Platform::$ROOT_DIR.'/core/views/layouts/')) ?? [];
-                        ?>
                     </p>
                 </div>
             </div>

@@ -4,6 +4,8 @@
  * Copyright (c) 2024. Mateable LLC
  */
 
+use mateable\core\Platform;
+
 ?>
 <footer class="page-footer dark">
     <div class="container">
