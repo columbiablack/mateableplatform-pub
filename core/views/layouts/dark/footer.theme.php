@@ -7,7 +7,7 @@
 ?>
 <footer>
     <div class="container text-center">
-        <p>© 2023 Copyright <a href="https://www.mateable.com/">{{app_name}} LLC</a></p>
+        <p>© 2023-<?php echo date('Y'); ?> Copyright <a href="{{site_url}}">{{app_name}} LLC</a></p>
     </div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

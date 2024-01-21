@@ -18,7 +18,7 @@ class Initial {
                 address2 VARCHAR(55) NULL,
                 phone VARCHAR(25) NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )  ENGINE=INNODB;";
         $db->pdo->exec($SQL);
     }

@@ -6,6 +6,7 @@
 
 namespace mateable\core\db;
 
+use mateable\core\exceptions\Exception;
 use mateable\core\Platform;
 use mysqli;
 use PDO;
@@ -34,10 +35,10 @@ class Database
         {
             try
             {
-                //$this->pdo = new PDO($dsn, $user, $password);
-                //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->pdo = new PDO($dsn, $user, $password);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }catch (\Exception $exception){
-                // TODO Add error handler here.
+                throw new Exception($exception->getMessage(), $exception->getCode());
             }
         }
     }
@@ -46,10 +47,12 @@ class Database
     {
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
-        $files = scandir(Platform::$ROOT_DIR . '/migrations');
+        echo 'Getting migrations list'.PHP_EOL;
+        $files = scandir(Platform::$ROOT_DIR . '/core/migrations');
         $toApplyMigrations = array_diff($files, $appliedMigrations);
         $newMigrations = [];
 
+        echo 'Migration started..'.PHP_EOL;
         foreach($toApplyMigrations as $migration){
             if($migration === '.' || $migration === '..')
             {
@@ -57,9 +60,10 @@ class Database
             }
 
             require_once Platform::$ROOT_DIR.'/core/migrations/'.$migration;
-
-            $classname = pathinfo($migration, PATHINFO_FILENAME);
+            echo 'Running '.$migration.' into database.';
+            $classname = str_replace(".mgn", "", pathinfo($migration, PATHINFO_FILENAME));
             $instance = new $classname();
+            echo 'Migrating '.$classname.PHP_EOL;
             $instance->up();
             $newMigrations[] = $migration;
 
@@ -68,6 +72,7 @@ class Database
                 $this->savedMigrations($newMigrations);
             }
         }
+        echo 'Finished migrations!'.PHP_EOL;
     }
 
     public function createMigrationsTable(): void

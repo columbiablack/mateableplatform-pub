@@ -16,10 +16,12 @@ class ViewManager
 
     public function definitions():array
     {
+        $Website = $_ENV['WEBSITE'];
         return [
             '{{app_name}}' => $this->title,
+            '{{site_url}}' => $Website,
+            '{{logo}}' => '<img src=\'assets/img/mateable_logo.png\'>',
             '{{age}}' => 18,
-            '{{logo}}' => '<img src=\'assets/img/mateable_logo.png\'>'
         ];
     }
 
@@ -28,6 +30,7 @@ class ViewManager
         foreach($this->definitions() as $key => $value){
             $context = str_replace($key, $value, $context);
         }
+
         return $context;
     }
 }
