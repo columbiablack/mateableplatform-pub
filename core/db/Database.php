@@ -56,12 +56,10 @@ class Database
                 continue;
             }
 
-            require_once Platform::$ROOT_DIR.'/migrations/'.$migration;
+            require_once Platform::$ROOT_DIR.'/core/migrations/'.$migration;
 
             $classname = pathinfo($migration, PATHINFO_FILENAME);
-            echo 'The Classname is '.$classname.PHP_EOL;
             $instance = new $classname();
-
             $instance->up();
             $newMigrations[] = $migration;
 
@@ -74,7 +72,7 @@ class Database
 
     public function createMigrationsTable(): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS mtb_migrations (
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations (
             id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -83,7 +81,7 @@ class Database
 
     public function getAppliedMigrations(): bool|array
     {
-        $statement = $this->pdo->prepare("SELECT migration FROM mtb_migrations");
+        $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_COLUMN);
@@ -92,7 +90,7 @@ class Database
     public function savedMigrations(array $migrations): void
     {
         $str = implode(",", array_map(fn($m) => "('$m')", $migrations));
-        $statement = $this->pdo->prepare("INSERT INTO mtb_migrations (migration) VALUES
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES
                                        $str
                                        ");
         $statement->execute();
