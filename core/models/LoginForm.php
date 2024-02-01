@@ -6,14 +6,17 @@
 
 namespace mateable\core\models;
 
+use mateable\core\exceptions\Exception;
 use mateable\core\Platform;
-use mateable\core\models\Users;
 
 
 class LoginForm extends Model
 {
     public string $email = '';
     public string $password = '';
+    public string $last_login = '';
+
+    protected RegisterForm $user;
 
     public function rules(): array
     {
@@ -43,21 +46,31 @@ class LoginForm extends Model
 
     public function doLogin(): bool
     {
-        $user = Users::findOne(['email' => $this->email]);
+        try{
+        /**
+         * @var $user RegisterForm
+         */
+            $user = RegisterForm::findOne(['email' => $this->email]);
 
-        if(!$user)
-        {
-            $this->addError('email','The user does not exist with this email.');
+            if (!$user) {
+                $this->addError('email', 'The user does not exist with this email.');
+                return false;
+            }
+
+            if (!password_verify($this->password, $user->password)) {
+                $this->addError('password', 'The password is incorrect.');
+                return false;
+            }
+
+            Platform::$app->user = $user;
+            $primaryKey = $user->primaryKey();
+            $primaryValue = $user->{$primaryKey};
+            Platform::$app->session->set('user', $primaryValue);
+            Platform::$app->session->setFlash('success', 'Your Login was successful!');
+
+            return true; //$this->loginHandler($user);
+        }catch(Exception|\PDOException $e){
             return false;
         }
-
-        if(!password_verify($this->password, $user->password))
-        {
-            $this->addError('password','The password is incorrect.');
-            return false;
-        }
-
-        return Platform::$app->login($user);
     }
-
 }

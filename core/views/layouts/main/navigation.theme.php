@@ -2,6 +2,7 @@
 
 /**
  * Copyright (c) 2024. Mateable LLC
+ *
  */
 
 use mateable\core\Platform;
@@ -16,7 +17,7 @@ use mateable\core\Platform;
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
-                <?php if(Platform::isGuest() >= false): ?>
+                <?php if(Platform::isGuest() === true): ?>
                     <li class="nav-item"><a class="nav-link" href="./login">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="./register">Register</a></li>
                     <li class="nav-item"><a class="nav-link" href="./marketplace">Marketplace</a></li>
@@ -36,9 +37,7 @@ use mateable\core\Platform;
                     <li class="nav-item"><a class="nav-link" href="./contact">Contact Us</a></li>
                 <?php else: ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            <?php echo '<i class="icon-user"></i> '. Platform::$app->user->displayUserName(); ?>
-                        </a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><?php echo ('<i class="icon-user"></i>'); ?></a>
                         <ul class="dropdown-menu">
                             <!--<li><h6 class="dropdown-item text-info"><i class="icon-people"></i> Social</h6></li>
                             <li><hr class="dropdown-divider"></li>-->

@@ -11,8 +11,11 @@ use mateable\core\models\DB;
 abstract class User extends DB
 {
     abstract public function displayName();
+
     abstract public function displayFirstName();
+
     abstract public function displayLastName();
-    abstract public function displayUserName();
+
     abstract public function displayUserID();
+
 }

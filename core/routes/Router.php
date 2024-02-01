@@ -6,7 +6,6 @@
 
 namespace mateable\core\routes;
 
-use mateable\core\controllers\Controller;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
@@ -57,7 +56,7 @@ class Router
 
         $routeParams = false;
 
-        // Start iterating registed routes
+        // Start iterating registered routes
         foreach ($routes as $route => $callback) {
             // Trim slashes
             $route = trim($route, '/');
@@ -123,6 +122,7 @@ class Router
                 $middleware->execute();
             }
         }
+
         return call_user_func($callback, $this->request, $this->response);
     }
 

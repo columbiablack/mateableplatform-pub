@@ -12,9 +12,10 @@
 
 namespace mateable\core\models;
 
+use mateable\core\Platform;
 use mateable\core\users\User;
 
-class Users extends User
+class RegisterForm extends User
 {
     public const STATUS_INACTIVE = 0;
     public const STATUS_ACTIVE = 1;
@@ -25,17 +26,20 @@ class Users extends User
     public string $firstname = '';
     public string $lastname = '';
     public string $dob = '';
-    public string $location = '';
+    public string $address1 = '';
+    public string $address2 = '';
+    public string $phone = '';
     public string $email = '';
-    public string $username = '';
     public string $password = '';
     public string $password_confirm = '';
+    public string $last_login = '';
+    public string $ip_address = '';
     public int $id;
 
 
     public static function tableName(): string
     {
-        return 'mtb_users';
+        return 'users';
     }
 
     public function primaryKey(): string
@@ -45,9 +49,10 @@ class Users extends User
 
     public function save(): bool
     {
+        $this->ip_address = Platform::$app->request->getClientAddress();
+        $this->last_login = date("Y-m-d H:i:s",);
         $this->status = self::STATUS_INACTIVE;
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
-        //$this->uploadProfilePicture($this->user_image);
         return parent::save();
     }
 
@@ -56,10 +61,11 @@ class Users extends User
         return [
             'firstname' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2]],
             'lastname' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2]],
-            'dob' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_DOB, 'dob' => 18]],
-            'location' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 180]],
+            'dob' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_DOB, 'dob' => 12]],
+            'address1' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 80]],
+            'address2' => [],
+            'phone' => [self::RULE_REQUIRED],
             'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
-            'username' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 6]],
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 6]],
             'password_confirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
         ];
@@ -71,11 +77,14 @@ class Users extends User
             'firstname',
             'lastname',
             'dob',
-            'location',
+            'address1',
+            'address2',
+            'phone',
             'email',
-            'username',
             'password',
-            'status'
+            'status',
+            'ip_address',
+            'last_login',
         ];
     }
 
@@ -85,8 +94,10 @@ class Users extends User
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
             'dob' => 'Date of birth',
-            'location' => 'Location',
-            'username' => 'Username',
+            'address1' => 'Address Line(Primary)',
+            'address2' => 'Address Line(Secondary)',
+            'email' => 'E-mail Address',
+            'phone' => 'Phone (No VOIP Numbers Allowed)',
             'password' => 'Password',
             'password_confirm' => 'Confirm Password',
         ];
@@ -105,11 +116,6 @@ class Users extends User
     public function displayLastName(): string
     {
         return $this->lastname;
-    }
-
-    public function displayUserName(): string
-    {
-        return $this->username;
     }
 
     public function displayUserID(): int

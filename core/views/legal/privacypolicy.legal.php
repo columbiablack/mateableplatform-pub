@@ -16,7 +16,9 @@
             </p>
 
             <p>
-                Effective Date: [01/01/2024]
+                Effective Date: [01/02/2023]
+                <br>
+                Last Modified Dated: [01/13/2024]
                 <br>
                 <br>
                 1. Information We Collect
@@ -52,8 +54,5 @@
                 If you have any questions, concerns, or requests related to your personal information or this Privacy Policy, please visit the <a href="./contact">contact us</a> page.
             </p>
         </div>
-
-
-
     </div>
 </section>

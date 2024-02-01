@@ -6,8 +6,6 @@
 
 namespace mateable\core\models;
 
-use mateable\core\models\Model;
-
 class ContactForm extends Model
 {
     public string $email = '';
@@ -35,6 +33,5 @@ class ContactForm extends Model
     public function contactUs(): bool
     {
 
-        return true;
     }
 }

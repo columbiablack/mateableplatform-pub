@@ -11,6 +11,7 @@ $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $config = [
+    'userClass' => \mateable\core\models\RegisterForm::class,
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
@@ -18,6 +19,9 @@ $config = [
     ]
 ];
 
-$app = new Platform(__DIR__, $config);
-
-$app->db->applyMigrations();
+try {
+    $app = new Platform(__DIR__, $config);
+    $app->db->applyMigrations();
+}catch (PDOException $e){
+    echo $e->getMessage();
+}

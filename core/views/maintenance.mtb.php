@@ -37,7 +37,7 @@
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>
-                <p>© <?php echo date('Y'); ?> Copyright <a href="https://www.mateable.com/">Mateable LLC</a></p>
+                <p>© 2003-<?php echo date('Y'); ?> Copyright <a href="<?php echo $_ENV['website']; ?>">Mateable LLC</a></p>
             </span>
         </div>
     </div>

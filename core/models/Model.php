@@ -6,6 +6,9 @@
 
 namespace mateable\core\models;
 
+use mateable\core\exceptions\DatabaseConnectionException;
+use mateable\core\Platform;
+
 abstract class Model
 {
     public const RULE_EMAIL = 'email';
@@ -15,6 +18,7 @@ abstract class Model
     public const RULE_MAX = 'max';
     public const RULE_REQUIRED = 'required';
     public const RULE_UNIQUE = 'unique';
+    public array $errors = [];
 
     abstract public function rules(): array;
 
@@ -28,8 +32,6 @@ abstract class Model
             }
         }
     }
-
-    public array $errors = [];
 
     public function validate(): bool
     {
@@ -76,17 +78,16 @@ abstract class Model
                     $this->addErrorForRule($attribute, self::RULE_DOB, $rule);
                 }
 
-                if($ruleName === self::RULE_UNIQUE)
-                {
+                if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
                     $uniqueAttr = $rule['attribute'] ?? $attribute;
                     $tableName = $className::tableName();
-                    $statement = Application::$app->db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :attr");
-                    $statement->bindValue(":attr", $value);
+                    $db = Platform::$app->db;
+                    $statement = $db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :$uniqueAttr");
+                    $statement->bindValue(":$uniqueAttr", $value);
                     $statement->execute();
                     $record = $statement->fetchObject();
-                    if($record)
-                    {
+                    if ($record) {
                         $this->addErrorForRule($attribute, self::RULE_UNIQUE,['field' => $this->getlabel($attribute)]);
                     }
                 }
@@ -136,12 +137,6 @@ abstract class Model
     public function getFirstError($attribute)
     {
         return $this->errors[$attribute][0] ?? false;
-    }
-
-    public function uploadProfilePicture($profile_image): bool
-    {
-        $target_file = Application::$ROOT_DIR .'/active-dump/'. basename($_FILES[$profile_image]['name']);
-        return move_uploaded_file($_FILES[$profile_image]['tmp_name'], $target_file);
     }
 
     public function dobCheck($dob): string

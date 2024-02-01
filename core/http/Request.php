@@ -55,6 +55,11 @@ class Request
         return $data;
     }
 
+    public function getClientAddress(): string
+    {
+        return $_SERVER['HTTP_CLIENT_IP'] ? : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? : $_SERVER['REMOTE_ADDR']);
+    }
+
     public function setRouteParams($params): static
     {
         $this->routeParams = $params;

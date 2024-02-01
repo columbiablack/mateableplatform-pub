@@ -6,10 +6,11 @@
 
 namespace mateable\core\controllers;
 
+use mateable\core\http\Response;
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\http\Request;
 use mateable\core\models\LoginForm;
-use mateable\core\models\Users;
+use mateable\core\models\RegisterForm;
 use mateable\core\Platform;
 use mateable\core\routes\Routes;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
         $this->registerMiddleware(new AuthMiddleware(Routes::authAllowedRoutes()));
     }
 
-    public function login(Request $request): string
+    public function login(Request $request, Response $response): string
     {
         $loginForm = new LoginForm();
         if($request->isPost())
@@ -28,21 +29,23 @@ class AuthController extends Controller
             $loginForm->loadData($request->getBody());
 
             if($loginForm->validate() && $loginForm->doLogin()){
-                $this->profile();
+                Platform::$app->session->setFlash('success','You have signed in successfully!!!');
+                Platform::$app->response->redirect('./dashboard');
             }
         }
         return $this->render('login', ['model' => $loginForm]);
     }
 
-    public function register(Request $request): string
+    public function register(Request $request, Response $response): string
     {
-        $registerForm = new Users();
+        $registerForm = new RegisterForm();
         if($request->isPost())
         {
             $registerForm->loadData($request->getBody());
 
             if($registerForm->validate() && $registerForm->save()){
-                $this->newMember();
+                Platform::$app->session->setFlash('success','You have registered successfully!!!');
+                $response->redirect('./login');
             }
         }
         return $this->render('register', ['model' => $registerForm]);
@@ -51,11 +54,5 @@ class AuthController extends Controller
     public function profile(): string
     {
         return $this->render('profile');
-    }
-
-    public function newMember(): void
-    {
-        Platform::$app->session->setFlash('success','You have registered successfully!!!');
-        Platform::$app->response->redirect('login');
     }
 }

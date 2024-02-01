@@ -39,7 +39,7 @@ class Wallet extends DBModel
         return [];// TODO: Implement rules() method.
     }
 
-    public function makeNewWallet(Users $user)
+    public function makeNewWallet(RegisterForm $user)
     {
         $this->uid = $user->displayUserID();
         $this->wallet_address =  Platform::$app->bitcoin->createwallet($user->email, false, false, "", false, false, false);

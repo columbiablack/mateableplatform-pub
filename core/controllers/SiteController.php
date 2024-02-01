@@ -34,7 +34,7 @@ class SiteController extends Controller
 
             if($contact->validate() && $contact->contactUs())
             {
-                Platform::$app->session->setFlash('success', 'Your message was sent! Responses will vary from 30 minutes to 24 hours.');
+                Platform::$app->session->setFlash('success', 'Your message was sent! Responses will vary from 24 hours to 48 hours.');
                 return $this->render('contact', ['model' => (new $contact)]);
             }
         }
@@ -62,6 +62,23 @@ class SiteController extends Controller
         return match ($type) {
             'privacypolicy' => $this->renderLegal('privacypolicy'),
             'serviceterms' => $this->renderLegal('termsofservice')
+        };
+    }
+
+    public function webMigrate()
+    {
+        return include(Platform::$ROOT_DIR.'/Migrations.php');
+    }
+
+    public function verifyUs(): string
+    {
+        return $this->render('verification');
+    }
+
+    public function logout()
+    {
+        if(Platform::$app->logout()){
+            Platform::$app->response->redirect('./home');
         };
     }
 }

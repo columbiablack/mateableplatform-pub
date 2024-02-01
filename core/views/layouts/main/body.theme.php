@@ -8,7 +8,7 @@ use mateable\core\Platform;
 
 ?>
 <main class="page landing-page">
-    <?php if(Platform::isGuest() >= false): ?>
+    <?php if(Platform::$app->isGuest()): ?>
         <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/mateable_logo.png&quot;);background-position-y: -200pt;background-attachment: fixed;color: rgba(30, 75, 180, 0.85);"> <!--//rgba(9, 162, 255, 0.85);">-->
             <div class="text">
                 <h2>{{app_name}}</h2>
@@ -20,6 +20,11 @@ use mateable\core\Platform;
     <?php if(Platform::$app->session->getFlash('success')): ?>
         <div class="alert alert-success">
             <?php echo Platform::$app->session->getFlash('success'); ?>
+        </div>
+    <?php endif; ?>
+    <?php if(Platform::$app->session->getFlash('warning')): ?>
+        <div class="alert alert-warning">
+            <?php echo Platform::$app->session->getFlash('warning'); ?>
         </div>
     <?php endif; ?>
     {{content}}

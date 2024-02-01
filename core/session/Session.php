@@ -16,11 +16,15 @@ class Session
 
     public function __construct()
     {
+        session_set_cookie_params (3600);
         session_start();
+
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
+
         foreach ($flashMessages as $key => &$flashMessage) {
             $flashMessage['remove'] = true;
         }
+
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
 

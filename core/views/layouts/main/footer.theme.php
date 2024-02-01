@@ -9,7 +9,7 @@ use mateable\core\Platform;
 ?>
 <footer class="page-footer dark">
     <div class="container">
-        <?php if(Platform::isGuest()>=false): ?>
+        <?php if(Platform::isGuest()): ?>
             <div class="row">
                 <div class="col-sm-3">
                     <h5>Get started</h5>
