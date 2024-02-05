@@ -7,7 +7,7 @@
 use mateable\core\Platform;
 
 ?>
-<footer class="page-footer dark">
+<footer class="page-footer bottom dark">
     <div class="container">
         <?php if(Platform::isGuest()): ?>
             <div class="row">
@@ -23,7 +23,7 @@ use mateable\core\Platform;
                     <h5>About us</h5>
                     <ul>
                         <li><a href="./about-us">Mateable LLC</a></li>
-                        <li><a href="./contact">Contact us</a></li>
+                        <li><a href="./contactus">Contact us</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -43,7 +43,7 @@ use mateable\core\Platform;
             </div>
         <?php endif; ?>
     </div>
-    <div class="footer-copyright">
+    <div class="text-center footer-copyright">
         <p>© 2023-<?php echo date('Y'); ?> Copyright <a href="{{site_url}}">{{app_name}} LLC</a></p>
     </div>
 </footer>

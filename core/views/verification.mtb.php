@@ -35,7 +35,6 @@ use mateable\core\form\Form;
                             echo $form->button('Submit');
                             echo $form::end();
                         ?>
-
                     </div>
                 </div>
             </div>

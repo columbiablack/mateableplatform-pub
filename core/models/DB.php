@@ -6,11 +6,9 @@
 
 namespace mateable\core\models;
 
-    use mateable\core\exceptions\DatabaseConnectionException;
-    use mateable\core\exceptions\Exception;
-    use mateable\core\Platform;
+use mateable\core\Platform;
 
-    abstract class DB extends Model
+abstract class DB extends Model
 {
     abstract public static function tableName(): string;
     abstract public function attributes(): array;
@@ -39,7 +37,6 @@ namespace mateable\core\models;
         return $result;
     }
 
-
         public static function findOne($where): mixed
     {
         $tableName = static::tableName();
@@ -59,4 +56,25 @@ namespace mateable\core\models;
         return Platform::$app->db->prepare($sql);
     }
 
+    public function updateUserInfo(string $id): bool
+    {
+        try{
+            $tablename = static::tableName();
+            $attributes = $this->attributes();
+            $setValues = array_map(fn($attr) => "$attr = :$attr", $attributes);
+            $setValuesString = implode(', ', $setValues);
+
+            $statement = $this->prepare("UPDATE $tablename SET $setValuesString WHERE id = $id");
+
+            foreach ($attributes as $attribute)
+            {
+                $statement->bindValue(":$attribute", $this->{$attribute});
+            }
+
+            $statement->execute();
+            return true;
+        }catch(\PDOException $exception){
+            return false;
+        }
+    }
 }

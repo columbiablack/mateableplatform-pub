@@ -14,27 +14,31 @@ use mateable\core\Platform;
  */
 class View
 {
-    protected array $dirList =[];
+    protected ViewManager $viewManager;
+
+    public function __construct()
+    {
+        $this->viewManager = Platform::$app->viewManager;
+    }
 
     public function renderView($view, $params = []): array|string
-    {   $viewmgr = new ViewManager();
+    {
         $layout_content = $this->layoutContent();
         $viewcontent = $this->renderViewOnly($view,$params);
 
         $layout_content = str_replace('{{content}}',$viewcontent, $layout_content);
 
-        return $viewmgr->convert($layout_content);
+        return $this->viewManager->convert($layout_content);
     }
 
     public function renderLegalView($view, $params = []): array|string
     {
-        $viewmgr = new ViewManager();
         $legal_layout_content = $this->layoutLegalContent();
         $viewcontent = $this->renderLegalViewOnly($view,$params);
 
         $legal_layout_content = str_replace('{{content}}',$viewcontent, $legal_layout_content);
 
-        return $viewmgr->convert($legal_layout_content);
+        return $this->viewManager->convert($legal_layout_content);
     }
 
     public function renderViewOnly($view, $params = []): string
@@ -61,11 +65,11 @@ class View
 
     public function layoutContent(): string
     {
-        $layout = Platform::$app->controller->layout;
+        $layout = Platform::$app->controller->getLayout();
 
         if(Platform::$app->controller)
         {
-            $layout = Platform::$app->controller->layout;
+            $layout = Platform::$app->controller->getLayout();
         }
 
         ob_start();
@@ -75,27 +79,15 @@ class View
 
     public function layoutLegalContent(): string
     {
-        $layout = Platform::$app->controller->layout;
+        $layout = Platform::$app->controller->getLayout();
 
         if(Platform::$app->controller)
         {
-            $layout = Platform::$app->controller->layout;
+            $layout = Platform::$app->controller->getLayout();
         }
 
         ob_start();
         include_once Platform::$ROOT_DIR."/core/views/layouts/$layout/main.mtb.php";
         return ob_get_clean();
-    }
-
-    public function getLayouts(): array
-    {
-        foreach(scandir(Platform::$ROOT_DIR.'/core/views/layouts/') as $key => $value){
-            if(str_contains($value, '.') || str_contains($value, '..') || str_contains($value, 'htaccess')) {
-                continue;
-            }else{
-                $this->dirList += [$key => $value];
-            }
-        }
-        return $this->dirList;
     }
 }

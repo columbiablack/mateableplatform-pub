@@ -10,7 +10,8 @@ namespace mateable\core\exceptions;
  * @author SGreen <sgreen@mateable.com>
  * @package mateable
  */
-class ForbiddenException extends Exception
+
+class ForbiddenException extends \Exception
 {
     protected $message = 'Forbidden Access <br> You\'re not authorized to view this sector.';
     protected $code = 403;

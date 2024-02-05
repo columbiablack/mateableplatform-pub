@@ -5,8 +5,8 @@
  */
 
 ?>
-<footer>
-    <div class="container text-center">
+<footer class="page-footer text-center bottom dark">
+    <div class="text-center footer-copyright">
         <p>© 2023-<?php echo date('Y'); ?> Copyright <a href="{{site_url}}">{{app_name}} LLC</a></p>
     </div>
 </footer>

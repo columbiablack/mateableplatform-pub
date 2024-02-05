@@ -7,16 +7,15 @@
 namespace mateable\core\models;
 
 use mateable\core\Platform;
-use mateable\core\models\DBModel;
 
-class Wallet extends DBModel
+class Wallet extends DB
 {
-    public string $uid = '';
-    public string $wallet_address = '';
+    public string $user_id = '';
+    public string $address = '';
 
-    public function tableName(): string
+    public static function tableName(): string
     {
-        return 'mtb_wallets';
+        return 'wallets';
     }
 
     public function primaryKey(): string
@@ -31,7 +30,10 @@ class Wallet extends DBModel
 
     public function attributes(): array
     {
-        return ['uid', 'wallet_address'];
+        return [
+            'user_id',
+            'address'
+        ];
     }
 
     public function rules(): array

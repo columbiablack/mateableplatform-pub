@@ -7,7 +7,7 @@
 use mateable\core\Platform;
 
 ?>
-<main class="page landing-page">
+<main class="page content-section">
     <?php if(Platform::$app->isGuest()): ?>
         <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/mateable_logo.png&quot;);background-position-y: -200pt;background-attachment: fixed;color: rgba(30, 75, 180, 0.85);"> <!--//rgba(9, 162, 255, 0.85);">-->
             <div class="text">
@@ -29,7 +29,7 @@ use mateable\core\Platform;
     <?php endif; ?>
     {{content}}
     <?php if(Platform::$app->request->getUrl() === '/'): ?>
-        <section class="clean-block slider dark">
+        <section class="clean-block">
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Hot Topics</h2>
@@ -63,12 +63,6 @@ use mateable\core\Platform;
                         <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
                     </ol>
                 </div>
-            </div>
-        </section>
-    <?php else: ?>
-        <section class="clean-block slider dark">
-            <div class="container">
-
             </div>
         </section>
     <?php endif; ?>

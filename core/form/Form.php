@@ -23,7 +23,9 @@ class Form
 
     public static function end(): string
     {
-        return '</form>'.PHP_EOL;
+        return '
+            </form>
+            '.PHP_EOL;
     }
 
     public function field(Model $model, string $attribute): Field
@@ -41,7 +43,8 @@ class Form
         return '
               <div class="mb-3">
                 <button class="btn btn-primary" type="submit">'. $name .'</button>
-              </div>'.PHP_EOL;
+              </div>
+              '.PHP_EOL;
 
     }
 }

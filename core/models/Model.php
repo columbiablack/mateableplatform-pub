@@ -125,7 +125,7 @@ abstract class Model
             self::RULE_MAX => 'Maximum length for this field is {max}.',
             self::RULE_MIN => 'Minimum length for this field is {min}.',
             self::RULE_DOB => 'Must be {dob} or older.',
-            self::RULE_UNIQUE => '{field} has to be unique.',
+            self::RULE_UNIQUE => '{field} already exists or has to be unique.',
         ];
     }
 

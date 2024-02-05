@@ -10,7 +10,8 @@ namespace mateable\core\exceptions;
  * @author SGreen <sgreen@mateable.com>
  * @package mateable
  */
-class NotFoundException extends Exception
+
+class NotFoundException extends \Exception
 {
     protected $message = 'The requested page was not found.';
     protected $code = 404;

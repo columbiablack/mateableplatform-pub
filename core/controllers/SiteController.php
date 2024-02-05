@@ -48,7 +48,7 @@ class SiteController extends Controller
 
     public function home(): string
     {
-        return Platform::$app->view->renderView('home');
+        return $this->render('home');
     }
 
     public function marketplace(): string

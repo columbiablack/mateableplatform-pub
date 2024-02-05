@@ -5,5 +5,6 @@
  */
 
 require ('header.theme.php');
+require ('navigation.theme.php');
 require ('body.theme.php');
 require ('footer.theme.php');

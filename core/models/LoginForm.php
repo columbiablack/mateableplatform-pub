@@ -6,15 +6,12 @@
 
 namespace mateable\core\models;
 
-use mateable\core\exceptions\Exception;
 use mateable\core\Platform;
-
 
 class LoginForm extends Model
 {
     public string $email = '';
     public string $password = '';
-    public string $last_login = '';
 
     protected RegisterForm $user;
 
@@ -62,14 +59,17 @@ class LoginForm extends Model
                 return false;
             }
 
+
+            $user->updateUserInfo($user->id);
+
             Platform::$app->user = $user;
             $primaryKey = $user->primaryKey();
             $primaryValue = $user->{$primaryKey};
             Platform::$app->session->set('user', $primaryValue);
             Platform::$app->session->setFlash('success', 'Your Login was successful!');
 
-            return true; //$this->loginHandler($user);
-        }catch(Exception|\PDOException $e){
+            return true;
+        }catch(\PDOException $e){
             return false;
         }
     }

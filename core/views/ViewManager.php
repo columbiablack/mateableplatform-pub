@@ -5,9 +5,13 @@
  */
 namespace mateable\core\views;
 
+use mateable\core\Platform;
+
 class ViewManager
 {
-    protected string $title;
+    private string $title;
+
+    public static array $definitionsExtra = [];
 
     public function __construct()
     {
@@ -22,7 +26,7 @@ class ViewManager
             '{{site_url}}' => $Website,
             '{{logo}}' => '<img src=\'assets/img/mateable_logo.png\'>',
             '{{age}}' => 18,
-        ];
+        ] + self::$definitionsExtra;
     }
 
     public function convert(string $context): string

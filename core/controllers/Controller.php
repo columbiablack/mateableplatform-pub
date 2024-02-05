@@ -16,9 +16,10 @@ use mateable\core\Platform;
 
 class Controller
 {
-
     public string $action = '';
-    public string $layout = 'main';
+
+    private string $layout = 'main';
+    private array $dirList =[];
 
     /**
      * @var BaseMiddleware[]
@@ -40,11 +41,35 @@ class Controller
         $this->middlewares[] = $middleware;
     }
 
-    /**
-     * @return BaseMiddleware[]
-     */
     public function getMiddlewares(): array
     {
         return $this->middlewares;
+    }
+
+    public function setLayout(string $name): bool
+    {
+        if(array_search($name,$this->getLayouts())){
+            $this->layout = $name;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getLayout(): string
+    {
+        return Platform::$app->controller->layout;
+    }
+
+    public function getLayouts(): array
+    {
+        foreach(scandir(Platform::$ROOT_DIR.'/core/views/layouts/') as $key => $value){
+            if(str_contains($value, '.') || str_contains($value, '..') || str_contains($value, 'htaccess')) {
+                continue;
+            }else{
+                $this->dirList += [$key => $value];
+            }
+        }
+        return $this->dirList;
     }
 }

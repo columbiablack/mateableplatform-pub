@@ -21,7 +21,7 @@ class m01_Initial {
                 phone VARCHAR(25) NULL,
                 ip_address VARCHAR(25) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                last_login TIMESTAMP DEFAULT NOT NULL 
+                last_login datetime NOT NULL 
             )  ENGINE=INNODB;";
         $db->pdo->exec($SQL);
     }

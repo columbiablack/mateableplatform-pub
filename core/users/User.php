@@ -18,4 +18,6 @@ abstract class User extends DB
 
     abstract public function displayUserID();
 
+    abstract public function displayEmail();
+
 }

@@ -6,6 +6,7 @@
 
 namespace mateable\core;
 
+use mateable\core\coin\MTBCRPC;
 use mateable\core\controllers\Controller;
 use mateable\core\db\Database;
 use mateable\core\exceptions\NotFoundException;
@@ -15,6 +16,7 @@ use mateable\core\models\RegisterForm;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
 use mateable\core\views\View;
+use mateable\core\views\ViewManager;
 use PDOException;
 
 /**
@@ -25,25 +27,29 @@ use PDOException;
 class Platform
 {
     public static Platform $app;
+    public static array $config;
     public static string $ROOT_DIR;
-    public static string $layout = 'main';
     public Request $request;
     public Response $response;
     public Router $router;
-    public ?Controller $controller = null;
+    public Controller $controller;
     public Database $db;
     public Session $session;
     public View $view;
+    public ViewManager $viewManager;
     public ?RegisterForm $user;
+    public MTBCRPC $mateablecoin;
 
     public function __construct(string $root, array $config)
     {
+        self::$config = $config;
         self::$ROOT_DIR = $root;
         self::$app = $this;
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
         $this->controller = new Controller();
+        $this->viewManager = new ViewManager();
 
         try {
             $this->db = new Database($config['db']);
@@ -53,14 +59,16 @@ class Platform
         }
 
         $this->session = new Session();
-        $this->view = new View();
-
         $primaryValue = $this->session->get('user');
-        if ($primaryValue) {
+
+        if($primaryValue) {
             $this->user = Registerform::findOne(['id' => $primaryValue]);
+            $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'].'/', $this->user->displayEmail());
         } else {
             $this->user = null;
         }
+
+        $this->view = new View();
     }
 
     public static function isGuest(): bool
@@ -78,10 +86,11 @@ class Platform
     public function run(): void
     {
         try {
+            self::$app->response->statusCode(200);
             echo self::$app->router->resolve();
-        } catch (NotFoundException $e){
+        } catch(\Exception|NotFoundException $e){
             self::$app->response->statusCode(404);
-            echo self::$app->view->renderview('_error',['exception' => $e->getMessage(),'exceptiontitle' => $e->getCode()]);
+            echo self::$app->view->renderview('_error',['exception' => 'Platform[Run]: '.$e->getMessage(),'exceptiontitle' => $e->getCode()]);
         }
     }
 }

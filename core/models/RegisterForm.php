@@ -20,8 +20,12 @@ class RegisterForm extends User
     public const STATUS_INACTIVE = 0;
     public const STATUS_ACTIVE = 1;
     public const STATUS_DELETED = 2;
+    public const ROLE_ADMINISTRATOR = 2;
+    public const ROLE_MODERATOR = 1;
+    public const ROLE_MEMBER = 0;
 
     public int $status = self::STATUS_INACTIVE;
+    public int $role = self::ROLE_MEMBER;
 
     public string $firstname = '';
     public string $lastname = '';
@@ -50,10 +54,18 @@ class RegisterForm extends User
     public function save(): bool
     {
         $this->ip_address = Platform::$app->request->getClientAddress();
-        $this->last_login = date("Y-m-d H:i:s",);
+        $this->last_login = date("Y-m-d H:i:s");
         $this->status = self::STATUS_INACTIVE;
+        $this->role = self::ROLE_MEMBER;
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
         return parent::save();
+    }
+
+    public function updateUserInfo(string $id): bool
+    {
+        $this->ip_address = Platform::$app->request->getClientAddress();
+        $this->last_login = date("Y-m-d H:i:s");
+        return parent::updateUserInfo($id);
     }
 
     public function rules(): array
@@ -83,6 +95,7 @@ class RegisterForm extends User
             'email',
             'password',
             'status',
+            'role',
             'ip_address',
             'last_login',
         ];
@@ -122,4 +135,10 @@ class RegisterForm extends User
     {
         return $this->id;
     }
+
+    public function displayEmail(): string
+    {
+        return $this->email;
+    }
+
 }

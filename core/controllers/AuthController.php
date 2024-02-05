@@ -33,6 +33,7 @@ class AuthController extends Controller
                 Platform::$app->response->redirect('./dashboard');
             }
         }
+        $this->setLayout('auth');
         return $this->render('login', ['model' => $loginForm]);
     }
 

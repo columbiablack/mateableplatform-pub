@@ -2,7 +2,6 @@
 
 /**
  * Copyright (c) 2024. Mateable LLC
- *
  */
 
 use mateable\core\Platform;
@@ -34,14 +33,14 @@ use mateable\core\Platform;
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="./about-us">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./contact">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contactus">Contact Us</a></li>
                 <?php else: ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><?php echo ('<i class="icon-user"></i>'); ?></a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><?php echo ('<i class="icon-user"></i> '); ?></a>
                         <ul class="dropdown-menu">
                             <!--<li><h6 class="dropdown-item text-info"><i class="icon-people"></i> Social</h6></li>
                             <li><hr class="dropdown-divider"></li>-->
-                            <li><a class="dropdown-item" href="./profile">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="./profile"><?php echo(Platform::$app->user->displayFirstName()); ?>'s Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="icon-people"></i> Contacts</a></li>
                             <li><a class="dropdown-item" href="#"><i class="icon-people"></i> Groups</a></li>
@@ -62,7 +61,7 @@ use mateable\core\Platform;
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" aria-expanded="true">
-                            <i class="icon-wallet"></i> 0.00 MTBC{{MTBC_Price}}
+                            <i class="icon-wallet"></i> <?php echo Platform::$app->mateablecoin->getbalance() ?? 0.00; ?> MTBC
                         </a>
                     </li>
                 <?php endif; ?>

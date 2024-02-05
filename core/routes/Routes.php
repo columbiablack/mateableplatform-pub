@@ -27,7 +27,7 @@ class Routes
             '/login' => [AuthController::class, 'login'],
             '/register' => [AuthController::class, 'register'],
             '/about-us' => [SiteController::class, 'aboutUs'],
-            '/contact' => [SiteController::class, 'contact'],
+            '/contactus' => [SiteController::class, 'contact'],
             '/downloads' => [SiteController::class, 'downloads'],
             '/marketplace' => [SiteController::class, 'marketplace'],
             '/legal' => [SiteController::class, 'legal'],
@@ -36,7 +36,6 @@ class Routes
             '/logout' => [SiteController::class, 'logout'],
             '/dashboard' => [AuthController::class, 'profile'],
             '/profile' => [AuthController::class, 'profile']
-
         ];
         return $routesGET;
     }
@@ -47,8 +46,8 @@ class Routes
             '/login' => [AuthController::class, 'login'],
             '/register' => [AuthController::class, 'register'],
             '/register#register' => [AuthController::class, 'register'],
-            '/contact' => [SiteController::class, 'contact'],
-            '/verify-us' => [SiteController::class, 'verifyUs'],
+            '/contactus' => [SiteController::class, 'contact'],
+            '/verify-us' => [SiteController::class, 'verifyUs']
         ];
         return $routesPOST;
     }

@@ -5,10 +5,8 @@
  */
 
 ?>
-<section class="clean-block clean-form dark">
-    <div class="container">
-        <div class="block-heading">
-            {{content}}
-        </div>
+<main class=" content-section dark">
+    <div class="content container">
+        {{content}}
     </div>
-</section>
+</main>

@@ -6,18 +6,13 @@
 
 namespace mateable\core\db;
 
-use mateable\core\exceptions\DatabaseConnectionException;
-use mateable\core\exceptions\Exception;
-use mateable\core\exceptions\RuntimeException;
+
 use mateable\core\Platform;
-use mysqli;
 use PDO;
-use PDOException;
 
 class Database
 {
     public ?PDO $pdo = null;
-    public mysqli $mysqli;
 
     public function __construct(array $config)
     {
