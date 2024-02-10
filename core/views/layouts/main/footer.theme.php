@@ -47,7 +47,9 @@ use mateable\core\Platform;
         <p>© 2023-<?php echo date('Y'); ?> Copyright <a href="{{site_url}}">{{app_name}} LLC</a></p>
     </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
 <script src="./assets/bootstrap/js/main.min.js"></script>
+<script src="../assets/js/client.js"></script>
 <script src="./assets/js/main.min.js"></script>
 <script src="./assets/js/validation.js"></script>
 </body>

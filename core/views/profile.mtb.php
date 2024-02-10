@@ -8,9 +8,39 @@
 * user: Mateable
 */
 
+use mateable\core\Platform;
+
 ?>
         <section class="content-section clean-block">
             <div class="clean-info container">
+                <?php if(Platform::$app->user->role >= Platform::$app->user::ROLE_MODERATOR): ?>
+                <div class="flex-fill clean-info card-title block-heading">
+                    <h4 class="text-warning card-title">Administration Menu</h4>
+                </div>
+                <div class="row dark">
+                    <div class="clean-catalog container">
+                        <div class="row justify-content-center">
+                            <?php if(Platform::$app->user->role === Platform::$app->user::ROLE_ADMINISTRATOR): ?>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-screen-desktop card-img-top w-100 d-block"></i> Administration Panel</a>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-list card-img-top w-100 d-block"></i> Virtual Meetings</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-list card-img-top w-100 d-block"></i> User Privileges</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
                 <div class="flex-fill clean-info card-title block-heading">
                     <h4 class="text-info card-title">Account Dashboard</h4>
                 </div>
@@ -25,16 +55,6 @@
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
                                     <a class="dropdown-item" href="#"><i class="icon-list card-img-top w-100 d-block"></i> Subscriptions</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-screen-desktop card-img-top w-100 d-block"></i> Videos</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-picture card-img-top w-100 d-block"></i> Photo Gallery</a>
                                 </div>
                             </div>
                         </div>
@@ -68,12 +88,22 @@
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-screen-desktop card-img-top w-100 d-block"></i> Videos</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-picture card-img-top w-100 d-block"></i> Photo Gallery</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
                                     <a class="dropdown-item" href="#"><i class="icon-bubbles card-img-top w-100 d-block"></i> Personal Messages</a>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-bubbles card-img-top w-100 d-block"></i> Chatrooms</a>
+                                    <a class="dropdown-item" href="./chat"><i class="icon-bubbles card-img-top w-100 d-block"></i> Chatroom</a>
                                 </div>
                             </div>
                         </div>
@@ -87,12 +117,50 @@
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-wallet card-img-top w-100 d-block"></i> Cryptocurrency Tutorials</a>
+                                    <a class="dropdown-item" href="#"><i class="icon-book-open card-img-top w-100 d-block"></i> Cryptocurrency Tutorials</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-book-open card-img-top w-100 d-block"></i> MTBC Surveys</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-fill clean-info card-title block-heading">
+                    <h4 class="text-info card-title">Earn</h4>
+                </div>
+                <div class="row dark">
+                    <div class="clean-catalog container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-link card-img-top w-100 d-block"></i> Refer a friend</a>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
                                     <a class="dropdown-item" href="#"><i class="icon-wallet card-img-top w-100 d-block"></i> Mateablecoin(MTBC) Tutorials</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-fill clean-info card-title block-heading">
+                    <h4 class="text-info card-title">Help</h4>
+                </div>
+                <div class="row dark">
+                    <div class="clean-catalog container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="./contactus"><i class="icon-pencil bubble card-img-top w-100 d-block"></i> Contact Us</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="border-1 rounded-pill card text-center clean-card">
+                                    <a class="dropdown-item" href="#"><i class="icon-question card-img-top w-100 d-block"></i> FAQ</a>
                                 </div>
                             </div>
                         </div>

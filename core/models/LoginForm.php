@@ -7,6 +7,7 @@
 namespace mateable\core\models;
 
 use mateable\core\Platform;
+use mysql_xdevapi\Exception;
 
 class LoginForm extends Model
 {
@@ -59,15 +60,12 @@ class LoginForm extends Model
                 return false;
             }
 
-
             $user->updateUserInfo($user->id);
-
             Platform::$app->user = $user;
             $primaryKey = $user->primaryKey();
             $primaryValue = $user->{$primaryKey};
             Platform::$app->session->set('user', $primaryValue);
             Platform::$app->session->setFlash('success', 'Your Login was successful!');
-
             return true;
         }catch(\PDOException $e){
             return false;

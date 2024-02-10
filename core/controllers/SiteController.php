@@ -7,6 +7,7 @@
 namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
+use mateable\core\messaging\mail\Mailer;
 use mateable\core\models\ContactForm;
 use mateable\core\Platform;
 

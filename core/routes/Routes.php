@@ -7,6 +7,7 @@
 namespace mateable\core\routes;
 
 use mateable\core\controllers\AuthController;
+use mateable\core\controllers\MessageController;
 use mateable\core\controllers\SiteController;
 
 class Routes
@@ -15,7 +16,8 @@ class Routes
     {
         return [
             'profile',
-            'dashboard'
+            'dashboard',
+            'messaging'
         ];
     }
 
@@ -30,6 +32,7 @@ class Routes
             '/contactus' => [SiteController::class, 'contact'],
             '/downloads' => [SiteController::class, 'downloads'],
             '/marketplace' => [SiteController::class, 'marketplace'],
+            '/messaging' => [AuthController::class, 'chat'],
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/webmigrate' => [SiteController::class, 'webMigrate'],

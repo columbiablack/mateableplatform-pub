@@ -6,10 +6,14 @@
 
 use mateable\core\Platform;
 
+if(Platform::$app->user){
+    $balance = Platform::$app->mateablecoin->getbalance() ?? '';
+    $toUSD = Platform::$app->xeggeX->getCoinUSDValue($balance) ?? '';
+}
 ?>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="./">{{app_name}}</a>
+        <a class="navbar-brand logo" href="./">{{small_logo}}{{app_name}}</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -61,7 +65,7 @@ use mateable\core\Platform;
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" aria-expanded="true">
-                            <i class="icon-wallet"></i> <?php echo Platform::$app->mateablecoin->getbalance() ?? 0.00; ?> MTBC
+                            <i class="icon-wallet"></i> {{MTBC_BALANCE}}
                         </a>
                     </li>
                 <?php endif; ?>

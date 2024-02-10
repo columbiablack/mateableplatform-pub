@@ -46,7 +46,7 @@ class Database
             echo '<p>Migrating ' . $classname . '..</p>' . PHP_EOL;
             $instance->up();
             echo '<p>' . $classname . ' successfully migrated!</p>' . PHP_EOL;
-            $newMigrations[] = $migration;
+            $newMigrations = $migration;
         }
 
         if(!empty($newMigrations))

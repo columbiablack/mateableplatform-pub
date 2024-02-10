@@ -22,6 +22,6 @@ $config = [
 try {
     $app = new Platform(__DIR__, $config);
     $app->db->applyMigrations();
-}catch (PDOException $e){
-    echo $e->getMessage();
+}catch (\Exception|PDOException $e){
+    die($e->getMessage());
 }

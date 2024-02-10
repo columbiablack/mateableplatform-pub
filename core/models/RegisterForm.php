@@ -32,6 +32,9 @@ class RegisterForm extends User
     public string $dob = '';
     public string $address1 = '';
     public string $address2 = '';
+    public string $city = '';
+    public string $state = '';
+    public string $zip = '';
     public string $phone = '';
     public string $email = '';
     public string $password = '';
@@ -76,6 +79,9 @@ class RegisterForm extends User
             'dob' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_DOB, 'dob' => 12]],
             'address1' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 80]],
             'address2' => [],
+            'city' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_MAX, 'max' => 80]],
+            'state' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 2], [self::RULE_MAX, 'max' => 03]],
+            'zip' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 20]],
             'phone' => [self::RULE_REQUIRED],
             'email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 6]],
@@ -91,6 +97,9 @@ class RegisterForm extends User
             'dob',
             'address1',
             'address2',
+            'city',
+            'state',
+            'zip',
             'phone',
             'email',
             'password',

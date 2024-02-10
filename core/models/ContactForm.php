@@ -6,32 +6,52 @@
 
 namespace mateable\core\models;
 
-class ContactForm extends Model
+class ContactForm extends DB
 {
-    public string $email = '';
-    public string $subject = '';
-    public string $message = '';
+    public string $user_email = '';
+    public string $user_subject = '';
+    public string $user_message = '';
+
+    public static function tableName(): string
+    {
+        return 'service_messages';
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'user_email',
+            'user_subject',
+            'user_message',
+        ];
+    }
+
+    public function primaryKey(): string
+    {
+        return 'id';
+    }
 
     public function rules(): array
     {
         return [
-            'email' => [self::RULE_REQUIRED],
-            'subject' => [self::RULE_REQUIRED],
-            'message' => [self::RULE_REQUIRED]
+            'user_email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
+            'user_subject' => [self::RULE_REQUIRED,[self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 120]],
+            'user_message' => [self::RULE_REQUIRED]
         ];
     }
 
     public function labels(): array
     {
         return [
-            'email' => 'Your email',
-            'subject' => 'Subject',
-            'message' => 'Message'
+            'user_email' => 'Your email',
+            'user_subject' => 'Subject',
+            'user_message' => 'Message'
         ];
     }
 
     public function contactUs(): bool
     {
-
+        // MailToUs, add to db contacts.
+        return Parent::save();
     }
 }

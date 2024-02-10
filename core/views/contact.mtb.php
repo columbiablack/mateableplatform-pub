@@ -20,9 +20,9 @@ use mateable\core\form\Form;
 
             <?php
                 $form = Form::Begin('', 'post');
-                echo $form->field($model, 'email');
-                echo $form->field($model, 'subject');
-                echo $form->fieldTextArea($model, 'message');
+                echo $form->field($model, 'user_email');
+                echo $form->field($model, 'user_subject');
+                echo $form->fieldTextArea($model, 'user_message');
                 echo $form->button('Submit');
                 echo $form::end();
             ?>

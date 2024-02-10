@@ -38,13 +38,9 @@ class Form
         return new TextArea($model, $attribute);
     }
 
-    public function button($name): string
+    public function button(string $name, string $id = ''): string
     {
-        return '
-              <div class="mb-3">
-                <button class="btn btn-primary" type="submit">'. $name .'</button>
-              </div>
-              '.PHP_EOL;
+        return '<button class="btn btn-primary" id="'. $id .'" type="submit">'. $name .'</button>'.PHP_EOL;
 
     }
 }

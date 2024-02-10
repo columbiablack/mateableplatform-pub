@@ -52,6 +52,11 @@ class AuthController extends Controller
         return $this->render('register', ['model' => $registerForm]);
     }
 
+    public function chat():string
+    {
+        return MessageController::chat();
+    }
+
     public function profile(): string
     {
         return $this->render('profile');

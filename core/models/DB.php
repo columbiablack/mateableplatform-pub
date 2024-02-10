@@ -39,17 +39,21 @@ abstract class DB extends Model
 
         public static function findOne($where): mixed
     {
-        $tableName = static::tableName();
-        $attributes = array_keys($where);
-        $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
-        $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
-        foreach ($where as $key => $item) {
-            $statement->bindValue(":$key", $item);
+        try{
+            $tableName = static::tableName();
+            $attributes = array_keys($where);
+            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+            $statement->execute();
+            return $statement->fetchObject(static::class);
+        }catch(\PDOException $e){
+            echo "something is wrong in the db";
+            exit;
         }
-        $statement->execute();
-        return $statement->fetchObject(static::class);
     }
-
 
     public static function prepare($sql): bool|\PDOStatement
     {

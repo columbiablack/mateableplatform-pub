@@ -7,11 +7,13 @@
 namespace mateable\core;
 
 use mateable\core\coin\MTBCRPC;
+use mateable\core\coin\XeggeX;
 use mateable\core\controllers\Controller;
 use mateable\core\db\Database;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
+use mateable\core\messaging\mail\Mailer;
 use mateable\core\models\RegisterForm;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
@@ -39,6 +41,7 @@ class Platform
     public ViewManager $viewManager;
     public ?RegisterForm $user;
     public MTBCRPC $mateablecoin;
+    public XeggeX $xeggeX;
 
     public function __construct(string $root, array $config)
     {
@@ -50,6 +53,7 @@ class Platform
         $this->router = new Router($this->request, $this->response);
         $this->controller = new Controller();
         $this->viewManager = new ViewManager();
+        $this->xeggeX = new XeggeX();
 
         try {
             $this->db = new Database($config['db']);
@@ -64,6 +68,8 @@ class Platform
         if($primaryValue) {
             $this->user = Registerform::findOne(['id' => $primaryValue]);
             $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'].'/', $this->user->displayEmail());
+            $balance = $this->mateablecoin->getbalance();
+            $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: '. $balance .' MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue() .''];
         } else {
             $this->user = null;
         }

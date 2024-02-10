@@ -4,16 +4,18 @@
  * Copyright (c) 2024. Mateable LLC
  */
 
-class m05_Wallets
+namespace mateable\core\migrations;
+
+class m06_ServiceMessages
 {
     public function up(): void
     {
         $db = \mateable\core\Platform::$app->db;
-        $SQL = "CREATE TABLE wallets (
+        $SQL = "CREATE TABLE service_messages (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id VARCHAR(25) NULL,
-                address VARCHAR(56) NULL,
-                user_email VARCHAR(75) NULL,
+                user_email VARCHAR(65) NULL,
+                user_subject VARCHAR(75) NULL,
+                user_message TEXT NULL,
                 creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )  ENGINE=INNODB;";
         $db->pdo->exec($SQL);
@@ -22,7 +24,7 @@ class m05_Wallets
     public function down(): void
     {
         $db = \mateable\core\Platform::$app->db;
-        $SQL = "DROP TABLE wallets;";
+        $SQL = "DROP TABLE service_messages;";
         $db->pdo->exec($SQL);
     }
 }
