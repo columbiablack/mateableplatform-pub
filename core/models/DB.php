@@ -37,7 +37,7 @@ abstract class DB extends Model
         return $result;
     }
 
-        public static function findOne($where): mixed
+    public static function findOne($where): mixed
     {
         try{
             $tableName = static::tableName();
@@ -51,6 +51,24 @@ abstract class DB extends Model
             return $statement->fetchObject(static::class);
         }catch(\PDOException $e){
             echo "something is wrong in the db";
+            exit;
+        }
+    }
+
+    public static function findAll($where): mixed
+    {
+        try {
+            $tableName = static::tableName();
+            $attributes = array_keys($where);
+            $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+            $statement->execute();
+            return $statement->fetchAll(static::class);
+        } catch (\PDOException $e) {
+            echo "Something is wrong in the db";
             exit;
         }
     }

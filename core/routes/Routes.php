@@ -9,6 +9,9 @@ namespace mateable\core\routes;
 use mateable\core\controllers\AuthController;
 use mateable\core\controllers\MessageController;
 use mateable\core\controllers\SiteController;
+use mateable\core\controllers\WalletController;
+use mateable\core\http\Request;
+use mateable\core\Platform;
 
 class Routes
 {
@@ -17,17 +20,16 @@ class Routes
         return [
             'profile',
             'dashboard',
+            'walletmgr',
             'messaging'
         ];
     }
 
     public static function getAllowedRoutes(): array
     {
-        $routesGET['get'] = [
+        return ['get' => [
             '/' => [SiteController::class, 'home'],
             '/home' => [SiteController::class, 'home'],
-            '/login' => [AuthController::class, 'login'],
-            '/register' => [AuthController::class, 'register'],
             '/about-us' => [SiteController::class, 'aboutUs'],
             '/contactus' => [SiteController::class, 'contact'],
             '/downloads' => [SiteController::class, 'downloads'],
@@ -37,10 +39,12 @@ class Routes
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/webmigrate' => [SiteController::class, 'webMigrate'],
             '/logout' => [SiteController::class, 'logout'],
+            '/login' => [AuthController::class, 'login'],
+            '/register' => [AuthController::class, 'register'],
             '/dashboard' => [AuthController::class, 'profile'],
-            '/profile' => [AuthController::class, 'profile']
+            '/walletmgr' => [WalletController::class, 'walletManager'],
+            ]
         ];
-        return $routesGET;
     }
 
     public static function postAllowedRoutes(): array

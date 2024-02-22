@@ -6,6 +6,7 @@
 
 namespace mateable\core\controllers;
 
+use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Response;
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\http\Request;
@@ -30,7 +31,7 @@ class AuthController extends Controller
 
             if($loginForm->validate() && $loginForm->doLogin()){
                 Platform::$app->session->setFlash('success','You have signed in successfully!!!');
-                Platform::$app->response->redirect('./dashboard');
+                Platform::$app->response->redirect('/dashboard');
             }
         }
         $this->setLayout('auth');
@@ -46,19 +47,19 @@ class AuthController extends Controller
 
             if($registerForm->validate() && $registerForm->save()){
                 Platform::$app->session->setFlash('success','You have registered successfully!!!');
-                $response->redirect('./login');
+                $response->redirect('/login');
             }
         }
         return $this->render('register', ['model' => $registerForm]);
     }
 
+    public function profile(Request $request, Response $response): string
+    {
+        return $this->render('profile');
+    }
+
     public function chat():string
     {
         return MessageController::chat();
-    }
-
-    public function profile(): string
-    {
-        return $this->render('profile');
     }
 }

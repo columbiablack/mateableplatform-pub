@@ -6,6 +6,7 @@
 
 namespace mateable\core\routes;
 
+use JetBrains\PhpStorm\NoReturn;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
@@ -20,7 +21,7 @@ class Router
 {
     protected Response $response;
     protected Request $request;
-    protected array $routemap = [];
+    private array $routemap = [];
 
     public function __construct(Request $request, Response $response)
     {
@@ -55,7 +56,7 @@ class Router
         $routes = $this->getRouteMap($method);
 
         $routeParams = false;
-
+        echo "<pre>";
         // Start iterating registered routes
         foreach ($routes as $route => $callback) {
             // Trim slashes
@@ -92,38 +93,45 @@ class Router
 
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function resolve()
     {
         $method = $this->request->getMethod();
         $url = $this->request->getUrl();
+        $position = strpos($url, '?');
+        if ($position !== false) {
+            $url = substr($url, 0, $position);
+        }
+
         $callback = $this->routemap[$method][$url] ?? false;
 
-        if(!$callback) {
+        if(!$callback){
             $callback = $this->getCallback();
-            if (false >= $callback) {
-                throw new NotFoundException();
+            if ($callback === false) {
+                throw new NotFoundException("The requested page cannot be found. Go to the <a href=\"{{site_url}}\">homepage</a>.");
             }
         }
 
-        if (is_string($callback)) {
-            return Platform::$app->view->renderView($callback);
-        }
-
-        if (is_array($callback)) {
-            $controller = new $callback[0]();
-            Platform::$app->controller = $controller;
-            $controller->action = $callback[1];
-            $callback[0] = $controller;
-
-            foreach ($controller->getMiddlewares() as $middleware) {
-                $middleware->execute();
+        if($callback){
+            if(is_string($callback)) {
+                return Platform::$app->view->renderView($callback);
             }
-        }
 
-        return call_user_func($callback, $this->request, $this->response);
+            if (is_array($callback)) {
+                $controller = new $callback[0]();
+                Platform::$app->controller = $controller;
+                $controller->action = $callback[1];
+                $callback[0] = $controller;
+
+                foreach ($controller->getMiddlewares() as $middleware) {
+                    $middleware->execute();
+                }
+            }
+
+            if(is_callable($callback)){
+                return call_user_func($callback, $this->request, $this->response);
+            }
+        }else{
+            throw new NotFoundException("The requested page cannot be found. Go to the <a href=\"{{site_url}}\">homepage</a>.");
+        }
     }
-
 }

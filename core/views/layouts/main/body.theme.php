@@ -13,7 +13,7 @@ use mateable\core\Platform;
             <div class="text">
                 <h2>{{app_name}}</h2>
                 <p>We're back, register and see what's new!</p>
-                <a class="btn btn-outline-light btn-lg" href="./register#register" type="button">Register</a>
+                <a class="btn btn-outline-light btn-lg" href="/register#register" type="button">Register</a>
             </div>
         </section>
     <?php endif; ?>

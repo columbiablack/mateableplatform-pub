@@ -41,6 +41,20 @@ class View
         return $this->viewManager->convert($legal_layout_content);
     }
 
+    public function viewExist(string $filename): bool
+    {
+        $result = false;
+        $dirs[] = scandir(Platform::$ROOT_DIR."/core/views/") ?? [];
+        foreach($dirs as $dir){
+            if($dir == '.' || $dir == '..') {
+                continue;
+            }elseif(array_search($filename,$dir)){
+                $result = true;
+            }
+        }
+        return $result;
+    }
+
     public function renderViewOnly($view, $params = []): string
     {
         foreach ($params as $key => $value) {

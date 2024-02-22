@@ -15,10 +15,12 @@ use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\messaging\mail\Mailer;
 use mateable\core\models\RegisterForm;
+use mateable\core\models\Wallet;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
 use mateable\core\views\View;
 use mateable\core\views\ViewManager;
+use mysql_xdevapi\Exception;
 use PDOException;
 
 /**
@@ -40,6 +42,7 @@ class Platform
     public View $view;
     public ViewManager $viewManager;
     public ?RegisterForm $user;
+    public Wallet $userWallet;
     public MTBCRPC $mateablecoin;
     public XeggeX $xeggeX;
 
@@ -66,10 +69,29 @@ class Platform
         $primaryValue = $this->session->get('user');
 
         if($primaryValue) {
+            // Find user and load information
             $this->user = Registerform::findOne(['id' => $primaryValue]);
             $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'].'/', $this->user->displayEmail());
             $balance = $this->mateablecoin->getbalance();
-            $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: '. $balance .' MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue() .''];
+
+            /*try {
+                // Find wallet and load Wallet addresses
+                $this->userWallet = Wallet::findOne(['user_id' => $primaryValue]);
+                if (!$this->userWallet) {
+                    if (!$this->session->get('warning')) {
+                        $this->session->setflash('warning', 'You need to create a MTBC Wallet!');
+                    }
+                }
+            }catch(\Exception $exception){
+                $this->userWallet = null;
+            }*/
+
+            if($this->mateablecoin->status == 500 || $this->mateablecoin->status != 200){
+                $this->session->setflash('warning','You need to create a MTBC Wallet!');
+                $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: 00 MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue()];
+            }else{
+                $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: '. $balance .' MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue()];
+            }
         } else {
             $this->user = null;
         }

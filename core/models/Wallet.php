@@ -12,6 +12,7 @@ class Wallet extends DB
 {
     public string $user_id = '';
     public string $address = '';
+    public string $user_email = '';
 
     public static function tableName(): string
     {
@@ -32,18 +33,29 @@ class Wallet extends DB
     {
         return [
             'user_id',
-            'address'
+            'address',
+            'user_email'
         ];
     }
 
     public function rules(): array
     {
-        return [];// TODO: Implement rules() method.
+        return [];
     }
 
-    public function makeNewWallet(RegisterForm $user)
+    public function createNewWallet(RegisterForm $user): bool
     {
-        $this->uid = $user->displayUserID();
-        $this->wallet_address =  Platform::$app->bitcoin->createwallet($user->email, false, false, "", false, false, false);
+        $this->user_id = $user->id;
+        $this->user_email = $user->email;
+
+        if($this->user_email && $this->user_id){
+            $this->address = Platform::$app->mateablecoin->getnewaddress("$user->email");
+        }
+
+        if(Platform::$app->mateablecoin->status == 200){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

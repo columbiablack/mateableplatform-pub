@@ -68,7 +68,7 @@ use mateable\core\Platform;
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-wallet card-img-top w-100 d-block"></i> MTBC Wallet</a>
+                                    <a class="dropdown-item" href="/walletmgr"><i class="icon-wallet card-img-top w-100 d-block"></i> MTBC Wallet</a>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-4">
@@ -103,7 +103,7 @@ use mateable\core\Platform;
                             </div>
                             <div class="col-sm-6 col-lg-4">
                                 <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="./chat"><i class="icon-bubbles card-img-top w-100 d-block"></i> Chatroom</a>
+                                    <a class="dropdown-item" href="/chat"><i class="icon-bubbles card-img-top w-100 d-block"></i> Chatroom</a>
                                 </div>
                             </div>
                         </div>

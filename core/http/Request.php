@@ -21,12 +21,7 @@ class Request
 
     public function getUrl(): string
     {
-        $path = $_SERVER['REQUEST_URI'];
-        $position = strpos($path, '?');
-        if ($position !== false) {
-            $path = substr($path, 0, $position);
-        }
-        return $path;
+        return $_SERVER['REQUEST_URI'] ?? '/';
     }
 
     public function isGet(): bool
@@ -60,19 +55,13 @@ class Request
         return $_SERVER['HTTP_CLIENT_IP'] ? : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? : $_SERVER['REMOTE_ADDR']);
     }
 
-    public function setRouteParams($params): static
+    public function setRouteParams($params): void
     {
         $this->routeParams = $params;
-        return $this;
     }
 
     public function getRouteParams(): array
     {
         return $this->routeParams;
-    }
-
-    public function getRouteParam($param, $default = null)
-    {
-        return $this->routeParams[$param] ?? $default;
     }
 }

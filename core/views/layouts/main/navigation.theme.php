@@ -13,7 +13,7 @@ if(Platform::$app->user){
 ?>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="./">{{small_logo}}{{app_name}}</a>
+        <a class="navbar-brand logo" href="/">{{small_logo}}{{app_name}}</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -44,6 +44,8 @@ if(Platform::$app->user){
                         <ul class="dropdown-menu">
                             <!--<li><h6 class="dropdown-item text-info"><i class="icon-people"></i> Social</h6></li>
                             <li><hr class="dropdown-divider"></li>-->
+                            <li><a class="dropdown-item" href="./dashboard"><?php echo(Platform::$app->user->displayFirstName()); ?>'s Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="./profile"><?php echo(Platform::$app->user->displayFirstName()); ?>'s Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="icon-people"></i> Contacts</a></li>

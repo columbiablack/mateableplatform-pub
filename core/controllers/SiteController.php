@@ -79,7 +79,7 @@ class SiteController extends Controller
     public function logout()
     {
         if(Platform::$app->logout()){
-            Platform::$app->response->redirect('./home');
+            Platform::$app->response->redirect('/home');
         };
     }
 }

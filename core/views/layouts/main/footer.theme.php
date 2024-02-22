@@ -14,30 +14,30 @@ use mateable\core\Platform;
                 <div class="col-sm-3">
                     <h5>Get started</h5>
                     <ul>
-                        <li><a href="./">Home</a></li>
-                        <li><a href="./register">Register</a></li>
-                        <li><a href="./downloads">Downloads</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/downloads">Downloads</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
                     <h5>About us</h5>
                     <ul>
-                        <li><a href="./about-us">Mateable LLC</a></li>
-                        <li><a href="./contactus">Contact us</a></li>
+                        <li><a href="/about-us">Mateable LLC</a></li>
+                        <li><a href="/contactus">Contact us</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="./#">FAQ</a></li>
-                        <li><a href="./#">Help desk</a></li>
+                        <li><a href="/#">FAQ</a></li>
+                        <li><a href="/#">Help desk</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
                     <h5>Legal</h5>
                     <ul>
-                        <li><a href="./legal?type=serviceterms">Terms of Service</a></li>
-                        <li><a href="./legal?type=privacypolicy">Privacy Policy</a></li>
+                        <li><a href="/legal?type=serviceterms">Terms of Service</a></li>
+                        <li><a href="/legal?type=privacypolicy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -48,9 +48,9 @@ use mateable\core\Platform;
     </div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
-<script src="./assets/bootstrap/js/main.min.js"></script>
+<script src="../assets/bootstrap/js/main.min.js"></script>
 <script src="../assets/js/client.js"></script>
-<script src="./assets/js/main.min.js"></script>
-<script src="./assets/js/validation.js"></script>
+<script src="../assets/js/main.min.js"></script>
+<script src="../assets/js/validation.js"></script>
 </body>
 </html>

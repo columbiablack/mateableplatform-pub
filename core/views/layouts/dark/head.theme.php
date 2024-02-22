@@ -11,6 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <base href="{{site_url}}/">
     <title>{{app_name}}</title>
     <meta name="twitter:card" content="summary">
     <meta property="og:type" content="website">
@@ -21,7 +22,7 @@
 ">
     <meta name="twitter:image" content="https://coin.mateable.com/assets/img/MTBC_Logo.png">
     <meta name="twitter:description" content="The official site of Mateablecoin (MTBC)">
-    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="1024x931" href="assets/img/MTBC_Logo.png?h=afc1ead01c2c62ad9919e58347ee8f6c">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=411336789fc7ec1c8f17cdfdecc5bce6">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
