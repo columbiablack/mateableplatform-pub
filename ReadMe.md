@@ -1,9 +1,12 @@
 <p align="center"><a href="https://mateablemedia.com" target="_blank"><img src="https://mateable.com/images/10.png" width="400" alt="Mateable Logo"></a></p>
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<div align="center">
+
+[![mateablecoinBadge](https://img.shields.io/badge/Mateable-coin-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/MateableCoin-MTBC-blueviolet.svg)](https://coin.mateable.com) 
+
+[![mateablecoinBadge](https://img.shields.io/badge/PoS-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/scrypt-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/yescrypt-R8-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/whirlpool-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/ghostrider-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/balloon-blueviolet.svg)](https://coin.mateable.com)
+
+</div>
 </p>
 
 ## About Mateable
