@@ -2,15 +2,13 @@
 <p align="center">
 <div align="center">
 
-[![mateablecoinBadge](https://img.shields.io/badge/Mateable-Platform-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/Mateable-System-blueviolet.svg)](https://mateable.com) 
-
-[![mateablecoinBadge](https://img.shields.io/badge/PHP-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/Javascript-blueviolet.svg)](https://mateable.com) 
+[![mateablecoinBadge](https://img.shields.io/badge/Mateable-Platform-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/PHP-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/Javascript-blueviolet.svg)](https://mateable.com) 
 </div>
 </p>
 
 ## About Mateable
 
-Mateable is a web based enterprise that ranges in all areas of need for the modern world with expressive, elegant syntax, and most of all logic! We believe development must be an enjoyable and creative experience to be truly fulfilling. Mateable makes the headaches go away by easing common tasks used in many web projects.
+Mateable is a web based enterprise that ranges in all areas of need for the modern world with expressive, elegant syntax, and most of all compatibility! We believe development must be an enjoyable and creative experience to be truly fulfilling. Mateable makes the headaches go away by easing common tasks used in many web projects.
 
 Mateable's platform is accessible, powerful, and provides tools required for large and small companies, and individuals.
 
