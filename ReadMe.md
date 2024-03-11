@@ -2,10 +2,9 @@
 <p align="center">
 <div align="center">
 
-[![mateablecoinBadge](https://img.shields.io/badge/Mateable-coin-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/MateableCoin-MTBC-blueviolet.svg)](https://coin.mateable.com) 
+[![mateablecoinBadge](https://img.shields.io/badge/Mateable-Platform-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/Mateable-System-blueviolet.svg)](https://mateable.com) 
 
-[![mateablecoinBadge](https://img.shields.io/badge/PoS-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/scrypt-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/yescrypt-R8-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/whirlpool-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/ghostrider-blueviolet.svg)](https://coin.mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/balloon-blueviolet.svg)](https://coin.mateable.com)
-
+[![mateablecoinBadge](https://img.shields.io/badge/PHP-blueviolet.svg)](https://mateable.com) [![mateablecoinBadge](https://img.shields.io/badge/Javascript-blueviolet.svg)](https://mateable.com) 
 </div>
 </p>
 
