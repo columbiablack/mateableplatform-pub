@@ -14,6 +14,7 @@ use mateable\core\Platform;
                 </div>
                 <div class="block-content">
                     <p class="text-info">
+                        There are no downloads listed at this moment.
                     </p>
                 </div>
             </div>

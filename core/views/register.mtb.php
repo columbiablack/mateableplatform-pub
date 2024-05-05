@@ -8,7 +8,7 @@ use mateable\core\form\Form;
 
 /**
  *  user: Mateable
- *  @var $model mateable\core\models\RegisterForm
+ *  @var $model mateable\core\models\UserModel
  */
 
 ?>

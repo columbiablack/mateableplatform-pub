@@ -6,7 +6,7 @@
 
 /**
 * user: Mateable
-* @var $model mateable\core\models\RegisterForm
+* @var $model mateable\core\models\UserModel
 */
 
 use mateable\core\form\Form;
@@ -14,7 +14,7 @@ use mateable\core\Platform;
 
 ?>
 <?php if(Platform::isGuest()): ?>
-        <section class="clean-block clean-form content-section">
+        <section class="content-section clean-block clean-form py-3">
             <div class="block-heading">
                 <h2 class="text-info">Login</h2>
                 <p>Are you of legal age to access the account?</p>

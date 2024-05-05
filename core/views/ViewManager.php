@@ -5,6 +5,8 @@
  */
 namespace mateable\core\views;
 
+use mateable\core\Platform;
+
 class ViewManager
 {
     private string $title;
@@ -23,8 +25,9 @@ class ViewManager
             '{{app_name}}' => $this->title,
             '{{site_url}}' => $Website,
             '{{small_logo}}' => '<img style="height:30pt;width:30pt;" src=\'assets/img/mateable_logo.png\'>',
-            '{{logo}}' => '<img src='.$Website.'\'assets/img/mateable_logo.png\'>',
+            '{{logo}}' => '<img src=\'assets/img/mateable_logo.png\'>',
             '{{age}}' => 18,
+            '{{MTBC_BALANCE}}' => 'Market(MTBC): '. Platform::$app->xeggeX->getMarketValue(),
         ] + self::$definitionsExtra;
     }
 

@@ -15,7 +15,7 @@ namespace mateable\core\models;
 use mateable\core\Platform;
 use mateable\core\users\User;
 
-class RegisterForm extends User
+class UserModel extends User
 {
     public const STATUS_INACTIVE = 0;
     public const STATUS_ACTIVE = 1;

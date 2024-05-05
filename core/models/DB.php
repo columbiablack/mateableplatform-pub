@@ -6,7 +6,11 @@
 
 namespace mateable\core\models;
 
+use mateable\core\exceptions\InternalErrorException;
 use mateable\core\Platform;
+use PDO;
+use PDOException;
+use PDOStatement;
 
 abstract class DB extends Model
 {
@@ -29,7 +33,7 @@ abstract class DB extends Model
 
             $statement->execute();
             $result = true;
-        }catch(\PDOException $exception){
+        }catch(PDOException $exception){
             Platform::$app->session->setFlash('warning', $exception->getMessage());
             Error_Log($exception->getMessage().' - '.$exception->getLine());
             $result = false;
@@ -49,13 +53,13 @@ abstract class DB extends Model
             }
             $statement->execute();
             return $statement->fetchObject(static::class);
-        }catch(\PDOException $e){
-            echo "something is wrong in the db";
-            exit;
+        }catch(\Exception|PDOException $e){
+            //throw new InternalErrorException("[FindOne]something is wrong in the db. <br>". $e->getMessage());
+            return false;
         }
     }
 
-    public static function findAll($where): mixed
+    public static function findAll($where): array|bool
     {
         try {
             $tableName = static::tableName();
@@ -66,14 +70,34 @@ abstract class DB extends Model
                 $statement->bindValue(":$key", $item);
             }
             $statement->execute();
-            return $statement->fetchAll(static::class);
-        } catch (\PDOException $e) {
-            echo "Something is wrong in the db";
-            exit;
+            // Change below to use FETCH_CLASS
+            return $statement->fetchAll(PDO::FETCH_CLASS, static::class);
+        } catch (\Exception|PDOException $e) {
+            //throw new InternalErrorException("[FindAll]Something is wrong in the db");
+            return false;
         }
     }
 
-    public static function prepare($sql): bool|\PDOStatement
+    public function remove(): bool
+    {
+        try {
+            $tableName = static::tableName();
+            $primaryKey = $this->primaryKey();
+            $primaryKeyValue = $this->{$primaryKey};
+
+            $statement = self::prepare("DELETE FROM $tableName WHERE $primaryKey = :$primaryKey");
+            $statement->bindValue(":$primaryKey", $primaryKeyValue);
+            $statement->execute();
+
+            return true;
+        } catch (\Exception|PDOException $e) {
+            Platform::$app->session->setFlash('warning', $e->getMessage());
+            error_log($e->getMessage() . ' - ' . $e->getLine());
+            return false;
+        }
+    }
+
+    public static function prepare($sql): bool|PDOStatement
     {
         return Platform::$app->db->prepare($sql);
     }
@@ -95,7 +119,7 @@ abstract class DB extends Model
 
             $statement->execute();
             return true;
-        }catch(\PDOException $exception){
+        }catch(PDOException $exception){
             return false;
         }
     }

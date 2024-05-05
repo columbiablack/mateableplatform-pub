@@ -40,57 +40,40 @@ class Router
         $this->routemap['post'][$url] = $callback;
     }
 
-    public function getRouteMap($method): array
+    public function getCallback(string $method, string $url)
     {
-        return $this->routeMap[$method] ?? [];
-    }
 
-    public function getCallback()
-    {
-        $method = $this->request->getMethod();
-        $url = $this->request->getUrl();
-        // Trim slashes
-        $url = trim($url, '/');
+        // Get all routes for the current request method
+        $routes = $this->routemap[$method];
 
-        // Get all routes for current request method
-        $routes = $this->getRouteMap($method);
-
-        $routeParams = false;
-        echo "<pre>";
-        // Start iterating registered routes
+        // Start iterating over registered routes
         foreach ($routes as $route => $callback) {
-            // Trim slashes
-            $route = trim($route, '/');
-            $routeNames = [];
 
-            if (!$route) {
-                continue;
-            }
+            // Escape special characters in the route pattern
+            $pattern = preg_quote($route, '/');
 
-            // Find all route names from route and save in $routeNames
-            if (preg_match_all('/\{(\w+)(:[^}]+)?}/', $route, $matches)) {
-                $routeNames = $matches[1];
-            }
+            // Convert route parameter placeholders to regex capture groups
+            $pattern = preg_replace_callback('/\{(\w+)(:[^}]+)?\}/', function($matches) {
+                $constraint = isset($matches[2]) ? $matches[2] : '\w+';
+                return "(?P<$matches[1]>$constraint)";
+            }, $pattern);
 
-            // Convert route name into regex pattern
-            $routeRegex = "@^" . preg_replace_callback('/\{\w+(:([^}]+))?}/', fn($m) => isset($m[2]) ? "({$m[2]})" : '(\w+)', $route) . "$@";
+            // Add start and end delimiters to the regex pattern
+            $pattern = "/^$pattern$/";
 
-            // Test and match current route against $routeRegex
-            if (preg_match_all($routeRegex, $url, $valueMatches)) {
-                $values = [];
-                for ($i = 1; $i < count($valueMatches); $i++) {
-                    $values[] = $valueMatches[$i][0];
-                }
-                $routeParams = array_combine($routeNames, $values);
+            // Test if the current route matches the URL
+            if (preg_match($pattern, $url, $matches)) {
+                // Remove the full match from the parameters
+                unset($matches[0]);
 
-                $this->request->setRouteParams($routeParams);
+                // Set route parameters in the request object
+                $this->request->setRouteParams($matches);
 
                 return $callback;
             }
         }
 
         return false;
-
     }
 
     public function resolve()
@@ -105,9 +88,9 @@ class Router
         $callback = $this->routemap[$method][$url] ?? false;
 
         if(!$callback){
-            $callback = $this->getCallback();
+            $callback = $this->getCallback($method, $url);
             if ($callback === false) {
-                throw new NotFoundException("The requested page cannot be found. Go to the <a href=\"{{site_url}}\">homepage</a>.");
+                throw new NotFoundException("There is a problem with the requested url. Go to the <a href=\"{{site_url}}\">homepage</a>.");
             }
         }
 

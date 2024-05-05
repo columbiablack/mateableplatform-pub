@@ -152,4 +152,10 @@ class MTBCRPC
 
         return $this->response['result'];
     }
+
+    public function satoshitize($satoshitize)
+    {
+        return sprintf("%.8f", $satoshitize);
+    }
+
 }

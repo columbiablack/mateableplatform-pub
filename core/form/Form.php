@@ -38,9 +38,19 @@ class Form
         return new TextArea($model, $attribute);
     }
 
-    public function button(string $name, string $id = ''): string
+    public function fieldSelect(string $name, string $id)
     {
-        return '<button class="btn btn-primary" id="'. $id .'" type="submit">'. $name .'</button>'.PHP_EOL;
+        return new Select($name, $id);
+    }
+
+    public function fieldOption(string $name, string $id)
+    {
+        return new Select($name, $id);
+    }
+
+    public function button(string $name, string $id = '', string $class = ''): string
+    {
+        return '<button class="btn btn-primary '.$class.'" id="'. $id .'" type="submit">'. $name .'</button>'.PHP_EOL;
 
     }
 }

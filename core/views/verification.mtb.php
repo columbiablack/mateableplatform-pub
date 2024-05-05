@@ -4,7 +4,7 @@
  * Copyright (c) 2024. Mateable LLC
  */
 /**
- * @var $model mateable\core\models\RegisterForm
+ * @var $model mateable\core\models\UserModel
  */
 
 use mateable\core\form\Form;

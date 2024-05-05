@@ -8,6 +8,11 @@
  *  user: Mateable
  */
 
+use mateable\core\Platform;
+
+if(!Platform::isGuest()){
+    Platform::$app->response->redirect('/dashboard');
+}
 ?>
         <section class="clean-block clean-form dark">
             <div class="container">
@@ -45,5 +50,3 @@
                 </div>
             </div>
         </section>
-
-

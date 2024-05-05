@@ -12,6 +12,7 @@ class Field
 {
     public const TYPE_TEXT = 'text';
     public const TYPE_PASSWORD = 'password';
+    public const TYPE_HIDDEN = 'hidden';
     public const TYPE_FILE = 'file';
     public const TYPE_DATE = 'date';
 
@@ -40,9 +41,9 @@ class Field
        '.PHP_EOL;
     }
 
-    public function passwordField(): string
+    public function dateField(): string
     {
-        $this->type = self::TYPE_PASSWORD;
+        $this->type = self::TYPE_DATE;
         return $this;
     }
 
@@ -52,10 +53,15 @@ class Field
         return $this;
     }
 
-    public function dateField(): string
+    public function hiddenField(): string
     {
-        $this->type = self::TYPE_DATE;
+        $this->type = self::TYPE_HIDDEN;
         return $this;
     }
 
+    public function passwordField(): string
+    {
+        $this->type = self::TYPE_PASSWORD;
+        return $this;
+    }
 }

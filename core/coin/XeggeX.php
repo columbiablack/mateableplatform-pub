@@ -26,9 +26,9 @@ class XeggeX
         return $info["usdValue"];
     }
 
-    public function getCoinUSDValue($balance): string
+    public function getCoinUSDValue($amount): string
     {
-        $price = $balance;
+        $price = $amount;
         $market = $this->getMarketValue();
         $totalUSD = $price * $market;
 

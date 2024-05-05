@@ -24,38 +24,45 @@ class Database
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function applyMigrations(): void
-    {
+    public function applyMigrations(): void {
         echo '<p>Getting migrations and applied migrations list..</p>'.PHP_EOL;
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
-        $newMigrations = [];
+
+        $newMigrations = []; // Initialize as an empty array to collect new migrations
         $files = scandir(Platform::$ROOT_DIR.'/core/migrations');
         $toApplyMigrations = array_diff($files, $appliedMigrations);
 
         echo '<p>Migration is fully loaded and has started.</p>'.PHP_EOL;
-        foreach($toApplyMigrations as $migration) {
+        foreach ($toApplyMigrations as $migration) {
             if ($migration === '.' || $migration === '..') {
-                continue;
+                continue; // Skip the directory pointers
             }
 
             require_once Platform::$ROOT_DIR . '/core/migrations/' . $migration;
-
-            $classname = str_replace(".mgn", "", pathinfo($migration, PATHINFO_FILENAME));
+            $classname = pathinfo($migration, PATHINFO_FILENAME);
             $instance = new $classname();
             echo '<p>Migrating ' . $classname . '..</p>' . PHP_EOL;
             $instance->up();
             echo '<p>' . $classname . ' successfully migrated!</p>' . PHP_EOL;
-            $newMigrations = $migration;
+            $newMigrations[] = $migration; // Correctly accumulating new migrations
         }
 
-        if(!empty($newMigrations))
-        {
-            $this->savedMigrations($newMigrations);
-        }else{
-            echo '<p>All migrations applied to database!</p>'.PHP_EOL;
+        if (!empty($newMigrations)) {
+            $this->saveMigrations($newMigrations);
+        } else {
+            echo '<p>All migrations are already applied.</p>'.PHP_EOL;
         }
     }
+
+    private function saveMigrations(array $newMigrations): void {
+        // Assuming $this->pdo is your PDO instance
+        $values = implode(',', array_map(fn($m) => "('$m')", $newMigrations));
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $values");
+        $statement->execute();
+        echo '<p>Saved ' . count($newMigrations) . ' new migrations.</p>'.PHP_EOL;
+    }
+
 
     public function createMigrationsTable(): void
     {
@@ -74,6 +81,7 @@ class Database
         return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    /*
     public function savedMigrations(array $migrations): void
     {
         $str = implode(",", array_map(fn($m) => "('$m')", $migrations));
@@ -82,7 +90,7 @@ class Database
                                        ");
         $statement->execute();
     }
-
+    */
     public function prepare($sql): bool|\PDOStatement
     {
         if($this->pdo !== null) {

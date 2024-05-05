@@ -10,17 +10,17 @@ use mateable\core\coin\MTBCRPC;
 use mateable\core\coin\XeggeX;
 use mateable\core\controllers\Controller;
 use mateable\core\db\Database;
+use mateable\core\exceptions\ForbiddenException;
+use mateable\core\exceptions\InternalErrorException;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
-use mateable\core\messaging\mail\Mailer;
-use mateable\core\models\RegisterForm;
+use mateable\core\models\UserModel;
 use mateable\core\models\Wallet;
 use mateable\core\routes\Router;
 use mateable\core\session\Session;
 use mateable\core\views\View;
 use mateable\core\views\ViewManager;
-use mysql_xdevapi\Exception;
 use PDOException;
 
 /**
@@ -41,8 +41,8 @@ class Platform
     public Session $session;
     public View $view;
     public ViewManager $viewManager;
-    public ?RegisterForm $user;
-    public Wallet $userWallet;
+    public ?UserModel $user;
+    public ?Wallet $userWallet;
     public MTBCRPC $mateablecoin;
     public XeggeX $xeggeX;
 
@@ -67,31 +67,15 @@ class Platform
 
         $this->session = new Session();
         $primaryValue = $this->session->get('user');
-
+        $primaryKey = (new UserModel)->primaryKey();
         if($primaryValue) {
             // Find user and load information
-            $this->user = Registerform::findOne(['id' => $primaryValue]);
-            $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'].'/', $this->user->displayEmail());
-            $balance = $this->mateablecoin->getbalance();
+            $this->user = UserModel::findOne([$primaryKey => $primaryValue]);
+            $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'] . '/', $this->user->displayEmail());
 
-            /*try {
-                // Find wallet and load Wallet addresses
-                $this->userWallet = Wallet::findOne(['user_id' => $primaryValue]);
-                if (!$this->userWallet) {
-                    if (!$this->session->get('warning')) {
-                        $this->session->setflash('warning', 'You need to create a MTBC Wallet!');
-                    }
-                }
-            }catch(\Exception $exception){
-                $this->userWallet = null;
-            }*/
-
-            if($this->mateablecoin->status == 500 || $this->mateablecoin->status != 200){
-                $this->session->setflash('warning','You need to create a MTBC Wallet!');
-                $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: 00 MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue()];
-            }else{
-                $this->viewManager::$definitionsExtra =['{{MTBC_BALANCE}}' => 'Balance: '. $balance .' MTBC || USD: $'. $this->xeggeX->getCoinUSDValue($balance) .' || Market: '. $this->xeggeX->getMarketValue()];
-            }
+//            if($this->mateablecoin->status == 500 || $this->mateablecoin->status != 200){
+//                $this->session->setflash('warning','You need to create a MTBC Wallet!');
+//            }
         } else {
             $this->user = null;
         }
@@ -116,9 +100,15 @@ class Platform
         try {
             self::$app->response->statusCode(200);
             echo self::$app->router->resolve();
-        } catch(\Exception|NotFoundException $e){
+        } catch(ForbiddenException $e){
+            self::$app->response->statusCode(403);
+            echo self::$app->view->renderview('_error',['exception' => '{{app_name}} <br />'.$e->getMessage(),'exceptiontitle' => $e->getCode()]);
+        } catch(NotFoundException $e){
             self::$app->response->statusCode(404);
-            echo self::$app->view->renderview('_error',['exception' => 'Platform[Run]: '.$e->getMessage(),'exceptiontitle' => $e->getCode()]);
+            echo self::$app->view->renderview('_error',['exception' => '{{app_name}} <br />'.$e->getMessage(),'exceptiontitle' => $e->getCode()]);
+        } catch(InternalErrorException $e){
+            self::$app->response->statusCode(500);
+            echo self::$app->view->renderview('_error',['exception' => '{{app_name}} <br />'.$e->getMessage(),'exceptiontitle' => $e->getCode()]);
         }
     }
 }

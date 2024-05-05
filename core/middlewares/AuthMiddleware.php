@@ -6,6 +6,7 @@
 
 namespace mateable\core\middlewares;
 
+use mateable\core\exceptions\ForbiddenException;
 use mateable\core\Platform;
 
 class AuthMiddleware extends BaseMiddleware
@@ -27,8 +28,7 @@ class AuthMiddleware extends BaseMiddleware
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
                 Platform::$app->response->statusCode(403);
-                echo Platform::$app->view->renderview('_error',['exception' => 'AuthMDW[Execute]: ', 'exceptiontitle' => '403']);
-                //throw new ForbiddenException();
+                throw new ForbiddenException("AuthMDW[Execute] You are trying to access a forbidden area.");
             }
         }
     }

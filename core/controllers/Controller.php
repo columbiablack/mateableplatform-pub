@@ -26,7 +26,7 @@ class Controller
      */
     protected array $middlewares = [];
 
-    public function render($view, $params = []): string
+    public function renderView($view, $params = []): string
     {
         return Platform::$app->view->renderView($view, $params);
     }

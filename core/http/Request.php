@@ -60,8 +60,8 @@ class Request
         $this->routeParams = $params;
     }
 
-    public function getRouteParams(): array
+    public function getRouteParams($param, $default = null)
     {
-        return $this->routeParams;
+        return $this->routeParams[$param] ?? $default;
     }
 }

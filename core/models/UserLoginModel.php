@@ -9,12 +9,12 @@ namespace mateable\core\models;
 use mateable\core\Platform;
 use mysql_xdevapi\Exception;
 
-class LoginForm extends Model
+class UserLoginModel extends Model
 {
     public string $email = '';
     public string $password = '';
 
-    protected RegisterForm $user;
+    protected UserModel $user;
 
     public function rules(): array
     {
@@ -46,9 +46,9 @@ class LoginForm extends Model
     {
         try{
         /**
-         * @var $user RegisterForm
+         * @var $user UserModel
          */
-            $user = RegisterForm::findOne(['email' => $this->email]);
+            $user = UserModel::findOne(['email' => $this->email]);
 
             if (!$user) {
                 $this->addError('email', 'The user does not exist with this email.');

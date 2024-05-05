@@ -14,7 +14,7 @@ use Ratchet\ConnectionInterface;
 
 require __DIR__ . './vendor/autoload.php';
 
-class SignalingServer implements MessageComponentInterface
+class  SignalingServer implements MessageComponentInterface
 {
     protected $clients;
 

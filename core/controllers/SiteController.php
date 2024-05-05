@@ -22,7 +22,7 @@ class SiteController extends Controller
 
     public function aboutUs(): string
     {
-        return $this->render('about-us');
+        return $this->renderView('about-us');
     }
 
     public function contact(Request $request): string
@@ -36,25 +36,25 @@ class SiteController extends Controller
             if($contact->validate() && $contact->contactUs())
             {
                 Platform::$app->session->setFlash('success', 'Your message was sent! Responses will vary from 24 hours to 48 hours.');
-                return $this->render('contact', ['model' => (new $contact)]);
+                return $this->renderView('contact', ['model' => (new $contact)]);
             }
         }
-        return $this->render('contact', ['model' => $contact]);
+        return $this->renderView('contact', ['model' => $contact]);
     }
 
     public function downloads(): string
     {
-        return $this->render('downloads');
+        return $this->renderView('downloads');
     }
 
     public function home(): string
     {
-        return $this->render('home');
+        return $this->renderView('home');
     }
 
     public function marketplace(): string
     {
-        return $this->render('marketplace');
+        return $this->renderView('marketplace');
     }
 
     public function legal(): string
@@ -73,7 +73,7 @@ class SiteController extends Controller
 
     public function verifyUs(): string
     {
-        return $this->render('verification');
+        return $this->renderView('verification');
     }
 
     public function logout()

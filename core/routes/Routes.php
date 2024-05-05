@@ -10,7 +10,6 @@ use mateable\core\controllers\AuthController;
 use mateable\core\controllers\MessageController;
 use mateable\core\controllers\SiteController;
 use mateable\core\controllers\WalletController;
-use mateable\core\http\Request;
 use mateable\core\Platform;
 
 class Routes
@@ -18,31 +17,31 @@ class Routes
     public static function authAllowedRoutes(): array
     {
         return [
-            'profile',
             'dashboard',
-            'walletmgr',
-            'messaging'
+            'walletmanager',
         ];
     }
 
     public static function getAllowedRoutes(): array
     {
         return ['get' => [
+            '/login' => [AuthController::class, 'login'],
+            '/messaging' => [AuthController::class, 'chat'],
+            '/register' => [AuthController::class, 'register'],
+            '/dashboard' => [AuthController::class, 'dashboard'],
             '/' => [SiteController::class, 'home'],
             '/home' => [SiteController::class, 'home'],
             '/about-us' => [SiteController::class, 'aboutUs'],
             '/contactus' => [SiteController::class, 'contact'],
             '/downloads' => [SiteController::class, 'downloads'],
             '/marketplace' => [SiteController::class, 'marketplace'],
-            '/messaging' => [AuthController::class, 'chat'],
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/webmigrate' => [SiteController::class, 'webMigrate'],
             '/logout' => [SiteController::class, 'logout'],
-            '/login' => [AuthController::class, 'login'],
-            '/register' => [AuthController::class, 'register'],
-            '/dashboard' => [AuthController::class, 'profile'],
-            '/walletmgr' => [WalletController::class, 'walletManager'],
+            '/walletmanager' => [WalletController::class, 'walletmanager'],
+            '/walletmanager/transactions' => [WalletController::class, 'loadTransactionHistory'],
+            '/123' => [],
             ]
         ];
     }
@@ -54,7 +53,10 @@ class Routes
             '/register' => [AuthController::class, 'register'],
             '/register#register' => [AuthController::class, 'register'],
             '/contactus' => [SiteController::class, 'contact'],
-            '/verify-us' => [SiteController::class, 'verifyUs']
+            '/verify-us' => [SiteController::class, 'verifyUs'],
+            '/walletmgr/dispose' => [WalletController::class, 'walletRemove'],
+            '/walletmgr/n/address' => [WalletController::class, 'createNewAddress'],
+            '/walletmgr/n/wallet' => [WalletController::class, 'createNewWallet'],
         ];
         return $routesPOST;
     }

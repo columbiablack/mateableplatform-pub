@@ -13,6 +13,8 @@ class Wallet extends DB
     public string $user_id = '';
     public string $address = '';
     public string $user_email = '';
+    public string $creation_date = '';
+    public int $id;
 
     public static function tableName(): string
     {
@@ -43,19 +45,15 @@ class Wallet extends DB
         return [];
     }
 
-    public function createNewWallet(RegisterForm $user): bool
+    public function removeWallet(): bool
     {
-        $this->user_id = $user->id;
-        $this->user_email = $user->email;
+        return self::remove();
+    }
 
-        if($this->user_email && $this->user_id){
-            $this->address = Platform::$app->mateablecoin->getnewaddress("$user->email");
-        }
-
-        if(Platform::$app->mateablecoin->status == 200){
-            return true;
-        }else{
-            return false;
-        }
+    public function labels(): array
+    {
+        return [
+            'id' => ''
+        ];
     }
 }

@@ -12,6 +12,6 @@ class MessageController extends Controller
 {
     public static function chat(): string
     {
-        return Platform::$app->controller->render('messaging');
+        return Platform::$app->controller->renderView('messaging');
     }
 }

@@ -6,12 +6,11 @@
 
 namespace mateable\core\controllers;
 
-use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Response;
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\http\Request;
-use mateable\core\models\LoginForm;
-use mateable\core\models\RegisterForm;
+use mateable\core\models\UserLoginModel;
+use mateable\core\models\UserModel;
 use mateable\core\Platform;
 use mateable\core\routes\Routes;
 
@@ -24,7 +23,7 @@ class AuthController extends Controller
 
     public function login(Request $request, Response $response): string
     {
-        $loginForm = new LoginForm();
+        $loginForm = new UserLoginModel();
         if($request->isPost())
         {
             $loginForm->loadData($request->getBody());
@@ -35,12 +34,12 @@ class AuthController extends Controller
             }
         }
         $this->setLayout('auth');
-        return $this->render('login', ['model' => $loginForm]);
+        return $this->renderView('login', ['model' => $loginForm]);
     }
 
     public function register(Request $request, Response $response): string
     {
-        $registerForm = new RegisterForm();
+        $registerForm = new UserModel();
         if($request->isPost())
         {
             $registerForm->loadData($request->getBody());
@@ -50,12 +49,12 @@ class AuthController extends Controller
                 $response->redirect('/login');
             }
         }
-        return $this->render('register', ['model' => $registerForm]);
+        return $this->renderView('register', ['model' => $registerForm]);
     }
 
-    public function profile(Request $request, Response $response): string
+    public function dashboard(Request $request, Response $response): string
     {
-        return $this->render('profile');
+        return $this->renderView('dashboard');
     }
 
     public function chat():string
