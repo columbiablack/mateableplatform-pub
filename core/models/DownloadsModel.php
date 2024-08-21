@@ -6,22 +6,24 @@
 
 namespace mateable\core\models;
 
-class Post extends \mateable\core\models\DB
+class DownloadsModel extends DB
 {
-    public int $id;
-    public int $user_id;
-    public string $title = '';
-    public string $message = '';
-    public string $post_date = '';
+    public string $name;
+    public string $url;
+    public string $description;
 
     public static function tableName(): string
     {
-        return 'posts';
+        return 'downloads';
     }
 
     public function attributes(): array
     {
-        return [];
+        return [
+            'name',
+            'url',
+            'description',
+        ];
     }
 
     public function primaryKey(): string
@@ -32,5 +34,10 @@ class Post extends \mateable\core\models\DB
     public function rules(): array
     {
         return [];
+    }
+
+    public function upload(): bool
+    {
+        return false;
     }
 }

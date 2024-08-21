@@ -8,24 +8,40 @@ namespace mateable\core\models;
 
 class PostModel extends DB
 {
+    public int $id;
+    public int $user_id;
+    public string $content = '';
+    public string $post_date = '';
 
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'posts';
     }
 
     public function attributes(): array
+
     {
-        // TODO: Implement attributes() method.
+        return [
+            'postContent',
+            'fileInput',
+        ];
     }
 
     public function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        return 'id';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [];
+    }
+
+    public function labels() : array
+    {
+        return [
+            'postContent' => '',
+            'fileInput' => '',
+        ];
     }
 }

@@ -20,7 +20,6 @@ class Init
     {
         $maintenance = $_ENV['MAINTENANCE'];
         if($maintenance === "true"){
-            // TODO Switch to maintenance mode
             include_once(__DIR__ . '/core/views/maintenance.mtb.php');
         }elseif($maintenance === "false"){
             $config = [

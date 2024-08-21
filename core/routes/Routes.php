@@ -26,7 +26,7 @@ class Routes
     {
         return ['get' => [
             '/login' => [AuthController::class, 'login'],
-            '/messaging' => [AuthController::class, 'chat'],
+            '/messages' => [MessageController::class, 'chat'],
             '/register' => [AuthController::class, 'register'],
             '/dashboard' => [AuthController::class, 'dashboard'],
             '/' => [SiteController::class, 'home'],
@@ -41,7 +41,9 @@ class Routes
             '/logout' => [SiteController::class, 'logout'],
             '/walletmanager' => [WalletController::class, 'walletmanager'],
             '/walletmanager/transactions' => [WalletController::class, 'loadTransactionHistory'],
-            '/123' => [],
+            '/show/{id}' => function($id) {
+                return "<p>id: $id</p>";
+            },
             ]
         ];
     }

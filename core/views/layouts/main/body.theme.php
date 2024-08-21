@@ -18,12 +18,12 @@ use mateable\core\Platform;
         </section>
     <?php endif; ?>
     <?php if(Platform::$app->session->getFlash('success')): ?>
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show">
             <?php echo Platform::$app->session->getFlash('success'); ?>
         </div>
     <?php endif; ?>
     <?php if(Platform::$app->session->getFlash('warning')): ?>
-        <div class="alert alert-warning">
+        <div class="alert alert-warning alert-dismissible fade show">
             <?php echo Platform::$app->session->getFlash('warning'); ?>
         </div>
     <?php endif; ?>

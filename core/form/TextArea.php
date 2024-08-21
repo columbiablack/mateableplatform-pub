@@ -13,11 +13,13 @@ class TextArea
     public Model $model;
 
     public string $attribute;
+    public string $style;
 
-    public function __construct(Model $model, string $attribute)
+    public function __construct(Model $model, string $attribute, string $style)
     {
         $this->attribute = $attribute;
         $this->model = $model;
+        $this->style = $style;
     }
 
     public function __toString(): string
@@ -25,7 +27,7 @@ class TextArea
       return '
                 <div class="mb-3">
                     <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
-                    <textarea class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" name="' . $this->attribute . '" id="' . $this->attribute . '" value="' . $this->model->{$this->attribute} . '"></textarea>
+                    <textarea class="form-control ' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="' . $this->attribute . '" style="'. $this->style .'" value="'. $this->model->{$this->attribute} .'"></textarea>
                     <div class="invalid-feedback">
                         <p>' . $this->model->getFirstError($this->attribute) . '</p>
                     </div>

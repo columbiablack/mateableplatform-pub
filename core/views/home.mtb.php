@@ -21,7 +21,7 @@ if(!Platform::isGuest()){
                 </div>
                 <div class="block-content">
                     <p>
-                        Welcome to Mateable! There is no template set for the news and updates of the network.
+                        Welcome to {{app_name}}! There is no template set for the news and updates of the network.
                         Please bare with us as we're setting up a new platform built by our team.
                         This platform is built with care to help socialize and solve overall life tackles.
                         All are equal here and there are no set boundaries until mischief comes to the frontline of trust.

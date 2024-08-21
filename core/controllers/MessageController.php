@@ -10,8 +10,8 @@ use mateable\core\Platform;
 
 class MessageController extends Controller
 {
-    public static function chat(): string
+    public function chat(): string
     {
-        return Platform::$app->controller->renderView('messaging');
+        return Platform::$app->controller->renderView('/profile/messages/chat');
     }
 }

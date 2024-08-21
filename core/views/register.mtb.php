@@ -36,7 +36,7 @@ use mateable\core\form\Form;
                     echo $form->Field($model,'email');
                     echo $form->Field($model,'password')->passwordField();
                     echo $form->Field($model,'password_confirm')->passwordField();
-                    echo $form->button('Submit');
+                    echo $form->button('Register');
                     echo Form::end();
                 ?>
             </div>

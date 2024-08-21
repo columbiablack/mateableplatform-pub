@@ -28,14 +28,14 @@ class Form
             '.PHP_EOL;
     }
 
-    public function field(Model $model, string $attribute): Field
+    public function field(Model $model, string $attribute, string $id = '', string $accept = ''): Field
     {
-        return new Field($model, $attribute);
+        return new Field($model, $attribute, $id, $accept);
     }
 
-    public function fieldTextArea(Model $model, string $attribute)
+    public function fieldTextArea(Model $model, string $attribute, string $style = '')
     {
-        return new TextArea($model, $attribute);
+        return new TextArea($model, $attribute, $style);
     }
 
     public function fieldSelect(string $name, string $id)
@@ -48,9 +48,8 @@ class Form
         return new Select($name, $id);
     }
 
-    public function button(string $name, string $id = '', string $class = ''): string
+    public function button(string $name, string $id = '', string $class = '', string $onclick = ''): string
     {
-        return '<button class="btn btn-primary '.$class.'" id="'. $id .'" type="submit">'. $name .'</button>'.PHP_EOL;
-
+        return '<button class="btn btn-primary '.$class.'" id="'. $id .'" onclick="'. $onclick .'" type="submit">'. $name .'</button>'.PHP_EOL;
     }
 }

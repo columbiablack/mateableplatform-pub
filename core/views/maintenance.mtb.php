@@ -1,17 +1,20 @@
+<?php
+$myEnvName = $_ENV['NAME'];
+?>
+
 <!DOCTYPE html>
 <html style="--bs-primary: #39323e;--bs-primary-rgb: 57,50,62;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title><?php $_ENV['NAME']; ?></title>
+    <title><?php echo $myEnvName; ?></title>
     <meta name="twitter:card" content="summary">
     <meta property="og:type" content="website">
     <meta name="twitter:title" content="Mateablecoin (MTBC)">
     <meta property="og:title" content="Mateablecoin (MTBC)">
     <meta property="og:image" content="https://coin.mateable.com/assets/img/MTBC_Logo.png">
-    <meta name="description" content="The official site of Mateablecoin (MTBC)
-">
+    <meta name="description" content="The official site of Mateablecoin (MTBC)">
     <meta name="twitter:image" content="https://coin.mateable.com/assets/img/MTBC_Logo.png">
     <meta name="twitter:description" content="The official site of Mateablecoin (MTBC)">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
@@ -28,8 +31,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="text-center">
-            <img src="assets/img/mateable_logo.png" width="150" height="120">
-            <h1 class="h4 text-gray-900 mb-4">Undergoing maintenance</h1>
+            <img src="assets/img/mateable_logo.png" width="150" height="135">
+            <h2 class="text-gray-900 mb-4">Undergoing maintenance</h2>
+            <p class="text-secondary card-text text-left">The site is doing one of a few possible things at the moment such as system upgrades, plugin upgrades, etc.
+                It will only be a temporary amount of time that our services are unavailable to you.
+                Developers, go to <a href="https://github.com/mateable">Github</a> to see what's new in the latest upgrade!
+                <br>
+                If you see this message for longer than 12 hours, consider this a major upgrade!
+            </p>
+            <p class="text-secondary card-text">
+                Best regards,<br />
+                Mateable Administration
+            </p>
         </div>
     </div>
 </div>

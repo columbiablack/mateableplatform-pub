@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/main.min.css">
     <link rel="stylesheet" href="assets/fonts/simple-line-icons_main.min.css">
     <link rel="stylesheet" href="assets/mateable/css/mateable_bootstrap_main.min.css">
+    <link rel="stylesheet" href="assets/css/customized.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
 </head>
 <body>

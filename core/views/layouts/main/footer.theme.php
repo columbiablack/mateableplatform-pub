@@ -7,6 +7,11 @@
 use mateable\core\Platform;
 
 ?>
+<?php if(!Platform::isGuest()): ?>
+<div class="floating-menu">
+    <button class="btn btn-secondary" onclick="userOverlayOn()">Post</button>
+</div>
+<?php endif; ?>
 <footer class="page-footer bottom dark">
     <div class="container">
         <?php if(Platform::isGuest()): ?>
@@ -52,5 +57,7 @@ use mateable\core\Platform;
 <script src="../assets/js/client.js"></script>
 <script src="../assets/js/main.min.js"></script>
 <script src="../assets/js/validation.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="../assets/mateable/js/animation.js"></script>
 </body>
 </html>

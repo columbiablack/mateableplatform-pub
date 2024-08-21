@@ -24,7 +24,7 @@ use mateable\core\Platform;
                     $form = Form::begin('','post');
                     echo $form->field($model,'email');
                     echo $form->field($model,'password')->passwordField();
-                    echo $form->button('Submit');
+                    echo $form->button('Login');
                     echo $form::end();
                 ?>
             </div>

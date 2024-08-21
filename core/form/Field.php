@@ -20,12 +20,16 @@ class Field
 
     public string $attribute;
     public string $type;
+    public string $id;
+    public string $accept;
 
-    public function __construct(Model $model, string $attribute)
+    public function __construct(Model $model, string $attribute, string $id = '', string $accept = '')
     {
         $this->model = $model;
         $this->attribute = $attribute;
         $this->type = self::TYPE_TEXT;
+        $this->id = $id;
+        $this->accept = $accept;
     }
 
     public function __toString(): string
@@ -33,9 +37,9 @@ class Field
        return '
                 <div class="mb-3">
                     <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
-                    <input class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" type="' . $this->type . '" name="' . $this->attribute . '" value="' . $this->model->{$this->attribute} . '">
+                    <input accept="'. $this->accept .'" class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="'. $this->id .'" type="'. $this->type .'" name="'. $this->attribute .'" value="'. $this->model->{$this->attribute} .'">
                     <div class="invalid-feedback">
-                        <p>' . $this->model->getFirstError($this->attribute) . '</p>
+                        <p id="message_error">' . $this->model->getFirstError($this->attribute) . '</p>
                     </div>
                 </div>
        '.PHP_EOL;

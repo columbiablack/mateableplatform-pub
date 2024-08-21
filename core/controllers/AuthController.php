@@ -9,6 +9,7 @@ namespace mateable\core\controllers;
 use mateable\core\http\Response;
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\http\Request;
+use mateable\core\models\PostModel;
 use mateable\core\models\UserLoginModel;
 use mateable\core\models\UserModel;
 use mateable\core\Platform;
@@ -54,11 +55,7 @@ class AuthController extends Controller
 
     public function dashboard(Request $request, Response $response): string
     {
-        return $this->renderView('dashboard');
-    }
-
-    public function chat():string
-    {
-        return MessageController::chat();
+        $postModel = new PostModel;
+        return $this->renderView('dashboard',['postModel' => $postModel]);
     }
 }
