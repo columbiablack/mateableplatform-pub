@@ -7,17 +7,20 @@
 use mateable\core\Platform;
 
 ?>
-<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-    <div class="container">
-        <a class="navbar-brand logo" href="/">{{app_name}}</a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contactus">Contact Us</a></li>
+<nav class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark" id="mainNav">
+    <div class="container"><a class="navbar-brand" href="/">{{app_name}}</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto text-uppercase">
+<?php if(Platform::isGuest() === true): ?>
+                <li class="nav-item"><a class="nav-link" href="/mylogin">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/downloads">Downloads</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
+<?php else: ?>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/downloads">Downloads</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
+<?php endif; ?>
             </ul>
         </div>
     </div>

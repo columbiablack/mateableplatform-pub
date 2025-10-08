@@ -35,7 +35,7 @@ class Field
     public function __toString(): string
     {
        return '
-                <div class="mb-3">
+                <div class="form-control" style="width: 420pt;">
                     <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
                     <input accept="'. $this->accept .'" class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="'. $this->id .'" type="'. $this->type .'" name="'. $this->attribute .'" value="'. $this->model->{$this->attribute} .'">
                     <div class="invalid-feedback">

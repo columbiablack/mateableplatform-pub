@@ -1,63 +1,53 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2025. Mateable LLC
  */
 
-use mateable\core\Platform;
-
 ?>
-<?php if(!Platform::isGuest()): ?>
-<div class="floating-menu">
-    <button class="btn btn-secondary" onclick="userOverlayOn()">Post</button>
-</div>
-<?php endif; ?>
-<footer class="page-footer bottom dark">
+<footer>
     <div class="container">
-        <?php if(Platform::isGuest()): ?>
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/register">Register</a></li>
-                        <li><a href="/downloads">Downloads</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="/about-us">Mateable LLC</a></li>
-                        <li><a href="/contactus">Contact us</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="/#">FAQ</a></li>
-                        <li><a href="/#">Help desk</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="/legal?type=serviceterms">Terms of Service</a></li>
-                        <li><a href="/legal?type=privacypolicy">Privacy Policy</a></li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-md-4"><span class="copyright">Copyright&nbsp;© <a href="{{site_url}}">{{app_name}} LLC</a> <?php echo date('Y'); ?></span></div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
             </div>
-        <?php endif; ?>
-    </div>
-    <div class="text-center footer-copyright">
-        <p>© 2023-<?php echo date('Y'); ?> Copyright <a href="{{site_url}}">{{app_name}} LLC</a></p>
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li class="list-inline-item"><a href="/legal?type=privacypolicy">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="/legal?type=serviceterms">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
-<script src="../assets/bootstrap/js/main.min.js"></script>
-<script src="../assets/js/client.js"></script>
-<script src="../assets/js/main.min.js"></script>
-<script src="../assets/js/validation.js"></script>
-<script src="../assets/js/custom.js"></script>
-<script src="../assets/mateable/js/animation.js"></script>
+<div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal3">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3-full.jpg">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-unstyled">
+                                <li>Date: January 2017</li>
+                                <li>Client: Threads</li>
+                                <li>Category: Illustration</li>
+                            </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/agency.js"></script>
 </body>
 </html>

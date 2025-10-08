@@ -26,7 +26,7 @@ class View
         $layout_content = $this->layoutContent();
         $viewcontent = $this->renderViewOnly($view,$params);
 
-        $layout_content = str_replace('{{content}}',$viewcontent, $layout_content);
+        $layout_content = str_replace("{{content}}", $viewcontent, $layout_content);
 
         return $this->viewManager->convert($layout_content);
     }
@@ -36,23 +36,9 @@ class View
         $legal_layout_content = $this->layoutLegalContent();
         $viewcontent = $this->renderLegalViewOnly($view,$params);
 
-        $legal_layout_content = str_replace('{{content}}',$viewcontent, $legal_layout_content);
+        $legal_layout_content = str_replace("{{content}}", $viewcontent, $legal_layout_content);
 
         return $this->viewManager->convert($legal_layout_content);
-    }
-
-    public function viewExist(string $filename): bool
-    {
-        $result = false;
-        $dirs[] = scandir(Platform::$ROOT_DIR."/core/views/") ?? [];
-        foreach($dirs as $dir){
-            if($dir == '.' || $dir == '..') {
-                continue;
-            }elseif(array_search($filename,$dir)){
-                $result = true;
-            }
-        }
-        return $result;
     }
 
     public function renderViewOnly($view, $params = []): string
@@ -103,5 +89,19 @@ class View
         ob_start();
         include_once Platform::$ROOT_DIR."/core/views/layouts/$layout/main.mtb.php";
         return ob_get_clean();
+    }
+
+    public function viewExist(string $filename): bool
+    {
+        $result = false;
+        $dirs[] = scandir(Platform::$ROOT_DIR."/core/views/") ?? [];
+        foreach($dirs as $dir){
+            if($dir == '.' || $dir == '..') {
+                continue;
+            }elseif(array_search($filename,$dir)){
+                $result = true;
+            }
+        }
+        return $result;
     }
 }

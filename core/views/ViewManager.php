@@ -5,8 +5,6 @@
  */
 namespace mateable\core\views;
 
-use mateable\core\Platform;
-
 class ViewManager
 {
     private string $title;
@@ -18,16 +16,16 @@ class ViewManager
         $this->title = $_ENV['NAME'];
     }
 
-    public function definitions():array
+    public function definitions(): array
     {
         $Website = $_ENV['WEBSITE'];
         return [
-            '{{app_name}}' => $this->title,
+            '{{app_name}}' => $_ENV['NAME'],
             '{{site_url}}' => $Website,
             '{{small_logo}}' => '<img style="height:30pt;width:30pt;" src=\'assets/img/mateable_logo.png\'>',
             '{{logo}}' => '<img src=\'assets/img/mateable_logo.png\'>',
             '{{age}}' => 18,
-            '{{MTBC_BALANCE}}' => 'Market(MTBC): '. Platform::$app->xeggeX->getMarketValue(),
+            '{{news_posts}}' => '** Working on news **',
         ] + self::$definitionsExtra;
     }
 
@@ -36,7 +34,6 @@ class ViewManager
         foreach($this->definitions() as $key => $value){
             $context = str_replace($key, $value, $context);
         }
-
-        return $context;
+        return ($context);
     }
 }

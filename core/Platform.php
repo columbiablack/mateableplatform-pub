@@ -42,9 +42,6 @@ class Platform
     public View $view;
     public ViewManager $viewManager;
     public ?UserModel $user;
-    public ?Wallet $userWallet;
-    public MTBCRPC $mateablecoin;
-    public XeggeX $xeggeX;
 
     public function __construct(string $root, array $config)
     {
@@ -56,13 +53,13 @@ class Platform
         $this->router = new Router($this->request, $this->response);
         $this->controller = new Controller();
         $this->viewManager = new ViewManager();
-        $this->xeggeX = new XeggeX();
 
         try {
             $this->db = new Database($config['db']);
         } catch (PDOException $e) {
             self::$app->response->statusCode(400);
-            echo self::$app->view->renderView('_error', ['exception' => 'Constructor error: ' . $e->getMessage(), 'exceptiontitle' => $e->getCode()]);
+            //echo self::$app->view->renderView('_error', ['exception' => 'Constructor error: ' . $e->getMessage(), 'exceptiontitle' => $e->getCode()]);
+            throw new PDOException("There is a problem with the database. Try again later or go the <a href=\"{{site_url}}\">homepage</a>.", $e->getCode());
         }
 
         $this->session = new Session();
@@ -71,11 +68,6 @@ class Platform
         if($primaryValue) {
             // Find user and load information
             $this->user = UserModel::findOne([$primaryKey => $primaryValue]);
-            $this->mateablecoin = new MTBCRPC($config['MTBC']['MTBC_USER'], $config['MTBC']['MTBC_PASSWORD'], $config['MTBC']['MTBC_HOST'], $config['MTBC']['MTBC_PORT'], $config['MTBC']['MTBC_URL'] . '/', $this->user->displayEmail());
-
-//            if($this->mateablecoin->status == 500 || $this->mateablecoin->status != 200){
-//                $this->session->setflash('warning','You need to create a MTBC Wallet!');
-//            }
         } else {
             $this->user = null;
         }
@@ -100,6 +92,9 @@ class Platform
         try {
             self::$app->response->statusCode(200);
             echo self::$app->router->resolve();
+        } catch(PDOException $e) {
+            self::$app->response->statusCode(400);
+            echo self::$app->view->renderview('_error', ['exception' => '{{app_name}} <br />' . $e->getMessage(), 'exceptiontitle' => $e->getCode()]);
         } catch(ForbiddenException $e){
             self::$app->response->statusCode(403);
             echo self::$app->view->renderview('_error',['exception' => '{{app_name}} <br />'.$e->getMessage(),'exceptiontitle' => $e->getCode()]);

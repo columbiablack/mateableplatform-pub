@@ -102,7 +102,7 @@
                                             <div class="bg-success status-indicator"></div>
                                         </div>
                                         <div class="fw-bold">
-                                            <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren&#39;t good...</span></div>
+                                            <div class="text-truncate"><span>Am I a good boy? The reason I ask, someone told me that people say this to all dogs, even if they aren&#39;t good...</span></div>
                                             <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
                                         </div>
                                     </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>

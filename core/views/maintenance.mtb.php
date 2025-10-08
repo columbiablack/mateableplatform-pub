@@ -41,7 +41,7 @@ $myEnvName = $_ENV['NAME'];
             </p>
             <p class="text-secondary card-text">
                 Best regards,<br />
-                Mateable Administration
+                Mateable Team
             </p>
         </div>
     </div>

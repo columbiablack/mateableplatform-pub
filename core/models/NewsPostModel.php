@@ -22,7 +22,9 @@ class NewsPostModel extends DBModel
 
     {
         return [
+            'post_date',
             'content',
+            'user_id',
         ];
     }
 
@@ -44,4 +46,18 @@ class NewsPostModel extends DBModel
         ];
     }
 
+    public function postContent(): string
+    {
+        return $this->content;
+    }
+
+    public function postUserID(): int
+    {
+        return $this->user_id;
+    }
+
+    public function postDate(): string
+    {
+        return $this->post_date;
+    }
 }

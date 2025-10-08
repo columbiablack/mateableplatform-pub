@@ -7,7 +7,6 @@
 namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
-use mateable\core\messaging\mail\Mailer;
 use mateable\core\models\ContactForm;
 use mateable\core\Platform;
 
@@ -39,6 +38,7 @@ class SiteController extends Controller
                 return $this->renderView('contact', ['model' => (new $contact)]);
             }
         }
+        $this->setLayout('auth');
         return $this->renderView('contact', ['model' => $contact]);
     }
 
@@ -81,5 +81,14 @@ class SiteController extends Controller
         if(Platform::$app->logout()){
             Platform::$app->response->redirect('/home');
         };
+    }
+
+    public function show($request, $response): string {
+        $id = $request->getRouteParams('id');
+        // or
+        $params = $request->getAllRouteParams();
+        $id = $params['id'] ?? null;
+
+        return ($id);
     }
 }

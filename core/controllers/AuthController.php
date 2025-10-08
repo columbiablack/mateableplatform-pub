@@ -6,14 +6,14 @@
 
 namespace mateable\core\controllers;
 
-use mateable\core\http\Response;
-use mateable\core\middlewares\AuthMiddleware;
-use mateable\core\http\Request;
-use mateable\core\models\PostModel;
-use mateable\core\models\UserLoginModel;
-use mateable\core\models\UserModel;
 use mateable\core\Platform;
+use mateable\core\http\Request;
+use mateable\core\http\Response;
 use mateable\core\routes\Routes;
+use mateable\core\models\PostModel;
+use mateable\core\models\UserModel;
+use mateable\core\models\UserLoginModel;
+use mateable\core\middlewares\AuthMiddleware;
 
 class AuthController extends Controller
 {
@@ -47,9 +47,10 @@ class AuthController extends Controller
 
             if($registerForm->validate() && $registerForm->save()){
                 Platform::$app->session->setFlash('success','You have registered successfully!!!');
-                $response->redirect('/login');
+                Platform::$app->response->redirect('/mylogin');
             }
         }
+        $this->setLayout('auth');
         return $this->renderView('register', ['model' => $registerForm]);
     }
 

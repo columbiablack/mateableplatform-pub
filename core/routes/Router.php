@@ -27,7 +27,7 @@ class Router
     {
         $this->response = $response;
         $this->request = $request;
-        $this->routemap = Routes::getAllowedRoutes() + Routes::postAllowedRoutes();
+        $this->routemap = array_merge(Routes::getAllowedRoutes(), Routes::postAllowedRoutes());
     }
 
     public function get($url, $callback): void
@@ -59,7 +59,7 @@ class Router
             }, $pattern);
 
             // Add start and end delimiters to the regex pattern
-            $pattern = "/^$pattern$/";
+            $pattern = '/^$pattern$/';
 
             // Test if the current route matches the URL
             if (preg_match($pattern, $url, $matches)) {
@@ -78,23 +78,26 @@ class Router
 
     public function resolve()
     {
-        $method = $this->request->getMethod();
+        $method = strtolower($this->request->getMethod());
         $url = $this->request->getUrl();
-        $position = strpos($url, '?');
-        if ($position !== false) {
-            $url = substr($url, 0, $position);
+        $pos = strpos($url, '?');
+
+        if ($pos !== false || ($pos = strpos($url, '?')) !== false) {
+            $url = substr($url, 0, $pos);
+        }
+
+        if ($url === '' || $url[0] !== '/') {
+            $url = '/' . $url;
         }
 
         $callback = $this->routemap[$method][$url] ?? false;
 
         if(!$callback){
             $callback = $this->getCallback($method, $url);
-            if ($callback === false) {
+            if(!$callback){
                 throw new NotFoundException("There is a problem with the requested url. Go to the <a href=\"{{site_url}}\">homepage</a>.");
             }
-        }
-
-        if($callback){
+        }else{
             if(is_string($callback)) {
                 return Platform::$app->view->renderView($callback);
             }
@@ -113,8 +116,6 @@ class Router
             if(is_callable($callback)){
                 return call_user_func($callback, $this->request, $this->response);
             }
-        }else{
-            throw new NotFoundException("The requested page cannot be found. Go to the <a href=\"{{site_url}}\">homepage</a>.");
         }
     }
 }

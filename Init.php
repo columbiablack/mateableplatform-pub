@@ -18,10 +18,11 @@ class Init
 {
     public function __construct()
     {
-        $maintenance = $_ENV['MAINTENANCE'];
-        if($maintenance === "true"){
+        $maintenance = $_ENV['WEBSITE_UPGRADE'];
+
+        if($maintenance == 1){
             include_once(__DIR__ . '/core/views/maintenance.mtb.php');
-        }elseif($maintenance === "false"){
+        }elseif($maintenance == 0){
             $config = [
                 'db' => [
                     'dbname' => $_ENV['DB_NAME'],

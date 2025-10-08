@@ -50,6 +50,10 @@ class Form
 
     public function button(string $name, string $id = '', string $class = '', string $onclick = ''): string
     {
-        return '<button class="btn btn-primary '.$class.'" id="'. $id .'" onclick="'. $onclick .'" type="submit">'. $name .'</button>'.PHP_EOL;
+        return '
+            <div class="form-text"> 
+                <button class="btn btn-primary '.$class.'" id="'. $id .'" onclick="'. $onclick .'" type="submit">'. $name .'</button>
+            </div>
+                '.PHP_EOL;
     }
 }

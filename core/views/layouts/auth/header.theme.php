@@ -6,15 +6,16 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <base href="{{site_url}}/">
-    <title>{{app_name}}</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap_main.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons_main.min.css">
-    <link rel="stylesheet" href="assets/css/main.min.css">
-</head>
-<body id="page-top">
+<html data-bs-theme="light" lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{{app_name}}</title>
+    <link rel="stylesheet" href="assets/css/studio_theme.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+</head>
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">

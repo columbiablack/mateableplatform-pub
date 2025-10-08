@@ -9,7 +9,6 @@ namespace mateable\core\routes;
 use mateable\core\controllers\AuthController;
 use mateable\core\controllers\MessageController;
 use mateable\core\controllers\SiteController;
-use mateable\core\controllers\WalletController;
 use mateable\core\Platform;
 
 class Routes
@@ -18,14 +17,14 @@ class Routes
     {
         return [
             'dashboard',
-            'walletmanager',
+            'walletmanager'
         ];
     }
 
     public static function getAllowedRoutes(): array
     {
         return ['get' => [
-            '/login' => [AuthController::class, 'login'],
+            '/mylogin' => [AuthController::class, 'login'],
             '/messages' => [MessageController::class, 'chat'],
             '/register' => [AuthController::class, 'register'],
             '/dashboard' => [AuthController::class, 'dashboard'],
@@ -39,11 +38,6 @@ class Routes
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/webmigrate' => [SiteController::class, 'webMigrate'],
             '/logout' => [SiteController::class, 'logout'],
-            '/walletmanager' => [WalletController::class, 'walletmanager'],
-            '/walletmanager/transactions' => [WalletController::class, 'loadTransactionHistory'],
-            '/show/{id}' => function($id) {
-                return "<p>id: $id</p>";
-            },
             ]
         ];
     }
@@ -51,14 +45,11 @@ class Routes
     public static function postAllowedRoutes(): array
     {
         $routesPOST['post'] = [
-            '/login' => [AuthController::class, 'login'],
+            '/mylogin' => [AuthController::class, 'login'],
             '/register' => [AuthController::class, 'register'],
             '/register#register' => [AuthController::class, 'register'],
             '/contactus' => [SiteController::class, 'contact'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
-            '/walletmgr/dispose' => [WalletController::class, 'walletRemove'],
-            '/walletmgr/n/address' => [WalletController::class, 'createNewAddress'],
-            '/walletmgr/n/wallet' => [WalletController::class, 'createNewWallet'],
         ];
         return $routesPOST;
     }

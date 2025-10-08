@@ -8,11 +8,6 @@ namespace mateable\core\form;
 
 class Select
 {
-    public function __construct(string $name, string $id)
-    {
-        self::begin($name, $id);
-    }
-
     public static function begin(string $name, string $id): Select
     {
         echo '<select name="'.$name.'" id="'.$id.'">';

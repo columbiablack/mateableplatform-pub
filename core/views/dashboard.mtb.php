@@ -119,37 +119,6 @@ use mateable\core\Platform;
                     </div>
                 </div> -->
                 <div class="flex-fill clean-info card-title block-heading">
-                    <h4 class="text-info card-title">Finances</h4>
-                </div>
-                <div class="row dark">
-                    <div class="clean-catalog container">
-                        <div class="row justify-content-center">
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="/walletmanager"><i class="icon-wallet card-img-top w-100 d-block"></i> MTBC Wallet</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="#"><i class="icon-chemistry card-img-top w-100 d-block"></i> MTBC Explorer</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="/walletmanager/transactions"><i class="icon-clock card-img-top w-100 d-block"></i> Transactions History</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="border-1 rounded-pill card text-center clean-card">
-                                    <a class="dropdown-item" href="/walletmanager/transactions"><i class="icon-graph card-img-top w-100 d-block"></i> Finance Graph</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-fill clean-info card-title block-heading">
                     <h4 class="text-info card-title">Help</h4>
                 </div>
                 <div class="row dark">
