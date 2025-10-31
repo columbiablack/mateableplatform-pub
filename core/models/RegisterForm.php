@@ -15,7 +15,7 @@ namespace mateable\core\models;
 use mateable\core\Platform;
 use mateable\core\users\User;
 
-class UserModel extends User
+class RegisterForm extends User
 {
     public const STATUS_INACTIVE = 0;
     public const STATUS_ACTIVE = 1;
@@ -119,11 +119,8 @@ class UserModel extends User
             'address1' => 'Address Line(Primary)',
             'address2' => 'Address Line(Secondary)',
             'email' => 'E-mail Address',
-            'phone' => 'Phone (No VOIP Numbers)',
+            'phone' => 'Phone (No VOIP Numbers Allowed)',
             'password' => 'Password',
-            'city' => 'City',
-            'state' => 'State',
-            'zip' => 'Zip Code',
             'password_confirm' => 'Confirm Password',
         ];
     }

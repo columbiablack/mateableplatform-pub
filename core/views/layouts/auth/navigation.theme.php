@@ -12,14 +12,15 @@ use mateable\core\Platform;
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto text-uppercase">
 <?php if(Platform::isGuest() === true): ?>
-                <li class="nav-item"><a class="nav-link" href="/mylogin">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/downloads">Downloads</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="/downloads">Downloads</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="/mylogin">Login</a></li>
 <?php else: ?>
-                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="/downloads">Downloads</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 <?php endif; ?>
             </ul>
         </div>

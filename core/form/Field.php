@@ -22,25 +22,25 @@ class Field
     public string $type;
     public string $id;
     public string $accept;
+    public string $style;
 
-    public function __construct(Model $model, string $attribute, string $id = '', string $accept = '')
+    public function __construct(Model $model, string $attribute, string $id = '', string $accept = '', string $style = '')
     {
         $this->model = $model;
         $this->attribute = $attribute;
         $this->type = self::TYPE_TEXT;
         $this->id = $id;
         $this->accept = $accept;
+        $this->style = $style;
     }
 
     public function __toString(): string
     {
        return '
-                <div class="form-control" style="width: 420pt;">
-                    <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
-                    <input accept="'. $this->accept .'" class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="'. $this->id .'" type="'. $this->type .'" name="'. $this->attribute .'" value="'. $this->model->{$this->attribute} .'">
-                    <div class="invalid-feedback">
-                        <p id="message_error">' . $this->model->getFirstError($this->attribute) . '</p>
-                    </div>
+                <label for="'. $this->id .'">' . $this->model->getLabel($this->attribute) . '</label>
+                <input accept="'. $this->accept .'" style="'.  ($this->style) .'" class="form-control' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="'. $this->id .'" type="'. $this->type .'" name="'. $this->attribute .'" value="'. $this->model->{$this->attribute} .'">
+                <div class="invalid-feedback">
+                    <p id="message_error">' . $this->model->getFirstError($this->attribute) . '</p>
                 </div>
        '.PHP_EOL;
     }

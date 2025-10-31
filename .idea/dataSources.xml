@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mariadb://75.146.49.210:3306/mateable</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="VidGiggles" uuid="6f3193a1-2bfb-418c-b6d7-09cbcb27b892">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://75.146.49.210:3306/funny_videos</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

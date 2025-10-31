@@ -92,6 +92,16 @@ class Router
 
         $callback = $this->routemap[$method][$url] ?? false;
 
+        // If not found, attempt partial match
+        if (!$callback) {
+            foreach ($this->routemap[$method] as $route => $cb) {
+                if (str_starts_with($url, rtrim($route, '/').'/')) {
+                    $callback = $cb;
+                    break;
+                }
+            }
+        }
+
         if(!$callback){
             $callback = $this->getCallback($method, $url);
             if(!$callback){

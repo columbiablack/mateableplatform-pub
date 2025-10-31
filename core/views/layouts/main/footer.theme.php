@@ -5,6 +5,11 @@
  */
 
 ?>
+<section id="contact" style="background-image:url('assets/img/map-image.png');">
+    <div class="container">
+        <!-- // Something goes here -->
+    </div>
+</section>
 <footer>
     <div class="container">
         <div class="row">

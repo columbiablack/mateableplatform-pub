@@ -4,6 +4,7 @@
  */
 
 use mateable\core\models\Wallet;
+use mateable\core\form\Form;
 use mateable\core\Platform;
 
 /**

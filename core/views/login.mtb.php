@@ -14,22 +14,35 @@ use mateable\core\Platform;
 
 ?>
 <?php if(Platform::$app->isGuest()): ?>
-    <section class="content-section clean-block clean-form">
+    <section class="clean-block">
         <div class="block-heading">
             <h2 class="text-info">Login</h2>
             <p>Are you of legal age to access the account?</p>
         </div>
-        <div class="block-content">
-            <?php
-            $form = Form::begin('','post');
-            echo $form->field($model,'email');
-            echo $form->field($model,'password')->passwordField();
-            echo $form->button('Login');
-            echo $form::end();
-            ?>
+        <div class="clean-form">
+            <div class="container form-control">
+            <?php $form = Form::begin('','post'); ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php echo $form->field($model,'email', '', '','padding:10px; border:1px solid #ccc; border-radius:4px; font-size:14px; width:100%; box-sizing:border-box;'); ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php echo $form->field($model,'password', '', '','padding:10px; border:1px solid #ccc; border-radius:4px; font-size:14px; width:100%; box-sizing:border-box;')->passwordField(); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/pwdrec">Forgot Password</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php echo $form->button('Login'); ?>
+                    </div>
+                </div>
+            <?php echo $form::end(); ?>
+            </div>
         </div>
-    </section>
-    <section class="clean-block clean-form content-section">
     </section>
 <?php else: ?>
     <section class="clean-block clean-form content-section">

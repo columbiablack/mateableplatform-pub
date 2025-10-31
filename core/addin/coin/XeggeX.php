@@ -4,7 +4,7 @@
  * Copyright (c) 2024. Mateable LLC
  */
 
-namespace mateable\core\coin;
+namespace mateable\core\addin\coin;
 
 class XeggeX
 {

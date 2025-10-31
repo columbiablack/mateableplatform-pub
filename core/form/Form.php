@@ -28,9 +28,9 @@ class Form
             '.PHP_EOL;
     }
 
-    public function field(Model $model, string $attribute, string $id = '', string $accept = ''): Field
+    public function field(Model $model, string $attribute, string $id = '', string $accept = '', string $style = ''): Field
     {
-        return new Field($model, $attribute, $id, $accept);
+        return new Field($model, $attribute, $id, $accept, $style);
     }
 
     public function fieldTextArea(Model $model, string $attribute, string $style = '')

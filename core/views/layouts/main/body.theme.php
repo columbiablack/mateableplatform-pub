@@ -6,39 +6,42 @@
 
 use mateable\core\Platform;
 ?>
-<?php if(Platform::$app->isGuest()): ?>
-    <header class="masthead" style="background-image:url('assets/img/mateable_logo.png');
-    background-size: 1000px auto;
-    background-repeat: no-repeat;
-    background-position-y: 50pt;
-    background-attachment: fixed;
-    height: 780px;
-    ">
+<main class="clean-block">
+    <div class="container">
+        <div class="row">
+            <!--<?php if(Platform::$app->isGuest()): ?>
+    <header class="masthead" style="background-image:url('assets/img/mateable_logo.png');background-size: 1000px auto;background-repeat: no-repeat;background-position-y: 50pt;background-attachment: fixed;height: 780px;">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in"><span>Welcome To Mateable Media!</span></div>
-                <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div>
+                <div class="intro-heading text-uppercase text-dark-emphasis"><span></span></div>
             </div>
         </div>
     </header>
-<?php endif; ?>
-<?php if(Platform::$app->session->getFlash('success')): ?>
-    <div class="alert alert-success alert-dismissible fade show">
-        <?php echo Platform::$app->session->getFlash('success'); ?>
+    <?php endif; ?>-->
+            <div class="clean-info cols-lg-2">
+                <?php if(Platform::$app->session->getFlash('success')): ?>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <?php echo Platform::$app->session->getFlash('success'); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if(Platform::$app->session->getFlash('warning')): ?>
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <?php echo Platform::$app->session->getFlash('warning'); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row">
+            {{content}}
+        </div>
     </div>
-<?php endif; ?>
-<?php if(Platform::$app->session->getFlash('warning')): ?>
-    <div class="alert alert-warning alert-dismissible fade show">
-        <?php echo Platform::$app->session->getFlash('warning'); ?>
-    </div>
-<?php endif; ?>
-    {{content}}
-<?php if(Platform::$app->request->getUrl() === "/" || Platform::$app->request->getUrl() === "/home"): ?>
-    <section class="bg-light" id="portfolio">
-        <div class="container">
+    <?php if(Platform::$app->request->getUrl() === "/" || Platform::$app->request->getUrl() === "/home"): ?>
+    <section class="clean-block" id="portfolio">
+         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="text-uppercase section-heading">Portfolio</h2>
+                    <h2 class="text-uppercase section-heading">Features</h2>
                     <h3 class="text-muted section-subheading">View some of our community features</h3>
                 </div>
             </div>
@@ -106,9 +109,5 @@ use mateable\core\Platform;
             </div>
         </div>
     </section>
-    <section id="contact" style="background-image:url('assets/img/map-image.png');">
-        <div class="container">
-            <!-- // Something goes here -->
-        </div>
-    </section>
-<?php endif; ?>
+    <?php endif; ?>
+</main>

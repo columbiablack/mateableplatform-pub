@@ -2,6 +2,42 @@
  * Copyright (c) 2024. Mateable LLC
  */
 
+/* --- Fix navbar overlap --- */
+body {
+    padding-top: 70px; /* space for fixed-top navbar */
+}
+
+/* --- Sidebar layout --- */
+.d-flex {
+    min-height: calc(100vh - 70px);
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 70px; /* height of navbar */
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 70px);
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* Main content */
+.content-section {
+    margin-left: 260px; /* same width as sidebar */
+    padding: 2rem;
+    width: calc(100% - 260px);
+}
+
+/* Optional tweaks */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
 #userOverlay {
     position: fixed;
     display: flex; /* Changed to flex to center the content */

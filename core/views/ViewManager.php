@@ -36,4 +36,9 @@ class ViewManager
         }
         return ($context);
     }
+
+    public function emoji(string $context):string
+    {
+        return "";
+    }
 }

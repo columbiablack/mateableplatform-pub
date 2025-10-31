@@ -54,9 +54,10 @@ class AuthController extends Controller
         return $this->renderView('register', ['model' => $registerForm]);
     }
 
-    public function dashboard(Request $request, Response $response): string
+    public function dashboard(Request $request): string
     {
         $postModel = new PostModel;
-        return $this->renderView('dashboard',['postModel' => $postModel]);
+        return $this->renderView('dashboard', ['postModel' => $postModel]);
     }
+
 }

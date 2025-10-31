@@ -6,7 +6,6 @@
 
 namespace mateable\core\models;
 
-use mateable\core\exceptions\InternalErrorException;
 use mateable\core\Platform;
 use PDO;
 use PDOException;
@@ -39,6 +38,32 @@ abstract class DB extends Model
             $result = false;
         }
         return $result;
+    }
+
+    public static function countAll(array $where = []): int
+    {
+        try {
+            $tableName = static::tableName();
+            $sql = "SELECT COUNT(*) as total FROM $tableName";
+
+            if (!empty($where)) {
+                $attributes = array_keys($where);
+                $conditions = implode(" OR ", array_map(fn($attr) => "$attr LIKE :$attr", $attributes));
+                $sql .= " WHERE $conditions";
+            }
+
+            $statement = static::prepare($sql);
+
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", "%$item%");
+            }
+
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['total'];
+        } catch (\Exception|\PDOException $e) {
+            return 0;
+        }
     }
 
     public static function findOne($where): mixed
@@ -78,6 +103,41 @@ abstract class DB extends Model
         }
     }
 
+    public static function findAllVid(array $where = [], int $limit = 0, int $offset = 0): array|bool
+    {
+        try {
+            $tableName = static::tableName();
+            $sql = "SELECT * FROM $tableName";
+
+            if (!empty($where)) {
+                $attributes = array_keys($where);
+                $conditions = implode(" OR ", array_map(fn($attr) => "$attr LIKE :$attr", $attributes));
+                $sql .= " WHERE $conditions";
+            }
+
+            if ($limit > 0) {
+                $sql .= " LIMIT :limit OFFSET :offset";
+            }
+
+            $statement = static::prepare($sql);
+
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", "%$item%"); // use LIKE for flexible search
+            }
+
+            if ($limit > 0) {
+                $statement->bindValue(":limit", $limit, PDO::PARAM_INT);
+                $statement->bindValue(":offset", $offset, PDO::PARAM_INT);
+            }
+
+            $statement->execute();
+
+            return $statement->fetchAll(PDO::FETCH_CLASS, static::class);
+        } catch (\Exception|\PDOException $e) {
+            return false;
+        }
+    }
+
     public function remove(): bool
     {
         try {
@@ -99,7 +159,7 @@ abstract class DB extends Model
 
     public static function prepare($sql): bool|PDOStatement
     {
-        return Platform::$app->db->prepare($sql);
+        return self::getdatabase()->prepare($sql);
     }
 
     public function updateUserInfo(string $id): bool

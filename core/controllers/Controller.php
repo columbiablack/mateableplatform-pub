@@ -6,6 +6,7 @@
 
 namespace mateable\core\controllers;
 
+use mateable\core\db\Database;
 use mateable\core\middlewares\BaseMiddleware;
 use mateable\core\Platform;
 

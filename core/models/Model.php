@@ -6,8 +6,8 @@
 
 namespace mateable\core\models;
 
-use mateable\core\exceptions\DatabaseConnectionException;
-use mateable\core\Platform;
+    use mateable\core\db\Database;
+    use mateable\core\Platform;
 
 abstract class Model
 {
@@ -20,7 +20,25 @@ abstract class Model
     public const RULE_UNIQUE = 'unique';
     public array $errors = [];
 
+    protected static Database $db;
+
     abstract public function rules(): array;
+
+    public function withDatabase(Database $db): static
+    {
+        self::$db = $db;
+        return $this;
+    }
+
+    public static function setDatabase(Database $db): void
+    {
+        self::$db = $db;
+    }
+
+    public static function getDatabase(): ?Database
+    {
+        return self::$db ?? Platform::$app->db;
+    }
 
     public function loadData($data): void
     {
@@ -82,8 +100,8 @@ abstract class Model
                     $className = $rule['class'];
                     $uniqueAttr = $rule['attribute'] ?? $attribute;
                     $tableName = $className::tableName();
-                    $db = Platform::$app->db;
-                    $statement = $db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :$uniqueAttr");
+                    self::$db = $this->getDatabase();
+                    $statement = self::$db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :$uniqueAttr");
                     $statement->bindValue(":$uniqueAttr", $value);
                     $statement->execute();
                     $record = $statement->fetchObject();

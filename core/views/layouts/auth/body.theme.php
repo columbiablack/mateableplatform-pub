@@ -5,7 +5,7 @@
  */
 
 ?>
-<main class="content-section dark" id="main">
+<main class="content-section">
     <div class="container col-md-4">
         {{content}}
     </div>

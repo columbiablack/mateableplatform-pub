@@ -25,12 +25,10 @@ class TextArea
     public function __toString(): string
     {
       return '
-                <div class="mb-3">
-                    <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
-                    <textarea class="form-control ' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="' . $this->attribute . '" style="'. $this->style .'" value="'. $this->model->{$this->attribute} .'"></textarea>
-                    <div class="invalid-feedback">
-                        <p>' . $this->model->getFirstError($this->attribute) . '</p>
-                    </div>
+                <label class="form-label">' . $this->model->getLabel($this->attribute) . '</label>
+                <textarea class="form-control ' . ($this->model->hasError($this->attribute) ? ' is-invalid' : '') . '" id="' . $this->attribute . '" style="'. $this->style .'" value="'. $this->model->{$this->attribute} .'"></textarea>
+                <div class="invalid-feedback">
+                    <p>' . $this->model->getFirstError($this->attribute) . '</p>
                 </div>
               '.PHP_EOL;
     }

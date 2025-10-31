@@ -93,10 +93,10 @@ class Database
     */
     public function prepare($sql): bool|\PDOStatement
     {
-        if($this->pdo !== null) {
-            return Platform::$app->db->pdo->prepare($sql);
-        }else{
-            return false;
+        if ($this->pdo === null) {
+            throw new \RuntimeException("Database connection not initialized.");
         }
+
+        return $this->pdo->prepare($sql);
     }
 }

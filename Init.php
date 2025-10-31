@@ -6,7 +6,6 @@
 
 namespace mateable;
 
-use mateable\core\exceptions\Exception;
 use mateable\core\Platform;
 
 /**
@@ -38,6 +37,14 @@ class Init
                     'MTBC_HOST' => $_ENV['MTBC_HOST'],
                     'MTBC_PORT' => $_ENV['MTBC_PORT'],
                     'MTBC_URL' => $_ENV['MTBC_URL'],
+                ],
+                'vg' => [
+                    'dbname' => $_ENV['VG_NAME'],
+                    'dsn' => $_ENV['VG_DSN'],
+                    'host' => $_ENV['VG_HOST'],
+                    'port' => $_ENV['VG_PORT'],
+                    'user' => $_ENV['VG_USER'],
+                    'password' => $_ENV['VG_PASSWORD'],
                 ]
             ];
 

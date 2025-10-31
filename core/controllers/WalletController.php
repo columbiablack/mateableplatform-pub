@@ -6,13 +6,13 @@
 
 namespace mateable\core\controllers;
 
-use mateable\core\exceptions\InternalErrorException;
+use mateable\core\Platform;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
-use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\models\Wallet;
-use mateable\core\Platform;
 use mateable\core\routes\Routes;
+use mateable\core\middlewares\AuthMiddleware;
+use mateable\core\exceptions\InternalErrorException;
 
 class WalletController extends Controller
 {

@@ -28,7 +28,7 @@ class AuthMiddleware extends BaseMiddleware
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
                 Platform::$app->response->statusCode(403);
-                throw new ForbiddenException("AuthMDW[Execute] You are trying to access a forbidden area.");
+                throw new ForbiddenException("Authorization Required!<br /> <b>You are trying to access a forbidden area.</b><br /> You can <a href=\"/register\">create an account</a> and then try again.");
             }
         }
     }

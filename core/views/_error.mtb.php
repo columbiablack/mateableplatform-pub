@@ -13,6 +13,8 @@
     <div class="container">
         <div class="block-heading">
             <h1><?php echo $exceptiontitle; ?></h1>
+        </div>
+        <div class="block-content">
             <p>
                 <?php echo $exception; ?>
             </p>

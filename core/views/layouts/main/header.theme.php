@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{{app_name}}</title>
     <link rel="stylesheet" href="assets/css/studio_theme.css">
+    <?php //<link rel="stylesheet" href="assets/mateable/css/mateable_bootstrap_main.min.css"> ?>
+    <link rel="stylesheet" href="assets/css/customized.css">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
