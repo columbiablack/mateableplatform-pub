@@ -14,12 +14,13 @@ use mateable\core\Platform;
     Platform::$app->response->redirect('/dashboard');
 }*/
 ?>
-        <section class="clean-block clean-form dark">
-            <div class="container">
+    <section class="bg-light">
+        <div class="container">
+            <div class="d-block row-cols-lg-8">
                 <div class="block-heading">
                     <h2 class="text-info">Mateable LLC</h2>
                 </div>
-                <div class="block-content">
+                <div class="content">
                     <p>
                         Welcome to {{app_name}}! There is no template set for the news and updates of the network.
                         Please bare with us as we're setting up a new platform built by our team.
@@ -38,4 +39,5 @@ use mateable\core\Platform;
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>

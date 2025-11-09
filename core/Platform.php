@@ -6,23 +6,24 @@
 
 namespace mateable\core;
 
-use mateable\core\controllers\VidGigglesController;
-use mateable\core\db\VidDatabase;
-use mateable\core\models\VidGigglesModel;
 use PDOException;
 use mateable\core\views\View;
 use mateable\core\db\Database;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\routes\Router;
+use mateable\core\db\VidDatabase;
 use mateable\core\session\Session;
 use mateable\core\models\UserModel;
 use mateable\core\views\ViewManager;
+use mateable\core\models\VidGigglesModel;
 use mateable\core\controllers\Controller;
+use mateable\core\controllers\FeedController;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\exceptions\ForbiddenException;
-use mateable\core\exceptions\InternalErrorException;
 use mateable\core\controllers\DownloadsController;
+use mateable\core\controllers\VidGigglesController;
+use mateable\core\exceptions\InternalErrorException;
 
 /**
  * @author SGreen <sgreen@mateable.com>
@@ -48,6 +49,7 @@ class Platform
     public Controller $controller;
     public DownloadsController $downloads;      // Downloads Controller
     public VidGigglesController $vidGiggles;    // VidGiggles Controller
+    public FeedController $rssFeeds;            // Rss Feeds
 
     /**
      * Database
@@ -88,6 +90,7 @@ class Platform
         $this->viewManager = new ViewManager();
         $this->downloads = new DownloadsController();
         $this->vidGiggles = new VidGigglesController();
+        $this->rssFeeds = new FeedController();
 
         /**
          * User Database

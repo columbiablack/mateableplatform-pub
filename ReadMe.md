@@ -8,10 +8,10 @@
 
 ## About Mateable
 
-Mateable is a web based enterprise that ranges in all areas of need for the modern world with expressive, elegant syntax, and most of all compatibility! We believe development must be an enjoyable and creative experience to be truly fulfilling. Mateable makes the headaches go away by easing common tasks used in many web projects.
+Mateable is a web based enterprise company that ranges in all areas of need for the modern world with expressive, elegant syntax, and most of all compatibility! We believe development must be an enjoyable and creative experience to be truly fulfilling. Mateable makes the headaches go away by easing common tasks used in many web projects.
 
 Mateable's platform is accessible, powerful, and provides tools required for large and small companies, and individuals.
 
 ## Mateable Platform
 
-To be continued..
+The platform is made solely for the usage and purpose of the community, community member promotions, socializing, education, self-wellness, life skills.
