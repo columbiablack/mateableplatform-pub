@@ -6,12 +6,14 @@
 
 namespace mateable\core\models;
 
+use mateable\core\Platform;
+
 class PostModel extends DB
 {
     public int $id;
     public int $user_id;
     public string $content = '';
-    public string $post_date = '';
+    public string $created_at = '';
 
     public static function tableName(): string
     {
@@ -22,8 +24,9 @@ class PostModel extends DB
 
     {
         return [
-            'postContent',
-            'fileInput',
+            'user_id',
+            'content',
+            'created_at',
         ];
     }
 
@@ -40,8 +43,15 @@ class PostModel extends DB
     public function labels() : array
     {
         return [
-            'postContent' => '',
-            'fileInput' => '',
+            'user_id' => 'User ID',
+            'content' => 'Content',
+            'created_at' => 'Created At',
         ];
     }
+
+    public static function postCount(int $user_Id): int
+    {
+        return static::countAll(['user_id' => $user_Id]);
+    }
+
 }

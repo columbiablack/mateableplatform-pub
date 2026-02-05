@@ -6,24 +6,28 @@
 
 namespace mateable\core;
 
+use mateable\core\models\ActivityModel;
 use PDOException;
-use mateable\core\views\View;
+use mateable\core\controllers\Controller;
+use mateable\core\controllers\DownloadsController;
+use mateable\core\controllers\VidGigglesController;
 use mateable\core\db\Database;
+use mateable\core\db\VidDatabase;
+use mateable\core\exceptions\NotFoundException;
+use mateable\core\exceptions\ForbiddenException;
+use mateable\core\exceptions\InternalErrorException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\routes\Router;
-use mateable\core\db\VidDatabase;
 use mateable\core\session\Session;
-use mateable\core\models\UserModel;
-use mateable\core\views\ViewManager;
 use mateable\core\models\VidGigglesModel;
-use mateable\core\controllers\Controller;
-use mateable\core\controllers\FeedController;
-use mateable\core\exceptions\NotFoundException;
-use mateable\core\exceptions\ForbiddenException;
-use mateable\core\controllers\DownloadsController;
-use mateable\core\controllers\VidGigglesController;
-use mateable\core\exceptions\InternalErrorException;
+use mateable\core\models\FollowerModel;
+use mateable\core\models\MessageModel;
+use mateable\core\models\SessionModel;
+use mateable\core\models\UserModel;
+use mateable\core\models\PostModel;
+use mateable\core\views\View;
+use mateable\core\views\ViewManager;
 
 /**
  * @author SGreen <sgreen@mateable.com>
@@ -49,13 +53,12 @@ class Platform
     public Controller $controller;
     public DownloadsController $downloads;      // Downloads Controller
     public VidGigglesController $vidGiggles;    // VidGiggles Controller
-    public FeedController $rssFeeds;            // Rss Feeds
 
     /**
      * Database
      **/
     public Database $db;                        // Main Database
-    public VidDatabase $dbVG;                      // VidGiggles Database
+    public VidDatabase $dbVG;                   // VidGiggles Database
 
     /**
      * Sessions
@@ -71,7 +74,12 @@ class Platform
     /**
      * Models
      **/
-    public ?UserModel $user;
+    public ?UserModel $user;                    // User Model
+    public FollowerModel $follower;             // Follower Model
+    public PostModel $post;                     // Post Model
+    public MessageModel $message;               // Message Model
+    public SessionModel $sessionM;              // Session Model
+    public ActivityModel $activity;
     public ?VidGigglesModel $vidGigglesContent; // VidGiggles Content Model
 
 
@@ -86,11 +94,12 @@ class Platform
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
+        $this->session = new Session();
         $this->controller = new Controller();
         $this->viewManager = new ViewManager();
+        $this->activity = new ActivityModel();
         $this->downloads = new DownloadsController();
         $this->vidGiggles = new VidGigglesController();
-        $this->rssFeeds = new FeedController();
 
         /**
          * User Database
@@ -110,24 +119,31 @@ class Platform
          **/
         try {
             $this->dbVG = new VidDatabase($config['vg']);
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             self::$app->response->statusCode(400);
             throw new PDOException("There is a problem with the VidGiggles database. Go to the <a href=\"{{site_url}}\">homepage</a>.", $e->getCode());
         }
 
-        $this->session = new Session();
-        $primaryValue = $this->session->get('user');
-        $primaryKey = (new UserModel)->primaryKey();
-        if($primaryValue) {
-            // Find user and load information
-            $this->user = UserModel::findOne([$primaryKey => $primaryValue]);
-        } else {
+        if (!$this->session->get('user')) {
             $this->user = null;
+        }else{
+            $primaryValue = $this->session->get('user');
+            $primaryKey = (new UserModel)->primaryKey();
+
+            if ($primaryValue) {
+                // Find user and load information
+                $this->user = UserModel::findOne([$primaryKey => $primaryValue]);
+                $this->message = new MessageModel();
+                $this->post = new PostModel();
+                $this->follower = new FollowerModel();
+            } else {
+                $this->user = null;
+            }
         }
 
         $this->view = new View();
     }
-// Take it away!!! can you go to the folder for mateable for the wallet  under the username  yup
+
     public static function isGuest(): bool
     {
         return !self::$app->user;

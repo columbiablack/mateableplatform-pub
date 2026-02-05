@@ -17,7 +17,12 @@ abstract class DB extends Model
     abstract public function attributes(): array;
     abstract public function primaryKey(): string;
 
-    public function save(): bool
+    protected array $whereConditions = [];
+    protected array $bindings = [];
+    protected ?int $limit = null;
+    protected ?int $offset = null;
+
+    /*public function save(): bool
     {
         try{
             $tablename = $this->tableName();
@@ -38,69 +43,115 @@ abstract class DB extends Model
             $result = false;
         }
         return $result;
-    }
+    }*/
 
     public static function countAll(array $where = []): int
     {
         try {
-            $tableName = static::tableName();
-            $sql = "SELECT COUNT(*) as total FROM $tableName";
+            $table = static::tableName();
+            $sql = "SELECT COUNT(*) FROM {$table}";
+            $conditions = [];
+            $bindings = [];
 
-            if (!empty($where)) {
-                $attributes = array_keys($where);
-                $conditions = implode(" OR ", array_map(fn($attr) => "$attr LIKE :$attr", $attributes));
-                $sql .= " WHERE $conditions";
+            foreach ($where as $column => $value) {
+                $param = 'param_' . count($bindings);
+                $conditions[] = "{$column} = :{$param}";
+                $bindings[$param] = $value;
             }
 
-            $statement = static::prepare($sql);
-
-            foreach ($where as $key => $item) {
-                $statement->bindValue(":$key", "%$item%");
+            if (!empty($conditions)) {
+                $sql .= " WHERE " . implode(' AND ', $conditions);
             }
 
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return (int)$result['total'];
-        } catch (\Exception|\PDOException $e) {
+            $stmt = static::prepare($sql);
+
+            foreach ($bindings as $param => $value) {
+                $stmt->bindValue(":{$param}", $value);
+            }
+
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+
+        } catch (\Throwable $e) {
             return 0;
         }
     }
 
-    public static function findOne($where): mixed
+    public static function findOne(
+        array $where = [],
+        ?string $orderBy = null,
+        ?int $limit = null
+    ): ?static
     {
-        try{
-            $tableName = static::tableName();
-            $attributes = array_keys($where);
-            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
-            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
-            foreach ($where as $key => $item) {
-                $statement->bindValue(":$key", $item);
+        $table = static::tableName();
+        $sql = "SELECT * FROM $table";
+
+        if (!empty($where)) {
+            $conditions = [];
+            foreach ($where as $key => $value) {
+                $conditions[] = "$key = :$key";
             }
-            $statement->execute();
-            return $statement->fetchObject(static::class);
-        }catch(\Exception|PDOException $e){
-            //throw new InternalErrorException("[FindOne]something is wrong in the db. <br>". $e->getMessage());
-            return false;
+            $sql .= " WHERE " . implode(" AND ", $conditions);
         }
+
+        if ($orderBy) {
+            $sql .= " ORDER BY $orderBy";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT $limit";
+        }
+
+        $stmt = static::prepare($sql);
+
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS, static::class);
+
+        return $stmt->fetch() ?: null;
     }
 
-    public static function findAll($where): array|bool
+    public static function findAll(
+        array $where = [],
+        ?string $orderBy = null,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array
     {
-        try {
-            $tableName = static::tableName();
-            $attributes = array_keys($where);
-            $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
-            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
-            foreach ($where as $key => $item) {
-                $statement->bindValue(":$key", $item);
+        $table = static::tableName();
+        $sql = "SELECT * FROM $table";
+
+        if (!empty($where)) {
+            $conditions = [];
+            foreach ($where as $key => $value) {
+                $conditions[] = "$key = :$key";
             }
-            $statement->execute();
-            // Change below to use FETCH_CLASS
-            return $statement->fetchAll(PDO::FETCH_CLASS, static::class);
-        } catch (\Exception|PDOException $e) {
-            //throw new InternalErrorException("[FindAll]Something is wrong in the db");
-            return false;
+            $sql .= " WHERE " . implode(" AND ", $conditions);
         }
+
+        if ($orderBy) {
+            $sql .= " ORDER BY $orderBy";
+        }
+
+        if ($limit !== null) {
+            $sql .= " LIMIT $limit";
+            if ($offset !== null) {
+                $sql .= " OFFSET $offset";
+            }
+        }
+
+        $stmt = static::prepare($sql);
+
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
     public static function findAllVid(array $where = [], int $limit = 0, int $offset = 0): array|bool
@@ -182,5 +233,134 @@ abstract class DB extends Model
         }catch(PDOException $exception){
             return false;
         }
+    }
+
+    /* ---------- QUERY BUILDER ---------- */
+
+    public static function where(array $conditions): static
+    {
+        $instance = new static();
+
+        foreach ($conditions as $column => $value) {
+            $param = str_replace('.', '_', $column);
+            $instance->whereConditions[] = "$column = :$param";
+            $instance->bindings[$param] = $value;
+        }
+
+        return $instance;
+    }
+
+    public function orWhere(array $conditions): static
+    {
+        $parts = [];
+
+        foreach ($conditions as $column => $value) {
+            $param = str_replace('.', '_', $column);
+            $parts[] = "$column = :$param";
+            $this->bindings[$param] = $value;
+        }
+
+        if (!empty($parts)) {
+            $this->whereConditions[] = '(' . implode(' OR ', $parts) . ')';
+        }
+
+        return $this;
+    }
+
+    public function limit(int $limit, int $offset = 0): static
+    {
+        $this->limit = $limit;
+        $this->offset = $offset;
+        return $this;
+    }
+
+    /* ---------- FETCHING ---------- */
+
+    public function get(): array
+    {
+        $table = static::tableName();
+        $sql = "SELECT * FROM {$table}";
+
+        if (!empty($this->whereConditions)) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->whereConditions);
+        }
+
+        if ($this->limit !== null) {
+            $sql .= ' LIMIT ' . $this->limit . ' OFFSET ' . ($this->offset ?? 0);
+        }
+
+        $stmt = self::prepare($sql);
+
+        foreach ($this->bindings as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
+    }
+
+    public function first(): static|false
+    {
+        $this->limit(1);
+        $results = $this->get();
+        return $results[0] ?? false;
+    }
+
+    public function exists(): bool
+    {
+        $table = static::tableName();
+        $sql = "SELECT 1 FROM {$table}";
+
+        if (!empty($this->whereConditions)) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->whereConditions);
+        }
+
+        $sql .= ' LIMIT 1';
+
+        $stmt = self::prepare($sql);
+
+        foreach ($this->bindings as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        $stmt->execute();
+
+        return (bool)$stmt->fetchColumn();
+    }
+
+    /* ---------- INSERT ---------- */
+
+    public function save(): bool
+    {
+        $table = static::tableName();
+        $attributes = $this->attributes();
+
+        $columns = implode(',', $attributes);
+        $params  = implode(',', array_map(fn($a) => ":$a", $attributes));
+
+        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$params})";
+        $stmt = self::prepare($sql);
+
+        foreach ($attributes as $attr) {
+            $stmt->bindValue(":$attr", $this->{$attr});
+        }
+
+        return $stmt->execute();
+    }
+
+    /* ---------- DELETE ---------- */
+
+    public function delete(): bool
+    {
+        $table = static::tableName();
+        $pk = $this->primaryKey();
+        $value = $this->{$pk};
+
+        $sql = "DELETE FROM {$table} WHERE {$pk} = :pk";
+        $stmt = self::prepare($sql);
+        $stmt->bindValue(':pk', $value);
+
+        return $stmt->execute();
     }
 }

@@ -65,7 +65,6 @@ class UserLoginModel extends Model
             $primaryKey = $user->primaryKey();
             $primaryValue = $user->{$primaryKey};
             Platform::$app->session->set('user', $primaryValue);
-            Platform::$app->session->setFlash('success', 'Your Login was successful!');
             return true;
         }catch(\PDOException $e){
             return false;

@@ -5,8 +5,6 @@
  */
 
 ?>
-<main class="content-section">
-    <div class="container col-md-4">
-        {{content}}
-    </div>
+<main id="mainContent" class="bg-light">
+    {{content}}
 </main>

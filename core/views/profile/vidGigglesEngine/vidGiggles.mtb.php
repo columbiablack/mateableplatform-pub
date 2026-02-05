@@ -19,13 +19,13 @@ $vidID = $_GET['video_id'];
 $user_rating = 0;
 $url='';
 ?>
-    <section class="clean-block dark">
-        <div class="container col col-md-7 g-4">
-            <div class="col-lg-9">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <h2 class="h2 mb-4">Videos</h2>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="block-heading">
+                    <h2 class="h2 mb-4 text-info" style="text-align: center;">Videos</h2>
                 </div>
-                <div class="alert alert-info">Powered by VidGiggles™ Engine.</div>
+                <div class="alert alert-info" style="text-align: center;">Powered by VidGiggles™ Engine.</div>
             </div>
             <div class="pagination alert alert-link">
                 <?php if ($page > 1): ?>
@@ -39,9 +39,9 @@ $url='';
                 <?php endif; ?>
             </div>
         </div>
-        <div class="container col col-md-4 g-4">
-            <div class="col-lg-9">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-1 g-4">
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="content">
                     <?php if (!empty($vidGigglesList)): ?>
                         <?php foreach ($vidGigglesList as $contentModel): ?>
                             <div class="col block">

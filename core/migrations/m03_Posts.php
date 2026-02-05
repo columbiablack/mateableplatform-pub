@@ -12,8 +12,8 @@ class m03_Posts
         $SQL = "CREATE TABLE posts (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id VARCHAR(25) NULL,
-                message VARCHAR(1024) NULL,
-                post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                content VARCHAR(1024) NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )  ENGINE=INNODB;";
         $db->pdo->exec($SQL);
     }

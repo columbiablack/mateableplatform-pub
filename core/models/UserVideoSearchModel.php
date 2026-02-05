@@ -10,21 +10,21 @@ class UserVideoSearchModel extends DB
 {
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return "users";
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+       return [];
     }
 
     public function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        return "id";
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [];
     }
 }

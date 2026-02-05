@@ -14,6 +14,7 @@ class ViewManager
     public function __construct()
     {
         $this->title = $_ENV['NAME'];
+        // Load extra definitions
     }
 
     public function definitions(): array

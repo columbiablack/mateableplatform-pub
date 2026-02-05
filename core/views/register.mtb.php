@@ -12,75 +12,77 @@ use mateable\core\form\Form;
  */
 
 ?>
-    <section class="content-section clean-block">
-        <div class="block-heading">
-            <h2 class="text-info">Register</h2>
-            <p>Register with us and you may get 100 MTBC to start you off!</p>
-            <br/>
-            <p>The membership application below is the only information required by {{app_name}} LLC. Any additional information required will be acknowledged via e-mail.</p>
-            <p>By signing up, you acknowledge that you are of legal age({{age}} yrs) to view this content, and have agreed to our <a href="/legal?type=serviceterms">Terms of Service</a>.</p>
+<section class="bg-light py-5">
+    <div class="container-fluid">
+        <div class="block-heading text-center mb-4">
+            <h2 class="text-info">Create Your Account</h2>
+
+            <p class="lead">
+                Sign up today and receive <strong>100 MTBC</strong> to get started.
+            </p>
+
+            <p class="text-muted">
+                The information below is all that is required by {{app_name}} LLC.
+                Any additional details will be requested via your dashboard, email, or SMS.
+            </p>
+
+            <p class="small">
+                By signing up, you confirm you are at least {{age}} years old and agree to our
+                <a href="/legal?type=serviceterms">Terms of Service</a>.
+            </p>
         </div>
-        <div class="clean-form">
-            <div class="container form-control">
-            <?php $form = Form::begin('','post'); ?>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'firstname', '', '','width: 250px;'); ?>
-                    </div>
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'lastname', '', '','width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'dob', '', '','width: 250px;')->dateField(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'address1', '', '','width: 250px;'); ?>
-                    </div>
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'address2', '', '', 'width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'city', '', '','width: 250px;'); ?>
-                    </div>
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'state', '', '','width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'zip', '', '','width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'phone', '', '','width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'email', '', '','width: 250px;'); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'password', '', '','width: 250px;')->passwordField(); ?>
-                    </div>
-                    <div class="col-md-5">
-                        <?php echo $form->field($model,'password_confirm', '', '','width: 250px;')->passwordField(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <?php echo $form->button('Register'); ?>
-                    </div>
-                </div>
-            </div>
-            <?php echo Form::end(); ?>
-        </div>
-    </section>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-8">
+                <div class="clean-form p-4 border rounded bg-white">
+
+                    <?php $form = Form::begin('', 'post'); ?>
+
+                    <div class="row gy-4">
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'firstname', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'lastname', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'dob', '', '', 'width: 250px;', '')->dateField() ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'phone', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'address1', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'address2', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'city', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'state', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'zip', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'email', '', '', 'width: 250px;', '') ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'password', '', '', 'width: 250px;', '')->passwordField() ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'password_confirm', '', '', 'width: 250px;', '')->passwordField() ?>

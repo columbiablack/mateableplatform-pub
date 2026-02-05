@@ -17,6 +17,11 @@ class ContactForm extends DB
         return 'service_messages';
     }
 
+    public function primaryKey(): string
+    {
+        return 'id';
+    }
+
     public function attributes(): array
     {
         return [
@@ -26,9 +31,13 @@ class ContactForm extends DB
         ];
     }
 
-    public function primaryKey(): string
+    public function labels(): array
     {
-        return 'id';
+        return [
+            'user_email' => 'Your email',
+            'user_subject' => 'Subject',
+            'user_message' => 'Message'
+        ];
     }
 
     public function rules(): array
@@ -37,15 +46,6 @@ class ContactForm extends DB
             'user_email' => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
             'user_subject' => [self::RULE_REQUIRED,[self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 120]],
             'user_message' => [self::RULE_REQUIRED]
-        ];
-    }
-
-    public function labels(): array
-    {
-        return [
-            'user_email' => 'Your email',
-            'user_subject' => 'Subject',
-            'user_message' => 'Message'
         ];
     }
 

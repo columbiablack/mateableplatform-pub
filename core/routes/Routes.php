@@ -7,7 +7,9 @@
 namespace mateable\core\routes;
 
 use mateable\core\controllers\AuthController;
+use mateable\core\controllers\AdminController;
 use mateable\core\controllers\FeedController;
+use mateable\core\controllers\SearchController;
 use mateable\core\controllers\SiteController;
 use mateable\core\controllers\MessageController;
 use mateable\core\controllers\VidGigglesController;
@@ -21,35 +23,50 @@ class Routes
             'walletmanager',
             'vidGiggles',
             'index',
+            'downloads',
+        ];
+    }
+
+    public static function adminAllowedRoutes(): array
+    {
+        return [
+            'adminDash',
+            'webMigrate',
         ];
     }
 
     public static function getAllowedRoutes(): array
     {
         return ['get' => [
-            '/login' => [AuthController::class, 'login'],
-            '/messages' => [MessageController::class, 'chat'],
-            '/register' => [AuthController::class, 'register'],
+            '/admdash' => [AdminController::class, 'adminDash'],
+            '/webmigrate' => [AdminController::class, 'webMigrate'],
+
+            '/signin' => [AuthController::class, 'login'],
+            '/signup' => [AuthController::class, 'register'],
             '/dashboard' => [AuthController::class, 'dashboard'],
+            '/downloads' => [AuthController::class, 'downloads'],
+
+            '/messages' => [MessageController::class, 'chat'],
 
             '/' => [SiteController::class, 'home'],
             '/home' => [SiteController::class, 'home'],
             '/news' => [SiteController::class, 'home'],
-            '/about-us' => [SiteController::class, 'aboutUs'],
+            '/about' => [SiteController::class, 'aboutUs'],
             '/contactus' => [SiteController::class, 'contact'],
             '/contact' => [SiteController::class, 'contact'],
-            '/downloads' => [SiteController::class, 'downloads'],
             '/marketplace' => [SiteController::class, 'marketplace'],
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
-            '/webmigrate' => [SiteController::class, 'webMigrate'],
-            '/logout' => [SiteController::class, 'logout'],
+            '/signout' => [SiteController::class, 'logout'],
             '/pwdrec' => [SiteController::class, 'passwordRecovery'],
+
+            '/search' => [SearchController::class, 'find'],
 
             '/videos' => [VidGigglesController::class, 'vidGiggles'],
 
             '/feed' => [FeedController::class, 'getFeedIndex'],
             '/apifeed', [FeedController::class, 'api'],
+            '/gov', [FeedController::class, 'api'],
             ]
         ];
     }
@@ -57,12 +74,14 @@ class Routes
     public static function postAllowedRoutes(): array
     {
         $routesPOST['post'] = [
-            '/login' => [AuthController::class, 'login'],
-            '/register' => [AuthController::class, 'register'],
-            '/register#register' => [AuthController::class, 'register'],
+            '/signin' => [AuthController::class, 'login'],
+            '/signup' => [AuthController::class, 'register'],
+
+            '/search' => [SearchController::class, 'find'],
+
             '/contactus' => [SiteController::class, 'contact'],
-            '/contact' => [SiteController::class, 'contact'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
+            '/contact' => [SiteController::class, 'contact'],
             '/pwdrec' => [SiteController::class, 'passwordRecovery'],
         ];
         return $routesPOST;

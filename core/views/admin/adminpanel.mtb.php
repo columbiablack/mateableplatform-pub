@@ -3,135 +3,177 @@
 /**
  * Copyright (c) 2024. Mateable LLC
  */
-
+/**
+ * @var $totalu
+ */
 ?>
-<html data-bs-theme="light" lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Mateable</title>
-</head>
-
-<body id="page-top">
-<div id="wrapper">
-    <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
-        <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-                <div class="sidebar-brand-text mx-3"><span>Mateable</span></div>
-            </a>
-            <hr class="sidebar-divider my-0" />
-            <ul id="accordionSidebar" class="navbar-nav text-light"></ul>
-            <div class="text-center d-none d-md-inline"><button id="sidebarToggle" class="btn rounded-circle border-0" type="button"></button></div>
+<section id="admin-dashboard" class="bg-light pt-4 pb-5">
+    <div class="container-fluid">
+        <!-- Admin Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="fw-bold text-info">
+                    Administration Dashboard
+                </h1>
+                <p class="text-muted mb-0">
+                    Manage users, monitor system health, and control platform operations.
+                </p>
+            </div>
         </div>
-    </nav>
-    <div id="content-wrapper" class="d-flex flex-column">
-        <div id="content">
-            <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
-                <div class="container-fluid"><button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle me-3" type="button"><i class="fas fa-bars"></i></button>
-                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." /><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                    </form>
-                    <ul class="navbar-nav flex-nowrap ms-auto">
-                        <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
-                            <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="me-auto navbar-search w-100">
-                                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." />
-                                        <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="me-3">
-                                            <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
-                                        </div>
-                                        <div><span class="small text-gray-500">December 12, 2019</span>
-                                            <p>A new monthly report is ready to download!</p>
-                                        </div>
-                                    </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="me-3">
-                                            <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
-                                        </div>
-                                        <div><span class="small text-gray-500">December 7, 2019</span>
-                                            <p>$290.29 has been deposited into your account!</p>
-                                        </div>
-                                    </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="me-3">
-                                            <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
-                                        </div>
-                                        <div><span class="small text-gray-500">December 2, 2019</span>
-                                            <p>Spending Alert: We&#39;ve noticed unusually high spending for your account.</p>
-                                        </div>
-                                    </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image me-3"><img class="rounded-circle" src="avatars/avatar4.jpeg" />
-                                            <div class="bg-success status-indicator"></div>
-                                        </div>
-                                        <div class="fw-bold">
-                                            <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I&#39;ve been having.</span></div>
-                                            <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                        </div>
-                                    </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image me-3"><img class="rounded-circle" src="avatars/avatar2.jpeg" />
-                                            <div class="status-indicator"></div>
-                                        </div>
-                                        <div class="fw-bold">
-                                            <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
-                                            <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                        </div>
-                                    </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image me-3"><img class="rounded-circle" src="avatars/avatar3.jpeg" />
-                                            <div class="bg-warning status-indicator"></div>
-                                        </div>
-                                        <div class="fw-bold">
-                                            <div class="text-truncate"><span>Last month&#39;s report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
-                                            <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
-                                        </div>
-                                    </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image me-3"><img class="rounded-circle" src="avatars/avatar5.jpeg" />
-                                            <div class="bg-success status-indicator"></div>
-                                        </div>
-                                        <div class="fw-bold">
-                                            <div class="text-truncate"><span>Am I a good boy? The reason I ask, someone told me that people say this to all dogs, even if they aren&#39;t good...</span></div>
-                                            <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
-                                        </div>
-                                    </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </div>
-                            <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
-                        </li>
-                        <div class="d-none d-sm-block topbar-divider"></div>
-                        <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="avatars/avatar1.jpeg" /></a>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i> Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i> Activity log</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+        <!-- Admin Stats -->
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">Total Users</h6>
+                        <h3 class="fw-bold mb-0"><?php echo $totalu; ?></h3>
+                    </div>
                 </div>
-            </nav>
-            <div class="container-fluid">
-                <h3 class="text-dark mb-1">Blank Page</h3>
             </div>
-        </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Mateable 2024</span></div>
-            </div>
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-</div>
-</body>
 
-</html>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">Active Sessions</h6>
+                        <h3 class="fw-bold mb-0">312</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">Reports</h6>
+                        <h3 class="fw-bold mb-0 text-danger">18</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">System Status</h6>
+                        <span class="badge bg-success">Operational</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Admin Workspace -->
+        <div class="row g-4">
+
+            <!-- Main Admin Panel -->
+            <div class="col-lg-8">
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            Recent Administrative Activity
+                        </h5>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                User <strong>@johndoe</strong> suspended
+                                <span class="text-muted small float-end">10 mins ago</span>
+                            </li>
+                            <li class="list-group-item">
+                                New admin role assigned
+                                <span class="text-muted small float-end">1 hour ago</span>
+                            </li>
+                            <li class="list-group-item">
+                                System maintenance completed
+                                <span class="text-muted small float-end">Today</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            User Management
+                        </h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>@johndoe</td>
+                                    <td>john@example.com</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>User</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                        <button class="btn btn-sm btn-outline-danger">Suspend</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@admin01</td>
+                                    <td>admin@example.com</td>
+                                    <td><span class="badge bg-warning">Restricted</span></td>
+                                    <td>Admin</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- Admin Sidebar -->
+            <div class="col-lg-4">
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            Administrative Actions
+                        </h5>
+
+                        <div class="d-grid gap-2">
+                            <a href="/admin/users" class="btn btn-outline-primary">
+                                Manage Users
+                            </a>
+                            <a href="/admin/roles" class="btn btn-outline-secondary">
+                                Roles & Permissions
+                            </a>
+                            <a href="/admin/moderation" class="btn btn-outline-warning">
+                                Moderation Queue
+                            </a>
+                            <a href="/admin/settings" class="btn btn-outline-danger">
+                                Platform Settings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-2">
+                            Security Overview
+                        </h6>
+                        <ul class="list-unstyled small mb-0">
+                            <li>✔ 2FA Enforcement: Enabled</li>
+                            <li>✔ Account Recovery: Active</li>
+                            <li>✔ Last Audit: 2 days ago</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

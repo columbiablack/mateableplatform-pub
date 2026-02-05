@@ -1,55 +1,122 @@
 <?php
 
-/**
- * Copyright (c) 2024. Mateable LLC
- */
-
 namespace mateable\core\session;
 
-/**
- * @author SGreen <sgreen@mateable.com>
- * @package mateable
- */
 class Session
 {
     protected const FLASH_KEY = 'flash_messages';
-    private int $lifetime = 0;
+    private int $lifetime;
+    private int $regenerateInterval = 300; // 5 minutes
 
-    public function __construct()
+    public function __construct(int $lifetime = 604800) // default: 7 days
     {
-        $this->lifetime = 60 * 60 * 24 * 7; // 7 days
-
-        // Ensure garbage collection and cookie lifetimes match
-        ini_set('session.gc_maxlifetime', $this->lifetime);
-        ini_set('session.cookie_lifetime', $this->lifetime);
-
-        // Use the same lifetime for the session cookie
-        session_set_cookie_params([
-            'lifetime' => $this->lifetime,
-            'path' => '/',
-            'secure' => isset($_SERVER['HTTPS']), // only use HTTPS cookies
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ]);
-
         session_start();
+        $this->lifetime = $lifetime;
 
-        // Refresh the cookie each time user is active
-        setcookie(session_name(), session_id(), [
-            'expires' => time() + $this->lifetime,
-            'path' => '/',
-            'secure' => isset($_SERVER['HTTPS']),
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ]);
+        $this->applyLifetimeSettings();
 
-        // Handle flash messages
+
+        // Refresh cookie on activity
+        $this->refreshCookie();
+
+        // Secure auto-regeneration
+        $this->autoRegenerateId();
+
+        // Mark flash messages for removal
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
         foreach ($flashMessages as $key => &$flashMessage) {
             $flashMessage['remove'] = true;
         }
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
+
+    /* -------------------------------
+     * SESSION LIFETIME MANAGEMENT
+     * ------------------------------- */
+
+    private function applyLifetimeSettings(): void
+    {
+        ini_set('session.gc_maxlifetime', $this->lifetime);
+        ini_set('session.cookie_lifetime', $this->lifetime);
+
+        session_set_cookie_params([
+            'lifetime' => $this->lifetime,
+            'path'     => '/',
+            'secure'   => isset($_SERVER['HTTPS']),
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+    }
+
+    private function refreshCookie(): void
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            setcookie(session_name(), session_id(), [
+                'expires'  => time() + $this->lifetime,
+                'path'     => '/',
+                'secure'   => isset($_SERVER['HTTPS']),
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]);
+        }
+    }
+
+    /** Change session lifetime dynamically */
+    public function setLifetime(int $seconds): void
+    {
+        $this->lifetime = $seconds;
+        $this->applyLifetimeSettings();
+        $this->refreshCookie();
+    }
+
+    public function getLifetime(): int
+    {
+        return $this->lifetime;
+    }
+
+    /* -------------------------------
+     * REMEMBER ME FEATURE
+     * ------------------------------- */
+
+    /**
+     * Enable Remember Me mode
+     */
+    public function rememberMe(int $days): void
+    {
+        $seconds = $days * 24 * 60 * 60;
+        $this->setLifetime($seconds);
+    }
+
+    /* -------------------------------
+     * SESSION ID REGENERATION SECURITY
+     * ------------------------------- */
+
+    /** Call this manually on login */
+    public function regenerateOnLogin(): void
+    {
+        session_regenerate_id(true);
+        $_SESSION['last_regeneration'] = time();
+    }
+
+    /** Automatic regeneration every X seconds */
+    private function autoRegenerateId(): void
+    {
+        $last = $_SESSION['last_regeneration'] ?? 0;
+
+        if (time() - $last >= $this->regenerateInterval) {
+            session_regenerate_id(true);
+            $_SESSION['last_regeneration'] = time();
+        }
+    }
+
+    public function setRegenerationInterval(int $seconds): void
+    {
+        $this->regenerateInterval = $seconds;
+    }
+
+    /* -------------------------------
+     * FLASH MESSAGES
+     * ------------------------------- */
 
     public function setFlash($key, $message): void
     {
@@ -63,6 +130,10 @@ class Session
     {
         return $_SESSION[self::FLASH_KEY][$key]['value'] ?? false;
     }
+
+    /* -------------------------------
+     * REGULAR SESSION STORAGE
+     * ------------------------------- */
 
     public function set($key, $value): void
     {
@@ -79,6 +150,10 @@ class Session
         unset($_SESSION[$key]);
     }
 
+    /* -------------------------------
+     * FLASH CLEANUP
+     * ------------------------------- */
+
     public function __destruct()
     {
         $this->removeFlashMessages();
@@ -88,7 +163,7 @@ class Session
     {
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
         foreach ($flashMessages as $key => $flashMessage) {
-            if ($flashMessage['remove']) {
+            if (!empty($flashMessage['remove'])) {
                 unset($flashMessages[$key]);
             }
         }

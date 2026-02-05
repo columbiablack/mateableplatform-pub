@@ -28,9 +28,14 @@ class Form
             '.PHP_EOL;
     }
 
-    public function field(Model $model, string $attribute, string $id = '', string $accept = '', string $style = ''): Field
+    public function field(Model $model, string $attribute, string $id = '', string $accept = '', string $style = '', string $placeholder): Field
     {
-        return new Field($model, $attribute, $id, $accept, $style);
+        return new Field($model, $attribute, $id, $accept, $style, $placeholder);
+    }
+
+    public function checkBox(string $name, string $id, string $value): CheckBox
+    {
+        return new CheckBox($name, $id, $value);
     }
 
     public function fieldTextArea(Model $model, string $attribute, string $style = '')
@@ -38,9 +43,9 @@ class Form
         return new TextArea($model, $attribute, $style);
     }
 
-    public function fieldSelect(string $name, string $id)
+    public function select(): Select
     {
-        return new Select($name, $id);
+        return new Select();
     }
 
     public function fieldOption(string $name, string $id)

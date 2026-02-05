@@ -17,14 +17,19 @@ use mateable\core\users\User;
 
 class UserModel extends User
 {
-    public const STATUS_INACTIVE = 0;
-    public const STATUS_ACTIVE = 1;
-    public const STATUS_DELETED = 2;
+    #
+    public const STATUS_ACTIVE = 0;
+    public const STATUS_INACTIVE = 1;
+
+    public const ACCOUNT_STATUS_ACTIVE = 'active';
+    public const ACCOUNT_STATUS_SUSPENDED = 'suspended';
+    public const ACCOUNT_STATUS_PENDING = 'pending';
+
     public const ROLE_ADMINISTRATOR = 2;
     public const ROLE_MODERATOR = 1;
     public const ROLE_MEMBER = 0;
 
-    public int $status = self::STATUS_INACTIVE;
+    public int $status = self::STATUS_ACTIVE;
     public int $role = self::ROLE_MEMBER;
 
     public string $firstname = '';
@@ -41,6 +46,8 @@ class UserModel extends User
     public string $password_confirm = '';
     public string $last_login = '';
     public string $ip_address = '';
+    public string $account_status = self::ACCOUNT_STATUS_ACTIVE;
+
     public int $id;
 
 
@@ -107,6 +114,7 @@ class UserModel extends User
             'role',
             'ip_address',
             'last_login',
+            'account_status',
         ];
     }
 
@@ -151,6 +159,16 @@ class UserModel extends User
     public function displayEmail(): string
     {
         return $this->email;
+    }
+
+    public function displayDOB(): string
+    {
+        return $this->dob;
+    }
+
+    public function displayAccountStatus(): string
+    {
+        return $this->account_status;
     }
 
 }
