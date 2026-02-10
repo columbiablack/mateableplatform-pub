@@ -5,6 +5,8 @@
  */
 namespace mateable\core\views;
 
+use mateable\core\Platform;
+
 class ViewManager
 {
     private string $title;

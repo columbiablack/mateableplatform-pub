@@ -37,14 +37,23 @@ class AuthController extends Controller
                     Platform::$app->session->setLifetime(3600);
                 }
 
-                Platform::$app->activity::log(Platform::$app->user->id, "logged in", "You've signed in successfully!");
+                Platform::$app->activity::log(Platform::$app->user->id, "logged in", "You have successfully signed in!");
                 Platform::$app->session->regenerateOnLogin();
-                Platform::$app->session->setFlash('success','You have signed in successfully!!!');
+                Platform::$app->session->setFlash('success','You have successfully signed in!');
                 Platform::$app->response->redirect('/dashboard');
             }
         }
         $this->setLayout('auth');
         return $this->renderView('login', ['model' => $loginForm]);
+    }
+
+    public function logout()
+    {
+        Platform::$app->activity::log(Platform::$app->user->id, "logged out","You've successfully signed out!");
+        Platform::$app->user = null;
+        Platform::$app->session->remove('user');
+        Platform::$app->session->setFlash('success', "You have successfully signed out!");
+        Platform::$app->response->redirect('/home');
     }
 
     public function register(Request $request): string
@@ -55,7 +64,7 @@ class AuthController extends Controller
             $registerForm->loadData($request->getBody());
 
             if($registerForm->validate() && $registerForm->save()){
-                Platform::$app->session->setFlash('success','You have registered successfully!!!');
+                Platform::$app->session->setFlash('success','You have successfully registered!');
                 Platform::$app->response->redirect('/signin');
             }
         }

@@ -22,12 +22,11 @@ use mateable\core\Platform;
 ?>
 <section id="dashboard" class="bg-light pt-4 pb-5">
     <div class="container-fluid">
-
         <!-- Page Header -->
         <div class="row mb-4">
             <div class="col-12">
                 <h1 class="fw-bold text-info">
-                    Dashboard
+                    Your Dashboard
                 </h1>
                 <p class="text-muted mb-0">
                     Welcome back! Here’s what’s happening with your account.

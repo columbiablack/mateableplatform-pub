@@ -25,8 +25,22 @@ class AdminController extends Controller
         ]);
     }
 
-    public function webMigrate()
+    public function manageUsers(): string
     {
-        return include(Platform::$ROOT_DIR.'/Migrations.php');
+        return $this->renderView('admin/usrmgmt', [
+            'userAccounts' => Platform::$app->user::findAll([]),
+        ]);
+    }
+
+    public function moderationQueue(): string
+    {
+        return $this->renderView('admin/moderation', [
+            'moderationAccounts' => Platform::$app->user::findAll(['account_status' => Platform::$app->user::ACCOUNT_STATUS_PENDING]),
+        ]);
+    }
+
+    public function webMigrate(): string
+    {
+        return $this->renderView(Platform::$ROOT_DIR.'/Migrations.php', []);
     }
 }

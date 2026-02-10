@@ -36,7 +36,7 @@ use mateable\core\Platform;
                     <a class="nav-link dropdown-toggle" href="#" id="mtbDownload" data-bs-toggle="dropdown" aria-expanded="false">Downloads</a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="mtbDownload">
                         <li><a class="dropdown-item nav-link" href="/games">Games</a></li>
-                        <li><a class="dropdown-item nav-link" href="/downloads">Other</a></li>
+                        <li><a class="dropdown-item nav-link" href="/downloads">General</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

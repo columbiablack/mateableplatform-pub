@@ -46,7 +46,7 @@ class UserModel extends User
     public string $password_confirm = '';
     public string $last_login = '';
     public string $ip_address = '';
-    public string $account_status = self::ACCOUNT_STATUS_ACTIVE;
+    public string $account_status = self::ACCOUNT_STATUS_PENDING;
 
     public int $id;
 
@@ -164,6 +164,11 @@ class UserModel extends User
     public function displayDOB(): string
     {
         return $this->dob;
+    }
+
+    public function displayRole(): string
+    {
+        return $this->role;
     }
 
     public function displayAccountStatus(): string

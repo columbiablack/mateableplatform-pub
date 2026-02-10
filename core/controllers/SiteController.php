@@ -9,7 +9,6 @@ namespace mateable\core\controllers;
 use mateable\core\http\Request;
 use mateable\core\models\ContactForm;
 use mateable\core\models\UserLoginModel;
-use mateable\core\models\UserModel;
 use mateable\core\Platform;
 
 /**
@@ -63,14 +62,6 @@ class SiteController extends Controller
         return $this->renderView('verification');
     }
 
-    public function logout()
-    {
-        if(Platform::$app->logout()){
-            Platform::$app->session->setFlash('success', "You have successfully signed out!");
-            Platform::$app->response->redirect('/home');
-        };
-    }
-
     public function show($request): string
     {
         $id = $request->getRouteParams('id');
@@ -85,5 +76,10 @@ class SiteController extends Controller
     {
         $this->setLayout('auth');
         return $this->renderview('recovery', ['recModel' => new UserLoginModel()]);
+    }
+
+    public function tournaments(): string
+    {
+        return $this->renderView('tournaments', []);
     }
 }

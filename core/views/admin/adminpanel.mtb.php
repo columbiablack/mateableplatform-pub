@@ -63,76 +63,6 @@
         <!-- Admin Workspace -->
         <div class="row g-4">
 
-            <!-- Main Admin Panel -->
-            <div class="col-lg-8">
-
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body">
-                        <h5 class="fw-semibold mb-3">
-                            Recent Administrative Activity
-                        </h5>
-
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                User <strong>@johndoe</strong> suspended
-                                <span class="text-muted small float-end">10 mins ago</span>
-                            </li>
-                            <li class="list-group-item">
-                                New admin role assigned
-                                <span class="text-muted small float-end">1 hour ago</span>
-                            </li>
-                            <li class="list-group-item">
-                                System maintenance completed
-                                <span class="text-muted small float-end">Today</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="fw-semibold mb-3">
-                            User Management
-                        </h5>
-
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Role</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>@johndoe</td>
-                                    <td>john@example.com</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>User</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary">View</button>
-                                        <button class="btn btn-sm btn-outline-danger">Suspend</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>@admin01</td>
-                                    <td>admin@example.com</td>
-                                    <td><span class="badge bg-warning">Restricted</span></td>
-                                    <td>Admin</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
             <!-- Admin Sidebar -->
             <div class="col-lg-4">
 
@@ -143,13 +73,10 @@
                         </h5>
 
                         <div class="d-grid gap-2">
-                            <a href="/admin/users" class="btn btn-outline-primary">
+                            <a href="/admdash/usrmgmt" class="btn btn-outline-primary">
                                 Manage Users
                             </a>
-                            <a href="/admin/roles" class="btn btn-outline-secondary">
-                                Roles & Permissions
-                            </a>
-                            <a href="/admin/moderation" class="btn btn-outline-warning">
+                            <a href="/admdash/moderation" class="btn btn-outline-secondary">
                                 Moderation Queue
                             </a>
                             <a href="/admin/settings" class="btn btn-outline-danger">

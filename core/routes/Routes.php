@@ -32,6 +32,8 @@ class Routes
         return [
             'adminDash',
             'webMigrate',
+            'manageUsers',
+            'moderationQueue',
         ];
     }
 
@@ -39,9 +41,13 @@ class Routes
     {
         return ['get' => [
             '/admdash' => [AdminController::class, 'adminDash'],
-            '/webmigrate' => [AdminController::class, 'webMigrate'],
+            '/admdash/portal/webmigrate' => [AdminController::class, 'webMigrate'],
+            '/admdash/usrmgmt' => [AdminController::class, 'manageUsers'],
+            '/admdash/moderation' => [AdminController::class, 'moderationQueue'],
+
 
             '/signin' => [AuthController::class, 'login'],
+            '/signout' => [AuthController::class, 'logout'],
             '/signup' => [AuthController::class, 'register'],
             '/dashboard' => [AuthController::class, 'dashboard'],
             '/downloads' => [AuthController::class, 'downloads'],
@@ -57,8 +63,8 @@ class Routes
             '/marketplace' => [SiteController::class, 'marketplace'],
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
-            '/signout' => [SiteController::class, 'logout'],
             '/pwdrec' => [SiteController::class, 'passwordRecovery'],
+            '/tournaments' => [SiteController::class, 'tournaments'],
 
             '/search' => [SearchController::class, 'find'],
 

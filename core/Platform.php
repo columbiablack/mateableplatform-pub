@@ -79,7 +79,7 @@ class Platform
     public PostModel $post;                     // Post Model
     public MessageModel $message;               // Message Model
     public SessionModel $sessionM;              // Session Model
-    public ActivityModel $activity;
+    public ActivityModel $activity;             // Activity Model
     public ?VidGigglesModel $vidGigglesContent; // VidGiggles Content Model
 
 
@@ -147,13 +147,6 @@ class Platform
     public static function isGuest(): bool
     {
         return !self::$app->user;
-    }
-
-    public function logout(): bool
-    {
-        $this->user = null;
-        $this->session->remove('user');
-        return true;
     }
 
     public function run(): void
