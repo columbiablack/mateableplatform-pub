@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 ?>
-<footer class="bg-light pt-5 pb-4 border-top">
+<footer class="pt-5 pb-4 border-top">
     <div class="container">
 
         <!-- Top Section -->
@@ -13,7 +13,7 @@
 
             <!-- Brand / Description -->
             <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase">{{app_name}}</h5>
+                <h5 class="navbar-brand navbar-dark">{{app_name}}</h5>
                 <p class="text-muted small">
                     {{app_name}} is a next-generation gaming platform where players compete,
                     connect, and grow through tournaments, community-driven features,
@@ -75,10 +75,7 @@
             <!-- Copyright -->
             <div class="col-md-4 text-md-start text-center mb-2 mb-md-0">
                 <span class="copyright small text-muted">
-                    © <?php echo date('Y'); ?>
-                    <a class="text-dark-emphasis" href="{{site_url}}">
-                        {{app_name}} LLC
-                    </a>. All rights reserved.
+                    © <?php echo date('Y'); ?> <a class="text-dark-emphasis" href="{{site_url}}">{{app_name}} LLC</a>. All rights reserved.
                 </span>
             </div>
 

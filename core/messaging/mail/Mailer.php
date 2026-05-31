@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\messaging\mail;

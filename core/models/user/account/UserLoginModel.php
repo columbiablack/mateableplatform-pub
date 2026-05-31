@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
-namespace mateable\core\models;
+namespace mateable\core\models\user\account;
 
+use mateable\core\models\Model;
 use mateable\core\Platform;
-use mysql_xdevapi\Exception;
 
 class UserLoginModel extends Model
 {
     public string $email = '';
     public string $password = '';
+    public string $dob = '';
 
     protected UserModel $user;
 
@@ -30,13 +31,16 @@ class UserLoginModel extends Model
             'password' => [
                 self::RULE_REQUIRED,
                 [self::RULE_MIN, 'min' => 2]
-            ]
+            ],
+            'dob' => [
+            ],
         ];
     }
 
     public function labels(): array
     {
         return [
+            'dob' => 'Date of Birth',
             'email' => 'Email',
             'password' => 'Password'
         ];
@@ -45,9 +49,9 @@ class UserLoginModel extends Model
     public function doLogin(): bool
     {
         try{
-        /**
-         * @var $user UserModel
-         */
+            /**
+             * @var $user UserModel
+             */
             $user = UserModel::findOne(['email' => $this->email]);
 
             if (!$user) {

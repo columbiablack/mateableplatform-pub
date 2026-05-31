@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\form;
@@ -33,9 +33,9 @@ class Form
         return new Field($model, $attribute, $id, $accept, $style, $placeholder);
     }
 
-    public function checkBox(string $name, string $id, string $value): CheckBox
+    public function checkBox(string $name, string $id, string $value = '', bool $checked = false): CheckBox
     {
-        return new CheckBox($name, $id, $value);
+        return new CheckBox($name, $id, $value, $checked);
     }
 
     public function fieldTextArea(Model $model, string $attribute, string $style = '')
@@ -53,12 +53,8 @@ class Form
         return new Select($name, $id);
     }
 
-    public function button(string $name, string $id = '', string $class = '', string $onclick = ''): string
+    public function button(string $label = ''): Button
     {
-        return '
-            <div class="form-text"> 
-                <button class="btn btn-primary '.$class.'" id="'. $id .'" onclick="'. $onclick .'" type="submit">'. $name .'</button>
-            </div>
-                '.PHP_EOL;
+        return Button::make($label);
     }
 }

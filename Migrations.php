@@ -11,7 +11,7 @@ $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $config = [
-    'userClass' => \mateable\core\models\UserModel::class,
+    'userClass' => \mateable\core\models\user\account\UserModel::class,
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],

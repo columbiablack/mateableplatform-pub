@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 use mateable\core\Platform;
 
 ?>
-<section id="dashboard" class="bg-light pt-4 pb-5">
+<section id="dashboard" class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="row mb-4">

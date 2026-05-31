@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 /***
@@ -16,7 +16,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">
                         <div class="card text-center clean-card">
-                            <img class="card-img-top w-100 d-block" src="assets/img/avatars/anime_greg_2.jpg">
+                            <img alt="" class="card-img-top w-100 d-block" src="assets/img/avatars/anime_greg_2.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Gregory Joy</h4>
                                 <p class="card-text">Co Founder of Mateable LLC and MateableCoin</p>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-sm-6 col-lg-4">
                         <div class="card text-center clean-card">
-                            <img class="card-img-top w-100 d-block" src="assets/img/avatars/anime_stephon_2.jpg">
+                            <img alt="" class="card-img-top w-100 d-block" src="assets/img/avatars/anime_stephon_2.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Stephon Green</h4>
                                 <p class="card-text">Co Founder of Mateable LLC and MateableCoin</p>

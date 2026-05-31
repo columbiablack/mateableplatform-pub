@@ -20,7 +20,7 @@ use mateable\core\models\ActivityModel;
 use mateable\core\Platform;
 
 ?>
-<section id="dashboard" class="bg-light pt-4 pb-5">
+<section id="dashboard" class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="row mb-4">
@@ -137,21 +137,39 @@ use mateable\core\Platform;
 
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
+
                         <h5 class="fw-semibold mb-3">
                             Quick Actions
                         </h5>
 
-                        <div class="d-grid gap-2">
-                            <a href="/profile" class="btn btn-outline-primary">
-                                View Profile
+                        <div class="d-grid gap-1 mb-sm-1">
+                            <?php if(Platform::$app->user->role === Platform::$app->user::ROLE_ADMINISTRATOR): ?>
+                                <a href="admdash/post" class="btn btn-small btn-outline-primary">
+                                    Create News Post
+                                </a>
+                            <?php endif; ?>
+
+                            <a href="dashboard/post" class="btn btn-outline-primary">
+                                Create Post
                             </a>
-                            <a href="/settings" class="btn btn-outline-secondary">
-                                Account Settings
+
+                            <a href="dashboard/edit?action=create&category=events" class="btn btn-outline-primary">
+                                Create Event
                             </a>
-                            <a href="/security" class="btn btn-outline-danger">
-                                Security
+
+                            <a href="dashboard/edit?action=modify&category=account" class="btn btn-outline-secondary">
+                                Modify Account
+                            </a>
+
+                            <a href="dashboard/edit?action=&category=profile" class="btn btn-outline-primary">
+                                Edit Profile
+                            </a>
+
+                            <a href="dashboard/edit?action=manage&category=community" class="btn btn-outline-secondary">
+                                Manage Community
                             </a>
                         </div>
+
                     </div>
                 </div>
 

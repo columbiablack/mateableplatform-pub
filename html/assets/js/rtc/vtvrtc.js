@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2024. Mateable LLC
+ * Copyright (c) 2016-2026. Mateable LLC
  */
 
 'use strict';

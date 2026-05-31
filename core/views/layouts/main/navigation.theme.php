@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 use mateable\core\form\Form;
@@ -58,9 +58,6 @@ use mateable\core\Platform;
                         <a class="nav-link" href="/videos">Videos</a>
                     </li>
                 <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contactus">Contact Us</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="mtbDropdown" data-bs-toggle="dropdown"
                        aria-expanded="false">Account</a>
@@ -82,6 +79,7 @@ use mateable\core\Platform;
                                 <hr>
                             </li>
                             <li><a class="dropdown-item nav-link" href="/dashboard">Dashboard</a></li>
+                            <li><a class="dropdown-item nav-link" href="/dashboard/messages">Messages</a></li>
                             <li><a class="dropdown-item nav-link" href="/payments">Payments</a></li>
                             <li><a class="dropdown-item nav-link" href="/subscriptions">Subscriptions</a></li>
                             <li><a class="dropdown-item nav-link" href="/signout">Sign out</a></li>

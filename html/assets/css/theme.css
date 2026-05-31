@@ -33,7 +33,7 @@
     --bs-info: #0dcaf0;
     --bs-warning: #ffc107;
     --bs-danger: #dc3545;
-    --bs-light: #f8f9fa;
+    --bs-light: #343a40; /*#f8f9fa;*/
     --bs-dark: #212529;
     --bs-primary-rgb: 254, 209, 54;
     --bs-secondary-rgb: 134, 142, 150;
@@ -41,7 +41,7 @@
     --bs-info-rgb: 13, 202, 240;
     --bs-warning-rgb: 255, 193, 7;
     --bs-danger-rgb: 220, 53, 69;
-    --bs-light-rgb: 248, 249, 250;
+    --bs-light-rgb: 48, 49, 50;
     --bs-dark-rgb: 33, 37, 41;
     --bs-primary-text-emphasis: #665416;
     --bs-secondary-text-emphasis: #36393c;
@@ -67,6 +67,8 @@
     --bs-danger-border-subtle: #f1aeb5;
     --bs-light-border-subtle: #e9ecef;
     --bs-dark-border-subtle: #adb5bd;
+    --bs-mateable-bg-color: 157, 177, 225;
+    --bs-mateable-grey-rgb: 47, 53, 68;
     --bs-white-rgb: 255, 255, 255;
     --bs-black-rgb: 0, 0, 0;
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -95,7 +97,7 @@
     --bs-link-color-rgb: 254, 209, 54;
     --bs-link-decoration: underline;
     --bs-link-hover-color: #cba72b;
-    --bs-link-hover-color-rgb: 203, 167, 43;
+    --bs-link-hover-color-rgb: rgba(203, 167, 43);
     --bs-code-color: #d63384;
     --bs-highlight-color: #212529;
     --bs-highlight-bg: #fff3cd;
@@ -125,10 +127,11 @@
 
 [data-bs-theme=dark] {
     color-scheme: dark;
-    --bs-body-color: #dee2e6;
+    --bs-body-color: #e3dee6;
     --bs-body-color-rgb: 222, 226, 230;
     --bs-body-bg: #212529;
     --bs-body-bg-rgb: 33, 37, 41;
+    --bs-mateable-grey-rgb: 157, 177, 225;
     --bs-emphasis-color: #fff;
     --bs-emphasis-color-rgb: 255, 255, 255;
     --bs-secondary-color: rgba(222, 226, 230, 0.75);
@@ -342,11 +345,12 @@ sup {
 
 a {
     color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
-    text-decoration: underline
+    text-decoration: none
 }
 
 a:hover {
-    --bs-link-color-rgb: var(--bs-link-hover-color-rgb)
+    color: var(--bs-link-hover-color-rgb);
+    text-decoration: underline;
 }
 
 a:not([href]):not([class]),a:not([href]):not([class]):hover {
@@ -9477,6 +9481,11 @@ textarea.form-control-lg {
     background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important
 }
 
+.bg-mateable-form-panel {
+    --bs-bg-opacity: 0.25;
+    background-color: rgba(var(--bs-mateable-grey-rgb), var(--bs-bg-opacity)) !important
+}
+
 .bg-body {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important
@@ -13733,11 +13742,12 @@ header.masthead .intro-text .intro-heading {
 }
 
 #portfolio .portfolio-item .portfolio-caption {
+    --bs-bg-opacity: 0.25;
     max-width: 400px;
     margin: 0 auto;
     padding: 25px;
     text-align: center;
-    background-color: #fff
+    background-color: rgba(var(--bs-mateable-grey-rgb), var(--bs-bg-opacity));
 }
 
 #portfolio .portfolio-item .portfolio-caption h4,#portfolio .portfolio-item .portfolio-caption .h4 {
@@ -14261,7 +14271,6 @@ img::-moz-selection {
 }
 
 #mainContent {
-    background: var(--bs-light);
     padding-top: 80px;
 }
 

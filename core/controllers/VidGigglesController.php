@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 namespace mateable\core\controllers;

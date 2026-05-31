@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 ?>
-<main id="mainContent" class="bg-light">
+<main id="mainContent" class="">
     {{content}}
 </main>

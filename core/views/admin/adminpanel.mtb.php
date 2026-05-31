@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 /**
  * @var $totalu
  */
 ?>
-<section id="admin-dashboard" class="bg-light pt-4 pb-5">
+<section id="admin-dashboard" class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Admin Header -->
         <div class="row mb-4">
@@ -35,8 +35,17 @@
             <div class="col-md-3">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h6 class="text-muted">Active Sessions</h6>
-                        <h3 class="fw-bold mb-0">312</h3>
+                        <h6 class="text-muted">Total Posts</h6>
+                        <h3 class="fw-bold mb-0">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="text-muted">Total Events</h6>
+                        <h3 class="fw-bold mb-0">0</h3>
                     </div>
                 </div>
             </div>
@@ -45,7 +54,7 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h6 class="text-muted">Reports</h6>
-                        <h3 class="fw-bold mb-0 text-danger">18</h3>
+                        <h3 class="fw-bold mb-0 text-danger">0</h3>
                     </div>
                 </div>
             </div>
@@ -69,17 +78,17 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
                         <h5 class="fw-semibold mb-3">
-                            Administrative Actions
+                            User Administrative Actions
                         </h5>
 
                         <div class="d-grid gap-2">
-                            <a href="/admdash/usrmgmt" class="btn btn-outline-primary">
+                            <a href="/admdash/usrmgmt" class="btn btn-small btn-outline-primary">
                                 Manage Users
                             </a>
-                            <a href="/admdash/moderation" class="btn btn-outline-secondary">
+                            <a href="/admdash/moderation" class="btn btn-small btn-outline-secondary">
                                 Moderation Queue
                             </a>
-                            <a href="/admin/settings" class="btn btn-outline-danger">
+                            <a href="/admin/settings" class="btn btn-small btn-outline-danger">
                                 Platform Settings
                             </a>
                         </div>
@@ -92,10 +101,35 @@
                             Security Overview
                         </h6>
                         <ul class="list-unstyled small mb-0">
-                            <li>✔ 2FA Enforcement: Enabled</li>
+                            <li>✔ 2FA Enforcement: Disabled</li>
                             <li>✔ Account Recovery: Active</li>
                             <li>✔ Last Audit: 2 days ago</li>
                         </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Admin Sidebar -->
+            <div class="col-lg-4">
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            Post Actions
+                        </h5>
+
+                        <div class="d-grid gap-2">
+                            <a href="/admdash/postmgmt" class="btn btn-small btn-outline-primary">
+                                Manage User Posts
+                            </a>
+                            <a href="/admdash/newsmgmt" class="btn btn-small btn-outline-secondary">
+                                Manage News
+                            </a>
+                            <a href="/admin/settings" class="btn btn-small btn-outline-danger">
+                                Platform Settings
+                            </a>
+                        </div>
                     </div>
                 </div>
 

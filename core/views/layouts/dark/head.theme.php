@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 ?>
 <!DOCTYPE html>
-<html style="--bs-primary: #39323e;--bs-primary-rgb: 57,50,62;">
+<html lang="en" style="--bs-primary: #39323e;--bs-primary-rgb: 57,50,62;">
 
 <head>
     <meta charset="utf-8">

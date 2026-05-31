@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace Symfony\Polyfill\Ctype;
@@ -144,7 +144,7 @@ final class Ctype
     }
 
     /**
-     * Returns TRUE if every character in text creates some sort of white space, FALSE otherwise. Besides the blank character this also includes tab, vertical tab, line feed, carriage return and form feed characters.
+     * Returns TRUE if every character in text creates some sort of white space, FALSE otherwise. Besides the blank character this also includes tab, vertical tab, line feeds, carriage return and form feeds characters.
      *
      * @see https://php.net/ctype-space
      *

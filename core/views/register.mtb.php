@@ -1,24 +1,25 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 use mateable\core\form\Form;
 
 /**
  *  user: Mateable
- *  @var $model mateable\core\models\UserModel
+ *  @var $model \mateable\core\models\user\account\UserModel
  */
 
 ?>
-<section class="bg-light py-5">
+<section class="py-5">
     <div class="container-fluid">
+
         <div class="block-heading text-center mb-4">
             <h2 class="text-info">Create Your Account</h2>
 
             <p class="lead">
-                Sign up today and receive <strong>100 MTBC</strong> to get started.
+                Sign up and receive <strong>100 MTBC</strong> to get started!
             </p>
 
             <p class="text-muted">
@@ -32,57 +33,78 @@ use mateable\core\form\Form;
             </p>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-9 col-xl-8">
-                <div class="clean-form p-4 border rounded bg-white">
+        <div class="row justify-content-center container-fluid">
+            <div class="col-lg-9">
+                <div class="clean-form p-4 border rounded bg-mateable-form-panel">
 
                     <?php $form = Form::begin('', 'post'); ?>
 
-                    <div class="row gy-4">
+                    <div class="row g-3 pt-3">
 
+                        <!-- Name -->
                         <div class="col-md-6">
-                            <?= $form->field($model, 'firstname', '', '', 'width: 250px;', '') ?>
+                            <?= $form->field($model, 'firstname', '', '', '', '') ?>
                         </div>
 
                         <div class="col-md-6">
-                            <?= $form->field($model, 'lastname', '', '', 'width: 250px;', '') ?>
+                            <?= $form->field($model, 'lastname', '', '', '', '') ?>
+                        </div>
+
+                        <!-- DOB + Phone -->
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'dob', '', '', '', '')->dateField() ?>
                         </div>
 
                         <div class="col-md-6">
-                            <?= $form->field($model, 'dob', '', '', 'width: 250px;', '')->dateField() ?>
+                            <?= $form->field($model, 'phone', '', '', '', '') ?>
                         </div>
 
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'phone', '', '', 'width: 250px;', '') ?>
+                        <!-- Address -->
+                        <div class="col-12">
+                            <?= $form->field($model, 'address1', '', '', '', '') ?>
                         </div>
 
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'address1', '', '', 'width: 250px;', '') ?>
+                        <div class="col-12">
+                            <?= $form->field($model, 'address2', '', '', '', '') ?>
                         </div>
 
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'address2', '', '', 'width: 250px;', '') ?>
+                        <!-- City / State / Zip -->
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'city', '', '', '', '') ?>
                         </div>
 
                         <div class="col-md-4">
-                            <?= $form->field($model, 'city', '', '', 'width: 250px;', '') ?>
+                            <?= $form->field($model, 'state', '', '', '', '') ?>
                         </div>
 
                         <div class="col-md-4">
-                            <?= $form->field($model, 'state', '', '', 'width: 250px;', '') ?>
+                            <?= $form->field($model, 'zip', '', '', '', '') ?>
                         </div>
 
-                        <div class="col-md-4">
-                            <?= $form->field($model, 'zip', '', '', 'width: 250px;', '') ?>
+                        <!-- Email -->
+                        <div class="col-12">
+                            <?= $form->field($model, 'email', '', '', '', '') ?>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'password', '', '', '', '')->passwordField() ?>
                         </div>
 
                         <div class="col-md-6">
-                            <?= $form->field($model, 'email', '', '', 'width: 250px;', '') ?>
+                            <?= $form->field($model, 'password_confirm', '', '', '', '')->passwordField() ?>
                         </div>
 
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'password', '', '', 'width: 250px;', '')->passwordField() ?>
+                        <!-- Button -->
+                        <div class="col-12 text-start mt-3">
+                            <?= $form->button()::make('Register')->class('btn btn-primary') ?>
                         </div>
 
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'password_confirm', '', '', 'width: 250px;', '')->passwordField() ?>
+                    </div>
+                    <?php echo $form::end(); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

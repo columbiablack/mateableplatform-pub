@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 /***
@@ -12,7 +12,7 @@ use mateable\core\Platform;
 
 ?>
 
-<section class="bg-light py-5">
+<section class="py-5">
     <div class="container">
 
         <div class="row g-4">
@@ -89,7 +89,7 @@ use mateable\core\Platform;
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="text-uppercase section-heading text-primary">Platform Features</h2>
-                <h3 class="section-subheading text-info">
+                <h3 class="section-subheading text-muted">
                     Core systems built for competitive gaming
                 </h3>
             </div>

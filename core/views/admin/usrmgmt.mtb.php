@@ -9,11 +9,11 @@
 * @var UserModel $userAccount
 **/
 
-use mateable\core\models\UserModel;
+use mateable\core\models\user\account\UserModel;
 use mateable\core\Platform;
 
 ?>
-<section id="admin-dashboard" class="bg-light pt-4 pb-5">
+<section id="admin-dashboard" class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Admin Header -->
         <div class="row mb-4">
@@ -31,11 +31,11 @@ use mateable\core\Platform;
         <div class="row g-4">
 
             <!-- Main Admin Panel -->
-            <div class="col-lg-8">
+            <div class="container-fluid col-lg-9">
 
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h5 class="fw-semibold mb-3">
+                        <h5 class="fw-semibold mb-3 btn-outline-primary">
                             Account Listing
                         </h5>
 
@@ -56,11 +56,11 @@ use mateable\core\Platform;
                                 <tbody>
                                 <?php foreach($userAccounts as $userAccount): ?>
                                 <tr>
-                                    <td><?= $userAccount->displayUserID() ?></td>
-                                    <td><?= $userAccount->displayFirstName() ?></td>
-                                    <td><?= $userAccount->displayLastName() ?></td>
-                                    <td>nickname</td>
-                                    <td><?= $userAccount->displayEmail() ?></td>
+                                    <td><?php echo $userAccount->displayUserID(); ?></td>
+                                    <td><?php echo $userAccount->displayFirstName(); ?></td>
+                                    <td><?php echo $userAccount->displayLastName(); ?></td>
+                                    <td><?php echo $userAccount->displayNickname(); ?></td>
+                                    <td><?php echo $userAccount->displayEmail(); ?></td>
                                     <?php
                                     switch($userAccount->displayAccountStatus()){
 
@@ -97,9 +97,7 @@ use mateable\core\Platform;
                                     }
                                     ?>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary">View</button>
-                                        <button class="btn btn-sm btn-outline-danger">Suspend</button>
-                                        <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-secondary">Modify</button>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

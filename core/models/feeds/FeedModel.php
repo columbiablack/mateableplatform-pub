@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
-namespace mateable\core\models;
+namespace mateable\core\models\feeds;
 
 use mateable\core\services\RssService;
 
@@ -18,7 +18,7 @@ class FeedModel
     }
 
     /**
-     * Return array of items for a single feed
+     * Return array of items for a single feeds
      */
     public function getFeed(string $url): array
     {

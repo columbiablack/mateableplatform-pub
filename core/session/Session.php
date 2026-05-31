@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2026. Mateable LLC
+ */
+
 namespace mateable\core\session;
 
 class Session
@@ -81,7 +85,7 @@ class Session
     /**
      * Enable Remember Me mode
      */
-    public function rememberMe(int $days): void
+    public function  rememberMe(int $days): void
     {
         $seconds = $days * 24 * 60 * 60;
         $this->setLifetime($seconds);

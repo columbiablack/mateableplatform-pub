@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\routes;
@@ -43,14 +43,18 @@ class Routes
             '/admdash' => [AdminController::class, 'adminDash'],
             '/admdash/portal/webmigrate' => [AdminController::class, 'webMigrate'],
             '/admdash/usrmgmt' => [AdminController::class, 'manageUsers'],
-            '/admdash/moderation' => [AdminController::class, 'moderationQueue'],
+            '/admdash/moderation' => [AdminController::class, 'moderation'],
 
 
+            '/downloads' => [AuthController::class, 'downloads'],
+            '/dashboard' => [AuthController::class, 'dashboard'],
+            '/dashboard/edit/account' => [AuthController::class, 'dashboard'],
+            '/dashboard/edit/profile' => [AuthController::class, 'dashboard'],
+            '/dashboard/edit/events' => [AuthController::class, 'dashboard'],
+            '/pwdrec' => [AuthController::class, 'passwordRecovery'],
             '/signin' => [AuthController::class, 'login'],
             '/signout' => [AuthController::class, 'logout'],
             '/signup' => [AuthController::class, 'register'],
-            '/dashboard' => [AuthController::class, 'dashboard'],
-            '/downloads' => [AuthController::class, 'downloads'],
 
             '/messages' => [MessageController::class, 'chat'],
 
@@ -63,14 +67,13 @@ class Routes
             '/marketplace' => [SiteController::class, 'marketplace'],
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
-            '/pwdrec' => [SiteController::class, 'passwordRecovery'],
             '/tournaments' => [SiteController::class, 'tournaments'],
 
             '/search' => [SearchController::class, 'find'],
 
             '/videos' => [VidGigglesController::class, 'vidGiggles'],
 
-            '/feed' => [FeedController::class, 'getFeedIndex'],
+            '/feeds' => [FeedController::class, 'getFeedIndex'],
             '/apifeed', [FeedController::class, 'api'],
             '/gov', [FeedController::class, 'api'],
             ]
@@ -80,15 +83,17 @@ class Routes
     public static function postAllowedRoutes(): array
     {
         $routesPOST['post'] = [
+            '/admdash/moderation' => [AdminController::class, 'moderation'],
+
             '/signin' => [AuthController::class, 'login'],
             '/signup' => [AuthController::class, 'register'],
+            '/pwdrec' => [AuthController::class, 'passwordRecovery'],
 
             '/search' => [SearchController::class, 'find'],
 
             '/contactus' => [SiteController::class, 'contact'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/contact' => [SiteController::class, 'contact'],
-            '/pwdrec' => [SiteController::class, 'passwordRecovery'],
         ];
         return $routesPOST;
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\controllers;
@@ -18,7 +18,7 @@ class NewsPostController
 
     public function getNewsPosts(): array
     {
-        $this->postList = (new postModel)::findAll(["id"=> "*"]);
+        $this->postList = (new postModel)::findAll([]);
         if($this->postList >= 1){
             ksort($this->postList, );
             return $this->postList;

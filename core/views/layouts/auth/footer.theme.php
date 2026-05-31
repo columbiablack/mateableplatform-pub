@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 ?>
-<footer class="bg-light pt-5 pb-4 border-top">
+<footer class="pt-5 pb-4 border-top">
     <div class="container">
 
         <!-- Top Section -->

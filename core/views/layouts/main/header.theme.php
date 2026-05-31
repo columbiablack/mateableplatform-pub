@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 ?>
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-bs-theme="dark" lang="en">
 <head>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">

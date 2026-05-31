@@ -28,7 +28,7 @@ class AdminMiddleware extends BaseMiddleware
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
                 Platform::$app->response->statusCode(403);
-                throw new ForbiddenException("Administration Authorization Required!<br /> <b>You are trying to access a Mateable Administration only area.</b><br /> If you are staff then <a href=\"/signin\">Sign in</a>.");
+                throw new ForbiddenException("Administration Authorization Required!<br /> <b>You are trying to access a Mateable Administration ONLY area.</b><br /> If you are staff then <a href=\"/signin\">Sign in</a>.");
             }
         }
     }

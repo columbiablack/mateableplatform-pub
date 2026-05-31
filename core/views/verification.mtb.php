@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 /**
- * @var $model mateable\core\models\UserModel
+ * @var $model \mateable\core\models\user\account\UserModel
  */
 
 use mateable\core\form\Form;
@@ -32,7 +32,8 @@ use mateable\core\form\Form;
                             $form = Form::begin('','post');
                             echo $form->field($model,'verify_key');
                             echo $form->field($model,'password')->passwordField();
-                            echo $form->button('Submit');
+                            echo $form->button()::make('Submit')
+                            ->class('btn btn-primary btn-small');
                             echo $form::end();
                         ?>
                     </div>

@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
 use mateable\core\models\ContactForm;
-use mateable\core\models\UserLoginModel;
 use mateable\core\Platform;
 
 /**
@@ -70,12 +69,6 @@ class SiteController extends Controller
         $id = $params['id'] ?? null;
 
         return ($id);
-    }
-
-    public function passwordRecovery(Request $request): string
-    {
-        $this->setLayout('auth');
-        return $this->renderview('recovery', ['recModel' => new UserLoginModel()]);
     }
 
     public function tournaments(): string

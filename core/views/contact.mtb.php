@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 use mateable\core\form\Form;
@@ -12,8 +12,8 @@ use mateable\core\form\Form;
  */
 
 ?>
-    <section class="bg-light py-5">
-        <div class="container">
+    <section class="py-5">
+        <div class="container container-fluid">
 
             <div class="block-heading text-center mb-4">
                 <h2 class="text-info">Contact Us</h2>
@@ -21,31 +21,37 @@ use mateable\core\form\Form;
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6">
+                <div class="col-lg-6">
 
-                    <div class="form-control p-4 border rounded bg-white">
-                        <?php $form = Form::begin('','post'); ?>
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <?php echo $form->field($model,'user_email', '', '','width: 250px;', ''); ?>
-                            </div>
-                            <div class="col-md-4">
-                                <?php echo $form->field($model,'user_subject', '', '','width: 250px;', ''); ?>
-                            </div>
-                        </div>
+                    <div class="p-4 border rounded bg-mateable-form-panel shadow-sm">
+                        <?php $form = Form::begin('', 'post'); ?>
 
-                        <div class="row mb-3">
+                        <div class="row g-3">
+
+                            <!-- Email -->
                             <div class="col-md-6">
-                                <?php echo $form->fieldTextArea($model,'user_message', 'width: 500px;height: 250px;'); ?>
+                                <?= $form->field($model, 'user_email', '', '', '','') ?>
                             </div>
+
+                            <!-- Subject -->
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'user_subject', '', '', '', '') ?>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <?= $form->fieldTextArea($model, 'user_message', 'height: 200px;') ?>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="col-12 text-start">
+                                <?= $form->button()::make('Submit')
+                                    ->class('btn btn-primary') ?>
+                            </div>
+
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <?php echo $form->button('Submit'); ?>
-                            </div>
-                        </div>
-                        <?php echo Form::end(); ?>
+                        <?= Form::end(); ?>
                     </div>
 
                 </div>

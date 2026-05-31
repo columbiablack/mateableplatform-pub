@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 namespace mateable\core\controllers;
 
 use mateable\core\middlewares\AuthMiddleware;
-use mateable\core\models\FeedModel;
+use mateable\core\models\feeds\FeedModel;
 use mateable\core\routes\Routes;
 use mateable\core\services\RssService;
 

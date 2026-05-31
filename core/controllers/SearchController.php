@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Copyright (c) 2025. Mateable LLC
+ * Copyright (c) 2025-2026. Mateable LLC
  */
 
 namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
 use mateable\core\models\SearchModel;
+use function MongoDB\BSON\toCanonicalExtendedJSON;
 
 class SearchController extends Controller
 {

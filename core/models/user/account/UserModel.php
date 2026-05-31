@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 /**
@@ -10,21 +10,26 @@
  *  @package app\models
  */
 
-namespace mateable\core\models;
+namespace mateable\core\models\user\account;
 
 use mateable\core\Platform;
 use mateable\core\users\User;
 
-class RegisterForm extends User
+class UserModel extends User
 {
-    public const STATUS_INACTIVE = 0;
-    public const STATUS_ACTIVE = 1;
-    public const STATUS_DELETED = 2;
+    #
+    public const STATUS_ACTIVE = 0;
+    public const STATUS_INACTIVE = 1;
+
+    public const ACCOUNT_STATUS_ACTIVE = 'active';
+    public const ACCOUNT_STATUS_SUSPENDED = 'suspended';
+    public const ACCOUNT_STATUS_PENDING = 'pending';
+
     public const ROLE_ADMINISTRATOR = 2;
     public const ROLE_MODERATOR = 1;
     public const ROLE_MEMBER = 0;
 
-    public int $status = self::STATUS_INACTIVE;
+    public int $status = self::STATUS_ACTIVE;
     public int $role = self::ROLE_MEMBER;
 
     public string $firstname = '';
@@ -41,6 +46,9 @@ class RegisterForm extends User
     public string $password_confirm = '';
     public string $last_login = '';
     public string $ip_address = '';
+    public string $account_status = self::ACCOUNT_STATUS_PENDING;
+    public string $nickname = '';
+
     public int $id;
 
 
@@ -107,6 +115,8 @@ class RegisterForm extends User
             'role',
             'ip_address',
             'last_login',
+            'account_status',
+            'nickname',
         ];
     }
 
@@ -119,35 +129,58 @@ class RegisterForm extends User
             'address1' => 'Address Line(Primary)',
             'address2' => 'Address Line(Secondary)',
             'email' => 'E-mail Address',
-            'phone' => 'Phone (No VOIP Numbers Allowed)',
+            'phone' => 'Phone (No VOIP Numbers)',
             'password' => 'Password',
+            'city' => 'City',
+            'state' => 'State',
+            'zip' => 'Zip Code',
             'password_confirm' => 'Confirm Password',
+            'nickname' => 'Nickname',
         ];
+    }
+
+    public function displayNickname(): string
+    {
+        return $this->nickname;
     }
 
     public function displayName(): string
     {
-        return $this->firstname .' '. $this->lastname;
+        return $this->firstname .' '. $this->lastname ?? '';
     }
 
     public function displayFirstName(): string
     {
-        return $this->firstname;
+        return $this->firstname ?? '';
     }
 
     public function displayLastName(): string
     {
-        return $this->lastname;
+        return $this->lastname ?? '';
     }
 
     public function displayUserID(): int
     {
-        return $this->id;
+        return $this->id ?? '';
     }
 
     public function displayEmail(): string
     {
-        return $this->email;
+        return $this->email ?? '';
     }
 
+    public function displayDOB(): string
+    {
+        return $this->dob ?? '';
+    }
+
+    public function displayRole(): string
+    {
+        return $this->role ?? '';
+    }
+
+    public function displayAccountStatus(): string
+    {
+        return $this->account_status ?? '';
+    }
 }

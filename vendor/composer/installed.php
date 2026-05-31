@@ -240,3 +240,9 @@
         ),
     ),
 );
+
+/**
+ * Copyright (c) 2026. Mateable LLC
+ */
+
+

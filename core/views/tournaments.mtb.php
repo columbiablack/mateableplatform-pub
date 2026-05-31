@@ -5,7 +5,7 @@
  */
 
 ?>
-<section id="dashboard" class="bg-light pt-4 pb-5">
+<section id="dashboard" class="pt-4 pb-5">
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="row mb-4">

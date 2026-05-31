@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core\middlewares;
@@ -28,7 +28,7 @@ class AuthMiddleware extends BaseMiddleware
             if(empty($this->actions) || in_array(Platform::$app->controller->action, $this->actions))
             {
                 Platform::$app->response->statusCode(403);
-                throw new ForbiddenException("Authorization Required!<br /> <b>You are trying to access a forbidden area.</b><br /> You can <a href=\"/signin\">Sign in</a> or <a href=\"/register\">Sign up</a>, then try again.");
+                throw new ForbiddenException("Authorization Required!<br /> <b>You are trying to access a Mateable Members ONLY area.</b><br /> You can <a href=\"/signin\">Sign in</a> or <a href=\"/register\">Sign up</a>, then try again.");
             }
         }
     }

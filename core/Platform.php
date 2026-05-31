@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 namespace mateable\core;
@@ -24,7 +24,7 @@ use mateable\core\models\VidGigglesModel;
 use mateable\core\models\FollowerModel;
 use mateable\core\models\MessageModel;
 use mateable\core\models\SessionModel;
-use mateable\core\models\UserModel;
+use mateable\core\models\user\account\UserModel;
 use mateable\core\models\PostModel;
 use mateable\core\views\View;
 use mateable\core\views\ViewManager;
@@ -39,6 +39,7 @@ class Platform
     public static Platform $app;                // Application
     public static array $config;                // Configuration Information
     public static string $ROOT_DIR;             // Root Directory
+    public static int $id;                      // ID
 
     /**
      * System Controllers

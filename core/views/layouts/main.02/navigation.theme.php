@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2024. Mateable LLC
+ * Copyright (c) 2024-2026. Mateable LLC
  */
 
 use mateable\core\Platform;
@@ -9,7 +9,7 @@ use mateable\core\Platform;
  ?>
 
 <div class="collapse fixed-bottom" id="navbarToggleExternalContent" data-bs-theme="light" style="">
-    <div class="bg-light p-xl-5">
+    <div class="p-xl-5">
         <div class="btn-group">
             <div class="row">
                 <div class="col-sm-auto">
