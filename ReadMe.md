@@ -30,7 +30,7 @@ Mateable Media is not just a place to post content — it is a platform to **pla
 
 The core philosophy of Mateable Media is simple:
 
-> **Skill over popularity. Performance over algorithms. Community over manipulation.**
+>  **Skill over popularity. Performance over algorithms. Community over manipulation.**
 
 The platform is built to:
 - Encourage competitive integrity
@@ -76,7 +76,7 @@ The platform is built to:
 
 ## Technology Stack
 
-Mateable Media is built using a modern, scalable architecture:
+ Mateable Media is built using a modern, scalable architecture:
 
 - **Backend:** PHP (custom MVC / ORM architecture)
 - **Frontend:** JavaScript, HTML5, CSS3 (Bootstrap-based UI)
@@ -93,17 +93,55 @@ Mateable Media exists to serve its community. Features are built based on:
 - Competitive fairness
 - Long-term sustainability
 
-There are no hidden algorithms controlling visibility, no artificial engagement loops, and no pay-to-win mechanics.
+> There are no hidden algorithms controlling visibility, no artificial engagement loops, and no pay-to-win mechanics.
 
 ---
 
 ## Status
+ Mateable Media is actively under development. Features are continuously being expanded, refined, and tested to ensure a stable, fair, and competitive platform.
 
-Mateable Media is actively under development. Features are continuously being expanded, refined, and tested to ensure a stable, fair, and competitive platform.
+---
+
+## Contributions
+
+Interested in helping grow Mateable Media? We welcome contributions of all kinds.
+
+Whether you're fixing bugs, improving performance, adding features, or sharing ideas, your input is valuable. This project is actively evolving, and strong contributors may have the opportunity to become part of the development team.
+
+If you're interested in contributing, feel free to explore the codebase, submit pull requests, or reach out with suggestions. We appreciate your support in building something meaningful together.
+
+---
+
+## Personal Usage
+
+Do you plan to use this platform for your own personal use? Fine, we have no problem with you using the platform and/or you modifying the code. If so, please do the following:
+
+>1) Credits: Acknowledge Mateable LLC and the work of the community.
+>2) Network: Send us your website url (Site content doesn't matter).
+>3) Report: All errors you come across should be reported to us.
+>4) Enjoy!
+
 
 ---
 
 ## License & Ownership
 
-© 2024–2026 **Mateable LLC**  
-All rights reserved.
+Copyright (c) 2024–2026 Mateable LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
