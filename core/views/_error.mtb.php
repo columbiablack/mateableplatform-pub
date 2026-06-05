@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Copyright (c) 2024-2026. Mateable LLC
+ */
+
+/**
+ * @author SGreen <sgreen@mateable.com>
+ * @package mateable
+ */
+?>
+<section class="clean-block clean-form dark">
+    <div class="container">
+        <div class="block-heading">
+            <h1><?php echo $exceptiontitle; ?></h1>
+        </div>
+        <div class="block-content">
+            <p>
+                <?php echo $exception; ?>
+            </p>
+        </div>
+    </div>
+</section>

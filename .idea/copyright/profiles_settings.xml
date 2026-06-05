@@ -1,0 +1,14 @@
+<component name="CopyrightManager">
+  <settings default="SGreen">
+    <module2copyright>
+      <element module="Project Files" copyright="SGreen" />
+    </module2copyright>
+    <LanguageOptions name="PHP">
+      <option name="fileTypeOverride" value="3" />
+      <option name="addBlankBefore" value="true" />
+      <option name="separateBefore" value="true" />
+      <option name="lenBefore" value="1" />
+      <option name="lenAfter" value="2" />
+    </LanguageOptions>
+  </settings>
+</component>

@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * Copyright (c) 2024-2026. Mateable LLC
+ */
+
+namespace mateable\core\form;
+
+use mateable\core\models\Model;
+
+class Form
+{
+    /**
+     * @param $action
+     * @param $method
+     * @return Form
+     */
+    public static function begin($action, $method): Form
+    {
+        echo '<form action="' . $action . '" method="' . $method . '" enctype="multipart/form-data">'.PHP_EOL;
+        return new Form();
+    }
+
+    public static function end(): string
+    {
+        return '
+            </form>
+            '.PHP_EOL;
+    }
+
+    public function field(Model $model, string $attribute, string $id = '', string $accept = '', string $style = '', string $placeholder): Field
+    {
+        return new Field($model, $attribute, $id, $accept, $style, $placeholder);
+    }
+
+    public function checkBox(string $name, string $id, string $value = '', bool $checked = false): CheckBox
+    {
+        return new CheckBox($name, $id, $value, $checked);
+    }
+
+    public function fieldTextArea(Model $model, string $attribute, string $style = '')
+    {
+        return new TextArea($model, $attribute, $style);
+    }
+
+    public function select(): Select
+    {
+        return new Select();
+    }
+
+    public function fieldOption(string $name, string $id)
+    {
+        return new Select($name, $id);
+    }
+
+    public function button(string $label = ''): Button
+    {
+        return Button::make($label);
+    }
+}

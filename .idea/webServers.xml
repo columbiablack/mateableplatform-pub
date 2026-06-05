@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d1d8091b-c92c-4c1c-a437-9f2f2e85803a" name="Mateable" url="http://mateablemedia.com/project/public/">
+        <fileTransfer rootFolder="/var/www/mateablemedia.com" accessType="SFTP" host="75.146.49.214" port="2200" sshConfigId="dd47355d-fb63-4194-afad-46c0ef1a4b89" sshConfig="root@75.146.49.214:2200 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

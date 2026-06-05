@@ -1,0 +1,27 @@
+# All Files
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+*.env
+>>>>>>> a94f798 (These updates are as follows)
+.env
+env
+=======
+=======
+>>>>>>> a3b2af4 (Updated .gitignore)
+.idea/
+.vscode/
+backup/
+core/views/profile
+core/views/layouts
+core/views/legal
+core/views/admin
+core/routes/Routes.php
+<<<<<<< HEAD
+.env
+>>>>>>> 3f25497 (Updated IGNORE files.)
+=======
+.env
+>>>>>>> a3b2af4 (Updated .gitignore)

@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Copyright (c) 2024-2026. Mateable LLC
+ */
+
+if (\PHP_VERSION_ID < 80000 && extension_loaded('tokenizer')) {
+    class PhpToken extends Symfony\Polyfill\Php80\PhpToken
+    {
+    }
+}
