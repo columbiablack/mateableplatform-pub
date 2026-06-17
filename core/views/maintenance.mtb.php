@@ -32,7 +32,7 @@ $myEnvName = $_ENV['NAME'];
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
 </head>
 <body id="wBody" class="" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
-<!--<section class="content">
+<section class="content">
     <div id="wrapper">
         <div class="container">
             <div class="row justify-content-center">
@@ -169,7 +169,7 @@ $myEnvName = $_ENV['NAME'];
 
     </div>
 </footer>
-</div>-->
+</div>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -169,4 +169,18 @@ class Platform
             echo self::$app->view->renderview('_error',['exception' => $e->getMessage(),'exceptiontitle' => $e->getCode()]);
         }
     }
+
+    public function runMaintenance():void
+    {
+        try {
+            self::$app->response->statusCode(200);
+            echo self::$app->view->renderview('maintenance');
+        } catch (ForbiddenException $e) {
+            self::$app->response->statusCode(403);
+            echo self::$app->view->renderview('_error', ['exception' => $e->getMessage(), 'exceptiontitle' => $e->getCode()]);
+        } catch (NotFoundException $e) {
+            self::$app->response->statusCode(404);
+            echo self::$app->view->renderview('_error', ['exception' => $e->getMessage(), 'exceptiontitle' => $e->getCode()]);
+        }
+    }
 }

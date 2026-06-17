@@ -1,0 +1,10 @@
+# All Files
+.idea/
+.vscode/
+backup/
+core/views/profile
+core/views/layouts
+core/views/legal
+core/views/admin
+core/routes/Routes.php
+.env
