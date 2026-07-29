@@ -39,21 +39,18 @@ use mateable\core\Platform;
                         <li><a class="dropdown-item nav-link" href="/downloads">General</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/creators">Creators</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="mtbCreatorsStreams" data-bs-toggle="dropdown" aria-expanded="false">Creators & Streams</a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="mtbCreatorsStreams">
+                        <li><a class="dropdown-item nav-link" href="/creators-streams">Creators & Streams</a></li>
+                        <li><a class="dropdown-item nav-link" href="/streams">Live Streams</a></li>
+                        <li><a class="dropdown-item nav-link" href="/tournaments">Tournaments</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/explore">Explore</a>
                 </li>
                 <?php if (!Platform::$app->isGuest()): ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="mtbStreams" data-bs-toggle="dropdown"
-                           aria-expanded="false">Streams</a>
-                        <ul class="dropdown-menu bg-dark" aria-labelledby="mtbStreams">
-                            <li><a class="dropdown-item nav-link" href="/livestream">My Stream</a></li>
-                            <li><a class="dropdown-item nav-link" href="/favoritestreams">Favorites</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/videos">Videos</a>
                     </li>

@@ -45,7 +45,6 @@ class Routes
             '/admdash/usrmgmt' => [AdminController::class, 'manageUsers'],
             '/admdash/moderation' => [AdminController::class, 'moderation'],
 
-
             '/downloads' => [AuthController::class, 'downloads'],
             '/dashboard' => [AuthController::class, 'dashboard'],
             '/dashboard/edit/account' => [AuthController::class, 'dashboard'],
@@ -68,6 +67,9 @@ class Routes
             '/legal' => [SiteController::class, 'legal'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/tournaments' => [SiteController::class, 'tournaments'],
+            '/creators-streams' => [SiteController::class, 'creatorsStreams'],
+            '/creators' => [SiteController::class, 'creators'],
+            '/streams' => [SiteController::class, 'streams'],
 
             '/search' => [SearchController::class, 'find'],
 

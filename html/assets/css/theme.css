@@ -4,6 +4,16 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root,[data-bs-theme=light] {
+    --mateable-primary: #8ea8e8;
+    --mateable-primary-strong: #6d8be0;
+    --mateable-secondary: #f2c94c;
+    --mateable-accent: #f4d06f;
+    --mateable-surface: #07111f;
+    --mateable-surface-2: #111d31;
+    --mateable-surface-3: #18253d;
+    --mateable-text: #f4f7fb;
+    --mateable-muted: #9aa7bf;
+    --mateable-border: #2c3d5a;
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
@@ -203,6 +213,178 @@ body {
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+body {
+    background: radial-gradient(circle at top left, rgba(142, 168, 232, 0.16), transparent 28%), linear-gradient(135deg, var(--mateable-surface) 0%, #0e1729 100%);
+    color: var(--mateable-text);
+}
+
+.navbar, .dropdown-menu, .card, .modal-content, footer, .form-control, .form-select, .input-group-text {
+    background-color: rgba(17, 29, 49, 0.95) !important;
+    color: var(--mateable-text) !important;
+    border-color: var(--mateable-border) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.navbar .nav-link, .navbar .navbar-brand, footer a, .dropdown-item, .modal-content a {
+    color: var(--mateable-text) !important;
+}
+
+.navbar .nav-link:hover, .dropdown-item:hover, footer a:hover {
+    color: var(--mateable-accent) !important;
+}
+
+.btn-primary, .btn-info, .btn-outline-primary {
+    background: linear-gradient(135deg, var(--mateable-secondary) 0%, var(--mateable-accent) 100%);
+    border-color: var(--mateable-secondary);
+    color: #07111f;
+    font-weight: 700;
+}
+
+.btn-primary:hover, .btn-info:hover, .btn-outline-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(242, 201, 76, 0.28);
+    color: #07111f;
+}
+
+.text-primary, .text-info, .section-heading, .portfolio-caption h4, .card-title {
+    color: var(--mateable-primary) !important;
+}
+
+.text-muted, .small, .item-intro, .card-text, .copyright {
+    color: var(--mateable-muted) !important;
+}
+
+.badge, .alert-success {
+    background-color: rgba(142, 168, 232, 0.2);
+    color: var(--mateable-accent);
+    border: 1px solid rgba(142, 168, 232, 0.3);
+}
+
+.mateable-hero {
+    background: linear-gradient(135deg, rgba(17,29,49,0.98) 0%, rgba(24,37,61,0.96) 100%);
+    border: 1px solid rgba(242, 201, 76, 0.25) !important;
+}
+
+.mateable-badge {
+    display: inline-block;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: rgba(242, 201, 76, 0.12);
+    border: 1px solid rgba(242, 201, 76, 0.28);
+    color: var(--mateable-accent);
+}
+
+.mateable-section {
+    padding: 4rem 0;
+    background: rgba(7, 17, 31, 0.7);
+    border-top: 1px solid rgba(142, 168, 232, 0.18);
+}
+
+.mateable-outline-btn {
+    color: #07111f !important;
+    border-color: rgba(242, 201, 76, 0.8) !important;
+    background: linear-gradient(135deg, var(--mateable-accent) 0%, var(--mateable-secondary) 100%) !important;
+    font-weight: 700;
+}
+
+.mateable-outline-btn:hover {
+    background: linear-gradient(135deg, #f8d96d 0%, #f2c94c 100%) !important;
+    color: #07111f !important;
+}
+
+.mateable-action-btn {
+    color: #07111f !important;
+    background: linear-gradient(135deg, var(--mateable-accent) 0%, var(--mateable-secondary) 100%) !important;
+    border: 1px solid rgba(242, 201, 76, 0.8) !important;
+    font-weight: 700;
+}
+
+.mateable-action-btn:hover {
+    background: linear-gradient(135deg, #f8d96d 0%, #f2c94c 100%) !important;
+    color: #07111f !important;
+}
+
+.mateable-dashboard-hero {
+    background: linear-gradient(135deg, rgba(17, 29, 49, 0.98) 0%, rgba(24, 37, 61, 0.95) 100%);
+    border: 1px solid rgba(242, 201, 76, 0.25) !important;
+}
+
+.mateable-stat-card, .mateable-panel {
+    background: rgba(17, 29, 49, 0.92);
+    border: 1px solid rgba(142, 168, 232, 0.16) !important;
+}
+
+.mateable-badge-pill {
+    background: rgba(242, 201, 76, 0.15);
+    color: var(--mateable-accent);
+    border: 1px solid rgba(242, 201, 76, 0.3);
+    padding: 0.45rem 0.7rem;
+}
+
+.portfolio-item .portfolio-caption {
+    padding-top: 1rem;
+}
+
+/* Strong override for CTA buttons so they stay high-contrast gold on dark */
+a.btn.mateable-outline-btn,
+a.btn.mateable-action-btn,
+a.btn.btn-outline-primary,
+a.btn.btn-primary {
+    position: relative;
+    overflow: hidden;
+    color: #07111f !important;
+    background: linear-gradient(135deg, #f4d06f 0%, #f2c94c 100%) !important;
+    border: 1px solid #f2c94c !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 8px 20px rgba(242, 201, 76, 0.22) !important;
+    text-shadow: none !important;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+    animation: mateable-button-pulse 2.6s ease-in-out infinite;
+}
+
+a.btn.mateable-outline-btn::after,
+a.btn.mateable-action-btn::after,
+a.btn.btn-outline-primary::after,
+a.btn.btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 45%, transparent 90%);
+    transform: translateX(-140%) skewX(-16deg);
+    transition: transform 500ms ease;
+    pointer-events: none;
+}
+
+a.btn.mateable-outline-btn:hover,
+a.btn.mateable-action-btn:hover,
+a.btn.btn-outline-primary:hover,
+a.btn.btn-primary:hover,
+a.btn.mateable-outline-btn:focus-visible,
+a.btn.mateable-action-btn:focus-visible,
+a.btn.btn-outline-primary:focus-visible,
+a.btn.btn-primary:focus-visible {
+    color: #07111f !important;
+    background: linear-gradient(135deg, #f8d96d 0%, #f2c94c 100%) !important;
+    border-color: #f8d96d !important;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 0 0 1px rgba(242, 201, 76, 0.18), 0 10px 24px rgba(242, 201, 76, 0.35), 0 0 18px rgba(244, 208, 111, 0.28) !important;
+}
+
+a.btn.mateable-outline-btn:hover::after,
+a.btn.mateable-action-btn:hover::after,
+a.btn.btn-outline-primary:hover::after,
+a.btn.btn-primary:hover::after {
+    transform: translateX(140%) skewX(-16deg);
+}
+
+@keyframes mateable-button-pulse {
+    0%, 100% {
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 8px 20px rgba(242, 201, 76, 0.22);
+    }
+    50% {
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 24px rgba(242, 201, 76, 0.28);
+    }
 }
 
 hr {

@@ -14,6 +14,29 @@ use mateable\core\Platform;
 
 <section class="py-5">
     <div class="container">
+        <div class="mateable-hero card border-0 shadow-sm mb-4">
+            <div class="card-body p-4 p-lg-5">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <p class="text-uppercase mb-2 fw-bold" style="letter-spacing:0.25rem; color: var(--mateable-accent);">Mateable Media</p>
+                        <h1 class="display-6 fw-bold mb-3">Competitive gaming, built around skill and community.</h1>
+                        <p class="lead mb-4" style="color: var(--mateable-muted);">
+                            Join ranked play, creator-led events, and a platform designed to reward performance over noise.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="/signup" class="btn btn-primary">Create Account</a>
+                            <a href="/tournaments" class="btn mateable-outline-btn">Explore Tournaments</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="mateable-badge">
+                            <i class="fa fa-trophy fa-3x"></i>
+                            <div class="mt-3 fw-semibold">Ranked • Fair • Competitive</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row g-4">
 
@@ -84,7 +107,7 @@ use mateable\core\Platform;
     </div>
 </section>
 
-<section class="bg-dark" id="portfolio">
+<section class="mateable-section" id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
