@@ -43,7 +43,7 @@
                     <div class="card-body p-4">
                         <h4 class="fw-semibold mb-3">Upcoming tournaments</h4>
                         <div class="d-grid gap-3">
-                            <?php foreach (($upcomingTournaments ?? []) as $tournament): ?>
+                            <?php foreach ($upcomingTournamentsc  as $tournament): ?>
                                 <div class="border rounded-3 p-3">
                                     <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
                                         <div>
@@ -65,7 +65,7 @@
                     <div class="card-body p-4">
                         <h4 class="fw-semibold mb-3">Recent results</h4>
                         <div class="d-grid gap-3">
-                            <?php foreach (($recentResults ?? []) as $result): ?>
+                            <?php foreach ($recentResultsc as $result): ?>
                                 <div class="border rounded-3 p-3">
                                     <div class="fw-semibold"><?= htmlspecialchars($result['name']) ?></div>
                                     <div class="text-muted small"><?= htmlspecialchars($result['result']) ?></div>

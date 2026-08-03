@@ -109,6 +109,7 @@
     --bs-link-hover-color: #cba72b;
     --bs-link-hover-color-rgb: rgba(203, 167, 43);
     --bs-code-color: #d63384;
+    --bs-nav-link-font-size: 0.25rem;
     --bs-highlight-color: #212529;
     --bs-highlight-bg: #fff3cd;
     --bs-border-width: 1px;
@@ -141,6 +142,7 @@
     --bs-body-color-rgb: 222, 226, 230;
     --bs-body-bg: #212529;
     --bs-body-bg-rgb: 33, 37, 41;
+    --bs-nav-link-font-size: 0.25rem;
     --bs-mateable-grey-rgb: 157, 177, 225;
     --bs-emphasis-color: #fff;
     --bs-emphasis-color-rgb: 255, 255, 255;
@@ -3878,6 +3880,18 @@ textarea.form-control-lg {
     background-clip: padding-box;
     border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
     border-radius: var(--bs-dropdown-border-radius)
+    max-height: 400px; /* adjust as needed */
+    overflow-y: auto;
+}
+
+/* Optional: smoother scrolling */
+.dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 3px;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -13780,10 +13794,10 @@ textarea.form-control-lg {
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-    font-size: 90%;
-    font-weight: 400;
-    padding: .75em 0;
-    letter-spacing: 1px;
+    font-size: .75rem;
+    font-weight: 500;
+    padding: .15em 0;
+    letter-spacing: 0.20em;
     color: #fff;
     font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif
 }
@@ -14458,4 +14472,96 @@ img::-moz-selection {
 
 #wBody {
     background: var(--bs-light);
+}
+
+.mega-menu {
+    width: 700px;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+/* Layout */
+.mega-container {
+    display: flex;
+}
+
+/* LEFT SIDE */
+.mega-left {
+    width: 200px;
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.mega-category {
+    padding: 12px;
+    cursor: pointer;
+    color: #ccc;
+    transition: 0.2s;
+}
+
+.mega-category:hover,
+.mega-category.active {
+    background: #2c2c2c;
+    color: #fff;
+}
+
+/* RIGHT SIDE */
+.mega-right {
+    flex: 1;
+    padding: 15px;
+}
+
+.mega-panel {
+    display: none;
+}
+
+.mega-panel.active {
+    display: block;
+}
+
+.mega-panel h6 {
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.mega-panel a {
+    display: block;
+    padding: 6px 0;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.mega-panel a:hover {
+    color: #fff;
+}
+.mega-category i,
+.mega-panel a i {
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.mega-panel a:hover i {
+    transform: scale(1.15);
+    color: #f1c40f;
+}
+
+.mega-category i,
+.mega-panel a i {
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.mega-category:hover i,
+.mega-panel a:hover i {
+    transform: scale(1.15);
+    color: #f1c40f;
+}
+
+/* Make logout pop slightly */
+.mega-category.text-danger:hover {
+    background: rgba(255, 0, 0, 0.1);
 }

@@ -83,7 +83,7 @@ class AuthController extends Controller
             'postsc' => number_format(Platform::$app->post::postCount(Platform::$app->user->id)),
             'unreadc' => number_format(Platform::$app->message::unreadCount(Platform::$app->user->id)),
             'messagec' => number_format(Platform::$app->message::messageCount(Platform::$app->user->id)),
-            'activities' => Platform::$app->activity::findAll(['user_id' => Platform::$app->user->id], 'created_at DESC', 6),
+            'activities' => Platform::$app->activity::findAll(['user_id' => Platform::$app->user->id], 'created_at DESC', 16),
         ]);
     }
 

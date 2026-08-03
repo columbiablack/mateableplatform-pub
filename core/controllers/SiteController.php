@@ -19,11 +19,18 @@ class SiteController extends Controller
 {
     public string $type;
 
+    /**
+     * @return string
+     */
     public function aboutUs(): string
     {
         return $this->renderView('about-us');
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function contact(Request $request): string
     {
         $contact = new ContactForm();
@@ -42,11 +49,17 @@ class SiteController extends Controller
         return $this->renderView('contact', ['model' => $contact]);
     }
 
+    /**
+     * @return string
+     */
     public function home(): string
     {
         return $this->renderView('home');
     }
 
+    /**
+     * @return string
+     */
     public function legal(): string
     {
         $type = str_replace('type=','',$_SERVER['QUERY_STRING']);
@@ -56,11 +69,18 @@ class SiteController extends Controller
         };
     }
 
+    /**
+     * @return string
+     */
     public function verifyUs(): string
     {
         return $this->renderView('verification');
     }
 
+    /**
+     * @param $request
+     * @return string
+     */
     public function show($request): string
     {
         $id = $request->getRouteParams('id');
@@ -71,6 +91,9 @@ class SiteController extends Controller
         return ($id);
     }
 
+    /**
+     * @return string
+     */
     public function tournaments(): string
     {
         $upcomingTournaments = [
@@ -104,11 +127,14 @@ class SiteController extends Controller
         ];
 
         return $this->renderView('tournaments', [
-            'upcomingTournaments' => $upcomingTournaments,
-            'recentResults' => $recentResults,
+            'upcomingTournamentsc' => $upcomingTournaments,
+            'recentResultsc' => $recentResults,
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function creatorsStreams(): string
     {
         $featuredCreators = [
@@ -127,15 +153,5 @@ class SiteController extends Controller
             'featuredCreators' => $featuredCreators,
             'liveStreams' => $liveStreams,
         ]);
-    }
-
-    public function creators(): string
-    {
-        return $this->creatorsStreams();
-    }
-
-    public function streams(): string
-    {
-        return $this->creatorsStreams();
     }
 }

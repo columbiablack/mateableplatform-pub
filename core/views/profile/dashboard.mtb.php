@@ -168,16 +168,12 @@ use mateable\core\Platform;
                                 Create Event
                             </a>
 
-                            <a href="dashboard/edit?action=modify&category=account" class="btn btn-outline-secondary">
-                                Modify Account
-                            </a>
-
                             <a href="dashboard/edit?action=&category=profile" class="btn mateable-action-btn">
                                 Edit Profile
                             </a>
 
-                            <a href="dashboard/edit?action=manage&category=community" class="btn btn-outline-secondary">
-                                Manage Community
+                            <a href="dashboard/edit?action=modify&category=account" class="btn btn-outline-secondary">
+                                Modify Account
                             </a>
                         </div>
 

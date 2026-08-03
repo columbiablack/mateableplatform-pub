@@ -60,6 +60,7 @@ class Routes
             '/' => [SiteController::class, 'home'],
             '/home' => [SiteController::class, 'home'],
             '/news' => [SiteController::class, 'home'],
+
             '/about' => [SiteController::class, 'aboutUs'],
             '/contactus' => [SiteController::class, 'contact'],
             '/contact' => [SiteController::class, 'contact'],
@@ -68,12 +69,9 @@ class Routes
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/tournaments' => [SiteController::class, 'tournaments'],
             '/creators-streams' => [SiteController::class, 'creatorsStreams'],
-            '/creators' => [SiteController::class, 'creators'],
-            '/streams' => [SiteController::class, 'streams'],
-
             '/search' => [SearchController::class, 'find'],
 
-            '/videos' => [VidGigglesController::class, 'vidGiggles'],
+            // '/videos' => [VidGigglesController::class, 'vidGiggles'],
 
             '/feeds' => [FeedController::class, 'getFeedIndex'],
             '/apifeed', [FeedController::class, 'api'],

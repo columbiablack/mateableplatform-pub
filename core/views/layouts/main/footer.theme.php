@@ -359,5 +359,6 @@
 <!-- Modal End -->
 
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/theme.js"></script>
 </body>
 </html>
