@@ -35,9 +35,10 @@ use mateable\core\Platform;
 
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h5 class="fw-semibold mb-3 btn-outline-primary">
-                            Account Listing
-                        </h5>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-semibold mb-0">Account Listing</h5>
+                            <a href="/admdash/usrmgmt/add" class="btn btn-sm btn-outline-primary">Add User</a>
+                        </div>
 
                         <div class="table-responsive">
                             <table class="table table-hover align-middle">
@@ -97,7 +98,7 @@ use mateable\core\Platform;
                                     }
                                     ?>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-secondary">Modify</button>
+                                        <a href="/admdash/usrmgmt/menu?id=<?= (int) $userAccount->displayUserID() ?>" class="btn btn-sm btn-outline-secondary">Modify</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

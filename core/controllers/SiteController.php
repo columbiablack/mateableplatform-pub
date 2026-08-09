@@ -94,6 +94,20 @@ class SiteController extends Controller
     /**
      * @return string
      */
+    public function store(): string
+    {
+        $section = $_GET['section'] ?? 'games';
+
+        return $this->renderView('store', [
+            'section' => $section,
+            'sectionLabel' => \mateable\core\models\StoreModel::getSectionLabel($section),
+            'catalog' => \mateable\core\models\StoreModel::getCatalog($section),
+        ]);
+    }
+
+    /**
+     * @return string
+     */
     public function tournaments(): string
     {
         $upcomingTournaments = [
@@ -127,8 +141,8 @@ class SiteController extends Controller
         ];
 
         return $this->renderView('tournaments', [
-            'upcomingTournamentsc' => $upcomingTournaments,
-            'recentResultsc' => $recentResults,
+            'upcomingTournaments' => $upcomingTournaments,
+            'recentResults' => $recentResults,
         ]);
     }
 

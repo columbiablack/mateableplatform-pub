@@ -24,43 +24,32 @@ use mateable\core\Platform;
                     <a class="nav-link active" href="/news">News</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="mtbDownload" data-bs-toggle="dropdown" aria-expanded="false">Store</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="mtbStore" data-bs-toggle="dropdown" aria-expanded="false">Store</a>
                     <ul class="dropdown-menu mega-menu bg-dark p-0" aria-labelledby="mtbStore">
                         <div class="mega-container d-flex">
-
-                            <!-- LEFT: MAIN CATEGORIES -->
                             <div class="mega-left">
                                 <a class="mega-category active" data-target="Games"><i class="bi bi-controller"></i> Games</a>
                                 <a class="mega-category" data-target="Software"><i class="bi bi-cpu"></i> Software</a>
                                 <a class="mega-category" data-target="Rewards"><i class="bi bi-gift"></i> Rewards</a>
                             </div>
-
-                            <!-- RIGHT: SUBCATEGORY PANELS -->
                             <div class="mega-right">
-
-                                <!-- GAMES -->
                                 <div class="mega-panel active" id="Games">
                                     <h6>PC & Mobile Games</h6>
-                                    <a href="#"><i class="bi bi-stars"></i> New Releases</a>
-                                    <a href="#"><i class="bi bi-heart"></i> Wishlist</a>
-                                    <a href="#"><i class="bi bi-box-seam"></i> My Inventory</a>
+                                    <a href="/store?section=games"><i class="bi bi-stars"></i> New Releases</a>
+                                    <a href="/store?section=games"><i class="bi bi-heart"></i> Wishlist</a>
+                                    <a href="/store?section=games"><i class="bi bi-box-seam"></i> My Inventory</a>
                                 </div>
-
-                                <!-- SOFTWARE -->
                                 <div class="mega-panel" id="Software">
                                     <h6>Software & Apps</h6>
-                                    <a href="#"><i class="bi bi-pc-display"></i> Desktop</a>
-                                    <a href="#"><i class="bi bi-phone"></i> Mobile</a>
+                                    <a href="/store?section=software"><i class="bi bi-pc-display"></i> Desktop</a>
+                                    <a href="/store?section=software"><i class="bi bi-phone"></i> Mobile</a>
                                 </div>
-
-                                <!-- REWARDS -->
                                 <div class="mega-panel" id="Rewards">
                                     <h6>Rewards</h6>
-                                    <a href="#"><i class="bi bi-question-circle"></i> How to Earn</a>
-                                    <a href="#"><i class="bi bi-gift"></i> Redeem Points</a>
-                                    <a href="#"><i class="bi bi-ticket-perforated"></i> Redeem Code</a>
+                                    <a href="/store?section=rewards"><i class="bi bi-question-circle"></i> How to Earn</a>
+                                    <a href="/store?section=rewards"><i class="bi bi-gift"></i> Redeem Points</a>
+                                    <a href="/store?section=rewards"><i class="bi bi-ticket-perforated"></i> Redeem Code</a>
                                 </div>
-
                             </div>
                         </div>
                     </ul>
@@ -160,7 +149,7 @@ use mateable\core\Platform;
                             <!-- LEFT: MAIN CATEGORIES -->
                             <div class="mega-left">
 
-                                <a class="mega-category" data-target="Creators-Streams">
+                                <a class="mega-category active" data-target="Creators-Streams">
                                     <i class="bi bi-camera-video"></i>
                                     Creators & Streams
                                 </a>
@@ -170,6 +159,11 @@ use mateable\core\Platform;
                                     Tournaments
                                 </a>
 
+                                <a class="mega-category" data-target="CommunityHighlights">
+                                    <i class="bi bi-star"></i>
+                                    Community Highlights
+                                </a>
+
                             </div>
 
                             <!-- RIGHT: PANEL -->
@@ -177,18 +171,25 @@ use mateable\core\Platform;
 
                                 <div class="mega-panel active" id="Creators-Streams">
                                     <h6><i class="bi bi-broadcast"></i> Creators & Streams</h6>
-                                    <a href="/featured-creators" class="mega-item"><i class="bi bi-star"></i> Featured Creators</a>
-                                    <a href="/live-streams" class="mega-item"><i class="bi bi-play-circle"></i> Live Streams</a>
-                                    <a href="/become-creator" class="mega-item"><i class="bi bi-person-plus"></i> Become a Creator</a>
-                                    <a href="/gaming-clips" class="mega-item"><i class="bi bi-camera-reels"></i> Gaming Clips</a>
+                                    <a href="/creators-streams" class="mega-item"><i class="bi bi-star"></i> Featured Creators</a>
+                                    <a href="/streams" class="mega-item"><i class="bi bi-play-circle"></i> Live Streams</a>
+                                    <a href="/creators-streams" class="mega-item"><i class="bi bi-person-plus"></i> Become a Creator</a>
+                                    <a href="/creators-streams" class="mega-item"><i class="bi bi-camera-reels"></i> Gaming Clips</a>
                                 </div>
 
                                 <div class="mega-panel" id="Tournaments">
                                     <h6 class="text-white mb-3"><i class="bi bi-trophy"></i> Tournaments</h6>
-                                    <a href="/browse-tournaments" class="mega-item"><i class="bi bi-search"></i>Browse Tournaments</a>
-                                    <a href="/my-tournaments" class="mega-item"><i class="bi bi-controller"></i>My Competitions</a>
-                                    <a href="/create-tournament" class="mega-item"><i class="bi bi-plus-circle"></i>Create Tournament</a>
-                                    <a href="/leaderboards" class="mega-item"><i class="bi bi-bar-chart"></i>Leaderboards</a>
+                                    <a href="/tournaments" class="mega-item"><i class="bi bi-search"></i> Browse Tournaments</a>
+                                    <a href="/tournaments" class="mega-item"><i class="bi bi-controller"></i> My Competitions</a>
+                                    <a href="/tournaments" class="mega-item"><i class="bi bi-plus-circle"></i> Create Tournament</a>
+                                    <a href="/leaderboards" class="mega-item"><i class="bi bi-bar-chart"></i> Leaderboards</a>
+                                </div>
+
+                                <div class="mega-panel" id="CommunityHighlights">
+                                    <h6 class="text-white mb-3"><i class="bi bi-star"></i> Community Highlights</h6>
+                                    <a href="/creators-streams" class="mega-item"><i class="bi bi-camera-video"></i> Spotlight Feed</a>
+                                    <a href="/tournaments" class="mega-item"><i class="bi bi-trophy"></i> Weekly Brackets</a>
+                                    <a href="/streams" class="mega-item"><i class="bi bi-play-circle"></i> Live Watch Party</a>
                                 </div>
 
                             </div>
@@ -274,29 +275,29 @@ use mateable\core\Platform;
                                         <a href="/dashboard"><i class="bi bi-speedometer2"></i> My Dashboard</a>
                                         <a href="/dashboard/edit/account"><i class="bi bi-gear"></i> Account Settings</a>
                                         <a href="/dashboard/edit/profile"><i class="bi bi-person-circle"></i> Edit Profile</a>
-                                        <a href="#"><i class="bi bi-bar-chart"></i> My Game Stats</a>
+                                        <a href="/dashboard"><i class="bi bi-bar-chart"></i> My Game Stats</a>
                                     </div>
 
                                     <!-- MESSAGES -->
                                     <div class="mega-panel" id="Messages">
                                         <h6>Messages</h6>
-                                        <a href="#"><i class="bi bi-inbox"></i> Inbox</a>
-                                        <a href="#"><i class="bi bi-archive"></i> Archive</a>
-                                        <a href="#"><i class="bi bi-trash"></i> Trash</a>
+                                        <a href="/messages"><i class="bi bi-inbox"></i> Inbox</a>
+                                        <a href="/messages"><i class="bi bi-archive"></i> Archive</a>
+                                        <a href="/messages"><i class="bi bi-trash"></i> Trash</a>
                                     </div>
 
                                     <!-- PAYMENTS -->
                                     <div class="mega-panel" id="Payments">
                                         <h6>Payments</h6>
-                                        <a href="#"><i class="bi bi-credit-card"></i> Payment Methods</a>
-                                        <a href="#"><i class="bi bi-receipt"></i> Billing History</a>
+                                        <a href="/payments"><i class="bi bi-credit-card"></i> Payment Methods</a>
+                                        <a href="/payments"><i class="bi bi-receipt"></i> Billing History</a>
                                     </div>
 
                                     <!-- SUBSCRIPTIONS -->
                                     <div class="mega-panel" id="Subscriptions">
                                         <h6>My Subscriptions</h6>
-                                        <a href="#"><i class="bi bi-people"></i> Who's Following Me</a>
-                                        <a href="#"><i class="bi bi-arrow-repeat"></i> Manage Subscriptions</a>
+                                        <a href="/subscriptions"><i class="bi bi-people"></i> Who's Following Me</a>
+                                        <a href="/subscriptions"><i class="bi bi-arrow-repeat"></i> Manage Subscriptions</a>
                                     </div>
 
                                 </div>

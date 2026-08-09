@@ -6,10 +6,10 @@
 
 namespace mateable\core\models;
 
-class NewsPostModel extends DBModel
+class NewsPostModel extends DB
 {
     public int $id;
-    public int $user_id;
+    public int $user_id = 0;
     public string $content = '';
     public string $post_date = '';
 
@@ -35,7 +35,9 @@ class NewsPostModel extends DBModel
 
     public function rules(): array
     {
-        return [];
+        return [
+            'content' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3], [self::RULE_MAX, 'max' => 10000]],
+        ];
     }
 
     public function labels() : array

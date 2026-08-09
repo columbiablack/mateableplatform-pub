@@ -9,7 +9,6 @@ namespace mateable\core;
 use mateable\core\models\ActivityModel;
 use PDOException;
 use mateable\core\controllers\Controller;
-use mateable\core\controllers\DownloadsController;
 use mateable\core\controllers\VidGigglesController;
 use mateable\core\db\Database;
 use mateable\core\db\VidDatabase;
@@ -52,7 +51,6 @@ class Platform
      * Controllers
      **/
     public Controller $controller;
-    public DownloadsController $downloads;      // Downloads Controller
     public VidGigglesController $vidGiggles;    // VidGiggles Controller
 
     /**
@@ -99,7 +97,6 @@ class Platform
         $this->controller = new Controller();
         $this->viewManager = new ViewManager();
         $this->activity = new ActivityModel();
-        $this->downloads = new DownloadsController();
         $this->vidGiggles = new VidGigglesController();
 
         /**

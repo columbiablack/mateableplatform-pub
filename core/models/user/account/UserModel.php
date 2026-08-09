@@ -79,6 +79,26 @@ class UserModel extends User
         return parent::updateUserInfo($id);
     }
 
+    public function updateAdministrativeStatus(int $role, string $accountStatus): bool
+    {
+        if (!in_array($role, [self::ROLE_MEMBER, self::ROLE_MODERATOR, self::ROLE_ADMINISTRATOR], true)) {
+            return false;
+        }
+
+        if (!in_array($accountStatus, [self::ACCOUNT_STATUS_ACTIVE, self::ACCOUNT_STATUS_PENDING, self::ACCOUNT_STATUS_SUSPENDED], true)) {
+            return false;
+        }
+
+        $statement = self::prepare(
+            'UPDATE ' . self::tableName() . ' SET role = :role, account_status = :account_status WHERE id = :id'
+        );
+        $statement->bindValue(':role', $role, \PDO::PARAM_INT);
+        $statement->bindValue(':account_status', $accountStatus);
+        $statement->bindValue(':id', $this->id, \PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+
     public function rules(): array
     {
         return [

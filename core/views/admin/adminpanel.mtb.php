@@ -85,8 +85,8 @@
                             <a href="/admdash/usrmgmt" class="btn btn-small btn-outline-primary">
                                 Manage Users
                             </a>
-                            <a href="/admdash/moderation" class="btn btn-small btn-outline-secondary">
-                                Moderation Queue
+                            <a href="/admdash/usrmgmt" class="btn btn-small btn-outline-secondary">
+                                Review User Status
                             </a>
                             <a href="/admin/settings" class="btn btn-small btn-outline-danger">
                                 Platform Settings
@@ -128,6 +128,30 @@
                             </a>
                             <a href="/admin/settings" class="btn btn-small btn-outline-danger">
                                 Platform Settings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            Tournament Moderation
+                        </h5>
+
+                        <div class="d-grid gap-2">
+                            <a href="/admdash/tournaments" class="btn btn-small btn-outline-primary">
+                                Manage Tournaments
+                            </a>
+                            <a href="/tournaments" class="btn btn-small btn-outline-secondary">
+                                View Tournament Hub
+                            </a>
+                            <a href="/leaderboards" class="btn btn-small btn-outline-info">
+                                Review Leaderboards
                             </a>
                         </div>
                     </div>

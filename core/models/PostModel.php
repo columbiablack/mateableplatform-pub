@@ -6,8 +6,6 @@
 
 namespace mateable\core\models;
 
-use mateable\core\Platform;
-
 class PostModel extends DB
 {
     public int $id;

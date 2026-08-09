@@ -155,7 +155,7 @@ use mateable\core\Platform;
 
                         <div class="d-grid gap-1 mb-sm-1">
                             <?php if(Platform::$app->user->role === Platform::$app->user::ROLE_ADMINISTRATOR): ?>
-                                <a href="admdash/post" class="btn btn-small mateable-action-btn">
+                                <a href="/admdash" class="btn btn-small mateable-action-btn">
                                     Create News Post
                                 </a>
                             <?php endif; ?>
