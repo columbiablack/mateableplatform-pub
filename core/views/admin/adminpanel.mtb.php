@@ -5,6 +5,7 @@
  */
 /**
  * @var $totalu
+ * @var $activeUsers
  */
 ?>
 <section id="admin-dashboard" class="pt-4 pb-5">
@@ -35,8 +36,9 @@
             <div class="col-md-3">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <h6 class="text-muted">Total Posts</h6>
-                        <h3 class="fw-bold mb-0">0</h3>
+                        <h6 class="text-muted">Active Visitors</h6>
+                        <h3 class="fw-bold mb-0"><?php echo $activeUsers ?? 0; ?></h3>
+                        <div class="text-muted small">Last 15 minutes</div>
                     </div>
                 </div>
             </div>
@@ -73,7 +75,7 @@
         <div class="row g-4">
 
             <!-- Admin Sidebar -->
-            <div class="col-lg-4">
+            <div class="col-lg-3">
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -110,8 +112,7 @@
 
             </div>
 
-            <!-- Admin Sidebar -->
-            <div class="col-lg-4">
+            <div class="col-lg-3">
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -126,16 +127,13 @@
                             <a href="/admdash/newsmgmt" class="btn btn-small btn-outline-secondary">
                                 Manage News
                             </a>
-                            <a href="/admin/settings" class="btn btn-small btn-outline-danger">
-                                Platform Settings
-                            </a>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -152,6 +150,24 @@
                             </a>
                             <a href="/leaderboards" class="btn btn-small btn-outline-info">
                                 Review Leaderboards
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">
+                            Database
+                        </h5>
+
+                        <div class="d-grid gap-2">
+                            <a href="/admdash/portal/webmigrate" class="btn btn-small btn-outline-primary">
+                                Run Migrations
                             </a>
                         </div>
                     </div>

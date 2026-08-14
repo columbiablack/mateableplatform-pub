@@ -8,6 +8,8 @@ namespace mateable\core\controllers;
 
 use mateable\core\http\Request;
 use mateable\core\models\ContactForm;
+use mateable\core\models\TournamentModel;
+use mateable\core\models\TournamentEntryModel;
 use mateable\core\Platform;
 
 /**
@@ -108,42 +110,76 @@ class SiteController extends Controller
     /**
      * @return string
      */
-    public function tournaments(): string
+    public function tournaments(Request $request): string
     {
-        $upcomingTournaments = [
-            [
-                'title' => 'Nightfall Cup',
-                'game' => 'Arcade Showdown',
-                'date' => 'Aug 03 · 8:00 PM',
-                'slots' => '24 spots left',
-                'description' => 'Fast-paced bracket play for players who love clutch finishes and bold plays.'
-            ],
-            [
-                'title' => 'Rift Arena',
-                'game' => 'Strategy Clash',
-                'date' => 'Aug 10 · 7:30 PM',
-                'slots' => '16 spots left',
-                'description' => 'A tactical event for squads that thrive on planning, timing, and coordination.'
-            ],
-            [
-                'title' => 'Pulse Invitational',
-                'game' => 'Skill Sprint',
-                'date' => 'Aug 17 · 9:00 PM',
-                'slots' => '12 spots left',
-                'description' => 'A community favorite built for high-energy, high-skill matches.'
-            ],
-        ];
-
-        $recentResults = [
-            ['name' => 'Rin', 'result' => 'Won Nightfall Cup', 'game' => 'Arcade Showdown'],
-            ['name' => 'Mika', 'result' => 'Top 4 in Rift Arena', 'game' => 'Strategy Clash'],
-            ['name' => 'Jace', 'result' => 'Claimed Pulse Invitational', 'game' => 'Skill Sprint'],
-        ];
-
         return $this->renderView('tournaments', [
-            'upcomingTournaments' => $upcomingTournaments,
-            'recentResults' => $recentResults,
+            'tournaments' => TournamentModel::findAll(
+                ['moderation_status' => TournamentModel::MODERATION_APPROVED],
+                'starts_at ASC'
+            ),
+            'newTournament' => new TournamentModel(),
         ]);
+    }
+
+    public function createTournament(Request $request): string
+    {
+        if (Platform::isGuest()) {
+            Platform::$app->session->setFlash('warning', 'Sign in before creating a tournament.');
+            Platform::$app->response->redirect('/signin');
+            return '';
+        }
+
+        $tournament = new TournamentModel();
+        $tournament->loadData($request->getBody());
+        $tournament->creator_id = (int) Platform::$app->user->id;
+        $tournament->max_players = max(2, (int) $tournament->max_players);
+        $tournament->starts_at = str_replace('T', ' ', $tournament->starts_at);
+        $tournament->status = TournamentModel::STATUS_OPEN;
+        $tournament->moderation_status = TournamentModel::MODERATION_PENDING;
+
+        if ($tournament->validate() && $tournament->save()) {
+            Platform::$app->session->setFlash('success', 'Your tournament was submitted for review.');
+        } else {
+            Platform::$app->session->setFlash('warning', 'The tournament could not be submitted. Check the form details.');
+        }
+
+        Platform::$app->response->redirect('/tournaments');
+        return '';
+    }
+
+    public function joinTournament(Request $request): string
+    {
+        if (Platform::isGuest()) {
+            Platform::$app->session->setFlash('warning', 'Sign in before joining a tournament.');
+            Platform::$app->response->redirect('/signin');
+            return '';
+        }
+
+        $tournament = TournamentModel::findOne(['id' => (int) ($request->getBody()['id'] ?? 0)]);
+        $userId = (int) Platform::$app->user->id;
+        $entry = $tournament ? TournamentEntryModel::findOne([
+            'tournament_id' => $tournament->id,
+            'user_id' => $userId,
+        ]) : null;
+
+        if ($tournament && !$entry && $tournament->moderation_status === TournamentModel::MODERATION_APPROVED) {
+            $entry = new TournamentEntryModel();
+            $entry->tournament_id = $tournament->id;
+            $entry->user_id = $userId;
+
+            if ($entry->save()) {
+                Platform::$app->session->setFlash('success', 'You are registered for ' . $tournament->title . '.');
+            } else {
+                Platform::$app->session->setFlash('warning', 'You could not be registered for that tournament.');
+            }
+        } elseif ($entry) {
+            Platform::$app->session->setFlash('warning', 'You are already registered for that tournament.');
+        } else {
+            Platform::$app->session->setFlash('warning', 'That tournament is not available for registration.');
+        }
+
+        Platform::$app->response->redirect('/tournaments');
+        return '';
     }
 
     /**

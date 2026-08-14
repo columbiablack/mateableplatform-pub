@@ -4,15 +4,11 @@
  * Copyright (c) 2026. Mateable LLC
  */
 
-namespace mateable\core\migrations;
-
-use mateable\core\Platform;
-
 class m07_Messages
 {
     public function up(): void
     {
-        $db = Platform::$app->db;
+        $db = \mateable\core\Platform::$app->db;
         $SQL = "CREATE TABLE messages (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     sender_id INT NOT NULL,

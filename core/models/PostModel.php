@@ -12,6 +12,7 @@ class PostModel extends DB
     public int $user_id;
     public string $content = '';
     public string $created_at = '';
+    public string $moderation_status = 'pending';
 
     public static function tableName(): string
     {
@@ -50,6 +51,21 @@ class PostModel extends DB
     public static function postCount(int $user_Id): int
     {
         return static::countAll(['user_id' => $user_Id]);
+    }
+
+    public function updateModerationStatus(string $status): bool
+    {
+        if (!in_array($status, ['pending', 'approved', 'rejected'], true)) {
+            return false;
+        }
+
+        $statement = self::prepare(
+            'UPDATE ' . self::tableName() . ' SET moderation_status = :moderation_status WHERE id = :id'
+        );
+        $statement->bindValue(':moderation_status', $status);
+        $statement->bindValue(':id', $this->id, \PDO::PARAM_INT);
+
+        return $statement->execute();
     }
 
 }

@@ -26,7 +26,7 @@ class m01_Initial {
                 ip_address VARCHAR(25) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 last_login datetime NOT NULL, 
-                admin_note text NULL, 
+                admin_note text NULL
             )  ENGINE=INNODB;";
         $db->pdo->exec($SQL);
     }

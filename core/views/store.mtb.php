@@ -12,7 +12,7 @@
                         <p class="text-info mb-2 fw-semibold">Mateable Store</p>
                         <h1 class="display-6 fw-bold mb-3">Browse the marketplace for games, software, and team rewards.</h1>
                         <p class="text-muted mb-4">
-                            The store now renders as a real catalog view, with category-driven browsing and static product cards that fit the current MVC structure.
+                            The store now renders all catalogs, with a category-driven browsing structure.
                         </p>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="/store?section=games" class="btn mateable-outline-btn">Games</a>

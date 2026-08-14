@@ -33,6 +33,7 @@ class Routes
             'adminDash',
             'webMigrate',
             'managePosts',
+            'moderatePost',
             'deletePost',
             'manageUsers',
             'newsManagement',
@@ -40,6 +41,8 @@ class Routes
             'deleteNewsPost',
             'settings',
             'tournamentModeration',
+            'moderateTournament',
+            'deleteTournament',
             'moderation',
         ];
     }
@@ -110,11 +113,16 @@ class Routes
         $routesPOST['post'] = [
             '/admdash/moderation' => [AdminController::class, 'moderation'],
             '/admdash/postmgmt/delete' => [AdminController::class, 'deletePost'],
+            '/admdash/postmgmt/moderate' => [AdminController::class, 'moderatePost'],
             '/admdash/newsmgmt/create' => [AdminController::class, 'createNewsPost'],
             '/admdash/newsmgmt/delete' => [AdminController::class, 'deleteNewsPost'],
             '/admdash/usrmgmt/add' => [AdminController::class, 'addUser'],
             '/admdash/usrmgmt/delete' => [AdminController::class, 'deleteUser'],
             '/admdash/usrmgmt/status' => [AdminController::class, 'updateUserStatus'],
+            '/admdash/tournaments/moderate' => [AdminController::class, 'moderateTournament'],
+            '/admdash/tournaments/delete' => [AdminController::class, 'deleteTournament'],
+            '/tournaments/create' => [SiteController::class, 'createTournament'],
+            '/tournaments/join' => [SiteController::class, 'joinTournament'],
 
             '/signin' => [AuthController::class, 'login'],
             '/signup' => [AuthController::class, 'register'],

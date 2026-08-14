@@ -14,11 +14,9 @@ class Session
 
     public function __construct(int $lifetime = 604800) // default: 7 days
     {
-        session_start();
         $this->lifetime = $lifetime;
-
         $this->applyLifetimeSettings();
-
+        session_start();
 
         // Refresh cookie on activity
         $this->refreshCookie();

@@ -10,6 +10,8 @@ use mateable\core\http\Request;
 use mateable\core\middlewares\AdminMiddleware;
 use mateable\core\models\NewsPostModel;
 use mateable\core\models\PostModel;
+use mateable\core\models\SessionModel;
+use mateable\core\models\TournamentModel;
 use mateable\core\models\user\account\UserModel;
 use mateable\core\Platform;
 use mateable\core\routes\Routes;
@@ -26,7 +28,8 @@ class AdminController extends Controller
         $this->setLayout('auth');
         Platform::$app->activity::log(Platform::$app->user->id, "admin dashboard", "You viewed the Administration Dashboard!");
         return $this->renderView('admin/adminpanel', [
-            'totalu'=> Platform::$app->user::countAll(),
+            'totalu' => UserModel::countAll(),
+            'activeUsers' => SessionModel::countActiveSessions(),
         ]);
     }
 
@@ -39,7 +42,15 @@ class AdminController extends Controller
 
     public function managePosts(): string
     {
+        $query = trim((string) ($_GET['q'] ?? ''));
+        $status = (string) ($_GET['status'] ?? 'all');
         $posts = PostModel::findAll([], 'created_at DESC');
+
+        $posts = array_values(array_filter($posts, static function (PostModel $post) use ($query, $status): bool {
+            $matchesQuery = $query === '' || str_contains(strtolower($post->content), strtolower($query));
+            $matchesStatus = $status === 'all' || $post->moderation_status === $status;
+            return $matchesQuery && $matchesStatus;
+        }));
         $postAuthors = [];
 
         foreach ($posts as $post) {
@@ -50,7 +61,26 @@ class AdminController extends Controller
         return $this->renderView('admin/postmgmt', [
             'posts' => $posts,
             'postAuthors' => $postAuthors,
+            'query' => $query,
+            'status' => $status,
         ]);
+    }
+
+    public function moderatePost(Request $request): string
+    {
+        $body = $request->getBody();
+        $id = (int) ($body['id'] ?? 0);
+        $post = $id > 0 ? PostModel::findOne(['id' => $id]) : null;
+        $status = (string) ($body['moderation_status'] ?? 'pending');
+
+        if ($post && $post->updateModerationStatus($status)) {
+            Platform::$app->session->setFlash('success', 'The post moderation status was updated.');
+        } else {
+            Platform::$app->session->setFlash('warning', 'The post moderation status could not be updated.');
+        }
+
+        Platform::$app->response->redirect('/admdash/postmgmt');
+        return '';
     }
 
     public function deletePost(Request $request): string
@@ -204,9 +234,62 @@ class AdminController extends Controller
 
     public function tournamentModeration(): string
     {
+        $status = (string) ($_GET['status'] ?? 'all');
+        $allTournaments = TournamentModel::findAll([], 'created_at DESC');
+        $tournaments = $status === 'all'
+            ? $allTournaments
+            : array_values(array_filter(
+                $allTournaments,
+                static fn (TournamentModel $tournament): bool => $tournament->moderation_status === $status
+            ));
+        $creators = [];
+
+        foreach ($tournaments as $tournament) {
+            $creator = UserModel::findOne(['id' => $tournament->creator_id]);
+            $creators[$tournament->id] = $creator?->displayName() ?: 'Unknown user';
+        }
+
         return $this->renderView('admin/tournaments', [
-            'a_tournaments' => [],
+            'tournaments' => $tournaments,
+            'creators' => $creators,
+            'status' => $status,
+            'counts' => [
+                'all' => count($allTournaments),
+                'pending' => count(array_filter($allTournaments, static fn (TournamentModel $tournament): bool => $tournament->moderation_status === TournamentModel::MODERATION_PENDING)),
+                'approved' => count(array_filter($allTournaments, static fn (TournamentModel $tournament): bool => $tournament->moderation_status === TournamentModel::MODERATION_APPROVED)),
+                'rejected' => count(array_filter($allTournaments, static fn (TournamentModel $tournament): bool => $tournament->moderation_status === TournamentModel::MODERATION_REJECTED)),
+            ],
         ]);
+    }
+
+    public function moderateTournament(Request $request): string
+    {
+        $body = $request->getBody();
+        $tournament = TournamentModel::findOne(['id' => (int) ($body['id'] ?? 0)]);
+        $status = (string) ($body['moderation_status'] ?? TournamentModel::MODERATION_PENDING);
+
+        if ($tournament && $tournament->updateModerationStatus($status)) {
+            Platform::$app->session->setFlash('success', 'The tournament moderation status was updated.');
+        } else {
+            Platform::$app->session->setFlash('warning', 'The tournament moderation status could not be updated.');
+        }
+
+        Platform::$app->response->redirect('/admdash/tournaments');
+        return '';
+    }
+
+    public function deleteTournament(Request $request): string
+    {
+        $tournament = TournamentModel::findOne(['id' => (int) ($request->getBody()['id'] ?? 0)]);
+
+        if ($tournament && $tournament->remove()) {
+            Platform::$app->session->setFlash('success', 'The tournament was deleted.');
+        } else {
+            Platform::$app->session->setFlash('warning', 'The tournament could not be deleted.');
+        }
+
+        Platform::$app->response->redirect('/admdash/tournaments');
+        return '';
     }
 
     public function moderation(Request $request): string
@@ -218,6 +301,12 @@ class AdminController extends Controller
 
     public function webMigrate(): string
     {
-        return $this->renderView(Platform::$ROOT_DIR.'/Migrations.php', []);
+        ob_start();
+        Platform::$app->db->applyMigrations();
+        $migrationOutput = ob_get_clean();
+
+        return $this->renderView('admin/migrations', [
+            'migrationOutput' => $migrationOutput,
+        ]);
     }
 }

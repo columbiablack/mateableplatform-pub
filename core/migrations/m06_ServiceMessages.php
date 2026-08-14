@@ -4,8 +4,6 @@
  * Copyright (c) 2024-2026. Mateable LLC
  */
 
-namespace mateable\core\migrations;
-
 class m06_ServiceMessages
 {
     public function up(): void

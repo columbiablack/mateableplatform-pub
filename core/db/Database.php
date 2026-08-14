@@ -29,30 +29,64 @@ class Database
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
 
-        $newMigrations = []; // Initialize as an empty array to collect new migrations
-        $files = scandir(Platform::$ROOT_DIR.'/core/migrations');
+        $newMigrations = [];
+        $failedMigrations = [];
+        $files = array_values(array_filter(
+            scandir(Platform::$ROOT_DIR.'/core/migrations'),
+            static fn (string $file): bool => str_ends_with($file, '.php')
+        ));
+        usort($files, static fn (string $left, string $right): int => strnatcasecmp($left, $right));
         $toApplyMigrations = array_diff($files, $appliedMigrations);
 
         echo '<p>Migration is fully loaded and has started.</p>'.PHP_EOL;
         foreach ($toApplyMigrations as $migration) {
-            if ($migration === '.' || $migration === '..') {
-                continue; // Skip the directory pointers
-            }
-
-            require_once Platform::$ROOT_DIR . '/core/migrations/' . $migration;
             $classname = pathinfo($migration, PATHINFO_FILENAME);
-            $instance = new $classname();
-            echo '<p>Migrating ' . $classname . '..</p>' . PHP_EOL;
-            $instance->up();
-            echo '<p>' . $classname . ' successfully migrated!</p>' . PHP_EOL;
-            $newMigrations[] = $migration; // Correctly accumulating new migrations
+            echo '<p>Migrating ' . htmlspecialchars($classname, ENT_QUOTES, 'UTF-8') . '..</p>' . PHP_EOL;
+
+            try {
+                require_once Platform::$ROOT_DIR . '/core/migrations/' . $migration;
+                $instance = new $classname();
+                $instance->up();
+                $newMigrations[] = $migration;
+                echo '<p>' . htmlspecialchars($classname, ENT_QUOTES, 'UTF-8') . ' successfully migrated!</p>' . PHP_EOL;
+            } catch (\Throwable $exception) {
+                if ($this->isAlreadyAppliedSchemaChange($exception)) {
+                    $newMigrations[] = $migration;
+                    echo '<p style="color:#8a6d1d;">' . htmlspecialchars($classname, ENT_QUOTES, 'UTF-8')
+                        . ' already applied in the database; recording it as applied.</p>' . PHP_EOL;
+                } else {
+                    $failedMigrations[$migration] = $exception->getMessage();
+                    echo '<p style="color:#b02a37;">' . htmlspecialchars($classname, ENT_QUOTES, 'UTF-8') . ' failed: '
+                        . htmlspecialchars($exception->getMessage(), ENT_QUOTES, 'UTF-8') . '</p>' . PHP_EOL;
+                    echo '<p>Continuing with the next migration.</p>' . PHP_EOL;
+                }
+            }
         }
 
         if (!empty($newMigrations)) {
             $this->saveMigrations($newMigrations);
-        } else {
+        }
+
+        if (empty($newMigrations) && empty($failedMigrations)) {
             echo '<p>All migrations are already applied.</p>'.PHP_EOL;
         }
+
+        if (!empty($failedMigrations)) {
+            echo '<h3>Migration failures</h3><ul>';
+            foreach ($failedMigrations as $migration => $error) {
+                echo '<li><strong>' . htmlspecialchars($migration, ENT_QUOTES, 'UTF-8') . ':</strong> '
+                    . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</li>';
+            }
+            echo '</ul><p>Failed migrations were not marked as applied and will be retried next time.</p>';
+        }
+    }
+
+    private function isAlreadyAppliedSchemaChange(\Throwable $exception): bool
+    {
+        $message = strtolower($exception->getMessage());
+
+        return str_contains($message, 'already exists')
+            || str_contains($message, 'duplicate column name');
     }
 
     private function saveMigrations(array $newMigrations): void {

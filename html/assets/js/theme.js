@@ -1,14 +1,30 @@
-document.querySelectorAll(".mega-category").forEach(item => {
-    item.addEventListener("mouseenter", function () {
-        // Remove active from all
-        document.querySelectorAll(".mega-category").forEach(i => i.classList.remove("active"));
-        document.querySelectorAll(".mega-panel").forEach(p => p.classList.remove("active"));
+document.querySelectorAll(".mega-menu").forEach(menu => {
+    const categories = menu.querySelectorAll(".mega-category");
+    const panels = menu.querySelectorAll(".mega-panel");
 
-        // Activate current
-        this.classList.add("active");
-        document.getElementById(this.dataset.target).classList.add("active");
+    const activateCategory = category => {
+        const target = menu.querySelector(`#${CSS.escape(category.dataset.target)}`);
+        if (!target) {
+            return;
+        }
+
+        categories.forEach(item => item.classList.remove("active"));
+        panels.forEach(panel => panel.classList.remove("active"));
+        category.classList.add("active");
+        target.classList.add("active");
+    };
+
+    categories.forEach(category => {
+        category.addEventListener("mouseenter", () => activateCategory(category));
+        category.addEventListener("click", event => {
+            if (category.getAttribute("href") === "#") {
+                event.preventDefault();
+            }
+            activateCategory(category);
+        });
     });
-});/*
+});
+/*
  * Copyright (c) 2026. Mateable LLC
  */
 

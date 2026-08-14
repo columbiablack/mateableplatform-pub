@@ -22,7 +22,7 @@
                         <form action="/admdash/newsmgmt/create" method="post">
                             <div class="mb-3">
                                 <label for="content" class="form-label">Announcement</label>
-                                <textarea id="content" name="content" class="form-control" rows="8" required minlength="3" maxlength="10000" placeholder="Write the announcement for the community..."><?= htmlspecialchars(isset($newsPost) ? $newsPost->content : '') ?></textarea>
+                                <textarea id="content" name="content" class="form-control" rows="8" required minlength="3" maxlength="10000" placeholder="Write the announcement for the community..."><?= htmlspecialchars(isset($newsPost) ? html_entity_decode($newsPost->content, ENT_QUOTES | ENT_HTML5, 'UTF-8') : '') ?></textarea>
                             </div>
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">Publish News</button>
@@ -50,7 +50,7 @@
                                 <div class="d-flex justify-content-between align-items-start gap-3">
                                     <div>
                                         <div class="small text-muted mb-1"><?= htmlspecialchars($newsPost->postDate()) ?></div>
-                                        <div class="text-break"><?= nl2br(htmlspecialchars($newsPost->postContent())) ?></div>
+                                        <div class="text-break"><?= \mateable\core\models\NewsPostModel::renderContent($newsPost->postContent()) ?></div>
                                     </div>
                                     <form action="/admdash/newsmgmt/delete" method="post" onsubmit="return confirm('Delete this news post?');">
                                         <input type="hidden" name="id" value="<?= (int) $newsPost->id ?>">

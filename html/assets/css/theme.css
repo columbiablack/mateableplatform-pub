@@ -14476,6 +14476,7 @@ img::-moz-selection {
 
 .mega-menu {
     width: 700px;
+    max-width: calc(100vw - 2rem);
     padding: 0;
     border-radius: 10px;
     overflow: hidden;
@@ -14564,4 +14565,61 @@ img::-moz-selection {
 /* Make logout pop slightly */
 .mega-category.text-danger:hover {
     background: rgba(255, 0, 0, 0.1);
+}
+
+@media (max-width: 991.98px) {
+    #mainNav {
+        padding: 0.65rem 0;
+    }
+
+    #mainNav .navbar-brand {
+        font-size: 1.35rem;
+    }
+
+    #mainNav .navbar-collapse {
+        max-height: calc(100vh - 4.5rem);
+        overflow-y: auto;
+        padding-top: 0.75rem;
+    }
+
+    #mainNav .navbar-nav {
+        width: 100%;
+    }
+
+    #mainNav .navbar-nav .nav-link {
+        padding: 0.75rem 0.5rem !important;
+        letter-spacing: 0.08em;
+    }
+
+    #mainNav .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        max-width: none;
+        margin: 0.25rem 0 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    #mainNav .mega-container {
+        display: block;
+    }
+
+    #mainNav .mega-left {
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid #333;
+    }
+
+    #mainNav .mega-category {
+        display: block;
+        padding: 0.75rem 1rem;
+    }
+
+    #mainNav .mega-right {
+        padding: 1rem;
+    }
+
+    #mainNav .mega-panel a {
+        padding: 0.65rem 0;
+    }
 }

@@ -6,9 +6,12 @@
 
 namespace mateable\core\models;
 
+use PDO;
+
 class SessionModel extends DB
 {
-    public string $user_id = '';
+    public int $id = 0;
+    public ?int $user_id = null;
     public string $session_id = '';
     public string $ip_address = '';
     public string $user_agent = '';
@@ -42,5 +45,20 @@ class SessionModel extends DB
     public function rules(): array
     {
         return [];
+    }
+
+    public static function countActiveSessions(int $seconds = 900): int
+    {
+        try {
+            $table = static::tableName();
+            $cutoff = time() - $seconds;
+            $sql = "SELECT COUNT(*) FROM {$table} WHERE UNIX_TIMESTAMP(last_activity) >= :cutoff";
+            $stmt = self::prepare($sql);
+            $stmt->bindValue(':cutoff', $cutoff, PDO::PARAM_INT);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (\Throwable $e) {
+            return 0;
+        }
     }
 }

@@ -105,6 +105,8 @@ class Platform
          **/
         try {
             $this->db = new Database($config['db']);
+            $this->sessionM = new SessionModel();
+            $this->trackSessionActivity();
         } catch (PDOException $e) {
             self::$app->response->statusCode(400);
             throw new PDOException("There is a problem with the database. Try again later or go to the <a href=\"{{site_url}}\">homepage</a>.", $e->getCode());
@@ -145,6 +147,44 @@ class Platform
     public static function isGuest(): bool
     {
         return !self::$app->user;
+    }
+
+    private function trackSessionActivity(): void
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            return;
+        }
+
+        $sessionId = session_id();
+        if ($sessionId === '') {
+            return;
+        }
+
+        $userId = $this->session->get('user');
+        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $now = date('Y-m-d H:i:s');
+        $expiresAt = date('Y-m-d H:i:s', time() + $this->session->getLifetime());
+
+        try {
+            $stmt = $this->db->prepare(
+                "INSERT INTO sessions (session_id, user_id, ip_address, user_agent, created_at, last_activity, expires_at)"
+                . " VALUES (:session_id, :user_id, :ip_address, :user_agent, :created_at, :last_activity, :expires_at)"
+                . " ON DUPLICATE KEY UPDATE user_id = VALUES(user_id), ip_address = VALUES(ip_address),"
+                . " user_agent = VALUES(user_agent), last_activity = VALUES(last_activity), expires_at = VALUES(expires_at)"
+            );
+
+            $stmt->bindValue(':session_id', $sessionId);
+            $stmt->bindValue(':user_id', $userId === false ? null : $userId, $userId === false ? \PDO::PARAM_NULL : \PDO::PARAM_INT);
+            $stmt->bindValue(':ip_address', $ipAddress);
+            $stmt->bindValue(':user_agent', $userAgent);
+            $stmt->bindValue(':created_at', $now);
+            $stmt->bindValue(':last_activity', $now);
+            $stmt->bindValue(':expires_at', $expiresAt);
+            $stmt->execute();
+        } catch (\Throwable $e) {
+            // Ignore session tracking failures.
+        }
     }
 
     public function run(): void

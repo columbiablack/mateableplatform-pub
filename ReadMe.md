@@ -1,18 +1,16 @@
 <p align="center">
   <a href="https://mateablemedia.com" target="_blank">
-    <img src="https://mateable.com/images/10.png" width="400" alt="Mateable Media Logo">
+    <img src="https://mateablemedia.com/images/10.png" width="400" alt="Mateable Media Logo">
   </a>
 </p>
 
-<p align="center">
-  <div align="center">
+<div align="center">
 
 [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
 [![Backend](https://img.shields.io/badge/PHP-Backend-blueviolet.svg)](https://www.php.net)
 [![Frontend](https://img.shields.io/badge/Javascript-Frontend-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-  </div>
-</p>
+</div>
 
 ---
 
