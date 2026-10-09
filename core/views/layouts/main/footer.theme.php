@@ -5,124 +5,84 @@
  */
 
 ?>
-<footer class="pt-5 pb-4 border-top">
+<footer class="site-footer">
     <div class="container">
-
-        <!-- Top Section -->
-        <div class="row mb-4">
-
-            <!-- Brand / Description -->
+        <div class="row mb-4 g-4">
             <div class="col-md-4 mb-3">
-                <h5 class="navbar-brand navbar-dark">{{app_name}}</h5>
-                <p class="text-muted small">
+                <h5 class="navbar-brand navbar-dark mb-3">{{app_name}}</h5>
+                <p class="mb-0" style="color: rgba(255,255,255,0.62); line-height: 1.7; max-width: 340px;">
                     {{app_name}} is a next-generation gaming platform where players compete,
                     connect, and grow through tournaments, community-driven features,
                     and creator-focused tools.
                 </p>
             </div>
 
-            <!-- Platform Links -->
             <div class="col-md-2 mb-3">
-                <h6 class="text-uppercase">Platform</h6>
-                <ul class="list-unstyled small">
-                    <li><a class="text-dark-emphasis" href="/about">About</a></li>
-                    <li><a class="text-dark-emphasis" href="/how-it-works">How It Works</a></li>
-                    <li><a class="text-dark-emphasis" href="/roadmap">Roadmap</a></li>
-                    <li><a class="text-dark-emphasis" href="/careers">Careers</a></li>
+                <h6 class="footer-heading">Platform</h6>
+                <ul class="list-unstyled small mb-0">
+                    <li class="mb-2"><a class="footer-link" href="/about">About</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/how-it-works">How It Works</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/roadmap">Roadmap</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/careers">Careers</a></li>
                 </ul>
             </div>
 
-            <!-- Community Links -->
             <div class="col-md-2 mb-3">
-                <h6 class="text-uppercase">Community</h6>
-                <ul class="list-unstyled small">
-                    <li><a class="text-dark-emphasis" href="/community/forums">Forums</a></li>
-                    <li><a class="text-dark-emphasis" href="/tournaments">Tournaments</a></li>
-                    <li><a class="text-dark-emphasis" href="/events">Events</a></li>
-                    <li><a class="text-dark-emphasis" href="/leaderboards">Leaderboards</a></li>
+                <h6 class="footer-heading">Community</h6>
+                <ul class="list-unstyled small mb-0">
+                    <li class="mb-2"><a class="footer-link" href="/community/forums">Forums</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/tournaments">Tournaments</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/events">Events</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/leaderboards">Leaderboards</a></li>
                 </ul>
             </div>
 
-            <!-- Support Links -->
             <div class="col-md-2 mb-3">
-                <h6 class="text-uppercase">Support</h6>
-                <ul class="list-unstyled small">
-                    <li><a class="text-dark-emphasis" href="/help">Help Center</a></li>
-                    <li><a class="text-dark-emphasis" href="/contact">Contact</a></li>
-                    <li><a class="text-dark-emphasis" href="/account-recovery">Account Recovery</a></li>
-                    <li><a class="text-dark-emphasis" href="/report">Report Abuse</a></li>
+                <h6 class="footer-heading">Support</h6>
+                <ul class="list-unstyled small mb-0">
+                    <li class="mb-2"><a class="footer-link" href="/help">Help Center</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/contact">Contact</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/account-recovery">Account Recovery</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/report">Report Abuse</a></li>
                 </ul>
             </div>
 
-            <!-- Legal Links -->
             <div class="col-md-2 mb-3">
-                <h6 class="text-uppercase">Legal</h6>
-                <ul class="list-unstyled small">
-                    <li><a class="text-dark-emphasis" href="/legal?type=privacypolicy">Privacy Policy</a></li>
-                    <li><a class="text-dark-emphasis" href="/legal?type=serviceterms">Terms of Use</a></li>
-                    <li><a class="text-dark-emphasis" href="/guidelines">Community Guidelines</a></li>
-                    <li><a class="text-dark-emphasis" href="/dmca">DMCA</a></li>
+                <h6 class="footer-heading">Legal</h6>
+                <ul class="list-unstyled small mb-0">
+                    <li class="mb-2"><a class="footer-link" href="/legal?type=privacypolicy">Privacy Policy</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/legal?type=serviceterms">Terms of Use</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/guidelines">Community Guidelines</a></li>
+                    <li class="mb-2"><a class="footer-link" href="/dmca">DMCA</a></li>
                 </ul>
             </div>
-
         </div>
 
-        <hr>
+        <hr style="border-color: rgba(255,255,255,0.08);">
 
-        <!-- Bottom Section -->
         <div class="row align-items-center">
-
-            <!-- Copyright -->
             <div class="col-md-4 text-md-start text-center mb-2 mb-md-0">
-                <span class="copyright small text-muted">
-                    © <?php echo date('Y'); ?> <a class="text-dark-emphasis" href="{{site_url}}">{{app_name}} LLC</a>. All rights reserved.
+                <span class="copyright small" style="color: rgba(255,255,255,0.6);">
+                    © <?php echo date('Y'); ?> <a href="{{site_url}}" style="color: rgba(255,255,255,0.8); text-decoration: none;">{{app_name}} LLC</a>. All rights reserved.
                 </span>
             </div>
 
-            <!-- Social Links -->
             <div class="col-md-4 text-center mb-2 mb-md-0">
                 <ul class="list-inline social-buttons mb-0">
-                    <li class="list-inline-item">
-                        <a href="https://x.com/mateable" aria-label="X">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://facebook.com/mateable" aria-label="Facebook">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://linkedin.com/company/mateable" aria-label="LinkedIn">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://discord.gg/JWafFNx6Kv" aria-label="Discord">
-                            <i class="fa fa-comments"></i>
-                        </a>
-                    </li>
+                    <li class="list-inline-item"><a class="social-btn" href="https://x.com/mateable" aria-label="X"><i class="fa fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a class="social-btn" href="https://facebook.com/mateable" aria-label="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li class="list-inline-item"><a class="social-btn" href="https://linkedin.com/company/mateable" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="list-inline-item"><a class="social-btn" href="https://discord.gg/JWafFNx6Kv" aria-label="Discord"><i class="fa fa-comments"></i></a></li>
                 </ul>
             </div>
 
-            <!-- Quick Legal -->
             <div class="col-md-4 text-md-end text-center">
                 <ul class="list-inline quicklinks mb-0 small">
-                    <li class="list-inline-item">
-                        <a class="text-dark-emphasis" href="/legal?type=privacypolicy">
-                            Privacy
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-dark-emphasis" href="/legal?type=serviceterms">
-                            Terms
-                        </a>
-                    </li>
+                    <li class="list-inline-item"><a href="/legal?type=privacypolicy">Privacy</a></li>
+                    <li class="list-inline-item"><a href="/legal?type=serviceterms">Terms</a></li>
                 </ul>
             </div>
-
         </div>
-
     </div>
 </footer>
 <!-- Modal Begin -->

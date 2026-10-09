@@ -166,7 +166,19 @@ class UserModel extends User
 
     public function displayName(): string
     {
-        return $this->firstname .' '. $this->lastname ?? '';
+        $first = trim((string) ($this->firstname ?? ''));
+        $last = trim((string) ($this->lastname ?? ''));
+        $nickname = trim((string) ($this->nickname ?? ''));
+
+        if ($first !== '' || $last !== '') {
+            return trim($first . ' ' . $last);
+        }
+
+        if ($nickname !== '') {
+            return $nickname;
+        }
+
+        return trim((string) ($this->email ?? 'Unknown User'));
     }
 
     public function displayFirstName(): string

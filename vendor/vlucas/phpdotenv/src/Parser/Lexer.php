@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Parser;
@@ -50,7 +46,7 @@ final class Lexer
         $offset = 0;
 
         while (isset($content[$offset])) {
-            if (!\preg_match($regex, $content, $matches, 0, $offset)) {
+            if (\preg_match($regex, $content, $matches, 0, $offset) !== 1) {
                 throw new \Error(\sprintf('Lexer encountered unexpected character [%s].', $content[$offset]));
             }
 

@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Parser;
@@ -34,7 +30,7 @@ final class Entry
      *
      * @return void
      */
-    public function __construct(string $name, Value $value = null)
+    public function __construct(string $name, ?Value $value = null)
     {
         $this->name = $name;
         $this->value = $value;

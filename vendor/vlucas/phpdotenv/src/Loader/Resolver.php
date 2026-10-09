@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Loader;
@@ -41,9 +37,23 @@ final class Resolver
      */
     public static function resolve(RepositoryInterface $repository, Value $value)
     {
-        return \array_reduce($value->getVars(), static function (string $s, int $i) use ($repository) {
-            return Str::substr($s, 0, $i).self::resolveVariable($repository, Str::substr($s, $i));
-        }, $value->getChars());
+        $chars = $value->getChars();
+        $vars = $value->getVars();
+
+        if ($vars === []) {
+            return $chars;
+        }
+
+        $tail = '';
+        $cut = Str::len($chars);
+
+        foreach ($vars as $i) {
+            $segment = Str::substr($chars, $i, $cut - $i);
+            $tail = self::resolveVariable($repository, $segment.$tail);
+            $cut = $i;
+        }
+
+        return Str::substr($chars, 0, $cut).$tail;
     }
 
     /**
@@ -59,8 +69,8 @@ final class Resolver
         return Regex::replaceCallback(
             '/\A\${([a-zA-Z0-9_.]+)}/',
             static function (array $matches) use ($repository) {
-                return Option::fromValue($repository->get($matches[1]))
-                    ->getOrElse($matches[0]);
+                /** @var string */
+                return Option::fromValue($repository->get($matches[1]))->getOrElse($matches[0]);
             },
             $str,
             1

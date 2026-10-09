@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Store;
@@ -55,7 +51,7 @@ final class StoreBuilder
      *
      * @return void
      */
-    private function __construct(array $paths = [], array $names = [], bool $shortCircuit = false, string $fileEncoding = null)
+    private function __construct(array $paths = [], array $names = [], bool $shortCircuit = false, ?string $fileEncoding = null)
     {
         $this->paths = $paths;
         $this->names = $names;
@@ -124,7 +120,7 @@ final class StoreBuilder
      *
      * @return \Dotenv\Store\StoreBuilder
      */
-    public function fileEncoding(string $fileEncoding = null)
+    public function fileEncoding(?string $fileEncoding = null)
     {
         return new self($this->paths, $this->names, $this->shortCircuit, $fileEncoding);
     }

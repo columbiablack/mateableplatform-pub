@@ -1,7 +1,19 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
+/*
+ * Copyright 2012 Johannes M. Schmitt <schmittjoh@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 namespace PhpOption;
@@ -9,7 +21,7 @@ namespace PhpOption;
 use ArrayIterator;
 
 /**
- * @template T
+ * @template-covariant T
  *
  * @extends Option<T>
  */
@@ -53,11 +65,21 @@ final class Some extends Option
         return $this->value;
     }
 
+    /**
+     * @param mixed $default
+     *
+     * @return T
+     */
     public function getOrElse($default)
     {
         return $this->value;
     }
 
+    /**
+     * @param callable():mixed $callable
+     *
+     * @return T
+     */
     public function getOrCall($callable)
     {
         return $this->value;
@@ -145,11 +167,29 @@ final class Some extends Option
         return new ArrayIterator([$this->value]);
     }
 
+    /**
+     * @template S
+     * @template R
+     *
+     * @param S                $initialValue
+     * @param callable(S, T):R $callable
+     *
+     * @return R
+     */
     public function foldLeft($initialValue, $callable)
     {
         return $callable($initialValue, $this->value);
     }
 
+    /**
+     * @template S
+     * @template R
+     *
+     * @param S                $initialValue
+     * @param callable(T, S):R $callable
+     *
+     * @return R
+     */
     public function foldRight($initialValue, $callable)
     {
         return $callable($this->value, $initialValue);

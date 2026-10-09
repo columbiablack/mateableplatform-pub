@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Repository\Adapter;
@@ -27,7 +23,7 @@ final class ImmutableWriter implements WriterInterface
     /**
      * The record of loaded variables.
      *
-     * @var array<string,string>
+     * @var array<string, string>
      */
     private $loaded;
 

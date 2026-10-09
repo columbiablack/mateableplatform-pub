@@ -8,7 +8,7 @@ use mateable\core\form\Form;
 
 $form = new Form();
 ?>
-<section class="clean-block clean-form content-section">
+<section class="py-5">
     <div class="container">
         <div class="row block-heading">
             <h2 class="text-info">Chatview</h2>

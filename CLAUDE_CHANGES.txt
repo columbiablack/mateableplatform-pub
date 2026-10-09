@@ -1,0 +1,386 @@
+mateablemedia.com theme review/fixes -- 2026-09-03
+
+Server: 10.1.10.195 ("media" box), site root /var/www/mateablemedia.com
+Live stylesheet: html/assets/css/theme_test.css (loaded by
+core/views/layouts/main/header.theme.php -- this is the page most people
+land on; the logged-in/auth layout loads a DIFFERENT, older file, theme.css
+-- see note at the bottom, not touched)
+
+This is a single-server site (not load-balanced like coin.mateable.com) --
+confirmed no mateablemedia.com presence on the other backend box (10.1.10.8),
+so there was nothing else to sync.
+
+BACKUPS MADE (originals untouched, safe to roll back):
+  html/assets/css/theme_test.css.bak-20260903152900
+  core/views/layouts/auth/navigation.theme.php.bak-20260903152906
+  core/views/layouts/main/navigation.theme.php.bak-20260903152906
+  core/views/layouts/main/header.theme.php.bak-20260903153838
+
+WHAT WAS CHANGED
+
+1. Fixed the actual "missing logo" bug (this is what you were seeing)
+   File: html/assets/css/theme_test.css, core/views/layouts/main/header
+   The site loads NO Bootstrap CSS framework at all -- only theme_test.css,
+   the icon fonts, and Google Fonts. Because of that, the mobile hamburger
+   menu button (.navbar-toggler) had no rule hiding it at desktop widths,
+   and no rule drawing its hamburger-lines icon (both normally come free
+   from Bootstrap's own CSS, which isn't loaded here). Result: on desktop,
+   an empty, icon-less pill-shaped button sat right next to "Mateable Media"
+   in the navbar -- which is what looked like a broken/missing logo. Added:
+     - a real hamburger-icon background image to .navbar-toggler-icon
+     - a rule to hide .navbar-toggler entirely at desktop widths (>=992px)
+   Confirmed via a real headless-browser screenshot before/after -- the
+   empty pill is gone, only "Mateable Media" + the nav links remain.
+   (Note: the site's navbar-brand is plain text, "{{app_name}}", not an
+   actual image logo anywhere -- same as coin.mateable.com. That's a
+   separate, bigger ask (designing/adding a real logo image) -- flagged,
+   not done here.)
+
+2. Fixed browser-cache issue causing you to see stale/broken layouts
+   File: core/views/layouts/main/header.theme.php
+   theme_test.css was linked with no version string, so browsers could
+   hold onto an old cached copy indefinitely and never notice new edits --
+   this is almost certainly why fixes kept "not showing" for you even after
+   they were live on the server. Added a cache-busting ?v=<timestamp> to
+   the stylesheet link. Every future edit needs a new ?v= value (or the
+   browser cache issue comes back) -- ask me to bump it, it's a 10-second
+   change.
+
+3. Fixed broken .ft-link CSS selector
+   File: html/assets/css/theme_test.css
+   Was missing its leading dot ("ft-link {" instead of ".ft-link {"), so
+   the base footer-link styling (display, color, size, spacing) never
+   applied to any element with class="ft-link" -- only the :hover rule
+   worked. One-character fix.
+
+4. Finished the half-applied rebrand (old purple -> new purple everywhere)
+   File: html/assets/css/theme_test.css
+   The :root block already defined a new palette (--primary: #7c6cf4,
+   --secondary: #b9b0ff, --accent: #ff69b4) but only 30 of the file's ~83
+   color rules actually referenced those variables. The other 53 still
+   hardcoded the OLD colors directly (rgba(108,92,231,...), #a29bfe,
+   #6c5ce7, #e84393), so most of the site -- navbar, ticker bar, hero
+   background, nav-link hover states, algo-card hover glow, hero title
+   gradient -- was still rendering in the old purple even though the
+   variables said otherwise. Converted every hardcoded old-palette value
+   to its new-palette equivalent so the rebrand is now consistent site-wide.
+
+5. Removed 2 unused CSS variables
+   --mateable-accent and --mateable-muted were defined in :root but never
+   referenced anywhere in the file. Removed (kept --mateable-text, which IS
+   used by the #dashboard styles).
+
+6. Removed a duplicate/conflicting CSS rule
+   .site-footer .social-btn:hover was defined twice with different values.
+   The second, plainer definition (background/border-color/color only) was
+   silently overriding part of the first, more polished one (which also had
+   a glow box-shadow and a scale-up transform). Removed the redundant
+   duplicate so the intended richer hover effect applies.
+
+7. Removed a duplicated block in the mega-menu icon hover rules
+   .mega-category i / .mega-panel a i and its hover state were defined
+   twice, verbatim, back to back. Removed the redundant copy.
+
+8. Fixed 2 broken icons (invalid Bootstrap Icons class names)
+   Files: core/views/layouts/auth/navigation.theme.php
+          core/views/layouts/main/navigation.theme.php
+   The site loads Bootstrap Icons 1.11.3 from a CDN. Two icon classes used
+   in the game-genre dropdown menu do not exist in that icon set at all, so
+   they rendered as nothing (blank space where the icon should be):
+     - "bi bi-sword"  (used for "Hack & Slash") -> does not exist
+     - "bi bi-arcade" (used for "Arcade")       -> does not exist
+   Checked every single icon class used anywhere on the site (66 Bootstrap
+   Icons total) against the real bootstrap-icons.css file -- these were the
+   only 2 broken ones.
+   Fixed to real, valid icons:
+     - Hack & Slash -> bi-shield
+     - Arcade       -> bi-controller
+   (Casual, right next to Arcade in the same menu, already used bi-joystick
+   -- picked bi-controller instead of also using bi-joystick so the two
+   adjacent menu items don't show the identical icon.)
+
+CONSIDERED BUT REVERTED
+  Initially flagged .mega-menu's hardcoded font-family: "Montserrat"... as a
+  mismatch and changed it to Inter. Turned out Montserrat IS intentionally
+  loaded via Google Fonts on this page (along with Kaushan Script) -- so
+  that may well be a deliberate stylistic choice for the dropdown, not a
+  bug. Reverted back to Montserrat rather than guess.
+
+VERIFIED
+  - CSS file: brace-balanced (277 open / 277 close), no old-palette colors
+    left, .ft-link fixed
+  - Both navigation.theme.php files: php -l clean, no syntax errors
+  - header.theme.php: php -l clean
+  - Homepage and theme_test.css both return HTTP 200 live, at the new
+    versioned URL
+  - Confirmed with an actual headless-browser screenshot of the real live
+    site (https://mateablemedia.com/) before and after -- not just curl/grep
+    -- that the empty navbar pill is gone
+
+ROUND 2 FIXES (after "there is still a lot to fix") -- these were found by
+actually taking real headless-browser screenshots of the live site (desktop
+AND mobile) and looking at them, not just reading CSS source:
+
+9. Footer links had visible bullet points colliding between columns
+   File: html/assets/css/theme_test.css
+   .site-footer .list-unstyled never set list-style:none (only margin/
+   padding), so plain browser bullet dots showed before every link --
+   e.g. "About" and "Forums" sat close enough that it looked like
+   "About•Forums" mashed together. Added list-style:none.
+
+10. Entire navbar (logo text + menu button) invisible on mobile
+    File: html/assets/css/theme_test.css
+    The ticker bar at the very top wraps its 5 pills onto 2-3 lines on
+    narrow screens, growing taller than the navbar's hardcoded 42px "top"
+    offset right below it. Since the ticker bar has a higher z-index than
+    the navbar, it ended up covering the navbar completely on mobile --
+    "Mateable Media" and the menu button were there, just hidden behind
+    the now-taller ticker bar. Fixed by keeping the ticker a single
+    horizontally-scrollable row on mobile instead of letting it wrap.
+
+11. Site-wide: hundreds of Bootstrap utility classes used, none defined
+    File: html/assets/css/theme_test.css
+    Confirmed via a full grep audit of core/views: classes like d-flex (59
+    uses), mb-3 (73 uses), gap-3 (20 uses), text-center (62 uses), and many
+    more are used throughout the templates, but no Bootstrap CSS framework
+    is loaded anywhere on this site -- only this custom stylesheet. Every
+    one of those classes was doing nothing. The most visible symptom: the
+    hero's "Create Account" / "Explore Tournaments" buttons had no working
+    flex-wrap, so on mobile "Explore Tournaments" ran off the edge of the
+    screen instead of stacking under the first button. Added real
+    definitions (matching actual Bootstrap 5 values) for every one of
+    these classes that's actually used in the templates -- display (d-flex/
+    d-grid/d-block/d-none), flex (flex-wrap/flex-column/flex-fill,
+    justify-content-*, align-items-*, gap-1/2/3), sizing (w-100/h-100),
+    text-center/text-white, rounded/rounded-pill/rounded-circle/etc, and
+    the margin/padding scale (m-0, mt/mb-1 through 5, p-0/3/4, pt/pb/py-4/5).
+    This is a big, systemic fix -- it likely resolves other visual issues
+    across the site beyond just the two spots that were reported, since
+    these classes are used everywhere.
+
+Also bumped the CSS cache-busting version again after these changes
+(theme_test.css?v=1788450359) -- same reason as before, so this round of
+fixes shows up immediately instead of needing another cache fight.
+
+VERIFIED (round 2)
+  - Took real headless-Chrome screenshots of https://mateablemedia.com/ (not
+    curl/grep) at both desktop (1440px) and mobile (390px) widths, before
+    and after, and visually confirmed all three fixes:
+      - footer bullets gone, columns clean
+      - navbar (logo + hamburger icon) now visible on mobile
+      - hero buttons stack vertically on mobile instead of overflowing
+  - CSS still brace-balanced (323 open / 323 close) after these additions
+  - theme_test.css still returns HTTP 200 at the new versioned URL
+
+ROUND 3 FIX (footer social icons)
+
+12. Footer social icons were the wrong/generic icons, not real brand marks
+    File: core/views/layouts/main/footer.theme.php
+    All 4 were font-icon glyphs (FontAwesome 4): fa-twitter (old bird, even
+    though the link goes to x.com), fa-facebook, fa-linkedin, and -- worst
+    one -- fa-comments (a generic speech bubble) standing in for Discord,
+    which has its own real, recognizable logo that this wasn't using at
+    all. Replaced all 4 with real inline SVG icons: the actual X logo,
+    Facebook logo, LinkedIn logo, and Discord logo. Inline SVG also avoids
+    any icon-font loading/rendering quirk entirely -- no font file
+    dependency, renders identically everywhere. .social-btn already
+    centers its contents via flexbox, so no CSS changes were needed for
+    them to sit centered in the circles.
+    Verified with a real screenshot of the live footer -- all 4 icons
+    show correctly, centered, real brand marks.
+
+ROUND 4 FIXES -- these were only found because the user sent real screenshots
+of their own actual browser (media1.PNG / media2.PNG, uploaded straight into
+this folder). Everything I'd tested myself (multiple widths from 390px to
+2560px, Chrome-engine headless browser, cache-busted URLs) looked correct,
+so these two were genuinely invisible to my own testing methodology --
+worth remembering for next time: ask for a real screenshot much sooner
+when something isn't reproducing.
+
+13. Top of the hero heading ("Competitive gaming,") clipped behind the
+    fixed header
+    File: core/views/home.mtb.php
+    The hero section had a hardcoded inline style="padding-top: 7rem;" --
+    a guessed pixel offset meant to clear the fixed ticker-bar + navbar
+    sitting on top of it. That guess was too tight and, combined with (12)
+    below, the top line of the heading could end up partially hidden
+    under the header depending on exact window width / font rendering.
+    Bumped to 9rem for real breathing room.
+
+14. Root cause of (13) and of the earlier "navbar invisible on mobile" fix:
+    the ticker bar could still wrap onto 2 lines at some in-between DESKTOP
+    window widths, not just on mobile
+    File: html/assets/css/theme_test.css
+    My earlier round-2 fix only forced the ticker bar to stay a single
+    scrollable row below 992px width. Above that, it could still wrap if
+    the 5 pills didn't quite fit the window -- growing taller than the
+    navbar's assumed offset and (since it has a higher z-index) covering
+    whatever sits below it, at ANY width, not just mobile. This explains
+    why it depended on exact window size/browser in a way that seemed
+    inconsistent. Made the ticker bar a single non-wrapping scrollable row
+    at every viewport width, not just narrow ones -- its height is now
+    always constant regardless of window size, so this class of bug can't
+    happen again at any width.
+
+15. Footer social icons visibly off-center (shifted toward top-left of
+    their circles)
+    File: html/assets/css/theme_test.css
+    Confirmed in the user's real screenshot -- all 4 icons sat noticeably
+    high-and-left in their circles instead of centered. Root cause: inline
+    SVG defaults to display:inline, which reserves invisible "descender"
+    space below the glyph (the same space a text character like "g" would
+    need) -- inside a flex container this can push the element off-center
+    in a way that's inconsistent across browsers/rendering conditions.
+    Added .social-btn svg { display:block; margin:auto; } to remove that
+    reserved space entirely, so the icon centers exactly regardless of
+    browser.
+
+VERIFIED (round 4)
+  - Took a fresh screenshot at 1338x451 -- the EXACT width of the user's
+    own browser window (matched from their screenshot's pixel dimensions)
+    -- and confirmed the hero heading now shows in full, nothing clipped.
+  - Zoomed 4x on the live footer icons -- confirmed all 4 now sit dead-
+    center in their circles, equal margin on every side.
+  - CSS still brace-balanced (323/323) after these changes.
+  - Bumped cache-busting version again (theme_test.css?v=1788451672).
+
+ROUND 5 FIX -- the actual root cause of the hero-text clipping, finally
+found. Everything in round 4 (ticker-bar wrap fix, padding-top bump) was
+real and worth keeping, but it turns out to have been treating a symptom,
+not the actual cause.
+
+16. Hero content clipped by a height-capped, overflow:hidden container --
+    depends on WINDOW HEIGHT, not width, which is why chasing window
+    WIDTH (390px through 2560px) never reproduced it
+    File: html/assets/css/theme_test.css
+    .hero had: height: min(100vh, 900px); overflow: hidden; align-items:
+    center;. On any browser window where the actual viewport height is
+    shorter than what the vertically-centered content needs (heading +
+    subtext + buttons + stats bar + padding), that combination clips
+    whatever doesn't fit -- cutting off the top of the heading. This has
+    nothing to do with window width at all, only height, which is exactly
+    why "small window = fine, maximized = broken" made sense on your
+    specific monitor/setup even though it made no sense width-wise, and
+    why it was consistent across Chrome and Firefox (pure CSS math, not a
+    browser engine quirk).
+    Changed height to min-height so the box grows to fit its content
+    instead of clipping it on short windows, while keeping the same
+    760-900px sizing as a floor (min-height: clamp(760px, 100vh, 900px)).
+    overflow:hidden was left in place (still needed to keep the decorative
+    background orbs contained within the section) -- with min-height
+    instead of height, the box can no longer be forced shorter than its
+    actual content, so nothing gets clipped by that overflow rule anymore.
+
+VERIFIED (round 5)
+  - Reproduced the actual bug myself for the first time, at 1338x750 (a
+    short-height window) -- confirmed the heading really was clipped
+    before this fix.
+  - Same exact 1338x750 window after the fix -- heading shows in full,
+    plus the "MATEABLE MEDIA" eyebrow badge above it that was ALSO
+    previously hidden by the same clipping.
+  - CSS still brace-balanced (323/323).
+  - Bumped cache-busting version again.
+
+ROUND 6 FIX -- the icon-centering fix, actually fixed this time
+17. Footer social icons genuinely NOT centered inside their circles --
+    sitting in the upper half, confirmed by a tight zoomed crop (not just
+    a general screenshot) after the user kept insisting and being right.
+    File: html/assets/css/theme_test.css
+    My round-4 fix (.social-btn svg { display:block; margin:auto; }) was
+    deployed correctly but did not actually work -- something about the
+    real nested ul > li > a > svg chain (each level has its own
+    inline-flex/align-items:center) wasn't propagating the centering
+    through to the svg reliably, even though it should have in theory.
+    Replaced it with a completely different, unambiguous technique:
+    absolute-position the svg at the exact mathematical center of the
+    button (position:absolute; top/left:50%; transform:translate(-50%,-50%))
+    instead of relying on flexbox alignment cascading correctly through
+    every ancestor. This doesn't depend on any parent's flex behavior at
+    all, just the button's own position:relative + fixed 46x46 size.
+    Confirmed with a tight 8x zoomed crop of a single icon, dead-center
+    now, no more empty space bias toward top or bottom.
+
+Also tried and ruled out: adding align-items:center to the parent
+row (copyright text / icons / Privacy+Terms) -- that specific alignment
+was NOT actually the cause of what turned out to be a within-the-circle
+centering issue, not a row-level one. Left that fix in place anyway since
+it's harmless and may help other mixed-height rows, but it wasn't the fix
+for this particular complaint.
+
+ROUND 7 -- proactive full-page audit (per "make sure it looks 100%") plus
+a real feature: live coin price / block height data
+
+18. "Online" badge overlapping "Mateable Coin" heading -- found during the
+    audit, real bug
+    File: html/assets/css/theme_test.css (new additions), no HTML change
+    <span class="badge bg-success-subtle text-success"> in the "Live
+    ecosystem" panel had none of those 3 classes defined (same root cause
+    as everything else today -- no Bootstrap CSS loaded), so it rendered
+    as a bare unstyled inline span with no padding/pill shape, and its
+    height/positioning collided visually with the heading next to it.
+
+19. Much bigger finding from the audit: the actual 12-column responsive
+    GRID SYSTEM (.row, .col-12, .col-md-4, .col-lg-6, .col-xl-3, etc) was
+    never defined either -- confirmed by grepping every view file, this
+    site uses Bootstrap grid classes constantly. Added a real, complete
+    grid system (container + row + col-1 through col-12, repeated for sm/
+    md/lg/xl/xxl breakpoints) so any page using standard Bootstrap column
+    classes now actually gets a responsive grid instead of silently
+    collapsing to plain stacked divs.
+
+20. Also added while auditing (all confirmed missing, all used sitewide):
+    - .badge + full color palette (bg-success/danger/warning/info/
+      secondary/primary, plus their "-subtle" variants, plus matching
+      text-* colors) -- ~35 uses sitewide
+    - .card-body / .card-header / .card-footer / .card-title / .card-text
+      (Bootstrap's card sub-components -- .card itself was already
+      styled, these interior pieces were not) -- 73+ uses on other pages
+    - .shadow-sm / .shadow, .border-0 / .border-1, .fw-bold / .fw-semibold
+      / .fw-normal / .fw-light, .me-2 / .ms-2 / .mx-auto / .my-5,
+      .float-start / .float-end, .d-inline / .d-inline-block,
+      .text-uppercase / .text-start / .text-end
+    These weren't all necessarily visibly broken on the homepage
+    specifically, but every one of them was confirmed actually used
+    somewhere in core/views via grep -- not speculative additions.
+
+21. NEW FEATURE: wired the ticker bar and the "Live ecosystem" Market
+    panel up to real, live data instead of static hardcoded placeholder
+    text (was: "$0.00002850" / "Block Height 4,538,705" / "Supply
+    196,838,169 MTBC" -- all literal strings in the PHP templates, never
+    changing)
+    Files: core/views/layouts/main/navigation.theme.php (ticker bar --
+    added id="mm-ticker-price/block/supply" spans)
+           core/views/home.mtb.php (hero market panel -- added
+           id="mm-hero-price/change/block", and a new "Block #" line that
+           didn't exist there before, per your ask)
+           html/assets/js/live-data.js (NEW FILE -- fetches and updates
+           all of the above)
+    Rather than duplicating a whole new caching API proxy on this server,
+    this reuses coin.mateable.com's EXISTING cached proxy endpoint
+    (coin.mateable.com/?api=paprika for price/change, ?api=explorer for
+    block height, already has Access-Control-Allow-Origin: * set, already
+    respects CoinPaprika's rate limit via server-side caching) --
+    confirmed working cross-origin via a real fetch test before wiring
+    anything up. Polls every 90s for price (matches that endpoint's 90s
+    server cache) and every 30s for block height (matches its 30s cache).
+    Verified live: ticker showed $0.00002890 / Block 4,543,300 / Supply
+    196,842,773 MTBC, and the market panel showed the same price, "+1.05%
+    today" in green, and "Block 4,543,300" -- all matching, all real,
+    confirmed via a real headless-browser screenshot with the async
+    fetches given time to complete first.
+
+NOT CHANGED / worth a look later, not touched without asking first
+  - No real image logo anywhere on this site (navbar-brand is plain text)
+    -- same situation as coin.mateable.com. Adding an actual logo image is
+    a separate task from what was broken here.
+  - The new palette (#7c6cf4 primary) is close to but not identical to
+    coin.mateable.com's palette (#6c5ce7 primary) -- two "sibling" Mateable
+    sites currently use slightly different purples. Left as-is since it's
+    unclear if that's intentional.
+  - The AUTH layout (core/views/layouts/auth/header.theme.php) loads a
+    completely different, older stylesheet -- theme.css, not theme_test.css
+    -- so login/register-area pages were not touched by any of this and
+    may still have the old broken palette/icons/navbar-toggler issue. Not
+    fixed, since it wasn't clear if that's in scope.
+  - theme.css itself (the old 338KB stylesheet) was not otherwise
+    investigated.

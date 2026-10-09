@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Store;
@@ -43,7 +39,7 @@ final class FileStore implements StoreInterface
      *
      * @return void
      */
-    public function __construct(array $filePaths, bool $shortCircuit, string $fileEncoding = null)
+    public function __construct(array $filePaths, bool $shortCircuit, ?string $fileEncoding = null)
     {
         $this->filePaths = $filePaths;
         $this->shortCircuit = $shortCircuit;
@@ -60,7 +56,7 @@ final class FileStore implements StoreInterface
     public function read()
     {
         if ($this->filePaths === []) {
-            throw new InvalidPathException('At least one environment file path must be provided.');
+            throw new InvalidPathException('At least one environment file path and file name must be provided.');
         }
 
         $contents = Reader::read($this->filePaths, $this->shortCircuit, $this->fileEncoding);

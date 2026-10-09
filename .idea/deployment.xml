@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Mateable" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false" compareModeInSync="TIMESTAMP" showDifferentInSync="false">
+  <component name="PublishConfigData" serverName="Mateable" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false" compareModeInSync="TEXT" showDifferentInSync="false" showNewOnSourceInSync="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
+      <paths name="Local or mounted folder">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Mateable">
         <serverdata>
           <mappings>

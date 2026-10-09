@@ -11,6 +11,7 @@ use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\models\user\account\UserLoginModel;
 use mateable\core\models\user\account\UserModel;
 use mateable\core\models\user\recovery\RecoveryByEmailModel;
+use mateable\core\models\PostModel;
 use mateable\core\Platform;
 use mateable\core\routes\Routes;
 
@@ -137,5 +138,77 @@ class AuthController extends Controller
 
         $this->setLayout('auth');
         return $this->renderview('recovery', ['recModel' => new UserLoginModel()]);
+    }
+
+    public function createPost(Request $request): string
+    {
+        if ($request->isPost()) {
+            $content = trim((string) ($request->getBody()['content'] ?? ''));
+
+            if (empty($content)) {
+                Platform::$app->session->setFlash('warning', 'Post content cannot be empty.');
+                Platform::$app->response->redirect('/dashboard');
+                return '';
+            }
+
+            if (strlen($content) > 5000) {
+                Platform::$app->session->setFlash('warning', 'Post content exceeds maximum length of 5000 characters.');
+                Platform::$app->response->redirect('/dashboard');
+                return '';
+            }
+
+            $post = new PostModel();
+            $post->user_id = (int) Platform::$app->user->id;
+            $post->content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+            $post->created_at = date('Y-m-d H:i:s');
+            $post->moderation_status = 'pending';
+
+            if ($post->save()) {
+                Platform::$app->activity::log(Platform::$app->user->id, 'created_post', 'You created a new post!');
+                Platform::$app->session->setFlash('success', 'Your post has been created and is awaiting moderation.');
+            } else {
+                Platform::$app->session->setFlash('warning', 'Your post could not be created. Please try again.');
+            }
+
+            Platform::$app->response->redirect('/dashboard');
+            return '';
+        }
+
+        // GET: Show post editor
+        return $this->renderView('profile/post-editor', []);
+    }
+
+    public function createEvent(Request $request): string
+    {
+        if ($request->isPost()) {
+            $eventData = $request->getBody();
+            $title = trim((string) ($eventData['title'] ?? ''));
+            $description = trim((string) ($eventData['description'] ?? ''));
+            $eventDate = trim((string) ($eventData['event_date'] ?? ''));
+
+            if (empty($title) || empty($description) || empty($eventDate)) {
+                Platform::$app->session->setFlash('warning', 'All event fields are required.');
+                Platform::$app->response->redirect('/dashboard');
+                return '';
+            }
+
+            // Validate event date is in the future
+            $eventTime = strtotime($eventDate);
+            if ($eventTime === false || $eventTime < time()) {
+                Platform::$app->session->setFlash('warning', 'Event date must be in the future.');
+                Platform::$app->response->redirect('/dashboard');
+                return '';
+            }
+
+            // TODO: Implement event storage (create events table/model if needed)
+            // For now, just log the action and redirect
+            Platform::$app->activity::log(Platform::$app->user->id, 'created_event', 'You created a new event!');
+            Platform::$app->session->setFlash('success', 'Your event has been created and is pending approval.');
+            Platform::$app->response->redirect('/dashboard');
+            return '';
+        }
+
+        // GET: Show event editor
+        return $this->renderView('profile/event-editor', []);
     }
 }

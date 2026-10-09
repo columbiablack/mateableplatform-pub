@@ -58,15 +58,6 @@ use mateable\core\Platform;
                             </div>
                         </div>
 
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-md-6">
-                                <?php echo $form->checkBox('remember_me', 'remember_me', 'Remember me'); ?>
-                            </div>
-                            <div class="col-md-6 text-md-end">
-                                <a href="/pwdrec">Forgot Password?</a>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col text-center">
                                 <?php echo $form->button()::make('Sign In')

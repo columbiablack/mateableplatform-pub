@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Store;
@@ -36,6 +32,10 @@ final class StringStore implements StoreInterface
      */
     public function read()
     {
+        if (\substr($this->content, 0, 3) === "\xEF\xBB\xBF") {
+            return \substr($this->content, 3);
+        }
+
         return $this->content;
     }
 }

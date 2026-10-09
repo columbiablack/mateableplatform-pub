@@ -15,10 +15,24 @@ use mateable\core\Platform;
  **/
 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+<div class="ticker-bar">
+    <div class="container">
+        <div class="ticker-inner">
+            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin price">MTBC $0.00002850</a>
+            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin block height">Block Height 4,538,705</a>
+            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin supply">Supply 196,838,169 MTBC</a>
+            <a class="ticker-pill" href="/about">Learn More</a>
+            <a class="ticker-pill" href="/downloads">Download Wallet</a>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">{{app_name}}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mtbNavbar" aria-controls="mtbNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">
+            <img src="assets/img/mateable_logo.png" alt="" class="navbar-brand-logo">
+            <span>{{app_name}}</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mtbNavbar" aria-controls="mtbNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mtbNavbar">
@@ -216,7 +230,7 @@ use mateable\core\Platform;
                                 <!-- RIGHT: INFORMATION -->
                                 <div class="mega-right">
 
-                                    <div class="mega-panel active" id="Login">
+                                    <div class="mega-panel" id="Login">
                                         <p>
                                             You're already a member? Login here!
                                         </p>
@@ -253,6 +267,9 @@ use mateable\core\Platform;
 
                                     <a class="mega-category" data-target="Messages">
                                         <i class="bi bi-chat-dots"></i> Messages
+                                        <?php if (Platform::$app->user && Platform::$app->message::unreadCount(Platform::$app->user->id) > 0): ?>
+                                            <span class="badge bg-danger ms-2"><?php echo Platform::$app->message::unreadCount(Platform::$app->user->id); ?></span>
+                                        <?php endif; ?>
                                     </a>
 
                                     <a class="mega-category" data-target="Payments">
@@ -277,17 +294,22 @@ use mateable\core\Platform;
                                         <h6>Account Dashboard</h6>
                                         <a href="/dashboard"><i class="bi bi-speedometer2"></i> My Dashboard</a>
                                         <a href="/dashboard/edit/account"><i class="bi bi-gear"></i> Account Settings</a>
-                                        <a href="/dashboard/edit/profile"><i class="bi bi-person-circle"></i> Edit Profile</a>
+                                        <?php echo '<a href="/'. Platform::$app->user->displayNickname() .'" ><i class="bi bi-person-circle"></i> My Profile</a>'; ?>
                                         <a href="/dashboard"><i class="bi bi-bar-chart"></i> My Game Stats</a>
                                     </div>
 
                                     <!-- MESSAGES -->
                                     <div class="mega-panel" id="Messages">
                                         <h6>Messages</h6>
-                                        <a href="/messages"><i class="bi bi-inbox"></i> Direct Message</a>
-                                        <a href="/messages"><i class="bi bi-inbox"></i> Inbox</a>
-                                        <a href="/messages"><i class="bi bi-archive"></i> Archive</a>
-                                        <a href="/messages"><i class="bi bi-trash"></i> Trash</a>
+                                        <a href="/messages" class="mega-item">
+                                            <i class="bi bi-inbox"></i>
+                                            Inbox
+                                            <?php if (Platform::$app->user && Platform::$app->message::unreadCount(Platform::$app->user->id) > 0): ?>
+                                                <span class="badge bg-danger float-end"><?php echo Platform::$app->message::unreadCount(Platform::$app->user->id); ?></span>
+                                            <?php endif; ?>
+                                        </a>
+                                        <a href="/messages#recent" class="mega-item"><i class="bi bi-clock-history"></i> Recent Chats</a>
+                                        <a href="/messages#starred" class="mega-item"><i class="bi bi-star"></i> Starred</a>
                                     </div>
 
                                     <!-- PAYMENTS -->

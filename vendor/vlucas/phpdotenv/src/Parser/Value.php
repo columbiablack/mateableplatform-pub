@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Parser;
@@ -48,6 +44,19 @@ final class Value
     public static function blank()
     {
         return new self('', []);
+    }
+
+    /**
+     * Create a new value instance.
+     *
+     * @param string $chars
+     * @param int[]  $vars
+     *
+     * @return \Dotenv\Parser\Value
+     */
+    public static function create(string $chars, array $vars)
+    {
+        return new self($chars, $vars);
     }
 
     /**

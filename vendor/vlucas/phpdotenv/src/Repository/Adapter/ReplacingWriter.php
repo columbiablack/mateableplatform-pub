@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Repository\Adapter;
@@ -27,7 +23,7 @@ final class ReplacingWriter implements WriterInterface
     /**
      * The record of seen variables.
      *
-     * @var array<string,string>
+     * @var array<string, string>
      */
     private $seen;
 

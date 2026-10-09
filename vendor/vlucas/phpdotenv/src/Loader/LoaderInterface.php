@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Loader;
@@ -18,7 +14,7 @@ interface LoaderInterface
      * @param \Dotenv\Repository\RepositoryInterface $repository
      * @param \Dotenv\Parser\Entry[]                 $entries
      *
-     * @return array<string,string|null>
+     * @return array<string, string|null>
      */
     public function load(RepositoryInterface $repository, array $entries);
 }

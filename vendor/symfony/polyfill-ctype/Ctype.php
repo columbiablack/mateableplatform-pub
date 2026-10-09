@@ -1,7 +1,12 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Symfony\Polyfill\Ctype;
@@ -144,7 +149,7 @@ final class Ctype
     }
 
     /**
-     * Returns TRUE if every character in text creates some sort of white space, FALSE otherwise. Besides the blank character this also includes tab, vertical tab, line feeds, carriage return and form feeds characters.
+     * Returns TRUE if every character in text creates some sort of white space, FALSE otherwise. Besides the blank character this also includes tab, vertical tab, line feed, carriage return and form feed characters.
      *
      * @see https://php.net/ctype-space
      *
@@ -206,16 +211,16 @@ final class Ctype
      */
     private static function convert_int_to_char_for_ctype($int, $function)
     {
+        if (\PHP_VERSION_ID >= 80100 && !\is_string($int)) {
+            @trigger_error($function.'(): Argument of type '.get_debug_type($int).' will be interpreted as string in the future', \E_USER_DEPRECATED);
+        }
+
         if (!\is_int($int)) {
             return $int;
         }
 
         if ($int < -128 || $int > 255) {
             return (string) $int;
-        }
-
-        if (\PHP_VERSION_ID >= 80100) {
-            @trigger_error($function.'(): Argument of type int will be interpreted as string in the future', \E_USER_DEPRECATED);
         }
 
         if ($int < 0) {

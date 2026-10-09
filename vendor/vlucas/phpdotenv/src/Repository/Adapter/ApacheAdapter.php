@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Repository\Adapter;
@@ -27,12 +23,11 @@ final class ApacheAdapter implements AdapterInterface
     /**
      * Create a new instance of the adapter, if it is available.
      *
-     * @return \PhpOption\Option<\Dotenv\Repository\Adapter\AdapterInterface>
+     * @return \PhpOption\Option<self>
      */
     public static function create()
     {
         if (self::isSupported()) {
-            /** @var \PhpOption\Option<AdapterInterface> */
             return Some::create(new self());
         }
 

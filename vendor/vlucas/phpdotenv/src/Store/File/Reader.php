@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
- */
-
 declare(strict_types=1);
 
 namespace Dotenv\Store\File;
@@ -42,9 +38,9 @@ final class Reader
      *
      * @throws \Dotenv\Exception\InvalidEncodingException
      *
-     * @return array<string,string>
+     * @return array<string, string>
      */
-    public static function read(array $filePaths, bool $shortCircuit = true, string $fileEncoding = null)
+    public static function read(array $filePaths, bool $shortCircuit = true, ?string $fileEncoding = null)
     {
         $output = [];
 
@@ -71,7 +67,7 @@ final class Reader
      *
      * @return \PhpOption\Option<string>
      */
-    private static function readFromFile(string $path, string $encoding = null)
+    private static function readFromFile(string $path, ?string $encoding = null)
     {
         /** @var Option<string> */
         $content = Option::fromValue(@\file_get_contents($path), false);

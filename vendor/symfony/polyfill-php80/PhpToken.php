@@ -1,7 +1,12 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Symfony\Polyfill\Php80;
@@ -24,7 +29,7 @@ class PhpToken implements \Stringable
     public $text;
 
     /**
-     * @var int
+     * @var -1|positive-int
      */
     public $line;
 
@@ -33,6 +38,9 @@ class PhpToken implements \Stringable
      */
     public $pos;
 
+    /**
+     * @param -1|positive-int $line
+     */
     public function __construct(int $id, string $text, int $line = -1, int $position = -1)
     {
         $this->id = $id;
@@ -75,7 +83,7 @@ class PhpToken implements \Stringable
     }
 
     /**
-     * @return static[]
+     * @return list<static>
      */
     public static function tokenize(string $code, int $flags = 0): array
     {

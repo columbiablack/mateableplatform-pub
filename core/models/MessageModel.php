@@ -7,6 +7,7 @@
 namespace mateable\core\models;
 
 use mateable\core\Platform;
+use PDO;
 
 class MessageModel extends DB
 {
@@ -28,7 +29,8 @@ class MessageModel extends DB
             'sender_id',
             'receiver_id',
             'body',
-            'is_read'
+            'is_read',
+            'created_at',
         ];
     }
 
@@ -39,12 +41,20 @@ class MessageModel extends DB
 
     public static function unreadCount(int $userId): int
     {
-        return self::countAll(["receiver_id" => Platform::$app->user->id, "is_read" => false]);
+        $stmt = self::prepare("SELECT COUNT(*) FROM messages WHERE receiver_id = :receiver_id AND is_read = 0");
+        $stmt->bindValue(':receiver_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return (int) $stmt->fetchColumn();
     }
 
     public static function messageCount(int $userId): int
     {
-        return self::countAll(['receiver_id' => Platform::$app->user->id]);
+        $stmt = self::prepare("SELECT COUNT(*) FROM messages WHERE receiver_id = :receiver_id");
+        $stmt->bindValue(':receiver_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return (int) $stmt->fetchColumn();
     }
 
     public function rules(): array

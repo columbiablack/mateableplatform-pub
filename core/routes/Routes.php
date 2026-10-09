@@ -24,6 +24,9 @@ class Routes
             'vidGiggles',
             'index',
             'downloads',
+            'chat',
+            'sendMessage',
+            'getMessages',
         ];
     }
 
@@ -63,6 +66,8 @@ class Routes
 
             '/downloads' => [AuthController::class, 'downloads'],
             '/dashboard' => [AuthController::class, 'dashboard'],
+            '/dashboard/post' => [AuthController::class, 'createPost'],
+            '/dashboard/edit' => [AuthController::class, 'createEvent'],
             '/dashboard/edit/account' => [AuthController::class, 'dashboard'],
             '/dashboard/edit/profile' => [AuthController::class, 'dashboard'],
             '/dashboard/edit/events' => [AuthController::class, 'dashboard'],
@@ -72,6 +77,7 @@ class Routes
             '/signup' => [AuthController::class, 'register'],
 
             '/messages' => [MessageController::class, 'chat'],
+            '/api/messages' => [MessageController::class, 'getMessages'],
 
             '/' => [SiteController::class, 'home'],
             '/home' => [SiteController::class, 'home'],
@@ -99,8 +105,6 @@ class Routes
             '/subscriptions' => [SiteController::class, 'store'],
             '/search' => [SearchController::class, 'find'],
 
-            // '/videos' => [VidGigglesController::class, 'vidGiggles'],
-
             '/feeds' => [FeedController::class, 'getFeedIndex'],
             '/apifeed', [FeedController::class, 'api'],
             '/gov', [FeedController::class, 'api'],
@@ -124,6 +128,9 @@ class Routes
             '/tournaments/create' => [SiteController::class, 'createTournament'],
             '/tournaments/join' => [SiteController::class, 'joinTournament'],
 
+            '/dashboard/post' => [AuthController::class, 'createPost'],
+            '/dashboard/edit' => [AuthController::class, 'createEvent'],
+
             '/signin' => [AuthController::class, 'login'],
             '/signup' => [AuthController::class, 'register'],
             '/pwdrec' => [AuthController::class, 'passwordRecovery'],
@@ -133,6 +140,8 @@ class Routes
             '/contactus' => [SiteController::class, 'contact'],
             '/verify-us' => [SiteController::class, 'verifyUs'],
             '/contact' => [SiteController::class, 'contact'],
+            '/api/messages/send' => [MessageController::class, 'sendMessage'],
+            '/api/messages/delete-conversation' => [MessageController::class, 'deleteConversation'],
         ];
         return $routesPOST;
     }

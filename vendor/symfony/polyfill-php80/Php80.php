@@ -1,7 +1,12 @@
 <?php
 
-/**
- * Copyright (c) 2024-2026. Mateable LLC
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Symfony\Polyfill\Php80;
@@ -55,7 +60,7 @@ final class Php80
     public static function get_resource_id($res): int
     {
         if (!\is_resource($res) && null === @get_resource_type($res)) {
-            throw new \TypeError(sprintf('Argument 1 passed to get_resource_id() must be of the type resource, %s given', get_debug_type($res)));
+            throw new \TypeError(\sprintf('Argument 1 passed to get_resource_id() must be of the type resource, %s given', get_debug_type($res)));
         }
 
         return (int) $res;

@@ -47,9 +47,9 @@ use mateable\core\Platform;
             </div>
         </div>
 
-        <div class="row g-3 mb-4">
+        <div class="row g-3 mb-4 dashboard-stats">
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Total Posts</h6>
@@ -58,7 +58,7 @@ use mateable\core\Platform;
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Followers</h6>
@@ -67,7 +67,7 @@ use mateable\core\Platform;
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Following</h6>
@@ -76,7 +76,7 @@ use mateable\core\Platform;
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Unread/Messages</h6>
@@ -85,7 +85,7 @@ use mateable\core\Platform;
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Active Events</h6>
@@ -94,7 +94,7 @@ use mateable\core\Platform;
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-xl-2">
                 <div class="card mateable-stat-card shadow-sm border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Account Status</h6>
@@ -148,6 +148,26 @@ use mateable\core\Platform;
 
                 <div class="card mateable-panel shadow-sm border-0 mb-4">
                     <div class="card-body">
+                        <h5 class="fw-semibold mb-3">Timeline Post</h5>
+                        <form action="dashboard/post" method="POST" class="d-flex flex-column gap-2">
+                            <textarea
+                                name="content"
+                                class="form-control form-control-sm"
+                                placeholder="What's on your mind?"
+                                rows="4"
+                                maxlength="5000"></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm w-100">
+                                <i class="fa fa-paper-plane me-2"></i>Post
+                            </button>
+                            <a href="dashboard/post" class="btn btn-outline-secondary btn-sm w-100 text-center" style="text-decoration: none;">
+                                Advanced Editor
+                            </a>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mateable-panel shadow-sm border-0 mb-4">
+                    <div class="card-body">
 
                         <h5 class="fw-semibold mb-3">
                             Quick Actions
@@ -155,25 +175,13 @@ use mateable\core\Platform;
 
                         <div class="d-grid gap-1 mb-sm-1">
                             <?php if(Platform::$app->user->role === Platform::$app->user::ROLE_ADMINISTRATOR): ?>
-                                <a href="/admdash" class="btn btn-small mateable-action-btn">
+                                <a href="/admdash/newsmgmt" class="btn btn-small mateable-action-btn">
                                     Create News Post
                                 </a>
                             <?php endif; ?>
 
-                            <a href="dashboard/post" class="btn mateable-action-btn">
-                                Create Post
-                            </a>
-
                             <a href="dashboard/edit?action=create&category=events" class="btn mateable-action-btn">
                                 Create Event
-                            </a>
-
-                            <a href="dashboard/edit?action=&category=profile" class="btn mateable-action-btn">
-                                Edit Profile
-                            </a>
-
-                            <a href="dashboard/edit?action=modify&category=account" class="btn btn-outline-secondary">
-                                Modify Account
                             </a>
                         </div>
 
