@@ -20,7 +20,7 @@ use mateable\core\models\ActivityModel;
 use mateable\core\Platform;
 
 ?>
-<section id="dashboard" class="pt-4 pb-5">
+<section id="dashboard" class="theme-page user-dashboard-page">
     <div class="container-fluid">
         <div class="row mb-4">
             <div class="col-12">

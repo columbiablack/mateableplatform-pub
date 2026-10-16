@@ -1,31 +1,61 @@
+const progressFill = document.getElementById('loading-progress-fill');
+const progressText = document.getElementById('loading-percentage');
+const progressBar = document.getElementById('loading-progress-bar');
+
+let progress = 0;
 let pageLoaded = false;
 let minTimeElapsed = false;
 
-function hideLoadingScreen() {
-    const loadingScreen = document.querySelector('.loading-screen');
+function updateProgress(value) {
+    progress = value;
 
-    if (!loadingScreen) return;
+    if (progressFill) {
+        progressFill.style.width = `${value}%`;
+    }
 
-    document.body.classList.add('is-loaded');
-    loadingScreen.classList.add('hidden');
+    if (progressText) {
+        progressText.textContent = `${Math.round(value)}%`;
+    }
 
-    loadingScreen.addEventListener(
-        'transitionend',
-        () => loadingScreen.remove(),
-        { once: true }
-    );
+    if (progressBar) {
+        progressBar.setAttribute('aria-valuenow', Math.round(value));
+    }
 }
 
-// Wait for the page to fully load
+function hideLoadingScreen() {
+    const screen = document.querySelector('.loading-screen');
+
+    if (!screen) return;
+
+    screen.classList.add('hidden');
+    document.body.classList.add('is-loaded');
+
+    screen.addEventListener('transitionend', (event) => {
+        if (event.target === screen && event.propertyName === 'opacity') {
+            screen.remove();
+        }
+    }, { once: true });
+}
+
+// Simulated progress: approach 90% while waiting.
+const progressTimer = setInterval(() => {
+    if (progress < 90 && !pageLoaded) {
+        updateProgress(Math.min(90, progress + Math.max(1, (90 - progress) * 0.08)));
+    }
+}, 600);
+
+// Actual page load completes the progress.
 window.addEventListener('load', () => {
     pageLoaded = true;
+    clearInterval(progressTimer);
+    updateProgress(100);
 
     if (minTimeElapsed) {
         hideLoadingScreen();
     }
-});
+}, { once: true });
 
-// Minimum 500ms display time
+// Minimum display duration.
 setTimeout(() => {
     minTimeElapsed = true;
 
@@ -34,16 +64,39 @@ setTimeout(() => {
     }
 }, 500);
 
+
+// Mega-Menu
 document.querySelectorAll(".mega-menu").forEach(menu => {
     const categories = menu.querySelectorAll(".mega-category");
     const panels = menu.querySelectorAll(".mega-panel");
+    const hoverRegion = menu.closest(".nav-item");
     let closeTimer = null;
 
-    const activateCategory = category => {
+    const clearSelection = () => {
+        const activeCategory = menu.querySelector(".mega-category.active");
+        if (activeCategory) {
+            activeCategory.classList.remove("active");
+        }
+        panels.forEach(panel => panel.classList.remove("active"));
+    };
+
+    const cancelClose = () => {
         if (closeTimer) {
             clearTimeout(closeTimer);
             closeTimer = null;
         }
+    };
+
+    const closeMenu = () => {
+        menu.classList.remove("show");
+        const toggle = document.getElementById(menu.getAttribute("aria-labelledby"));
+        toggle?.setAttribute("aria-expanded", "false");
+        clearSelection();
+        closeTimer = null;
+    };
+
+    const activateCategory = category => {
+        cancelClose();
         const target = menu.querySelector(`#${CSS.escape(category.dataset.target)}`);
         if (!target) {
             return;
@@ -66,21 +119,11 @@ document.querySelectorAll(".mega-menu").forEach(menu => {
         });
     });
 
-    menu.addEventListener("mouseenter", () => {
-        if (closeTimer) {
-            clearTimeout(closeTimer);
-            closeTimer = null;
-        }
-    });
-
-    menu.addEventListener("mouseleave", () => {
+    hoverRegion?.addEventListener("mouseenter", cancelClose);
+    hoverRegion?.addEventListener("mouseleave", () => {
+        cancelClose();
         closeTimer = setTimeout(() => {
-            const activeCategory = menu.querySelector(".mega-category.active");
-            if (activeCategory) {
-                activeCategory.classList.remove("active");
-            }
-            panels.forEach(panel => panel.classList.remove("active"));
-            closeTimer = null;
+            closeMenu();
         }, 180);
     });
 });
@@ -154,6 +197,37 @@ document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(button => {
         document.body.classList.remove('modal-open');
     });
 });
+
+const tickerTrack = document.querySelector('[data-ticker-track]');
+const tickerGroup = tickerTrack?.querySelector('.ticker-group');
+const reduceTickerMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (tickerTrack && tickerGroup) {
+    const tickerViewport = tickerTrack.parentElement;
+    const updateTickerSpeed = () => {
+        const overflow = tickerGroup.scrollWidth - tickerViewport.clientWidth;
+        const distance = Math.min(0, -overflow);
+
+        tickerTrack.style.setProperty('--ticker-distance', `${distance}px`);
+        tickerTrack.style.setProperty('--ticker-duration', `${Math.max(16, Math.abs(distance) / 24)}s`);
+        tickerTrack.classList.toggle('is-moving', distance < 0 && !reduceTickerMotion.matches);
+    };
+
+    const syncTickerMotion = () => {
+        if (reduceTickerMotion.matches) {
+            tickerTrack.classList.remove('is-moving');
+            tickerViewport?.classList.add('ticker-static');
+            return;
+        }
+
+        tickerViewport?.classList.remove('ticker-static');
+        updateTickerSpeed();
+    };
+
+    syncTickerMotion();
+    reduceTickerMotion.addEventListener('change', syncTickerMotion);
+    window.addEventListener('resize', syncTickerMotion, { passive: true });
+}
 
 const homePage = document.querySelector('.home-page');
 if (homePage) {

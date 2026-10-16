@@ -17,61 +17,61 @@ use mateable\core\Platform;
 <?php if(Platform::$app->isGuest()): ?>
     <section class="py-5">
         <div class="container">
+            <div class="g-card g-4">
+                <div class="block-heading text-center mb-4">
+                    <h2 class="text-info">Sign in</h2>
+                    <p class="text-muted mb-0">Sign in to see what you have been missing in the gaming world!</p>
+                </div>
 
-            <div class="block-heading text-center mb-4">
-                <h2 class="text-info">Sign in</h2>
-                <p class="text-muted mb-0">Sign in to see what you have been missing in the gaming world!</p>
-            </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
 
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6">
+                        <div class="clean-form p-4 border rounded bg-mateable-form-panel">
 
-                    <div class="clean-form p-4 border rounded bg-mateable-form-panel">
+                            <?php $form = Form::begin('', 'post'); ?>
 
-                        <?php $form = Form::begin('', 'post'); ?>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <?php
+                                    echo $form->field(
+                                        $model,
+                                        'email',
+                                        '',
+                                        '',
+                                        '',
+                                        ''
+                                    );
+                                    ?>
+                                </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <?php
-                                echo $form->field(
-                                    $model,
-                                    'email',
-                                    '',
-                                    '',
-                                    '',
-                                    ''
-                                );
-                                ?>
+                                <div class="col-md-6">
+                                    <?php
+                                    echo $form->field(
+                                        $model,
+                                        'password',
+                                        '',
+                                        '',
+                                        '',
+                                        ''
+                                    )->passwordField();
+                                    ?>
+                                </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <?php
-                                echo $form->field(
-                                    $model,
-                                    'password',
-                                    '',
-                                    '',
-                                    '',
-                                    ''
-                                )->passwordField();
-                                ?>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <?php echo $form->button()::make('Sign In')
+                                        ->class('btn btn-primary'); ?>
+                                </div>
                             </div>
+
+                            <?php echo $form::end(); ?>
+
                         </div>
-
-                        <div class="row">
-                            <div class="col text-center">
-                                <?php echo $form->button()::make('Sign In')
-                                ->class('btn btn-primary'); ?>
-                            </div>
-                        </div>
-
-                        <?php echo $form::end(); ?>
 
                     </div>
-
                 </div>
             </div>
-
         </div>
     </section>
 <?php else: ?>

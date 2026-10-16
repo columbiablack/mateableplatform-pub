@@ -43,7 +43,6 @@ class AuthController extends Controller
                 Platform::$app->response->redirect('/dashboard');
             }
         }
-        $this->setLayout('auth');
         return $this->renderView('login', ['model' => $loginForm]);
     }
 
@@ -69,7 +68,6 @@ class AuthController extends Controller
             }
         }
 
-        $this->setLayout('auth');
         return $this->renderView('register', ['model' => $registerForm]);
     }
 

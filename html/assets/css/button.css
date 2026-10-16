@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) 2026. Mateable LLC
+ */
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+.btn-primary {
+    background: var(--grad);
+    border: none;
+    padding: 0.78rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    transition: all 0.28s;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.38);
+    color: #fff;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(108,92,231,0.5); color: #fff; }
+
+.btn-outline-light {
+    border: 1.5px solid rgba(255,255,255,0.28);
+    padding: 0.78rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    transition: all 0.28s;
+    color: #fff;
+    background: transparent;
+}
+.btn-outline-light:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.55); transform: translateY(-2px); color: #fff; }
+
+.btn-outline-secondary {
+    border: 1px solid rgba(108,92,231,0.35);
+    border-radius: 50px;
+    color: var(--secondary);
+    background: transparent;
+    font-size: 0.78rem;
+    padding: 0.3rem 0.9rem;
+    transition: all 0.2s;
+}
+.btn-outline-secondary:hover { background: rgba(108,92,231,0.15); border-color: var(--primary); color: var(--secondary); }
+

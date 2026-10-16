@@ -5,7 +5,7 @@
  */
 
 ?>
-<section class="py-5">
+<section class="theme-page tournaments-page">
     <div class="container py-4">
         <div class="row g-4 align-items-start">
             <div class="col-lg-8">
@@ -43,19 +43,23 @@
                     <div class="card-body p-4">
                         <h4 class="fw-semibold mb-3">Upcoming tournaments</h4>
                         <div class="d-grid gap-3">
-                            <?php foreach ($upcomingTournamentsc  as $tournament): ?>
-                                <div class="border rounded-3 p-3">
+                            <?php if (!empty($tournaments)): ?>
+                                <?php foreach ($tournaments as $tournament): ?>
+                                <div class="tournament-entry border rounded-3 p-3">
                                     <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
                                         <div>
-                                            <h6 class="mb-1 fw-semibold"><?= htmlspecialchars($tournament['title']) ?></h6>
-                                            <div class="text-muted small"><?= htmlspecialchars($tournament['game']) ?></div>
+                                            <h6 class="mb-1 fw-semibold"><?= htmlspecialchars($tournament->title, ENT_QUOTES, 'UTF-8') ?></h6>
+                                            <div class="text-muted small"><?= htmlspecialchars($tournament->game, ENT_QUOTES, 'UTF-8') ?></div>
                                         </div>
-                                        <span class="badge bg-info-subtle text-info"><?= htmlspecialchars($tournament['slots']) ?></span>
+                                        <span class="badge bg-info-subtle text-info">Up to <?= (int) $tournament->max_players ?> players</span>
                                     </div>
-                                    <div class="text-muted small mb-2"><?= htmlspecialchars($tournament['date']) ?></div>
-                                    <div class="text-muted"><?= htmlspecialchars($tournament['description']) ?></div>
+                                    <div class="text-muted small mb-2"><?= htmlspecialchars(date('M j, Y g:i A', strtotime($tournament->starts_at)), ENT_QUOTES, 'UTF-8') ?></div>
+                                    <div class="text-muted"><?= htmlspecialchars($tournament->description, ENT_QUOTES, 'UTF-8') ?></div>
                                 </div>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p class="text-muted tournament-empty-state mb-0">There are no approved tournaments scheduled right now. Check back soon for the next event.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -64,15 +68,7 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <h4 class="fw-semibold mb-3">Recent results</h4>
-                        <div class="d-grid gap-3">
-                            <?php foreach ($recentResultsc as $result): ?>
-                                <div class="border rounded-3 p-3">
-                                    <div class="fw-semibold"><?= htmlspecialchars($result['name']) ?></div>
-                                    <div class="text-muted small"><?= htmlspecialchars($result['result']) ?></div>
-                                    <div class="text-muted small"><?= htmlspecialchars($result['game']) ?></div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                        <p class="text-muted tournament-empty-state mb-0">Results will appear here after completed tournaments are recorded.</p>
                     </div>
                 </div>
             </div>

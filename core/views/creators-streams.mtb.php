@@ -3,7 +3,7 @@
  * Copyright (c) 2026. Mateable LLC
  */
 ?>
-<section class="py-5">
+<section class="theme-page creators-page">
     <div class="container py-4">
         <div class="row g-4 align-items-start">
             <div class="col-lg-8">

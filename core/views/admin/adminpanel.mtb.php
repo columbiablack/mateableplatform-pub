@@ -8,7 +8,7 @@
  * @var $activeUsers
  */
 ?>
-<section id="admin-dashboard" class="pt-4 pb-5">
+<section id="admin-dashboard" class="theme-page admin-dashboard-page">
     <div class="container-fluid">
         <!-- Admin Header -->
         <div class="row mb-4">
@@ -22,7 +22,7 @@
             </div>
         </div>
         <!-- Admin Stats -->
-        <div class="row g-3 mb-4">
+        <div class="row admin-stats-grid">
 
             <div class="col-md-3">
                 <div class="card border-0 shadow-sm">
@@ -72,7 +72,7 @@
 
         </div>
         <!-- Admin Workspace -->
-        <div class="row g-4">
+        <div class="row admin-workspace">
 
             <!-- Admin Sidebar -->
             <div class="col-lg-3">

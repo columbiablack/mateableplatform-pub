@@ -17,12 +17,16 @@ use mateable\core\Platform;
 ?>
 <div class="ticker-bar">
     <div class="container">
-        <div class="ticker-inner">
-            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin price">MTBC $0.00002850</a>
-            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin block height">Block Height 4,538,705</a>
-            <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin supply">Supply 196,838,169 MTBC</a>
-            <a class="ticker-pill" href="/about">Learn More</a>
-            <a class="ticker-pill" href="/downloads">Download Wallet</a>
+        <div class="ticker-viewport">
+            <div class="ticker-inner" data-ticker-track>
+                <div class="ticker-group">
+                    <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin price">MTBC $0.00002850</a>
+                    <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin block height">Block Height 4,538,705</a>
+                    <a class="ticker-pill" href="https://coin.mateable.com/" aria-label="Mateable Coin supply">Supply 196,838,169 MTBC</a>
+                    <a class="ticker-pill" href="/about">Learn More</a>
+                    <a class="ticker-pill" href="/downloads">Download Wallet</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

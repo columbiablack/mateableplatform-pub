@@ -10,7 +10,7 @@
         <div class="row mb-4 g-4">
             <div class="col-md-4 mb-3">
                 <h5 class="navbar-brand navbar-dark mb-3">{{app_name}}</h5>
-                <p class="mb-0" style="color: rgba(255,255,255,0.62); line-height: 1.7; max-width: 340px;">
+                <p class="footer-about-copy mb-0" style="color: rgba(255,255,255,0.62);">
                     {{app_name}} is a next-generation gaming platform where players compete,
                     connect, and grow through tournaments, community-driven features,
                     and creator-focused tools.
@@ -319,6 +319,6 @@
 <!-- Modal End -->
 
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/theme.js"></script>
+<script src="assets/js/theme.js?v=20261015b"></script>
 </body>
 </html>

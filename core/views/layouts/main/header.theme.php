@@ -24,16 +24,31 @@
     <meta name="twitter:image" content="https://mateablemedia.com/assets/img/mateable_logo.png">
 
     <title>{{app_name}}</title>
+
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/theme_test.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/colorgrid.css">
+    <link rel="stylesheet" href="assets/css/button.css">
+    <link rel="stylesheet" href="assets/css/glasscard.css">
+    <link rel="stylesheet" href="assets/css/megapanel.css">
+    <link rel="stylesheet" href="assets/css/navigation_menu.css">
+    <link rel="stylesheet" href="assets/css/ticker.css?v=20261015b">
+    <link rel="stylesheet" href="assets/css/loading.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body id="wBody" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="54">
 <div class="loading-screen" role="status">
-    <h2 class="loading-text">Loading...</h2>
-    <div class="spinner" aria-hidden="true"></div>
+    <img style="align-content: center; height: 150px; width: 156px;" src="assets/img/mateable_logo.png">
+
+    <div class="loading-progress-info">
+        <span>LOADING</span>
+        <span id="loading-percentage">0%</span>
+    </div>
+
+    <div class="loading-progress-track" role="progressbar" aria-label="Page loading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="loading-progress-bar">
+        <div class="loading-progress-fill" id="loading-progress-fill"></div>
+    </div>
+
 </div>
 

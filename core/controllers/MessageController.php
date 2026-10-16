@@ -22,7 +22,7 @@ class MessageController extends Controller
 
     public function chat(): string
     {
-        $this->setLayout('auth');
+        //$this->setLayout('auth');
         return $this->renderView('profile/messages/chat', [
             'conversations' => $this->getConversations(),
         ]);

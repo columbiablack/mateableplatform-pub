@@ -1,0 +1,148 @@
+/*
+ * Copyright (c) 2026. Mateable LLC
+ */
+
+/* =====================================================
+   Mega Panels
+   ===================================================== */
+/*  8/29/2026 at 7:31pm  */
+
+#mainContent {
+    padding-top: 117px;
+}
+
+#wBody {
+    background: var(--dark);
+}
+
+.mega-menu {
+    width: 700px;
+    max-width: calc(100vw - 2rem);
+    padding: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(108,92,231,0.28);
+    box-shadow: 0 24px 48px rgba(5, 7, 18, 0.45);
+    background: rgba(9, 9, 26, 0.96);
+    backdrop-filter: blur(18px);
+    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+    z-index: 1350;
+}
+
+.mega-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+}
+
+.dropdown-menu {
+    border-radius: 14px;
+    border: 1px solid rgba(108,92,231,0.24);
+    box-shadow: 0 22px 42px rgba(5, 7, 18, 0.42);
+    background: rgba(9, 9, 26, 0.96);
+    backdrop-filter: blur(16px);
+    padding: 0.65rem 0;
+    z-index: 1350;
+}
+
+/* Layout */
+.mega-container {
+    display: flex;
+    background: rgba(9, 9, 26, 0.98);
+}
+
+/* LEFT SIDE */
+.mega-left {
+    width: 220px;
+    min-width: 220px;
+    background: rgba(108,92,231,0.12);
+    border-right: 1px solid rgba(108,92,231,0.28);
+    display: flex;
+    flex-direction: column;
+}
+
+.mega-category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+}
+
+.mega-category:hover,
+.mega-category.active {
+    background: rgba(162,155,254,0.14);
+    color: #fff;
+    border-left-color: rgba(162,155,254,0.9);
+    transform: translateX(2px);
+}
+
+/* RIGHT SIDE */
+.mega-right {
+    flex: 1;
+    padding: 15px;
+    min-width: 0;
+    background: #0e0e20;
+    border-left: 1px solid rgba(108, 92, 231, 0.12);
+}
+
+.mega-panel {
+    display: none;
+    min-height: 180px;
+    background: #0e0e20;
+}
+
+.mega-panel.active {
+    display: block;
+}
+
+.mega-panel h6 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.mega-panel a {
+    display: block;
+    padding: 6px 0;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.mega-panel a:hover {
+    color: var(--primary-dk);
+}
+.mega-category i,
+.mega-panel a i {
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.mega-panel a:hover i {
+    transform: scale(1.15);
+    color: #f1c40f;
+}
+
+.mega-category i,
+.mega-panel a i {
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.mega-category:hover i,
+.mega-panel a:hover i {
+    transform: scale(1.15);
+    color: #f1c40f;
+}
+
+/* Make logout pop slightly */
+.mega-category.text-danger:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
