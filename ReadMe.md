@@ -1,7 +1,7 @@
 <div style="background-color: #39323e; color: beige; padding: 20px;">
   <img src="https://mateablemedia.com/assets/img/10.png">
 
-  <div style="text-align: center;">
+  <div style="align: center; text-align: center;">
 
   [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
   [![Backend](https://img.shields.io/badge/PHP-Backend-blueviolet.svg)](https://www.php.net)
