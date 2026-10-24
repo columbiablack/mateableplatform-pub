@@ -1,14 +1,14 @@
-[![Mateable Media](https://mateablemedia.com/assets/img/10.png)](https://mateablemedia.com)
+<div style="background-color: #39323e; color: white; padding: 20px;">
+  <img src="https://mateablemedia.com/assets/img/10.png">
 
-<div align="center">
+  <div style="text-align: center;">
 
-[![Mateable Media](https://mateablemedia.com/assets/img/mateable_logo.png)](https://mateablemedia.com)
+  [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
+  [![Backend](https://img.shields.io/badge/PHP-Backend-blueviolet.svg)](https://www.php.net)
+  [![Frontend](https://img.shields.io/badge/Javascript-Frontend-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-[![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
-[![Backend](https://img.shields.io/badge/PHP-Backend-blueviolet.svg)](https://www.php.net)
-[![Frontend](https://img.shields.io/badge/Javascript-Frontend-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+  </div>
 
-</div>
 
 ---
 
@@ -120,3 +120,4 @@ Do you plan to use this platform for your own personal use? Fine, we have no pro
 >2) Network: Send us your website url (Site content does not matter).
 >3) Report: All errors you come across should be reported to us.
 >4) Enjoy!
+</div>
