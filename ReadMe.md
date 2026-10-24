@@ -1,10 +1,8 @@
-<p align="center">
-  <a href="https://mateablemedia.com" target="_blank">
-    <img src="https://mateablemedia.com/assets/img/10.png" width="400" alt="Mateable Media Logo">
-  </a>
-</p>
+[![Mateable Media](https://mateablemedia.com/assets/img/10.png)](https://mateablemedia.com)
 
 <div align="center">
+
+[![Mateable Media](https://mateablemedia.com/assets/img/mateable_logo.png)](https://mateablemedia.com)
 
 [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
 [![Backend](https://img.shields.io/badge/PHP-Backend-blueviolet.svg)](https://www.php.net)
