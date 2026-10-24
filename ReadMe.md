@@ -82,6 +82,10 @@ The platform is built to:
 - **Security:** Session management, account recovery, and multi-device handling
 - **Scalability:** Designed to grow with competitive features and real-time systems
 
+### Python API companion
+
+A Django REST Framework service is being developed in [`py-back/`](py-back/README.md). It currently provides health and tournament APIs using its own SQLite development database; the existing PHP site remains the production runtime and database/session integration is not configured yet.
+
 ---
 
 ## Community-Driven by Design
