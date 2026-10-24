@@ -1,4 +1,4 @@
-<div style="background-color: #39323e; color: white; padding: 20px;">
+<div style="background-color: #39323e; color: beige; padding: 20px;">
   <img src="https://mateablemedia.com/assets/img/10.png">
 
   <div style="text-align: center;">
