@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://mateablemedia.com" target="_blank">
-    <img src="https://mateablemedia.com/images/10.png" width="400" alt="Mateable Media Logo">
+    <img src="https://mateablemedia.com/assets/img/10.png" width="400" alt="Mateable Media Logo">
   </a>
 </p>
 
@@ -116,9 +116,9 @@ If you're interested in contributing, feel free to explore the codebase, submit 
 
 ## Personal Usage
 
-Do you plan to use this platform for your own personal use? Fine, we have no problem with you using the platform and/or you modifying the code. If so, please do the following:
+Do you plan to use this platform for your own personal use? Fine, we have no problem with you using the platform and/or you modifying code. If so, please do the following:
 
 >1) Credits: Acknowledge Mateable LLC and the work of the community.
->2) Network: Send us your website url (Site content doesn't matter).
+>2) Network: Send us your website url (Site content does not matter).
 >3) Report: All errors you come across should be reported to us.
 >4) Enjoy!
