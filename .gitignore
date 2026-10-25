@@ -3,8 +3,8 @@
 .vscode/
 backup/
 core/routes/Routes.php
-core/views/admin
-core/views/layouts
-core/views/legal
-core/views/profile
+core/views/admin/
+core/views/layouts/
+core/views/legal/
+core/views/profile/
 .env
