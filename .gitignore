@@ -3,7 +3,6 @@
 .vscode/
 backup/
 core/routes/Routes.php
-core/views/*
 core/views/admin
 core/views/layouts
 core/views/legal
