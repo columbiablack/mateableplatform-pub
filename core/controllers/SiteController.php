@@ -6,10 +6,13 @@
 
 namespace mateable\core\controllers;
 
+use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
+use mateable\core\http\Response;
 use mateable\core\models\ContactForm;
 use mateable\core\models\TournamentModel;
 use mateable\core\models\TournamentEntryModel;
+use mateable\core\models\user\account\UserModel;
 use mateable\core\Platform;
 
 /**
@@ -20,6 +23,32 @@ use mateable\core\Platform;
 class SiteController extends Controller
 {
     public string $type;
+
+    /**
+     * @return string
+     */
+    public function profile(Request $request, Response $response): string
+    {
+        $username = $request->getRouteParams('username');
+
+        // Look up the user with your existing user model.
+        // Replace this section with your actual model method.
+        $user = UserModel::findOne(['nickname' => $username]);
+
+        if (!$user) {
+            throw new NotFoundException('The requested page or member\'s profile cannot be found. Go to the <a href="">homepage</a>.');
+        }
+
+
+       /*** if (!$user) {
+            throw new NotFoundException('Profile not found.');
+        }*/
+
+        // Render the profile using your project's existing view convention.
+        return Platform::$app->view->renderView('profile', [
+            'user' => $user
+        ]);
+    }
 
     /**
      * @return string
@@ -47,7 +76,6 @@ class SiteController extends Controller
             }
         }
 
-        $this->setLayout('auth');
         return $this->renderView('contact', ['model' => $contact]);
     }
 

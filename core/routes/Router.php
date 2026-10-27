@@ -42,32 +42,47 @@ class Router
 
     public function getCallback(string $method, string $url)
     {
+        $routes = $this->routemap[$method] ?? [];
 
-        // Get all routes for the current request method
-        $routes = $this->routemap[$method];
-
-        // Start iterating over registered routes
         foreach ($routes as $route => $callback) {
+            $regex = '';
+            $offset = 0;
 
-            // Escape special characters in the route pattern
-            $pattern = preg_quote($route, '/');
+            preg_match_all(
+                '/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/',
+                $route,
+                $placeholders,
+                PREG_OFFSET_CAPTURE
+            );
 
-            // Convert route parameter placeholders to regex capture groups
-            $pattern = preg_replace_callback('/\{(\w+)(:[^}]+)?\}/', function($matches) {
-                $constraint = isset($matches[2]) ? $matches[2] : '\w+';
-                return "(?P<$matches[1]>$constraint)";
-            }, $pattern);
+            foreach ($placeholders[0] as $i => $placeholder) {
+                $token = $placeholder[0];
+                $position = $placeholder[1];
+                $name = $placeholders[1][$i][0];
 
-            // Add start and end delimiters to the regex pattern
-            $pattern = '/^$pattern$/';
+                $regex .= preg_quote(
+                    substr($route, $offset, $position - $offset),
+                    '#'
+                );
 
-            // Test if the current route matches the URL
-            if (preg_match($pattern, $url, $matches)) {
-                // Remove the full match from the parameters
-                unset($matches[0]);
+                $regex .= '(?P<' . $name . '>[^/]+)';
+                $offset = $position + strlen($token);
+            }
 
-                // Set route parameters in the request object
-                $this->request->setRouteParams($matches);
+            $regex .= preg_quote(substr($route, $offset), '#');
+
+            $pattern = '#^' . $regex . '$#';
+
+            if (preg_match($pattern, $url, $matches) === 1) {
+                $params = [];
+
+                foreach ($matches as $key => $value) {
+                    if (is_string($key)) {
+                        $params[$key] = $value;
+                    }
+                }
+
+                $this->request->setRouteParams($params);
 
                 return $callback;
             }
@@ -80,52 +95,59 @@ class Router
     {
         $method = strtolower($this->request->getMethod());
         $url = $this->request->getUrl();
-        $pos = strpos($url, '?');
 
-        if ($pos !== false || ($pos = strpos($url, '?')) !== false) {
-            $url = substr($url, 0, $pos);
-        }
+        // Remove the query string.
+        $url = strtok($url, '?') ?: '/';
 
+        // Normalize the URL.
         if ($url === '' || $url[0] !== '/') {
             $url = '/' . $url;
         }
 
+        // First try an exact route.
         $callback = $this->routemap[$method][$url] ?? false;
 
-        // If not found, attempt partial match
-        /*if (!$callback) {
-            foreach ($this->routemap[$method] as $route => $cb) {
-                if (str_starts_with($url, rtrim($route, '/').'/')) {
-                    $callback = $cb;
-                    break;
-                }
-            }
-        }*/
-
-        if(!$callback){
+        // Then try parameterized routes.
+        if ($callback === false) {
             $callback = $this->getCallback($method, $url);
-            if(!$callback){
-                throw new NotFoundException("There is a problem with the requested url. Go to the <a href=\"{{site_url}}\">homepage</a>.");
-            }
-        }else{
-            if(is_string($callback)) {
-                return Platform::$app->view->renderView($callback);
-            }
+        }
 
-            if (is_array($callback)) {
-                $controller = new $callback[0]();
-                Platform::$app->controller = $controller;
-                $controller->action = $callback[1];
-                $callback[0] = $controller;
+        if ($callback === false) {
+            throw new NotFoundException(
+                'The page requested cannot be found. Go to the <a href="{{site_url}}">homepage</a>.'
+            );
+        }
 
-                foreach ($controller->getMiddlewares() as $middleware) {
-                    $middleware->execute();
-                }
-            }
+        // Render a view directly.
+        if (is_string($callback)) {
+            return Platform::$app->view->renderView($callback);
+        }
 
-            if(is_callable($callback)){
-                return call_user_func($callback, $this->request, $this->response);
+        // Instantiate controllers and run their middleware.
+        if (is_array($callback)) {
+            $controllerClass = $callback[0];
+            $action = $callback[1];
+
+            $controller = new $controllerClass();
+
+            Platform::$app->controller = $controller;
+            $controller->action = $action;
+
+            $callback = [$controller, $action];
+
+            foreach ($controller->getMiddlewares() as $middleware) {
+                $middleware->execute();
             }
         }
+
+        if (is_callable($callback)) {
+            return call_user_func(
+                $callback,
+                $this->request,
+                $this->response
+            );
+        }
+
+        throw new NotFoundException('The requested route callback is invalid.');
     }
 }

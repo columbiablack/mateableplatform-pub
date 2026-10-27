@@ -134,7 +134,6 @@ class AuthController extends Controller
 
         }
 
-        $this->setLayout('auth');
         return $this->renderview('recovery', ['recModel' => new UserLoginModel()]);
     }
 
