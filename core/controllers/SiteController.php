@@ -27,7 +27,7 @@ class SiteController extends Controller
     /**
      * @return string
      */
-    public function profile(Request $request, Response $response): string
+    public function profile(Request $request): string
     {
         $username = $request->getRouteParams('username');
 
@@ -36,18 +36,11 @@ class SiteController extends Controller
         $user = UserModel::findOne(['nickname' => $username]);
 
         if (!$user) {
-            throw new NotFoundException('The requested page or member\'s profile cannot be found. Go to the <a href="">homepage</a>.');
+            throw new NotFoundException('The page or member\'s profile cannot be found. Go to the <a href="">homepage</a>.');
         }
 
-
-       /*** if (!$user) {
-            throw new NotFoundException('Profile not found.');
-        }*/
-
         // Render the profile using your project's existing view convention.
-        return Platform::$app->view->renderView('profile', [
-            'user' => $user
-        ]);
+        return Platform::$app->view->renderView('profile', ['user' => $user]);
     }
 
     /**

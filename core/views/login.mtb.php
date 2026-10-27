@@ -15,12 +15,12 @@ use mateable\core\Platform;
 
 ?>
 <?php if(Platform::$app->isGuest()): ?>
-    <section class="py-5">
+    <section class="theme-page">
         <div class="container">
             <div class="g-card g-4">
                 <div class="block-heading text-center mb-4">
-                    <h2 class="text-info">Sign in</h2>
-                    <p class="text-muted mb-0">Sign in to see what you have been missing in the gaming world!</p>
+                    <h2 class="text-uppercase fw-bold mb-2" style="letter-spacing:0.24rem; color: var(--mateable-accent);">Members Portal</h2>
+                    <p class="text-muted mb-0">Login to see what you have been missing in the gaming world!</p>
                 </div>
 
                 <div class="row justify-content-center">
@@ -60,7 +60,7 @@ use mateable\core\Platform;
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <?php echo $form->button()::make('Sign In')
+                                    <?php echo $form->button()::make('Login')
                                         ->class('btn btn-primary'); ?>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@
  */
 
 ?>
-<section>
+<section id="search-results" class="theme-page clean-block">
     <div class="container">
         <div class="row">
             <h2>Results</h2>

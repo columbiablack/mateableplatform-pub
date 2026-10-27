@@ -11,14 +11,14 @@
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, rgba(8,16,32,0.95), rgba(17,29,49,0.95));">
                     <div class="card-body p-4 p-lg-5">
-                        <p class="text-info mb-2 fw-semibold">Tournament Hub</p>
-                        <h1 class="display-6 fw-bold mb-3">Compete in structured events that test your timing, reflexes, and teamwork.</h1>
+                        <p class="text-uppercase fw-bold mb-2" style="letter-spacing:0.24rem; color: var(--mateable-accent);">Tournament Hub</p>
+                        <h1 class="fw-bold mb-3">Compete in structured events that test your timing, reflexes, and teamwork.</h1>
                         <p class="text-muted mb-4">
                             The tournaments section now acts as a launch point for upcoming events, recent winners, and your next challenge.
                         </p>
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="/creators-streams" class="btn mateable-outline-btn">Meet Creators</a>
-                            <a href="/streams" class="btn btn-outline-light">Watch Live Streams</a>
+                            <a href="/creators-streams" class="btn mateable-action-btn">Meet Creators</a>
+                            <a href="/streams" class="btn mateable-action-btn">Watch Live Streams</a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
-                        <h5 class="fw-semibold mb-3">Upcoming highlights</h5>
+                        <span class="s-label">Upcoming highlights</span>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-3"><strong>Bracket ready</strong><br><span class="text-muted">Weekly cups with seeded rounds and live spectators.</span></li>
                             <li class="mb-3"><strong>Creator-backed</strong><br><span class="text-muted">Many events are hosted with streamers and community partners.</span></li>
@@ -41,7 +41,7 @@
             <div class="col-lg-7">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
-                        <h4 class="fw-semibold mb-3">Upcoming tournaments</h4>
+                        <span class="s-label">Upcoming tournaments</span>
                         <div class="d-grid gap-3">
                             <?php if (!empty($tournaments)): ?>
                                 <?php foreach ($tournaments as $tournament): ?>
@@ -67,7 +67,7 @@
             <div class="col-lg-5">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
-                        <h4 class="fw-semibold mb-3">Recent results</h4>
+                        <span class="s-label">Recent results</span>
                         <p class="text-muted tournament-empty-state mb-0">Results will appear here after completed tournaments are recorded.</p>
                     </div>
                 </div>

@@ -27,14 +27,33 @@ function hideLoadingScreen() {
 
     if (!screen) return;
 
-    screen.classList.add('hidden');
+    // Mark the page as loaded.
     document.body.classList.add('is-loaded');
 
-    screen.addEventListener('transitionend', (event) => {
-        if (event.target === screen && event.propertyName === 'opacity') {
+    // Immediately stop the overlay from blocking interaction.
+    screen.style.pointerEvents = 'none';
+
+    // Start the fade-out transition.
+    screen.classList.add('hidden');
+
+    // Remove the overlay after the transition finishes.
+    const removeScreen = () => {
+        if (screen.isConnected) {
             screen.remove();
         }
+    };
+
+    screen.addEventListener('transitionend', (event) => {
+        if (
+            event.target === screen &&
+            event.propertyName === 'opacity'
+        ) {
+            removeScreen();
+        }
     }, { once: true });
+
+    // Fallback in case transitionend never fires.
+    setTimeout(removeScreen, 600);
 }
 
 // Simulated progress: approach 90% while waiting.
@@ -42,7 +61,7 @@ const progressTimer = setInterval(() => {
     if (progress < 90 && !pageLoaded) {
         updateProgress(Math.min(90, progress + Math.max(1, (90 - progress) * 0.08)));
     }
-}, 600);
+}, 100);
 
 // Actual page load completes the progress.
 window.addEventListener('load', () => {

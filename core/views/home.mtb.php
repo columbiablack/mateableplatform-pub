@@ -11,7 +11,7 @@
 use mateable\core\Platform;
 
 ?>
-<main class="home-page">
+<main class="theme-page">
     <section class="hero">
         <div class="container hero-inner">
             <div class="row align-items-center g-5">
@@ -23,8 +23,8 @@ use mateable\core\Platform;
                     </p>
 
                     <div class="hero-actions d-flex flex-wrap gap-3 mb-4">
-                        <a href="/signup" class="btn btn-primary">Create Account</a>
-                        <a href="/tournaments" class="btn btn-outline-light">Explore Tournaments</a>
+                        <a href="/signup" class="btn mateable-action-btn">Create Account</a>
+                        <a href="/tournaments" class="btn mateable-action-btn">Explore Tournaments</a>
                     </div>
 
                     <div class="hero-stats-bar">

@@ -12,11 +12,11 @@ use mateable\core\form\Form;
  */
 
 ?>
-<section class="py-5">
+<section class="theme-page">
     <div class="container-fluid">
 
         <div class="block-heading text-center mb-4">
-            <h2 class="text-info">Create Your Account</h2>
+            <h2 class="text-uppercase fw-bold mb-2" style="letter-spacing:0.24rem; color: var(--mateable-accent);">Create Your Account</h2>
 
             <p class="lead">
                 Sign up and receive <strong>100 MTBC</strong> to get started!

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2026. Mateable LLC
+ */
+
 declare(strict_types=1);
 
 namespace Dotenv\Repository;

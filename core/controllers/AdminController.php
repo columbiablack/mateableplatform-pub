@@ -25,7 +25,6 @@ class AdminController extends Controller
 
     public function adminDash(): string
     {
-        //$this->setLayout('auth');
         Platform::$app->activity::log(Platform::$app->user->id, "admin dashboard", "You viewed the Administration Dashboard!");
         return $this->renderView('admin/adminpanel', [
             'totalu' => UserModel::countAll(),
