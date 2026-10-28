@@ -15,7 +15,7 @@ class TextArea
     public string $attribute;
     public string $style;
 
-    public function __construct(Model $model, string $attribute, string $style)
+    public function __construct(Model $model, string $attribute, string $style, array $params = [])
     {
         $this->attribute = $attribute;
         $this->model = $model;

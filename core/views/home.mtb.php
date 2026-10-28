@@ -146,10 +146,12 @@ use mateable\core\Platform;
     <section class="bg-b" style="padding-top: 5rem; padding-bottom: 5rem;">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <span class="s-label">The ecosystem</span>
-                    <h2 class="s-title text-white">Built for players, creators, and communities</h2>
-                    <p class="s-desc text-start" style="margin: 0 0 2rem 0; max-width: none;">Mateable is more than a games site. It is an ecosystem of competition, profiles, digital rewards, and social discovery.</p>
+                <div class="col-lg-6 g-card">
+                    <div class="mb-4">
+                        <span class="s-label small">The ecosystem</span>
+                        <h2 class="s-title text-white">Built for players, creators, and communities</h2>
+                        <p class="s-desc text-start" style="margin: 0 0 2rem 0; max-width: none;">Mateable is more than a games site. It is an ecosystem of competition, profiles, digital rewards, and social discovery.</p>
+                    </div>
 
                     <div class="d-grid gap-3">
                         <div class="g-card" style="padding: 1.25rem;">
@@ -193,7 +195,7 @@ use mateable\core\Platform;
                 <div class="col-lg-6">
                     <div class="g-card" style="padding: 1.5rem;">
                         <div class="mb-4">
-                            <div class="small text-uppercase" style="letter-spacing: .12em; color: rgba(255,255,255,0.5);">Featured moments</div>
+                            <span class="s-label small">Featured moments</span>
                             <h3 class="mt-2 text-white">This week’s competitive highlights</h3>
                         </div>
 
@@ -306,10 +308,12 @@ use mateable\core\Platform;
 
     <section class="bg-a" style="padding-top: 5rem; padding-bottom: 5rem;">
         <div class="container">
-            <div class="g-card text-center" style="padding: 2.5rem 1.5rem;">
-                <span class="s-label">Ready to start?</span>
-                <h2 class="s-title text-white">Join the next generation of competitive gaming.</h2>
-                <p class="s-desc" style="margin: 0 auto 2rem; max-width: 700px;">Whether you want to play, compete, stream, or earn through community activity, Mateable gives you a full pathway to engage with the ecosystem.</p>
+            <div class="g-card mateable-form-panel text-center" style="padding: 2.5rem 1.5rem;">
+                <div class="mb-3">
+                    <span class="s-label">Ready to start?</span>
+                    <h2 class="s-title text-white">Join the next generation of competitive gaming.</h2>
+                    <p class="s-desc" style="margin: 0 auto 2rem; max-width: 700px;">Whether you want to play, compete, stream, or earn through community activity, Mateable gives you a full pathway to engage with the ecosystem.</p>
+                </div>
                 <div class="d-flex flex-wrap justify-content-center gap-3">
                     <a href="/signup" class="btn btn-primary">Create account</a>
                     <a href="/about" class="btn btn-outline-light">Learn more</a>

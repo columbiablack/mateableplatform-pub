@@ -15,8 +15,8 @@
                             Creators can spotlight gameplay, run tournaments, and engage fans through live streams that feel built for competition and discovery.
                         </p>
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="/tournaments" class="btn mateable-outline-btn">See Tournaments</a>
-                            <a href="/streams" class="btn btn-outline-light">Browse Live Streams</a>
+                            <a href="/tournaments" class="btn mateable-action-btn">See Tournaments</a>
+                            <a href="/streams" class="btn mateable-action-btn">Browse Live Streams</a>
                         </div>
                     </div>
                 </div>
@@ -40,12 +40,12 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <span class="s-label">Featured creators</span>
-                        <div class="list-group list-group-flush">
+                        <div class="list-group list-group-flush gap-2">
                             <?php foreach (($featuredCreators ?? []) as $creator): ?>
-                                <div class="list-group-item px-0 py-3">
-                                    <div class="d-flex justify-content-between align-items-start gap-3">
+                                <div class="g-card mateable-panel list-group-item p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
                                         <div>
-                                            <h6 class="mb-1 fw-semibold"><?= htmlspecialchars($creator['name']) ?></h6>
+                                            <h6 class="mb-2 fw-semibold"><?= htmlspecialchars($creator['name']) ?></h6>
                                             <div class="text-muted small"><?= htmlspecialchars($creator['focus']) ?></div>
                                         </div>
                                         <span class="badge bg-info-subtle text-info"><?= htmlspecialchars($creator['followers']) ?></span>

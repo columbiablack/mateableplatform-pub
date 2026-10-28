@@ -89,7 +89,7 @@ use mateable\core\Platform;
         </div>
 
         <!-- PLAYER STATISTICS -->
-        <div class="flex-fill clean-info card-title block-heading">
+        <div class="flex-fill clean-info card-title block-heading mb-3">
             <span class="s-label">Player Statistics</span>
         </div>
 
@@ -132,7 +132,7 @@ use mateable\core\Platform;
         </div>
 
         <!-- GAMING PROFILE -->
-        <div class="flex-fill clean-info card-title block-heading">
+        <div class="flex-fill clean-info card-title block-heading mb-3">
             <span class="s-label">Gaming Profile</span>
         </div>
 
@@ -175,7 +175,7 @@ use mateable\core\Platform;
         </div>
 
         <!-- VIDEOS AND STREAMS -->
-        <div class="flex-fill clean-info card-title block-heading">
+        <div class="flex-fill clean-info card-title block-heading mb-3">
             <span class="s-label">Videos & Streams</span>
         </div>
 
@@ -218,7 +218,7 @@ use mateable\core\Platform;
         </div>
 
         <!-- COMMUNITY -->
-        <div class="flex-fill clean-info card-title block-heading">
+        <div class="flex-fill clean-info card-title block-heading mb-3">
             <span class="s-label">Community</span>
         </div>
 
