@@ -99,7 +99,7 @@ If you're interested in contributing, feel free to explore the codebase, submit 
 ## Personal Usage
 Do you plan to use this platform for your own personal use? Fine, we have no problem with you using the platform and/or you modifying code. If so, please do the following:
 
-  ```Bash
+  ```Text
   1) Credits: Acknowledge Mateable LLC and the work of the community.
   2) Network: Send us your website url (Site content does not matter).
   3) Report: All errors you come across should be reported to us.
