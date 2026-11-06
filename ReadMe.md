@@ -7,8 +7,8 @@
 
 [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
 [![link](https://img.shields.io/badge/PHP-Language-blueviolet.svg)](https://www.php.net)
-[![link](https://img.shields.io/badge/Python-blueviolet.svg)](https://www.php.net)
-[![link](https://img.shields.io/badge/Javascript-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![link](https://img.shields.io/badge/Python-Language-blueviolet.svg)](https://www.php.net)
+[![link](https://img.shields.io/badge/Javascript-Language-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
   </div>
 
