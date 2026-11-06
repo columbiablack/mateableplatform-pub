@@ -3,7 +3,7 @@
  * Copyright (c) 2026. Mateable LLC
  */
 ?>
-<section class="theme-page clean-block">
+<section class="theme-page">
     <div class="clean-info container">
         <!-- Admin Header -->
         <div class="row mb-4">

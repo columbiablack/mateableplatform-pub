@@ -6,11 +6,11 @@
 
 namespace mateable\core\routes;
 
-use JetBrains\PhpStorm\NoReturn;
 use mateable\core\exceptions\NotFoundException;
 use mateable\core\http\Request;
 use mateable\core\http\Response;
 use mateable\core\Platform;
+use mateable\core\middlewares\BotDetectionMiddleware;
 
 /**
  * @author SGreen <sgreen@mateable.com>
@@ -93,6 +93,10 @@ class Router
 
     public function resolve()
     {
+        // Global request security middleware.
+        $botDetection = new BotDetectionMiddleware();
+        $botDetection->execute();
+
         $method = strtolower($this->request->getMethod());
         $url = $this->request->getUrl();
 

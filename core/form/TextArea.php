@@ -10,16 +10,42 @@ use mateable\core\models\Model;
 
 class TextArea
 {
-    public Model $model;
+    protected array $attributes = [];
+    private Model $model;
+    private string $placeholder;
 
-    public string $attribute;
-    public string $style;
-
-    public function __construct(Model $model, string $attribute, string $style, array $params = [])
+    public function __construct(string $placeholder)
     {
-        $this->attribute = $attribute;
-        $this->model = $model;
-        $this->style = $style;
+        $this->placeholder = $placeholder;
+    }
+
+    public static function make(string $placeholder):self
+    {
+        return new self($placeholder);
+    }
+
+    public function model(Model $model): self
+    {
+        $this->attributes['model'] = $model;
+        return $this;
+    }
+
+    public function class(string $class): self
+    {
+        $this->attributes['class'] = $class;
+        return $this;
+    }
+
+    public function name(string $name): self
+    {
+        $this->attributes['name'] = $name;
+        return $this;
+    }
+
+    public function placeholder(string $text): self
+    {
+        $this->attributes['placeholer'] = $text;
+        return $this;
     }
 
     public function __toString(): string

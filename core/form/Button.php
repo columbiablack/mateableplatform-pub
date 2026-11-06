@@ -75,23 +75,6 @@ class Button
         return $this;
     }
 
-    public function formmethod(string $method): self
-    {
-        $this->attributes['formmethod'] = $method;
-        return $this;
-    }
-
-    /*
-     |----------------------------------------
-     | Generic Attribute Setter
-     |----------------------------------------
-     */
-    public function attr(string $key, string $value): self
-    {
-        $this->attributes[$key] = $value;
-        return $this;
-    }
-
     /*
      |----------------------------------------
      | Render

@@ -4,7 +4,8 @@
  * Copyright (c) 2024-2026. Mateable LLC
  */
 
-use mateable\core\form\Form;use mateable\core\Platform;
+use mateable\core\form\Form;
+use mateable\core\Platform;
 
 /**
  *  user: Mateable

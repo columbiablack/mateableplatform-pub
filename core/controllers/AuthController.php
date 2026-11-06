@@ -6,12 +6,14 @@
 
 namespace mateable\core\controllers;
 
+use Couchbase\User;
 use mateable\core\http\Request;
 use mateable\core\middlewares\AuthMiddleware;
 use mateable\core\models\user\account\UserLoginModel;
 use mateable\core\models\user\account\UserModel;
 use mateable\core\models\user\recovery\RecoveryByEmailModel;
 use mateable\core\models\PostModel;
+use mateable\core\models\UserVideoSearchModel;
 use mateable\core\Platform;
 use mateable\core\routes\Routes;
 
@@ -76,6 +78,23 @@ class AuthController extends Controller
         Platform::$app->activity::log(Platform::$app->user->id, "dashboard", "You viewed your Dashboard!");
 
         return $this->renderView('profile/dashboard', [
+            'accstat' => Platform::$app->user->account_status,
+            'followerc' => number_format(Platform::$app->follower::followersCount(Platform::$app->user->id)),
+            'followingc' => number_format(Platform::$app->follower::followingCount(Platform::$app->user->id)),
+            'postsc' => number_format(Platform::$app->post::postCount(Platform::$app->user->id)),
+            'unreadc' => number_format(Platform::$app->message::unreadCount(Platform::$app->user->id)),
+            'messagec' => number_format(Platform::$app->message::messageCount(Platform::$app->user->id)),
+            'activities' => Platform::$app->activity::findAll(['user_id' => Platform::$app->user->id], 'created_at DESC', 16),
+        ]);
+    }
+
+    public function accountsettings(Request $request): string
+    {
+        Platform::$app->activity::log(Platform::$app->user->id, "account settings", "You viewed your Account Settings!");
+        $loginForm = new UserModel();
+
+        return $this->renderView('profile/account_settings', [
+            'model' => Platform::$app->user,
             'accstat' => Platform::$app->user->account_status,
             'followerc' => number_format(Platform::$app->follower::followersCount(Platform::$app->user->id)),
             'followingc' => number_format(Platform::$app->follower::followingCount(Platform::$app->user->id)),

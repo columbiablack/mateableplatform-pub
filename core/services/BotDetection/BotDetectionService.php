@@ -4,7 +4,9 @@
  * Copyright (c) 2026. Mateable LLC
  */
 
-namespace mateable\core\services;
+namespace mateable\core\services\BotDetection;
+
+use function mateable\core\services\str_starts_with;
 
 class BotDetectionService
 {
