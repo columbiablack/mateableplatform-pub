@@ -6,8 +6,8 @@
   <div style="align: center; text-align: center;">
 
 [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
-[![Backend](https://img.shields.io/badge/PHP-blueviolet.svg)](https://www.php.net)
-[![Backend](https://img.shields.io/badge/Python-blueviolet.svg)](https://www.php.net)
+[![Backend](https://img.shields.io/badge/PHP-Language-blueviolet.svg)](https://www.php.net)
+[![Backend](https://img.shields.io/badge/Python-Language-blueviolet.svg)](https://www.php.net)
 [![Frontend](https://img.shields.io/badge/Javascript-blueviolet.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
   </div>
