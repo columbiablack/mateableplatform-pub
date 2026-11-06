@@ -6,7 +6,7 @@
   <div style="align: center; text-align: center;">
 
 [![Platform](https://img.shields.io/badge/Mateable-Media-blueviolet.svg)](https://mateablemedia.com)
-[![Platform](https://img.shields.io/badge/PHP-Frontend-blueviolet.svg)](https://www.php.net)
+[![Platform](https://img.shields.io/badge/PHP-Platform-blueviolet.svg)](https://www.php.net)
 
 </div>
 
